@@ -16,6 +16,7 @@ import {
 } from "../lib/site";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { useLanguage } from "../components/LanguageProvider";
 import { RevealWatcher } from "../components/RevealWatcher";
 import { ArrowIcon } from "../components/icons";
 
@@ -56,7 +57,9 @@ function SplitChars({ text }: { text: string }) {
 }
 
 function Hero() {
+  const { t, locale } = useLanguage();
   const [wordIndex, setWordIndex] = useState(0);
+  const words = heroWords.map((word) => t(word));
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -111,22 +114,22 @@ function Hero() {
         <section className="hero">
           <div className="hero-copy" data-reveal>
             <h1>
-              <SplitChars text="Partners in making " />
+              <SplitChars text={`${t("Partners in making")} `} />
               <span>
-                <SplitChars text="the world " />
+                <SplitChars text={`${t("the world")} `} />
                 <span className="word-rotate">
-                  <strong key={heroWords[wordIndex]}>{heroWords[wordIndex]}</strong>
+                  <strong key={`${locale}-${heroWords[wordIndex]}`}>{words[wordIndex]}</strong>
                 </span>
               </span>
             </h1>
           </div>
           <div className="hero-summary" data-reveal>
             <p>
-              <RevealWords text="Thermax is a global engineering company providing sustainable solutions in energy and the environment." />
+              <RevealWords text={t("Thermax is a global engineering company providing sustainable solutions in energy and the environment.")} />
             </p>
             <a className="source-cta" href="#about">
               <span />
-              Discover more about Thermax
+              {t("Discover more about Thermax")}
             </a>
           </div>
         </section>
@@ -144,7 +147,7 @@ function Hero() {
           aria-label="Thermax industrial operations"
         />
         <div className="hero-video-label">
-          We are
+          {t("We are")}
           <br />
           Thermax
         </div>
@@ -154,11 +157,12 @@ function Hero() {
 }
 
 function AboutSection() {
+  const { t } = useLanguage();
   const aboutCopy =
-    "Backed by our strong engineering prowess and domain expertise over decades, we offer comprehensive solutions to ensure clean air, clean energy and clean water.";
+    t("Backed by our strong engineering prowess and domain expertise over decades, we offer comprehensive solutions to ensure clean air, clean energy and clean water.");
   const aboutBody =
-    "From curbing emissions with advanced air pollution control systems, enabling energy efficiency through clean technologies, to conserving water with cutting-edge treatment and recycling solutions, our commitment lies in fostering a world where progress and sustainability go hand in hand. With every solution, we aim to build a better tomorrow-one that thrives on responsible innovation and leaves a lasting legacy for generations to come.";
-  const splitIdx = aboutCopy.split(" ").findIndex((w) => w.startsWith("we"));
+    t("From curbing emissions with advanced air pollution control systems, enabling energy efficiency through clean technologies, to conserving water with cutting-edge treatment and recycling solutions, our commitment lies in fostering a world where progress and sustainability go hand in hand. With every solution, we aim to build a better tomorrow-one that thrives on responsible innovation and leaves a lasting legacy for generations to come.");
+  const splitIdx = aboutCopy.split(" ").findIndex((w) => w.startsWith("we") || w.startsWith("chúng"));
 
   return (
     <section className="about-section" id="about" data-section="about">
@@ -174,10 +178,10 @@ function AboutSection() {
       </div>
       <div className="stats-grid" data-reveal>
         {[
-          ["60+", "Years of legacy"],
-          ["90+", "Countries served"],
-          ["45+", "Offices globally"],
-          ["16", "Manufacturing facilities"],
+          ["60+", t("Years of legacy")],
+          ["90+", t("Countries served")],
+          ["45+", t("Offices globally")],
+          ["16", t("Manufacturing facilities")],
         ].map(([value, label]) => (
           <div className="stat-item" key={label}>
             <strong>{value}</strong>
@@ -190,21 +194,31 @@ function AboutSection() {
 }
 
 function BusinessSection() {
+  const { t, locale } = useLanguage();
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <section className="business-section" id="portfolio" data-section="business">
       <div className="business-intro" data-reveal>
         <h2>
-          Enabled by cutting-
-          <br />
-          edge <span>solutions</span>
+          {locale === "vi" ? (
+            <>
+              Dẫn dắt bởi
+              <br />
+              <span>giải pháp</span> tiên phong
+            </>
+          ) : (
+            <>
+              Enabled by cutting-
+              <br />
+              edge <span>solutions</span>
+            </>
+          )}
         </h2>
         <p>
-          At Thermax, we are committed to forging strong, trusted partnerships with our customers. With a deep-rooted
-          commitment to sustainability, we provide innovative and tailored energy, environment, and chemical solutions,
-          coupled with our digital capabilities, that help industrial, commercial and urban segments achieve better
-          resource productivity and bottom line while reducing their environmental footprint.
+          {t(
+            "At Thermax, we are committed to forging strong, trusted partnerships with our customers. With a deep-rooted commitment to sustainability, we provide innovative and tailored energy, environment, and chemical solutions, coupled with our digital capabilities, that help industrial, commercial and urban segments achieve better resource productivity and bottom line while reducing their environmental footprint.",
+          )}
         </p>
       </div>
 
@@ -230,15 +244,15 @@ function BusinessSection() {
             <SwiperSlide className="business-card" key={segment.label}>
               <img src={segment.image} alt="" />
               <div>
-                <h3>{segment.label}</h3>
-                <span>{segment.body}</span>
+                <h3>{t(segment.label)}</h3>
+                <span>{t(segment.body)}</span>
                 <ul>
                   {segment.links.slice(0, 5).map((link) => (
-                    <li key={link}>{link}</li>
+                    <li key={link}>{t(link)}</li>
                   ))}
                 </ul>
                 <a className="business-more" href="#">
-                  Discover more
+                  {t("Discover more")}
                 </a>
               </div>
             </SwiperSlide>
@@ -258,6 +272,7 @@ function BusinessSection() {
 }
 
 function CapabilitySection() {
+  const { t } = useLanguage();
   const swiperRef = useRef<SwiperType | null>(null);
   const [index, setIndex] = useState(0);
   const total = capabilities.length;
@@ -265,17 +280,17 @@ function CapabilitySection() {
   return (
     <section className="capability-section" data-section="capabilities">
       <div className="source-title">
-        Featured <span>capabilities</span>
+        {t("Featured")} <span>{t("capabilities")}</span>
       </div>
       <div className="capability-counter">
         <span className="capability-counter-text">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </span>
         <div className="capability-arrows">
-          <button type="button" aria-label="Previous capability" onClick={() => swiperRef.current?.slidePrev()}>
+          <button type="button" aria-label={t("Previous capability")} onClick={() => swiperRef.current?.slidePrev()}>
             {"<"}
           </button>
-          <button type="button" aria-label="Next capability" onClick={() => swiperRef.current?.slideNext()}>
+          <button type="button" aria-label={t("Next capability")} onClick={() => swiperRef.current?.slideNext()}>
             {">"}
           </button>
         </div>
@@ -301,11 +316,11 @@ function CapabilitySection() {
                 <img src={capability.image} alt="" />
               </div>
               <div className="capability-copy">
-                <h2>{capability.label}</h2>
-                <p>{capability.body}</p>
-                {capability.body2 && <p>{capability.body2}</p>}
+                <h2>{t(capability.label)}</h2>
+                <p>{t(capability.body)}</p>
+                {capability.body2 && <p>{t(capability.body2)}</p>}
                 <a className="capability-cta" href="#">
-                  Discover more
+                  {t("Discover more")}
                 </a>
               </div>
             </div>
@@ -317,28 +332,38 @@ function CapabilitySection() {
 }
 
 function ImpactSection() {
+  const { t, locale } = useLanguage();
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <section className="impact-section" data-section="impact">
       <div className="impact-intro" data-reveal>
         <h2>
-          <span>Delivering impact</span>
-          <br />
-          across industries
+          {locale === "vi" ? (
+            <>
+              <span>Tạo tác động</span>
+              <br />
+              trên nhiều ngành
+            </>
+          ) : (
+            <>
+              <span>Delivering impact</span>
+              <br />
+              across industries
+            </>
+          )}
         </h2>
         <p>
-          Backed by a legacy of trust and a commitment towards a sustainable future, Thermax empowers industries to
-          transform responsibly. Through our expertise in pollution control, energy and water management, and renewable
-          solutions, we help customers reduce emissions, optimise resource use, and enhance operational efficiency,
-          while lowering costs.
+          {t(
+            "Backed by a legacy of trust and a commitment towards a sustainable future, Thermax empowers industries to transform responsibly. Through our expertise in pollution control, energy and water management, and renewable solutions, we help customers reduce emissions, optimise resource use, and enhance operational efficiency, while lowering costs.",
+          )}
         </p>
       </div>
       <div className="case-toolbar" data-reveal>
-        <button type="button" onClick={() => swiperRef.current?.slidePrev()} aria-label="Previous case">
+        <button type="button" onClick={() => swiperRef.current?.slidePrev()} aria-label={t("Previous case")}>
           {"<"}
         </button>
-        <button type="button" onClick={() => swiperRef.current?.slideNext()} aria-label="Next case">
+        <button type="button" onClick={() => swiperRef.current?.slideNext()} aria-label={t("Next case")}>
           {">"}
         </button>
       </div>
@@ -359,9 +384,9 @@ function ImpactSection() {
             <img className="case-main" src={item.image} alt="" />
             <div className="case-content">
               <img className="case-thumb" src={item.thumb} alt="" />
-              <h3>{item.title}</h3>
+              <h3>{t(item.title)}</h3>
               <a href="#">
-                {item.meta}
+                {t(item.meta)}
                 <ArrowIcon />
               </a>
             </div>
@@ -373,6 +398,7 @@ function ImpactSection() {
 }
 
 function InvestorsSection() {
+  const { t } = useLanguage();
   const [market, setMarket] = useState<"NSE" | "BSE">("NSE");
   const marketValue = market === "NSE" ? "4,182.30" : "4,182.65";
   const marketChange = market === "NSE" ? "105.40 (2.59%)" : "104.35 (2.56%)";
@@ -381,14 +407,15 @@ function InvestorsSection() {
     <section className="investors-section" id="investors" data-section="investors">
       <div className="investor-hero">
         <div className="investor-copy" data-reveal>
-          <h2>Investors</h2>
+          <h2>{t("Investors")}</h2>
           <div>
             <p>
-              Our commitment to creating stakeholder value is reflected in our strategy, fundamentals and performance.
-              Stay up to date on key financial information, reports, and upcoming events.
+              {t(
+                "Our commitment to creating stakeholder value is reflected in our strategy, fundamentals and performance. Stay up to date on key financial information, reports, and upcoming events.",
+              )}
             </p>
             <a className="primary-button" href="#">
-              Explore more
+              {t("Explore more")}
               <ArrowIcon />
             </a>
           </div>
@@ -414,19 +441,19 @@ function InvestorsSection() {
           <span className="market-up">{marketChange} ↑</span>
           <div className="market-meta">
             <small>07-05-2026 03:56 PM</small>
-            <a href="#">Disclaimer</a>
+            <a href="#">{t("Disclaimer")}</a>
           </div>
         </div>
         <div className="publication-block">
-          <h3>Latest publication &amp; results</h3>
+          <h3>{t("Latest publication & results")}</h3>
           <div className="publication-grid">
             <a href="#" className="publication-card">
               <img src={imageUrls.annualReport} alt="" />
-              <span>Annual Report 2024-25</span>
+              <span>{t("Annual Report 2024-25")}</span>
             </a>
             <a href="#" className="publication-card">
               <img src={imageUrls.q4Report} alt="" />
-              <span>Q4 Results 2025-26</span>
+              <span>{t("Q4 Results 2025-26")}</span>
             </a>
           </div>
         </div>
@@ -436,26 +463,38 @@ function InvestorsSection() {
 }
 
 function NewsSection() {
+  const { t, locale } = useLanguage();
+
   return (
     <section className="news-section" id="media" data-section="news">
       <div className="news-layout">
         <div className="news-heading" data-reveal>
           <h2>
-            News and
-            <br />
-            Insights
+            {locale === "vi" ? (
+              <>
+                Tin tức và
+                <br />
+                góc nhìn
+              </>
+            ) : (
+              <>
+                News and
+                <br />
+                Insights
+              </>
+            )}
           </h2>
           <a href="#">
             <span />
-            Explore the latest
+            {t("Explore the latest")}
           </a>
         </div>
         <div className="news-grid" data-reveal>
           {newsItems.map((item) => (
             <article className="news-card" key={item.title}>
               <img src={item.image} alt="" />
-              <span>{item.date}</span>
-              <h3>{item.title}</h3>
+              <span>{t(item.date)}</span>
+              <h3>{t(item.title)}</h3>
             </article>
           ))}
         </div>
@@ -469,7 +508,7 @@ export default function Home() {
     <>
       <RevealWatcher />
       <Header />
-      <main>
+      <main data-no-translate>
         <Hero />
         <AboutSection />
         <BusinessSection />

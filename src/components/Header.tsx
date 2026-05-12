@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { imageUrls, navItems } from "../lib/site";
+import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 const navHref: Record<string, string> = {
   "About Us": "/company-overview",
@@ -43,6 +45,7 @@ const megaHref: Record<string, string> = {
 };
 
 export function Header() {
+  const { t } = useLanguage();
   const [menu, setMenu] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [callbackOpen, setCallbackOpen] = useState(false);
@@ -51,7 +54,7 @@ export function Header() {
 
   return (
     <>
-      <header className="site-header" onMouseLeave={() => setMenu("")}>
+      <header className="site-header" onMouseLeave={() => setMenu("")} data-no-translate>
         <div className="utility-bar">
           <div />
           <div className="utility-right">
@@ -65,7 +68,7 @@ export function Header() {
             className={mobileOpen ? "hamburger is-active" : "hamburger"}
             onClick={() => setMobileOpen((value) => !value)}
             type="button"
-            aria-label="Toggle menu"
+            aria-label={t("Toggle menu")}
           >
             <span />
             <span />
@@ -85,25 +88,25 @@ export function Header() {
                 onMouseEnter={() => setMenu(item.label)}
                 type="button"
               >
-                {item.label === "Digital Solutions" ? "Digital" : item.label}
+                {t(item.label === "Digital Solutions" ? "Digital" : item.label)}
               </button>
             ))}
           </nav>
 
           <div className="nav-actions">
             <button className="callback-button" onClick={() => setCallbackOpen(true)} type="button">
-              Request a call back
+              {t("Request a call back")}
             </button>
-            <button className="icon-button" onClick={() => setSearchOpen(true)} type="button" aria-label="Search">
+            <button className="icon-button" onClick={() => setSearchOpen(true)} type="button" aria-label={t("Search")}>
               <SearchIcon />
             </button>
-            <button className="icon-button" type="button" aria-label="Global region">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" />
-              </svg>
-            </button>
-            <button className="icon-button" onClick={() => setCallbackOpen(true)} type="button" aria-label="User enquiry">
+            <LanguageSwitch />
+            <button
+              className="icon-button user-enquiry-button"
+              onClick={() => setCallbackOpen(true)}
+              type="button"
+              aria-label={t("User enquiry")}
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8" r="4" />
                 <path d="M4 21c1.4-4 14.6-4 16 0" />
@@ -114,13 +117,13 @@ export function Header() {
 
         <div className={menu ? "mega-menu is-open" : "mega-menu"} onMouseEnter={() => setMenu(active.label)}>
           <div className="mega-copy">
-            <h2>{active.label === "About Us" ? "Thermax" : active.label}</h2>
-            <p>{active.summary}</p>
+            <h2>{t(active.label === "About Us" ? "Thermax" : active.label)}</h2>
+            <p>{t(active.summary)}</p>
           </div>
           <div className="mega-links">
             {active.links.map((link) => (
               <a href={megaHref[link] ?? "#"} key={link}>
-                {link}
+                {t(link)}
                 <span className="mega-row-arrow" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <path d="m9 5 7 7-7 7" />
@@ -130,20 +133,24 @@ export function Header() {
             ))}
           </div>
           <div className="mega-card">
-            <p>In the Spotlight</p>
+            <p>{t("In the Spotlight")}</p>
             <img src={active.spotlightImage} alt="" />
-            <strong>{active.spotlight}</strong>
+            <strong>{t(active.spotlight)}</strong>
           </div>
         </div>
 
         <div className={mobileOpen ? "mobile-panel is-open" : "mobile-panel"}>
           {navItems.map((item) => (
             <a href={navHref[item.label] ?? "#"} key={item.label} onClick={() => setMobileOpen(false)}>
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
+          <div className="mobile-language-row">
+            <span>{t("Language")}</span>
+            <LanguageSwitch compact />
+          </div>
           <button type="button" onClick={() => setCallbackOpen(true)}>
-            Request a call back
+            {t("Request a call back")}
           </button>
         </div>
       </header>
@@ -155,24 +162,32 @@ export function Header() {
 }
 
 function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t } = useLanguage();
+
   return (
-    <div className={open ? "modal-shell is-open" : "modal-shell"} role="dialog" aria-modal="true" aria-label="Search">
-      <button className="modal-backdrop" type="button" onClick={onClose} aria-label="Close search" />
+    <div
+      className={open ? "modal-shell is-open" : "modal-shell"}
+      role="dialog"
+      aria-modal="true"
+      aria-label={t("Search")}
+      data-no-translate
+    >
+      <button className="modal-backdrop" type="button" onClick={onClose} aria-label={t("Close search")} />
       <div className="search-panel">
-        <button className="close-button" type="button" onClick={onClose} aria-label="Close">
+        <button className="close-button" type="button" onClick={onClose} aria-label={t("Close")}>
           <CloseIcon />
         </button>
-        <label htmlFor="site-search">Search Results</label>
+        <label htmlFor="site-search">{t("Search Results")}</label>
         <div className="search-input">
           <SearchIcon />
-          <input id="site-search" placeholder="Search Thermax solutions" autoComplete="off" />
+          <input id="site-search" placeholder={t("Search Thermax solutions")} autoComplete="off" />
         </div>
-        <p>Popular searches</p>
+        <p>{t("Popular searches")}</p>
         <div className="chip-row">
           {["Air Pollution Control", "Cooling and Heating", "Process Heat", "Water and Waste", "Green Hydrogen"].map(
             (item) => (
               <button type="button" key={item}>
-                {item}
+                {t(item)}
               </button>
             ),
           )}
@@ -183,47 +198,84 @@ function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }
 }
 
 function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t } = useLanguage();
+
   return (
     <div
       className={open ? "modal-shell is-open" : "modal-shell"}
       role="dialog"
       aria-modal="true"
-      aria-label="Request a call back"
+      aria-label={t("Request a call back")}
+      data-no-translate
     >
-      <button className="modal-backdrop" type="button" onClick={onClose} aria-label="Close form" />
+      <button className="modal-backdrop" type="button" onClick={onClose} aria-label={t("Close form")} />
       <form className="callback-panel">
-        <button className="close-button" type="button" onClick={onClose} aria-label="Close">
+        <button className="close-button" type="button" onClick={onClose} aria-label={t("Close")}>
           <CloseIcon />
         </button>
-        <p>Request a call back</p>
-        <h2>Submit your enquiry</h2>
+        <p>{t("Request a call back")}</p>
+        <h2>{t("Submit your enquiry")}</h2>
         <div className="form-grid">
-          <input placeholder="Full name*" />
-          <input placeholder="Business email*" />
-          <input placeholder="Phone number*" />
+          <input placeholder={t("Full name*")} />
+          <input placeholder={t("Business email*")} />
+          <input placeholder={t("Phone number*")} />
           <select defaultValue="">
             <option value="" disabled>
-              Country*
+              {t("Country*")}
             </option>
-            <option>India</option>
-            <option>Vietnam</option>
-            <option>United States</option>
+            <option>{t("India")}</option>
+            <option>{t("Vietnam")}</option>
+            <option>{t("United States")}</option>
           </select>
           <select defaultValue="">
             <option value="" disabled>
-              Select industry
+              {t("Select industry")}
             </option>
-            <option>Power Generation</option>
-            <option>Chemicals</option>
-            <option>Urban & Infra</option>
+            <option>{t("Power Generation")}</option>
+            <option>{t("Chemicals")}</option>
+            <option>{t("Urban & Infra")}</option>
           </select>
-          <textarea placeholder="How can Thermax help?" />
+          <textarea placeholder={t("How can Thermax help?")} />
         </div>
         <button className="primary-button" type="button">
-          Submit enquiry
+          {t("Submit enquiry")}
           <ArrowIcon />
         </button>
       </form>
+    </div>
+  );
+}
+
+function LanguageSwitch({ compact = false }: { compact?: boolean }) {
+  const { locale, setLocale, t } = useLanguage();
+  const options: Locale[] = ["en", "vi"];
+
+  return (
+    <div
+      className={compact ? "language-switch is-compact" : "language-switch"}
+      data-no-translate
+      role="group"
+      aria-label={t("Language selector")}
+      title={localeLabels[locale]}
+    >
+      <span className="language-switch-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" />
+        </svg>
+      </span>
+      {options.map((option) => (
+        <button
+          className={locale === option ? "is-active" : ""}
+          key={option}
+          onClick={() => setLocale(option)}
+          type="button"
+          aria-pressed={locale === option}
+          aria-label={option === "en" ? t("Switch to English") : t("Switch to Vietnamese")}
+        >
+          {option === "en" ? "EN" : "VN"}
+        </button>
+      ))}
     </div>
   );
 }

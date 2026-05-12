@@ -1,16 +1,21 @@
+"use client";
+
 import { footerGroups, imageUrls } from "../lib/site";
+import { useLanguage } from "./LanguageProvider";
 
 export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
+  const { t } = useLanguage();
+
   return (
-    <footer className="site-footer" id="contact">
+    <footer className="site-footer" id="contact" data-no-translate>
       {showFooterCta ? (
         <section className="footer-cta">
           <img src={imageUrls.empower} alt="" />
           <div className="footer-cta-copy">
-            <h2>Empowering Young Minds, Transforming Futures</h2>
+            <h2>{t("Empowering Young Minds, Transforming Futures")}</h2>
             <a href="#">
               <span />
-              Our social initiatives
+              {t("Our social initiatives")}
             </a>
           </div>
         </section>
@@ -21,19 +26,19 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
             <img src={imageUrls.logo} alt="Thermax" />
           </a>
           <div className="footer-address-block">
-            <h3>Registered Office Address</h3>
+            <h3>{t("Registered Office Address")}</h3>
             <p>D-13, MIDC Industrial Area,<br />R. D. Aga Road, Chinchwad,<br />Pune 411019, Maharashtra, India</p>
           </div>
           <div className="footer-address-block">
-            <h3>Corporate Office Address</h3>
+            <h3>{t("Corporate Office Address")}</h3>
             <p>Thermax Limited<br />Thermax House,<br />14 Mumbai-Pune Road, Wakdewadi,<br />Pune 411003, Maharashtra, India</p>
           </div>
           <div className="footer-address-block">
-            <h3>Corporate Identity Number</h3>
+            <h3>{t("Corporate Identity Number")}</h3>
             <p>L29299PN1980PLC022787</p>
           </div>
           <div className="footer-address-block">
-            <h3>Toll Free Number</h3>
+            <h3>{t("Toll Free Number")}</h3>
             <p>1800-209-0115</p>
           </div>
           <div className="footer-social">
@@ -69,10 +74,10 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
         <div className="footer-links">
           {footerGroups.map((group) => (
             <div className="footer-link-col" key={group.title}>
-              <h3>{group.title}</h3>
+              <h3>{t(group.title)}</h3>
               {group.links.map((link) => (
                 <a href="#" key={link}>
-                  {link}
+                  {t(link)}
                 </a>
               ))}
             </div>
@@ -80,10 +85,10 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© Copyright 2026 Thermax Limited. All Rights Reserved.</span>
+        <span>{t("© Copyright 2026 Thermax Limited. All Rights Reserved.")}</span>
         <div>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
+          <a href="#">{t("Privacy Policy")}</a>
+          <a href="#">{t("Terms of Use")}</a>
         </div>
       </div>
     </footer>
