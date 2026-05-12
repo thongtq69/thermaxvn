@@ -1,0 +1,104 @@
+"use client";
+
+import { PageShell } from "../../components/PageShell";
+import { InnerHero } from "../../components/InnerHero";
+import { InnerSubNav } from "../../components/InnerSubNav";
+import { ArrowIcon } from "../../components/icons";
+import { imageUrls } from "../../lib/site";
+
+export default function ContactUsPage() {
+  return (
+    <PageShell>
+      <InnerHero
+        title="Contact Us"
+        image={imageUrls.bannerContact}
+        mobileImage={imageUrls.bannerContactMobile}
+        breadcrumb={[{ label: "Contact Us" }]}
+      />
+
+      <InnerSubNav
+        items={[
+          { label: "Contact Information", href: "#contact-information" },
+          { label: "Contact Form", href: "#contact-form" },
+          { label: "Office Locations", href: "#office-locations" },
+        ]}
+      />
+
+      <section className="contact-info-section" data-section="contact-info">
+        <div className="contact-info-grid" data-reveal>
+          <div>
+            <h3>Headquarters</h3>
+            <p>
+              Thermax Limited
+              <br />
+              Thermax House,
+              <br />
+              14 Mumbai-Pune Road Wakdewadi,
+              <br />
+              Pune 411003
+            </p>
+          </div>
+          <div>
+            <img src="https://www.thermaxglobal.com/themes/thermax/assets/images/headquarters-pic.jpg" alt="Headquarters" />
+          </div>
+        </div>
+        <div className="contact-info-grid contact-customer-support" data-reveal>
+          <h3>For customer support &amp; general inquiries</h3>
+          <div>
+            <a href="tel:18002090115">1800-209-0115</a>
+            <a href="mailto:customer.support@thermaxglobal.com">customer.support@thermaxglobal.com</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="contact-form-section" data-section="contact-form">
+        <div className="contact-form-grid" data-reveal>
+          <div>
+            <h3>Get in Touch</h3>
+            <p>
+              If you have a query regarding our products, solutions, or services, please fill out the form below. Our
+              team will review your request and connect with you at the earliest.
+            </p>
+          </div>
+          <form
+            className="contact-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("Thanks! We will get in touch shortly.");
+            }}
+          >
+            <input placeholder="First name*" required />
+            <input placeholder="Last name*" required />
+            <input placeholder="Business email*" type="email" required />
+            <input placeholder="Phone number*" type="tel" required />
+            <select className="full" defaultValue="">
+              <option value="" disabled>
+                Country*
+              </option>
+              <option>India</option>
+              <option>United States</option>
+              <option>Vietnam</option>
+              <option>Indonesia</option>
+              <option>Thailand</option>
+              <option>Other</option>
+            </select>
+            <select className="full" defaultValue="">
+              <option value="" disabled>
+                Select industry
+              </option>
+              <option>Power Generation</option>
+              <option>Chemicals</option>
+              <option>Cement</option>
+              <option>Steel</option>
+              <option>Pharma</option>
+            </select>
+            <textarea placeholder="How can Thermax help?" />
+            <button type="submit">
+              Submit enquiry <ArrowIcon />
+            </button>
+          </form>
+        </div>
+      </section>
+    </PageShell>
+  );
+}
