@@ -46,6 +46,7 @@ export default function ContactUsPage() {
           <h3>For customer support &amp; general inquiries</h3>
           <div>
             <a href="tel:18002090115">1800-209-0115</a>
+            {" "}
             <a href="mailto:customer.support@thermaxglobal.com">customer.support@thermaxglobal.com</a>
           </div>
         </div>

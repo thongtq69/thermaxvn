@@ -58,9 +58,9 @@ export function Header() {
         <div className="utility-bar">
           <div />
           <div className="utility-right">
-            <a href="/people">People</a>
-            <a href="/in-the-news">Media Centre</a>
-            <a href="/contact-us">Contact Us</a>
+            <a href="/people">{t("People")}</a>
+            <a href="/in-the-news">{t("Media Centre")}</a>
+            <a href="/contact-us">{t("Contact Us")}</a>
           </div>
         </div>
         <div className="main-nav">
