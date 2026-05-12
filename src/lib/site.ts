@@ -183,6 +183,14 @@ export const navItems: NavItem[] = [
     spotlightImage: imageUrls.capability,
   },
   {
+    label: "In the News",
+    summary:
+      "Current updates on Thermax's business performance, clean-energy projects, digital operations and corporate milestones.",
+    links: ["In the News", "Press Releases", "TV Interviews", "Media Kit"],
+    spotlight: "Latest newsroom updates",
+    spotlightImage: imageUrls.newsOne,
+  },
+  {
     label: "Investors",
     summary:
       "Thermax is committed to creating long-term value for its investors and shareholders through consistent performance, transparent governance, and responsible financial management.",

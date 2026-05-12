@@ -11,6 +11,7 @@ const navHref: Record<string, string> = {
   "Business Portfolio": "/business-segments/industrial-products",
   Sustainability: "/sustainability",
   "Digital Solutions": "/digital",
+  "In the News": "/in-the-news",
   Investors: "/investor-overview",
 };
 
@@ -42,6 +43,10 @@ const megaHref: Record<string, string> = {
   "Investor Services Contact": "/investors/investor-services-contact",
   "Dispute Resolution Mechanism": "/investor-overview",
   Disclaimer: "/investors/investor-disclaimer",
+  "In the News": "/in-the-news",
+  "Press Releases": "/in-the-news",
+  "TV Interviews": "/in-the-news",
+  "Media Kit": "/in-the-news",
 };
 
 export function Header() {
@@ -59,7 +64,7 @@ export function Header() {
           <div />
           <div className="utility-right">
             <a href="/people">{t("People")}</a>
-            <a href="/in-the-news">{t("In the News")}</a>
+            <a href="/in-the-news">{t("Media Centre")}</a>
             <a href="/contact-us">{t("Contact Us")}</a>
           </div>
         </div>
@@ -86,6 +91,9 @@ export function Header() {
                 key={item.label}
                 onFocus={() => setMenu(item.label)}
                 onMouseEnter={() => setMenu(item.label)}
+                onClick={() => {
+                  window.location.href = navHref[item.label] ?? "#";
+                }}
                 type="button"
               >
                 {t(item.label === "Digital Solutions" ? "Digital" : item.label)}
@@ -150,7 +158,7 @@ export function Header() {
               {t("People")}
             </a>
             <a href="/in-the-news" onClick={() => setMobileOpen(false)}>
-              {t("In the News")}
+              {t("Media Centre")}
             </a>
             <a href="/contact-us" onClick={() => setMobileOpen(false)}>
               {t("Contact Us")}
