@@ -1844,6 +1844,14 @@ main {
   display: none;
 }
 
+.mobile-utility-links {
+  display: grid;
+  gap: 8px;
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px solid #e3e3e3;
+}
+
 .mobile-panel {
   position: absolute;
   top: 122px;

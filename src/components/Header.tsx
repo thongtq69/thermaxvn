@@ -59,7 +59,7 @@ export function Header() {
           <div />
           <div className="utility-right">
             <a href="/people">{t("People")}</a>
-            <a href="/in-the-news">{t("Media Centre")}</a>
+            <a href="/in-the-news">{t("In the News")}</a>
             <a href="/contact-us">{t("Contact Us")}</a>
           </div>
         </div>
@@ -145,6 +145,17 @@ export function Header() {
               {t(item.label)}
             </a>
           ))}
+          <div className="mobile-utility-links">
+            <a href="/people" onClick={() => setMobileOpen(false)}>
+              {t("People")}
+            </a>
+            <a href="/in-the-news" onClick={() => setMobileOpen(false)}>
+              {t("In the News")}
+            </a>
+            <a href="/contact-us" onClick={() => setMobileOpen(false)}>
+              {t("Contact Us")}
+            </a>
+          </div>
           <div className="mobile-language-row">
             <span>{t("Language")}</span>
             <LanguageSwitch compact />
