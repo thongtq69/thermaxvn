@@ -6937,3 +6937,36 @@ main { color: var(--bs-body-color); }
   .driving-block-intro { font-size: 18px; line-height: 26px; }
   .driving-block-body > div .text24 { font-size: 22px; line-height: 30px; }
 }
+
+/* Keep the brand optically centered on tablet and mobile headers. */
+@media (max-width: 1199px) {
+  .main-nav {
+    position: relative;
+  }
+
+  .hamburger,
+  .brand,
+  .nav-actions {
+    grid-row: 1;
+  }
+
+  .hamburger {
+    grid-column: 1;
+    z-index: 3;
+  }
+
+  .brand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    grid-column: auto;
+    justify-self: auto;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .nav-actions {
+    grid-column: 3;
+    z-index: 2;
+  }
+}
