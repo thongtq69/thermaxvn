@@ -326,18 +326,18 @@ export const caseStudies: CaseStudy[] = [
 
 export const newsItems = [
   {
-    date: "January 29, 2026",
-    title: "Thermax Limited and Hindustan Petroleum Corporation Limited (HPCL) sign MoU to advance sustainable...",
+    date: "May 07, 2026",
+    title: "Thermax reports stronger Q4 with 13% revenue growth and 18% PAT growth",
     image: imageUrls.newsOne,
   },
   {
-    date: "December 08, 2025",
-    title: "Thermax celebrates 30 Years of NSE Listing",
+    date: "March 27, 2026",
+    title: "Rs. 1,600 crore boiler package reinforces Thermax's industrial infrastructure pipeline",
     image: imageUrls.newsTwo,
   },
   {
-    date: "November 26, 2025",
-    title: "Thermax Group secures an order valued at more than Rs. 580 crore from an African industry major",
+    date: "January 29, 2026",
+    title: "Thermax and HPCL partner on green hydrogen, carbon capture and bio-based fuels",
     image: imageUrls.newsThree,
   },
 ];

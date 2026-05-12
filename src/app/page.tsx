@@ -484,7 +484,7 @@ function NewsSection() {
               </>
             )}
           </h2>
-          <a href="#">
+          <a href="/in-the-news">
             <span />
             {t("Explore the latest")}
           </a>

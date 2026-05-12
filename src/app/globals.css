@@ -5935,7 +5935,141 @@ main { color: var(--bs-body-color); }
 /* ============================================
    News listing
    ============================================ */
+.newsroom-intro {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 24px 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: end;
+  box-sizing: border-box;
+}
+.newsroom-intro-copy > span,
+.newsroom-kicker,
+.newsroom-date {
+  color: var(--red);
+  font-size: var(--fs-13);
+  font-weight: var(--font-weight-600);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.newsroom-intro-copy h2,
+.news-listing-header h2 {
+  margin: 14px 0 18px;
+  color: var(--bs-body-color);
+  font-size: var(--fs-44);
+  font-weight: var(--font-weight-500);
+  line-height: 1.12;
+}
+.newsroom-intro-copy p,
+.news-listing-header p,
+.news-listing-card-body p,
+.newsroom-editorial-card p,
+.newsroom-featured-copy p {
+  color: var(--muted);
+  font-size: var(--fs-16);
+  line-height: 1.65;
+}
+.newsroom-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.newsroom-stat-card {
+  min-height: 150px;
+  padding: 20px;
+  background: #f6f8f9;
+  border: 1px solid #dfe7ec;
+  border-radius: 8px;
+}
+.newsroom-stat-card span {
+  display: block;
+  min-height: 38px;
+  color: var(--muted);
+  font-size: var(--fs-13);
+  line-height: 1.35;
+}
+.newsroom-stat-card strong {
+  display: block;
+  margin-top: 18px;
+  color: var(--green-dark);
+  font-size: var(--fs-28);
+  font-weight: var(--font-weight-600);
+  line-height: 1.1;
+}
+.newsroom-stat-card p {
+  margin: 8px 0 0;
+  color: var(--red);
+  font-size: var(--fs-13);
+  font-weight: var(--font-weight-600);
+}
+.newsroom-featured {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 24px 72px;
+  box-sizing: border-box;
+}
+.newsroom-featured-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  min-height: 520px;
+  overflow: hidden;
+  background: #082033;
+  border-radius: 8px;
+}
+.newsroom-featured-media {
+  min-height: 520px;
+}
+.newsroom-featured-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+}
+.newsroom-featured-copy {
+  padding: clamp(32px, 4vw, 64px);
+  color: #fff;
+}
+.newsroom-featured-copy h2 {
+  margin: 14px 0 18px;
+  color: #fff;
+  font-size: var(--fs-40);
+  font-weight: var(--font-weight-500);
+  line-height: 1.16;
+}
+.newsroom-featured-copy p,
+.newsroom-featured-copy li {
+  color: rgba(255, 255, 255, 0.78);
+}
+.newsroom-featured-copy ul {
+  margin: 22px 0 28px;
+  padding-left: 18px;
+}
+.newsroom-featured-copy li {
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+.newsroom-featured-copy .section-cta {
+  color: #fff;
+}
+.newsroom-featured-copy .cta-arrow {
+  background: #fff;
+  color: var(--green-dark);
+}
 .news-listing { padding: 80px 0; }
+.news-listing-header {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto 32px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+.news-listing-header h2 {
+  margin-top: 0;
+}
 .news-listing-filter {
   max-width: 1440px;
   width: 100%;
@@ -5976,10 +6110,19 @@ main { color: var(--bs-body-color); }
 .news-listing-card {
   background: #fff;
   border: 1px solid #e9ecef;
-  border-radius: 15px;
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.news-listing-card:hover {
+  border-color: rgba(0, 103, 71, 0.28);
+  box-shadow: 0 18px 44px rgba(8, 32, 51, 0.1);
+  transform: translateY(-2px);
 }
 .news-listing-card img {
   width: 100%;
@@ -5989,6 +6132,9 @@ main { color: var(--bs-body-color); }
 }
 .news-listing-card-body {
   padding: 24px 26px 28px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 .news-listing-card-body span {
   font-size: var(--fs-13);
@@ -6002,6 +6148,42 @@ main { color: var(--bs-body-color); }
   font-weight: var(--font-weight-500);
   line-height: 1.4;
   color: var(--bs-body-color);
+}
+.news-listing-card-body p:not(.newsroom-date) {
+  margin: 14px 0 22px;
+}
+.news-listing-card-body a {
+  margin-top: auto;
+  color: var(--green-dark);
+  font-size: var(--fs-14);
+  font-weight: var(--font-weight-600);
+}
+.newsroom-editorial {
+  padding: 80px 0;
+  background: #f5f7f9;
+}
+.newsroom-editorial-grid {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  box-sizing: border-box;
+}
+.newsroom-editorial-card {
+  min-height: 250px;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+}
+.newsroom-editorial-card h3 {
+  margin: 0 0 14px;
+  color: var(--bs-body-color);
+  font-size: var(--fs-24);
+  font-weight: var(--font-weight-500);
 }
 
 /* ============================================
@@ -6169,9 +6351,41 @@ main { color: var(--bs-body-color); }
   .contact-info-section,
   .contact-form-section,
   .news-listing,
+  .newsroom-featured,
+  .newsroom-editorial,
   .feature-cards,
   .text-section,
   .team-section { padding: 50px 0; }
+
+  .newsroom-intro {
+    width: auto;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding: 50px 0 24px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .newsroom-intro-copy h2,
+  .news-listing-header h2,
+  .newsroom-featured-copy h2 {
+    font-size: 30px;
+    line-height: 1.18;
+  }
+  .newsroom-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .newsroom-featured-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    border-radius: 8px;
+  }
+  .newsroom-featured-media,
+  .newsroom-featured-media img {
+    min-height: 260px;
+  }
+  .newsroom-featured-copy {
+    padding: 28px;
+  }
 
   .inner-intro-grid,
   .inner-intro-stats,
@@ -6199,8 +6413,10 @@ main { color: var(--bs-body-color); }
   .shareholder-info-list,
   .contact-info-grid,
   .contact-form-grid,
+  .news-listing-header,
   .news-listing-filter,
   .news-listing-grid,
+  .newsroom-editorial-grid,
   .feature-cards-grid,
   .text-section,
   .contact-grid {
@@ -6222,6 +6438,8 @@ main { color: var(--bs-body-color); }
   .contact-form { grid-template-columns: 1fr; }
   .contact-form textarea, .contact-form .full, .contact-form button { grid-column: span 1; }
   .we-are-thermax { height: 380px; width: 93%; }
+  .newsroom-editorial-grid { grid-template-columns: 1fr; }
+  .newsroom-editorial-card { min-height: 0; }
 }
 
 /* Digital overview diagram (IIoT capability) */
