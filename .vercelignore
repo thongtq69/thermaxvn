@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.git/
+
+_audit/
+_clone-*.png
+_source-*.png
+
+*.tsbuildinfo
+*.log
+.DS_Store

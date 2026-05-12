@@ -27,3 +27,4 @@ yarn-error.log*
 _audit/
 _clone-*.png
 _source-*.png
+.vercel
