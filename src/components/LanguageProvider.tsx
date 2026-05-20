@@ -20,17 +20,34 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 const storageKey = "thermax-language";
 
+function getSavedLocale(): Locale | null {
+  try {
+    const savedLocale = window.localStorage?.getItem(storageKey);
+    return savedLocale === "vi" || savedLocale === "en" ? savedLocale : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLocale(locale: Locale) {
+  try {
+    window.localStorage?.setItem(storageKey, locale);
+  } catch {
+    // Some embedded browsers block storage; language switching should still work.
+  }
+}
+
 function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "vi";
 
   const params = new URLSearchParams(window.location.search);
   const queryLocale = params.get("lang");
   if (queryLocale === "vi" || queryLocale === "en") return queryLocale;
 
-  const savedLocale = window.localStorage.getItem(storageKey);
-  if (savedLocale === "vi" || savedLocale === "en") return savedLocale;
+  const savedLocale = getSavedLocale();
+  if (savedLocale) return savedLocale;
 
-  return window.navigator.language.toLowerCase().startsWith("vi") ? "vi" : "en";
+  return "vi";
 }
 
 function preserveSpacing(original: string, translated: string) {
@@ -90,7 +107,7 @@ function translateDom(locale: Locale) {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+  const [locale, setLocaleState] = useState<Locale>("vi");
 
   useEffect(() => {
     setLocaleState(getInitialLocale());
@@ -98,13 +115,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((nextLocale: Locale) => {
     setLocaleState(nextLocale);
-    window.localStorage.setItem(storageKey, nextLocale);
+    saveLocale(nextLocale);
 
     const url = new URL(window.location.href);
-    if (nextLocale === "en") {
+    if (nextLocale === "vi") {
       url.searchParams.delete("lang");
     } else {
-      url.searchParams.set("lang", nextLocale);
+      url.searchParams.set("lang", "en");
     }
     window.history.replaceState({}, "", url);
   }, []);

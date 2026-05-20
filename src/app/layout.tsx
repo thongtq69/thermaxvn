@@ -3,9 +3,9 @@ import { LanguageProvider } from "../components/LanguageProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Thermax | Trusted Partner in Energy Transition",
+  title: "Vietnam | Thermax Global",
   description:
-    "Thermax is a global engineering company providing sustainable solutions in energy and the environment.",
+    "Explore how Thermax supports Vietnam's industries with sustainable energy, water, air pollution control, and digital solutions.",
   icons: {
     icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
     shortcut: ["/favicon.ico"],
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
