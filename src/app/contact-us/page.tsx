@@ -4,7 +4,7 @@ import { PageShell } from "../../components/PageShell";
 import { InnerHero } from "../../components/InnerHero";
 import { InnerSubNav } from "../../components/InnerSubNav";
 import { ArrowIcon } from "../../components/icons";
-import { imageUrls } from "../../lib/site";
+import { imageUrls, vietnamOffice } from "../../lib/site";
 
 export default function ContactUsPage() {
   return (
@@ -24,35 +24,36 @@ export default function ContactUsPage() {
         ]}
       />
 
-      <section className="contact-info-section" data-section="contact-info">
+      <section className="contact-info-section" id="contact-information" data-section="contact-info">
         <div className="contact-info-grid" data-reveal>
           <div>
-            <h3>Headquarters</h3>
+            <h3>{vietnamOffice.label}</h3>
             <p>
-              Thermax Limited
+              {vietnamOffice.company}
               <br />
-              Thermax House,
-              <br />
-              14 Mumbai-Pune Road Wakdewadi,
-              <br />
-              Pune 411003
+              {vietnamOffice.address.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
             </p>
           </div>
           <div>
-            <img src="https://www.thermaxglobal.com/themes/thermax/assets/images/headquarters-pic.jpg" alt="Headquarters" />
+            <img src={imageUrls.bannerGlobal} alt="Thermax Vietnam regional office" />
           </div>
         </div>
-        <div className="contact-info-grid contact-customer-support" data-reveal>
+        <div className="contact-info-grid contact-customer-support" id="office-locations" data-reveal>
           <h3>For customer support &amp; general inquiries</h3>
           <div>
-            <a href="tel:18002090115">1800-209-0115</a>
+            <a href={vietnamOffice.phoneHref}>{vietnamOffice.phone}</a>
             {" "}
-            <a href="mailto:customer.support@thermaxglobal.com">customer.support@thermaxglobal.com</a>
+            <a href={vietnamOffice.emailHref}>{vietnamOffice.email}</a>
           </div>
         </div>
       </section>
 
-      <section className="contact-form-section" data-section="contact-form">
+      <section className="contact-form-section" id="contact-form" data-section="contact-form">
         <div className="contact-form-grid" data-reveal>
           <div>
             <h3>Get in Touch</h3>

@@ -1,6 +1,6 @@
 "use client";
 
-import { footerGroups, imageUrls } from "../lib/site";
+import { footerGroups, imageUrls, vietnamOffice } from "../lib/site";
 import { useLanguage } from "./LanguageProvider";
 
 export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
@@ -26,15 +26,24 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
             <img src={imageUrls.logo} alt="Thermax" />
           </a>
           <div className="footer-address-block">
-            <h3>{t("Thermax Vietnam")}</h3>
-            <p>{t("Vietnam presence since 2008, with direct office presence strengthened in 2019.")}</p>
+            <h3>{t(vietnamOffice.label)}</h3>
+            <p>
+              {vietnamOffice.company}
+              <br />
+              {vietnamOffice.address.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
           </div>
           <div className="footer-address-block">
-            <h3>{t("Local Coverage")}</h3>
+            <h3>{t("Contact")}</h3>
             <p>
-              {t(
-                "Process heating, cooling, power generation, air pollution control, water and wastewater management, and performance-engineered chemicals.",
-              )}
+              <a href={vietnamOffice.phoneHref}>{vietnamOffice.phone}</a>
+              <br />
+              <a href={vietnamOffice.emailHref}>{vietnamOffice.email}</a>
             </p>
           </div>
           <div className="footer-address-block">

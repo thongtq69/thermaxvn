@@ -144,6 +144,22 @@ export const imageUrls = {
   discoverArrow: `${thermaxAssetBase}/discover-arrow.svg`,
 };
 
+export const vietnamOffice = {
+  label: "Vietnam - Regional Office",
+  company: "Thermax Limited",
+  address: [
+    "Room 2-3, 1st Floor",
+    "WiYO Complex, No. 46 N3C Street",
+    "Binh Trung Ward",
+    "Ho Chi Minh City",
+    "Vietnam",
+  ],
+  phone: "+84 90 880 8597",
+  phoneHref: "tel:+84908808597",
+  email: "enquiry.vietnam@thermaxglobal.com",
+  emailHref: "mailto:enquiry.vietnam@thermaxglobal.com",
+};
+
 export const navItems: NavItem[] = [
   {
     label: "About Us",

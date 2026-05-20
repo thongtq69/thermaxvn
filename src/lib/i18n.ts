@@ -20,6 +20,7 @@ export const viDictionary: Record<string, string> = {
   "Investors": "Nhà đầu tư",
   "Thermax": "Thermax",
   "Thermax Vietnam": "Thermax Việt Nam",
+  "Vietnam - Regional Office": "Văn phòng khu vực Việt Nam",
   "Request a call back": "Yêu cầu gọi lại",
   "Search": "Tìm kiếm",
   "Search Results": "Kết quả tìm kiếm",

@@ -2712,6 +2712,7 @@ main {
 .capability-section {
   position: relative;
   display: block;
+  scroll-margin-top: 96px;
   max-width: 1300px;
   min-height: 0;
   margin: 0 auto;
@@ -4411,7 +4412,7 @@ main {
   }
 
   .business-section {
-    padding: 60px 0 140px;
+    padding: 60px 0 54px;
   }
 
   .about-copy h2 {
@@ -4574,10 +4575,7 @@ main {
   }
 
   .source-arrows {
-    right: 24px;
-    bottom: 16px;
-    top: auto;
-    display: flex;
+    display: none;
   }
 
   .source-arrows button {
@@ -4587,35 +4585,41 @@ main {
 
   .capability-section {
     display: block;
-    padding: 0 24px 58px;
+    padding: 46px 24px 58px;
   }
 
   .capability-list {
     display: flex;
-    gap: 0;
+    gap: 8px;
     max-width: calc(100vw - 48px);
-    margin: 12px 0 16px;
+    margin: 14px 0 20px;
+    padding-bottom: 2px;
     overflow-x: auto;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 0;
+    scrollbar-width: none;
+  }
+
+  .capability-list::-webkit-scrollbar {
+    display: none;
   }
 
   .capability-link {
     flex: 0 0 auto;
-    min-height: 42px;
-    padding: 0 16px;
+    min-height: 40px;
+    padding: 0 14px;
     color: #111;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
+    background: #f3f5f7;
+    border: 1px solid #e1e5ea;
+    border-radius: 999px;
     font-size: 13px;
     font-weight: 700;
   }
 
   .capability-link.is-active,
   .capability-link:hover {
-    color: #111;
-    background: transparent;
-    border-bottom: 1px solid #111;
+    color: #fff;
+    background: #ed3438;
+    border-color: #ed3438;
   }
 
   .capability-swiper {
