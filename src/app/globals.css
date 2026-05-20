@@ -1980,7 +1980,7 @@ main {
   display: inline-block;
   height: 1em;
   vertical-align: bottom;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero h1 strong {
@@ -4313,6 +4313,775 @@ main {
   .business-more,
   .source-arrows {
     display: none;
+  }
+}
+
+/* Final source-parity overrides for the home page responsive clone. */
+.nav-actions > .language-switch {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.nav-actions > .language-switch .language-switch-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-actions > .language-switch button {
+  position: absolute;
+  width: 1px;
+  min-width: 0;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  pointer-events: none;
+}
+
+@media (max-width: 780px) {
+  .nav-actions {
+    gap: 14px;
+  }
+
+  .user-enquiry-button {
+    display: grid;
+  }
+
+  .hero-pin-wrap {
+    height: 419px;
+  }
+
+  .hero {
+    height: 419px;
+    min-height: 419px;
+    padding: 172px 24px 0 !important;
+    gap: 24px;
+  }
+
+  .hero h1 .word-rotate {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  .hero h1 strong {
+    display: inline-block;
+  }
+
+  .hero-visual-section {
+    height: 550px !important;
+    margin-top: -3px;
+    padding: 0 24px;
+    transform: none;
+  }
+
+  .hero-main-image {
+    height: 550px !important;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .business-section {
+    padding: 60px 0 140px;
+  }
+
+  .about-copy h2 {
+    font-size: 26px;
+    line-height: 1.24;
+  }
+
+  .about-body p {
+    font-size: 14px;
+    line-height: 1.54;
+  }
+
+  .stat-item {
+    height: 150px;
+  }
+
+  .business-layout {
+    padding: 0 24px;
+  }
+
+  .business-intro {
+    display: block;
+    min-height: 260px;
+    margin: 0 0 30px;
+    padding: 0 24px;
+  }
+
+  .business-intro h2 {
+    max-width: 444px;
+    margin: 0 0 20px;
+    font-size: 30px;
+    line-height: 35px;
+  }
+
+  .business-intro p {
+    max-width: 444px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .business-swiper {
+    width: min(444px, calc(100vw - 56px)) !important;
+    overflow: visible;
+    padding-bottom: 0 !important;
+  }
+
+  .business-swiper .swiper-wrapper {
+    display: block;
+    transform: none !important;
+  }
+
+  .business-card.swiper-slide {
+    display: none;
+  }
+
+  .business-card.swiper-slide:first-child {
+    display: flex;
+  }
+
+  .business-card.swiper-slide,
+  .business-card.swiper-slide-active {
+    width: 100% !important;
+    max-width: none !important;
+    flex: 0 0 100% !important;
+    height: 680px;
+    min-height: 0;
+    color: #111;
+    background: #fff;
+    border-radius: 18px;
+  }
+
+  .business-card.swiper-slide::after {
+    display: none;
+  }
+
+  .business-card > img,
+  .business-card.swiper-slide-active > img {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    margin-bottom: 7px;
+    opacity: 1;
+  }
+
+  .business-card > div,
+  .business-card.swiper-slide-active > div {
+    position: relative;
+    inset: auto;
+    display: block;
+    height: 412px;
+    min-height: 0;
+    padding: 13px 15px 0;
+    background: #fff;
+  }
+
+  .business-card h3,
+  .business-card.swiper-slide-active h3 {
+    color: #111;
+    margin: 0;
+    font-size: 24px;
+    line-height: 28.8px;
+  }
+
+  .business-card > div > span,
+  .business-card.swiper-slide-active > div > span {
+    display: block;
+    max-width: 400px;
+    margin: 0 0 16px;
+    padding-top: 16px;
+    color: #111;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+  }
+
+  .business-card ul,
+  .business-card.swiper-slide-active ul {
+    display: block;
+    grid-template-columns: 1fr;
+    height: 160px;
+    margin: 0;
+  }
+
+  .business-card li {
+    display: flex;
+    min-height: 32px;
+    padding: 0;
+    color: #111;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .business-card li::after {
+    color: #111;
+    content: ">";
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .business-card .business-more,
+  .business-card.swiper-slide-active .business-more {
+    display: inline-flex;
+    min-width: 124px;
+    min-height: 37px;
+    justify-content: center;
+    margin-top: 24px;
+    padding: 8px 12px;
+    color: #fff;
+    background: #ed3438;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+  }
+
+  .business-card .business-more::before {
+    display: none;
+  }
+
+  .source-arrows {
+    right: 24px;
+    bottom: 16px;
+    top: auto;
+    display: flex;
+  }
+
+  .source-arrows button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .capability-section {
+    display: block;
+    padding: 0 24px 58px;
+  }
+
+  .capability-list {
+    display: flex;
+    gap: 0;
+    max-width: calc(100vw - 48px);
+    margin: 12px 0 16px;
+    overflow-x: auto;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .capability-link {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 16px;
+    color: #111;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .capability-link.is-active,
+  .capability-link:hover {
+    color: #111;
+    background: transparent;
+    border-bottom: 1px solid #111;
+  }
+
+  .capability-swiper {
+    margin-top: 0;
+  }
+
+  .capability-slide {
+    display: block;
+  }
+
+  .capability-media img {
+    height: 338px;
+  }
+
+  .capability-copy {
+    display: block;
+    padding-top: 30px;
+  }
+
+  .impact-section {
+    height: 863px;
+    margin-top: -62px;
+    padding: 50px 24px;
+  }
+
+  .case-swiper {
+    width: min(444px, calc(100vw - 56px)) !important;
+    height: 490px;
+    margin-top: 15px;
+    overflow: visible;
+  }
+
+  .case-card {
+    width: 100% !important;
+    max-width: none;
+    height: 490px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 20px;
+  }
+
+  .case-card .case-main {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+  }
+
+  .case-card .case-content {
+    position: relative;
+    display: block;
+    min-height: 159px;
+    padding: 20px;
+    background: #fff;
+  }
+
+  .case-card h3 {
+    margin: 20px 0 0;
+  }
+
+  .case-card a {
+    width: 100%;
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .investors-section {
+    min-height: 1167px;
+    margin-top: 0;
+  }
+
+  .investors-section .publication-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .investors-section .publication-card {
+    display: block;
+    min-height: 0;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .investors-section .publication-card img {
+    display: block;
+    width: 100%;
+    height: 142px;
+    margin-bottom: 8px;
+    object-fit: cover;
+  }
+
+  .news-section {
+    height: 718px;
+    padding: 50px 24px;
+    overflow: hidden;
+  }
+
+  .news-section .news-grid {
+    display: block;
+  }
+
+  .news-section .news-card:nth-child(n + 2) {
+    display: none;
+  }
+
+  .footer-cta {
+    height: 538px;
+    min-height: 538px;
+    overflow: hidden;
+  }
+
+  .footer-cta-copy {
+    min-height: 258px;
+    padding: 34px 24px 42px;
+  }
+
+  .footer-grid {
+    padding: 40px 18px 20px;
+    gap: 26px;
+  }
+
+  .footer-links {
+    display: block;
+    column-count: 1 !important;
+  }
+
+  .footer-link-col {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    break-inside: avoid;
+  }
+
+  .footer-link-col h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .footer-link-col h3::after {
+    content: "+";
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .footer-link-col a {
+    display: none;
+  }
+
+  .footer-bottom {
+    padding: 0 18px 20px;
+  }
+}
+
+.nav-actions > .language-switch {
+  width: auto;
+  height: 34px;
+  padding: 3px;
+  gap: 2px;
+  background: #f7f7f7;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+}
+
+.nav-actions > .language-switch .language-switch-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-actions > .language-switch button {
+  position: static;
+  width: auto;
+  min-width: 34px;
+  height: 26px;
+  padding: 0 9px;
+  overflow: visible;
+  clip: auto;
+  pointer-events: auto;
+}
+
+.vietnam-about {
+  scroll-margin-top: 128px;
+  align-items: center;
+  gap: 48px 80px;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.vietnam-about-media {
+  width: 100%;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eaeef2;
+}
+
+.vietnam-about-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.vietnam-about-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.vietnam-about-copy h2 {
+  max-width: 520px;
+  font-size: 54px;
+  line-height: 1.04;
+}
+
+.vietnam-heading-accent,
+.people-copy h2 span {
+  color: #ed3438;
+}
+
+.vietnam-about-copy .about-body {
+  display: grid;
+  gap: 14px;
+}
+
+.vietnam-about-copy .about-body p {
+  max-width: 610px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.vietnam-about .source-cta {
+  margin-top: 0;
+}
+
+.vietnam-about .stats-grid {
+  margin-top: 20px;
+}
+
+.people-section {
+  overflow: hidden;
+  padding: 88px 24px 80px;
+  background: #fff;
+}
+
+.people-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 64px;
+}
+
+.people-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.people-copy h2 {
+  margin: 0;
+  color: #000;
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.04;
+}
+
+.people-copy p {
+  max-width: 520px;
+  margin: 0;
+  color: #000;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.people-copy .source-cta {
+  margin-top: 0;
+}
+
+.people-collage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  grid-template-rows: 235px 235px;
+  gap: 18px;
+}
+
+.people-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.people-image-1 {
+  grid-row: 1 / 3;
+}
+
+.social-follow {
+  max-width: 1300px;
+  margin: 80px auto 0;
+}
+
+.social-follow > p {
+  margin: 0 0 22px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.social-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.social-strip a {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #111;
+  border-radius: 8px;
+}
+
+.social-strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 450ms ease;
+}
+
+.social-strip svg {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 26px;
+  height: 26px;
+  color: #fff;
+  opacity: 0;
+  transform: translate3d(-8px, 8px, 0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.social-strip a:hover img {
+  transform: scale(1.05);
+}
+
+.social-strip a:hover svg {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 1199px) and (min-width: 781px) {
+  .vietnam-about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .vietnam-about-copy h2,
+  .people-copy h2 {
+    font-size: 46px;
+  }
+
+  .people-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 780px) {
+  .nav-actions > .language-switch {
+    height: 30px;
+    padding: 2px;
+  }
+
+  .nav-actions > .language-switch .language-switch-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-actions > .language-switch button {
+    min-width: 28px;
+    height: 24px;
+    padding: 0 7px;
+    font-size: 11px;
+  }
+
+  .vietnam-about {
+    scroll-margin-top: 86px;
+    display: block;
+    padding: 56px 24px 64px;
+  }
+
+  .vietnam-about-media {
+    min-height: 310px;
+    margin-bottom: 30px;
+  }
+
+  .vietnam-about-media img {
+    min-height: 310px;
+  }
+
+  .vietnam-about-copy {
+    gap: 20px;
+  }
+
+  .vietnam-about-copy h2,
+  .people-copy h2 {
+    max-width: none;
+    font-size: 38px;
+    line-height: 1.08;
+  }
+
+  .vietnam-about-copy .about-body p,
+  .people-copy p {
+    max-width: none;
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .vietnam-about .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .vietnam-about .stat-item {
+    height: 138px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .vietnam-about .stat-item strong {
+    font-size: 42px;
+    line-height: 50px;
+  }
+
+  .vietnam-about .stat-item span {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .people-section {
+    padding: 62px 24px 58px;
+  }
+
+  .people-layout {
+    display: block;
+  }
+
+  .people-collage {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .social-follow {
+    margin-top: 52px;
+  }
+
+  .social-strip {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .social-strip a {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
   }
 }
 

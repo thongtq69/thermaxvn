@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -12,7 +12,6 @@ import {
   capabilities,
   caseStudies,
   imageUrls,
-  newsItems,
 } from "../lib/site";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -158,30 +157,41 @@ function Hero() {
 
 function AboutSection() {
   const { t } = useLanguage();
-  const aboutCopy =
-    t("Backed by our strong engineering prowess and domain expertise over decades, we offer comprehensive solutions to ensure clean air, clean energy and clean water.");
-  const aboutBody =
-    t("From curbing emissions with advanced air pollution control systems, enabling energy efficiency through clean technologies, to conserving water with cutting-edge treatment and recycling solutions, our commitment lies in fostering a world where progress and sustainability go hand in hand. With every solution, we aim to build a better tomorrow-one that thrives on responsible innovation and leaves a lasting legacy for generations to come.");
-  const splitIdx = aboutCopy.split(" ").findIndex((w) => w.startsWith("we") || w.startsWith("chúng"));
+  const firstParagraph =
+    "Thermax began its journey in Vietnam in 2008, supporting industries with sustainable and energy-efficient solutions through its channel partners.";
+  const secondParagraph =
+    "In 2019, we strengthened our presence by establishing a shared office, marking our first direct presence in the country. We offer integrated solutions in process heating, cooling, and power generation, air pollution control, water and wastewater management, and performance-engineered chemicals, helping industries improve efficiency, meet compliance, and move towards a greener, more sustainable future.";
 
   return (
-    <section className="about-section" id="about" data-section="about">
-      <div className="about-copy" data-reveal>
-        <h2>
-          <RevealWords text={aboutCopy} highlightFromIndex={splitIdx} />
-        </h2>
+    <section className="about-section vietnam-about" id="about" data-section="about">
+      <div className="vietnam-about-media" data-reveal>
+        <img src={imageUrls.hero} alt="" />
       </div>
-      <div className="about-body" data-reveal>
-        <p>
-          <RevealWords text={aboutBody} />
-        </p>
+      <div className="about-copy vietnam-about-copy" data-reveal>
+        <h2>
+          <span>{t("Thermax")}</span>
+          <br />
+          <span className="vietnam-heading-accent">{t("in Vietnam")}</span>
+        </h2>
+        <div className="about-body">
+          <p>
+            <RevealWords text={t(firstParagraph)} />
+          </p>
+          <p>
+            <RevealWords text={t(secondParagraph)} />
+          </p>
+        </div>
+        <a className="source-cta" href="/company-overview/legacy-milestone">
+          <span />
+          {t("Know more about Thermax’s legacy")}
+        </a>
       </div>
       <div className="stats-grid" data-reveal>
         {[
-          ["60+", t("Years of legacy")],
-          ["90+", t("Countries served")],
-          ["45+", t("Offices globally")],
-          ["16", t("Manufacturing facilities")],
+          ["10+", t("Years")],
+          ["40+", t("Installations")],
+          ["10+", t("Industries served")],
+          ["40+", t("Customer base")],
         ].map(([value, label]) => (
           <div className="stat-item" key={label}>
             <strong>{value}</strong>
@@ -224,19 +234,17 @@ function BusinessSection() {
 
       <div className="business-layout" data-reveal>
         <Swiper
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation]}
           className="business-swiper"
           slidesPerView="auto"
           spaceBetween={30}
           centeredSlides
-          loop
           speed={650}
-          autoplay={{ delay: 4500, disableOnInteraction: false }}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
           breakpoints={{
-            0: { slidesPerView: 1.1, centeredSlides: true, spaceBetween: 16 },
+            0: { slidesPerView: 1, centeredSlides: false, spaceBetween: 20 },
             780: { slidesPerView: "auto", centeredSlides: true, spaceBetween: 30 },
           }}
         >
@@ -282,6 +290,18 @@ function CapabilitySection() {
       <div className="source-title">
         {t("Featured")} <span>{t("capabilities")}</span>
       </div>
+      <div className="capability-list" aria-label={t("Featured capabilities")}>
+        {capabilities.map((capability, capabilityIndex) => (
+          <button
+            className={index === capabilityIndex ? "capability-link is-active" : "capability-link"}
+            key={capability.label}
+            type="button"
+            onClick={() => swiperRef.current?.slideTo(capabilityIndex)}
+          >
+            {t(capability.label)}
+          </button>
+        ))}
+      </div>
       <div className="capability-counter">
         <span className="capability-counter-text">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -296,13 +316,11 @@ function CapabilitySection() {
         </div>
       </div>
       <Swiper
-        modules={[EffectFade, Autoplay]}
+        modules={[EffectFade]}
         className="capability-swiper"
         effect="fade"
         fadeEffect={{ crossFade: true }}
         speed={600}
-        loop
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
         allowTouchMove={false}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
@@ -368,13 +386,11 @@ function ImpactSection() {
         </button>
       </div>
       <Swiper
-        modules={[Navigation, Autoplay]}
+        modules={[Navigation]}
         className="case-swiper"
         slidesPerView={1}
         spaceBetween={30}
-        loop
         speed={650}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
@@ -397,105 +413,61 @@ function ImpactSection() {
   );
 }
 
-function InvestorsSection() {
-  const { t } = useLanguage();
-  const [market, setMarket] = useState<"NSE" | "BSE">("NSE");
-  const marketValue = market === "NSE" ? "4,182.30" : "4,182.65";
-  const marketChange = market === "NSE" ? "105.40 (2.59%)" : "104.35 (2.56%)";
-
-  return (
-    <section className="investors-section" id="investors" data-section="investors">
-      <div className="investor-hero">
-        <div className="investor-copy" data-reveal>
-          <h2>{t("Investors")}</h2>
-          <div>
-            <p>
-              {t(
-                "Our commitment to creating stakeholder value is reflected in our strategy, fundamentals and performance. Stay up to date on key financial information, reports, and upcoming events.",
-              )}
-            </p>
-            <a className="primary-button" href="#">
-              {t("Explore more")}
-              <ArrowIcon />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="investor-panel" data-reveal>
-        <div className="market-block">
-          <div className="market-toggle">
-            {["NSE", "BSE"].map((item) => (
-              <button
-                className={market === item ? "is-active" : ""}
-                key={item}
-                onClick={() => setMarket(item as "NSE" | "BSE")}
-                type="button"
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-          <strong>
-            {marketValue} <span>INR</span>
-          </strong>
-          <span className="market-up">{marketChange} ↑</span>
-          <div className="market-meta">
-            <small>07-05-2026 03:56 PM</small>
-            <a href="#">{t("Disclaimer")}</a>
-          </div>
-        </div>
-        <div className="publication-block">
-          <h3>{t("Latest publication & results")}</h3>
-          <div className="publication-grid">
-            <a href="#" className="publication-card">
-              <img src={imageUrls.annualReport} alt="" />
-              <span>{t("Annual Report 2024-25")}</span>
-            </a>
-            <a href="#" className="publication-card">
-              <img src={imageUrls.q4Report} alt="" />
-              <span>{t("Q4 Results 2025-26")}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function NewsSection() {
+function PeopleSection() {
   const { t, locale } = useLanguage();
+  const peopleImages = [imageUrls.peopleOne, imageUrls.peopleTwo, imageUrls.peopleThree];
+  const socialImages = [
+    imageUrls.socialVietnamOne,
+    imageUrls.socialVietnamTwo,
+    imageUrls.socialVietnamThree,
+    imageUrls.socialVietnamFour,
+    imageUrls.socialVietnamFive,
+  ];
 
   return (
-    <section className="news-section" id="media" data-section="news">
-      <div className="news-layout">
-        <div className="news-heading" data-reveal>
+    <section className="people-section" data-section="people">
+      <div className="people-layout">
+        <div className="people-copy" data-reveal>
           <h2>
             {locale === "vi" ? (
               <>
-                Tin tức và
+                <span>Con người</span>
                 <br />
-                góc nhìn
+                Thermax Vietnam
               </>
             ) : (
               <>
-                News and
+                <span>Our</span>
                 <br />
-                Insights
+                people
               </>
             )}
           </h2>
-          <a href="/in-the-news">
+          <p>
+            {t(
+              "The driving strength of Thermax Vietnam lies in its people. From skilled technicians and engineers to dedicated support teams, every individual plays a vital role in powering our operations and delivering value. Their commitment is instrumental in building strong partnerships and creating lasting impact for our customers and stakeholders across the region.",
+            )}
+          </p>
+          <a className="source-cta" href="/people">
             <span />
-            {t("Explore the latest")}
+            {t("Know more about Thermax culture")}
           </a>
         </div>
-        <div className="news-grid" data-reveal>
-          {newsItems.map((item) => (
-            <article className="news-card" key={item.title}>
-              <img src={item.image} alt="" />
-              <span>{t(item.date)}</span>
-              <h3>{t(item.title)}</h3>
-            </article>
+        <div className="people-collage" data-reveal>
+          {peopleImages.map((image, index) => (
+            <img src={image} alt="" key={image} className={`people-image people-image-${index + 1}`} />
+          ))}
+        </div>
+      </div>
+
+      <div className="social-follow" data-reveal>
+        <p>{t("Follow us on our social media")}</p>
+        <div className="social-strip">
+          {socialImages.map((image) => (
+            <a href={image} key={image} aria-label={t("Follow us")}>
+              <img src={image} alt="" />
+              <ArrowIcon />
+            </a>
           ))}
         </div>
       </div>
@@ -514,10 +486,9 @@ export default function Home() {
         <BusinessSection />
         <CapabilitySection />
         <ImpactSection />
-        <InvestorsSection />
-        <NewsSection />
+        <PeopleSection />
       </main>
-      <Footer showFooterCta />
+      <Footer />
     </>
   );
 }
