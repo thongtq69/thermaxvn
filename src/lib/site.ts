@@ -166,9 +166,11 @@ export const navItems: NavItem[] = [
     summary:
       "Spanning across four business segments, our solutions, products, and services improve resource productivity and strengthen the bottom line while maintaining a cleaner environment—delivering value for both industry and society.",
     links: [
-      "Industrial Products",
-      "Industrial Infra",
-      "Green Solutions",
+      "Air Pollution Control Systems",
+      "Process Heat Solutions",
+      "Steam Engineering Solutions",
+      "Cooling and Heating Solutions",
+      "Water and Waste Solutions",
       "Chemicals",
     ],
     spotlight: "Trusted Partner in Energy Transition",
@@ -222,6 +224,14 @@ export const navItems: NavItem[] = [
   },
 ];
 
+export const productSolutionHrefs: Record<string, string> = {
+  "Air Pollution Control Systems": "/business-segments/industrial-products?solution=air-pollution-control-systems#solutions",
+  "Process Heat Solutions": "/business-segments/industrial-products?solution=process-heat-solutions#solutions",
+  "Steam Engineering Solutions": "/business-segments/industrial-products?solution=steam-engineering-solutions#solutions",
+  "Cooling and Heating Solutions": "/business-segments/industrial-products?solution=cooling-and-heating-solutions#solutions",
+  "Water and Waste Solutions": "/business-segments/industrial-products?solution=water-and-waste-solutions#solutions",
+};
+
 export const businessSegments: BusinessSegment[] = [
   {
     label: "Industrial Products",
@@ -230,9 +240,9 @@ export const businessSegments: BusinessSegment[] = [
       "Industrial Products businesses offer solutions and services engineered to efficiently meet process heating, cooling, pollution abatement and water management requirements for various segments.",
     links: [
       "Air Pollution Control Systems",
-      "Cooling and Heating Solutions",
       "Process Heat Solutions",
       "Steam Engineering Solutions",
+      "Cooling and Heating Solutions",
       "Water and Waste Solutions",
     ],
   },

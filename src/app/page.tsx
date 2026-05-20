@@ -12,6 +12,7 @@ import {
   capabilities,
   caseStudies,
   imageUrls,
+  productSolutionHrefs,
 } from "../lib/site";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -211,19 +212,7 @@ function BusinessSection() {
     <section className="business-section" id="portfolio" data-section="business">
       <div className="business-intro" data-reveal>
         <h2>
-          {locale === "vi" ? (
-            <>
-              Dẫn dắt bởi
-              <br />
-              <span>giải pháp</span> tiên phong
-            </>
-          ) : (
-            <>
-              Enabled by cutting-
-              <br />
-              edge <span>solutions</span>
-            </>
-          )}
+          {locale === "vi" ? "Sản phẩm" : "Products"}
         </h2>
         <p>
           {t(
@@ -255,11 +244,14 @@ function BusinessSection() {
                 <h3>{t(segment.label)}</h3>
                 <span>{t(segment.body)}</span>
                 <ul>
-                  {segment.links.slice(0, 5).map((link) => (
-                    <li key={link}>{t(link)}</li>
-                  ))}
+                  {segment.links.slice(0, 5).map((link) => {
+                    const href = productSolutionHrefs[link];
+                    return (
+                      <li key={link}>{href ? <a href={href}>{t(link)}</a> : t(link)}</li>
+                    );
+                  })}
                 </ul>
-                <a className="business-more" href="#">
+                <a className="business-more" href="/business-segments/industrial-products#solutions">
                   {t("Discover more")}
                 </a>
               </div>

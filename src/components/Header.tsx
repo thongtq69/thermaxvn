@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { imageUrls, navItems } from "../lib/site";
+import { imageUrls, navItems, productSolutionHrefs } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
 
 const navHref: Record<string, string> = {
   "About Us": "/company-overview",
-  "Business Portfolio": "/business-segments/industrial-products",
+  "Business Portfolio": "/business-segments/industrial-products#solutions",
   Sustainability: "/sustainability",
   "Digital Solutions": "/digital",
   "In the News": "/in-the-news",
@@ -47,7 +47,18 @@ const megaHref: Record<string, string> = {
   "Press Releases": "/in-the-news",
   "TV Interviews": "/in-the-news",
   "Media Kit": "/in-the-news",
+  ...productSolutionHrefs,
 };
+
+const navDisplayLabel: Record<string, string> = {
+  "Business Portfolio": "Product Portfolio",
+  Sustainability: "Services",
+  "Digital Solutions": "Projects",
+};
+
+function getNavDisplayLabel(label: string) {
+  return navDisplayLabel[label] ?? label;
+}
 
 export function Header() {
   const { t } = useLanguage();
@@ -63,8 +74,7 @@ export function Header() {
         <div className="utility-bar">
           <div />
           <div className="utility-right">
-            <a href="/people">{t("People")}</a>
-            <a href="/in-the-news">{t("Media Centre")}</a>
+            <a href="/careers">{t("Careers")}</a>
             <a href="/contact-us">{t("Contact Us")}</a>
           </div>
         </div>
@@ -96,7 +106,7 @@ export function Header() {
                 }}
                 type="button"
               >
-                {t(item.label === "Digital Solutions" ? "Digital" : item.label)}
+                {t(getNavDisplayLabel(item.label))}
               </button>
             ))}
           </nav>
@@ -125,7 +135,7 @@ export function Header() {
 
         <div className={menu ? "mega-menu is-open" : "mega-menu"} onMouseEnter={() => setMenu(active.label)}>
           <div className="mega-copy">
-            <h2>{t(active.label === "About Us" ? "Thermax" : active.label)}</h2>
+            <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
             <p>{t(active.summary)}</p>
           </div>
           <div className="mega-links">
@@ -150,15 +160,12 @@ export function Header() {
         <div className={mobileOpen ? "mobile-panel is-open" : "mobile-panel"}>
           {navItems.map((item) => (
             <a href={navHref[item.label] ?? "#"} key={item.label} onClick={() => setMobileOpen(false)}>
-              {t(item.label)}
+              {t(getNavDisplayLabel(item.label))}
             </a>
           ))}
           <div className="mobile-utility-links">
-            <a href="/people" onClick={() => setMobileOpen(false)}>
-              {t("People")}
-            </a>
-            <a href="/in-the-news" onClick={() => setMobileOpen(false)}>
-              {t("Media Centre")}
+            <a href="/careers" onClick={() => setMobileOpen(false)}>
+              {t("Careers")}
             </a>
             <a href="/contact-us" onClick={() => setMobileOpen(false)}>
               {t("Contact Us")}

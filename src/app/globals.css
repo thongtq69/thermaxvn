@@ -2636,6 +2636,19 @@ main {
   font-weight: 700;
 }
 
+.business-card li a {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+.business-card li a:hover {
+  color: #ed3438;
+}
+
 .business-more {
   display: inline-flex;
   align-items: center;
