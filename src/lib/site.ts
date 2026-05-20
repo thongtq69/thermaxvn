@@ -171,24 +171,18 @@ export const navItems: NavItem[] = [
   {
     label: "Sustainability",
     summary:
-      "At Thermax, sustainability is not a target - it is the very foundation of how we engineer progress.",
-    links: [
-      "Overview",
-      "Corporate Social Responsibility",
-      "Social Compact",
-      "ESG Profile",
-      "BRSR Report",
-    ],
-    spotlight: "Driving Measurable Change",
-    spotlightImage: imageUrls.sustainabilitySpotlight,
+      "Thermax Vietnam supports customers with lifecycle service, digital reliability and responsible operations backed by Thermax expertise.",
+    links: ["Thermax Serve", "EDGE Live", "Corporate Social Responsibility", "ESG Profile"],
+    spotlight: "Lifecycle service and digital reliability",
+    spotlightImage: imageUrls.serve,
   },
   {
     label: "Digital Solutions",
     summary:
-      "EDGE Live and connected services help industrial teams monitor assets, predict failures and improve performance.",
-    links: ["EDGE Live", "Predictive Insights", "Energy Optimisation", "Connected Service"],
-    spotlight: "Future-ready operations",
-    spotlightImage: imageUrls.capability,
+      "Industrial infrastructure projects and energy solutions support large-scale steam, power and process requirements.",
+    links: ["Industrial Infra", "Projects and Energy Solutions", "Large Boilers and Fired Heaters"],
+    spotlight: "Projects and Energy Solutions",
+    spotlightImage: imageUrls.banner,
   },
   {
     label: "In the News",
@@ -384,7 +378,8 @@ export const footerGroups = [
   {
     title: "Services",
     links: [
-      { label: "Overview", href: "/sustainability" },
+      { label: "Thermax Serve", href: "/#capabilities" },
+      { label: "EDGE Live", href: "/digital" },
       { label: "Corporate Social Responsibility", href: "/corporate-social-responsibility" },
       { label: "ESG Profile", href: "/esg-profile" },
     ],
@@ -392,9 +387,15 @@ export const footerGroups = [
   {
     title: "Projects",
     links: [
-      { label: "Digital Solutions", href: "/digital" },
-      { label: "Green Hydrogen", href: "/business-segments/green-solutions" },
-      { label: "In the News", href: "/in-the-news" },
+      { label: "Industrial Infra", href: "/business-portfolio/industrial-infrastructure" },
+      {
+        label: "Projects and Energy Solutions",
+        href: "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
+      },
+      {
+        label: "Large Boilers and Fired Heaters",
+        href: "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
+      },
     ],
   },
   {

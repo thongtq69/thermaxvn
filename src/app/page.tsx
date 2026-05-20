@@ -278,7 +278,7 @@ function CapabilitySection() {
   const total = capabilities.length;
 
   return (
-    <section className="capability-section" data-section="capabilities">
+    <section className="capability-section" id="capabilities" data-section="capabilities">
       <div className="source-title">
         {t("Featured")} <span>{t("capabilities")}</span>
       </div>

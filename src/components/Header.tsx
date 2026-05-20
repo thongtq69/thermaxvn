@@ -9,8 +9,8 @@ import { useLanguage } from "./LanguageProvider";
 const navHref: Record<string, string> = {
   "About Us": "/company-overview",
   "Business Portfolio": "/business-segments/industrial-products#solutions",
-  Sustainability: "/sustainability",
-  "Digital Solutions": "/digital",
+  Sustainability: "/#capabilities",
+  "Digital Solutions": "/business-portfolio/industrial-infrastructure#solutions",
   "In the News": "/in-the-news",
   Investors: "/investor-overview",
 };
@@ -25,8 +25,11 @@ const megaHref: Record<string, string> = {
   "Policies & Certifications": "/about-us/policies",
   "Industrial Products": "/business-segments/industrial-products",
   "Industrial Infra": "/business-portfolio/industrial-infrastructure",
+  "Large Boilers and Fired Heaters": "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
+  "Projects and Energy Solutions": "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
   "Green Solutions": "/business-segments/green-solutions",
   Chemicals: "/business-portfolio/chemicals",
+  "Thermax Serve": "/#capabilities",
   Overview: "/sustainability",
   "Corporate Social Responsibility": "/corporate-social-responsibility",
   "Social Compact": "/social-compact",

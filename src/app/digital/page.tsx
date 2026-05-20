@@ -12,35 +12,35 @@ export const metadata = {
 
 const capabilities360 = [
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-1.png",
+    icon: imageUrls.missionIcon1,
     title: "Value discovery",
     body:
       "Pre-assessment of the plant to understand the current challenges, instrumentation availability and identification of digital use-cases",
   },
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-2.png",
+    icon: imageUrls.missionIcon2,
     title: "Sensorisation",
     body: "Supply and commissioning of necessary hardware (sensors / meters / controller equipment) as required",
   },
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-3.png",
+    icon: imageUrls.missionIcon3,
     title: "OT-IT connect",
     body: "OT security assessment and cloud connectivity using a secured OT architecture",
   },
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-4.png",
+    icon: imageUrls.missionIcon4,
     title: "Onboarding",
     body:
       "Seamless onboarding of assets on EDGE Live, platform configuration, model deployment and finetuning, user training, etc.",
   },
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-5.png",
+    icon: imageUrls.missionIcon5,
     title: "Value delivery",
     body:
       "Customer engagement through remote monitoring and expert insights leveraging the capabilities of EDGE Live and extensive domain knowledge",
   },
   {
-    icon: "https://www.thermaxglobal.com/themes/thermax/assets/images/digital-360-6.png",
+    icon: imageUrls.missionIcon6,
     title: "On-site intervention",
     body: "On-site visit and support as and when required • Providing spares and services as applicable",
   },
