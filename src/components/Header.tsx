@@ -47,6 +47,8 @@ const megaHref: Record<string, string> = {
   "Press Releases": "/in-the-news",
   "TV Interviews": "/in-the-news",
   "Media Kit": "/in-the-news",
+  Careers: "/careers",
+  "Contact Us": "/contact-us",
   ...productSolutionHrefs,
 };
 

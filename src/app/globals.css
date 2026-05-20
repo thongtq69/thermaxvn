@@ -3436,6 +3436,16 @@ main {
   line-height: 22px;
 }
 
+.footer-address-block a {
+  color: #dce8ee;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-address-block a:hover {
+  color: #fff;
+}
+
 .footer-social {
   display: flex;
   gap: 18px;

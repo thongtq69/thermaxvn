@@ -1,139 +1,38 @@
-import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { RevealWatcher } from "../../components/RevealWatcher";
+import { Header } from "../../components/Header";
 import { InnerHero } from "../../components/InnerHero";
+import { RevealWatcher } from "../../components/RevealWatcher";
 import { imageUrls } from "../../lib/site";
 
 export const metadata = {
-  title: "Thermax Company Overview | Clean Energy & Environment Solutions Since 1966",
+  title: "Thermax Vietnam Overview | Sustainable Energy and Environment Solutions",
   description:
-    "Welcome to Thermax – an engineering company providing sustainable solutions in energy and the environment.",
+    "A concise overview of Thermax Vietnam's local presence, industrial solutions, and customer support focus.",
 };
 
-const stats = [
-  ["60+", "Years of legacy"],
-  ["90+", "Countries served"],
-  ["45+", "Offices globally"],
-  ["16", "Manufacturing facilities"],
+const vietnamStats = [
+  ["2008", "Vietnam journey begins"],
+  ["2019", "Direct office presence"],
+  ["40+", "Installations"],
+  ["10+", "Industries served"],
 ];
 
-const family = [
+const focusAreas = [
   {
-    name: "A. S. Bhathena",
-    role: "Founder",
-    image: imageUrls.family1,
-  },
-  {
-    name: "Rohinton D. Aga",
-    role: "First Chairman and Managing Director",
-    image: imageUrls.family2,
-  },
-  {
-    name: "Anu Aga",
-    role: "Former Chairperson",
-    image: imageUrls.family3,
-  },
-  {
-    name: "Meher Pudumjee",
-    role: "Chairperson",
-    image: imageUrls.bod1,
-  },
-  {
-    name: "Pheroz Pudumjee",
-    role: "Non-Executive, Non-Independent Director",
-    image: imageUrls.bod2,
-  },
-];
-
-const missions = [
-  {
-    icon: imageUrls.missionIcon1,
-    title: "Global vision, quality delivery",
+    title: "Local industrial support",
     body:
-      "We aspire to become a leading technology company with a global outlook delivering world-class products and services to customers.",
+      "Thermax Vietnam supports industrial customers with energy-efficient, sustainability-led solutions adapted to local operating needs.",
   },
   {
-    icon: imageUrls.missionIcon2,
-    title: "Customer-first partnership",
+    title: "Integrated solutions",
     body:
-      "We exist to fulfil the needs of our customers – best understood through an enlightened partnership with them.",
+      "The local portfolio covers process heating, cooling, power generation, air pollution control, water and wastewater management, and performance-engineered chemicals.",
   },
   {
-    icon: imageUrls.missionIcon3,
-    title: "Strong supplier partnerships",
+    title: "Global expertise, local commitment",
     body:
-      "We seek dependable partnership with our suppliers – to generate a strong mutual interest in each other's welfare.",
+      "The Vietnam team combines local customer understanding with Thermax's global engineering experience to improve efficiency, compliance, and long-term reliability.",
   },
-  {
-    icon: imageUrls.missionIcon4,
-    title: "Integrity in leadership",
-    body: "We live by a high value of integrity and excellence in management.",
-  },
-  {
-    icon: imageUrls.missionIcon5,
-    title: "Expanding through innovation",
-    body:
-      "Our challenge is to continually expand and define new markets by expanding the frontiers of research and engineering and customer applications in our chosen field of business.",
-  },
-  {
-    icon: imageUrls.missionIcon6,
-    title: "Empowering people",
-    body:
-      "Our commitment is to create an organisation, which nurtures the talent and enterprise of our people, helping them to grow and find fulfilment, in an open culture.",
-  },
-  {
-    icon: imageUrls.missionIcon7,
-    title: "Sustainability & social impact",
-    body:
-      "We strive to contribute substantially to the global priority areas of energy conservation, environment protection and enrichment of society.",
-  },
-];
-
-const coreValues = [
-  {
-    title: "Respect",
-    image: imageUrls.coreValue1,
-    points: [
-      "Respect for human lives and human dignity",
-      "Respect for what is right, and not who is right",
-      "Respect for diverse opinions, traditions and cultures",
-    ],
-  },
-  {
-    title: "Commitment",
-    image: imageUrls.coreValue2,
-    points: [
-      "Commitment to deliver, on time and as promised",
-      "Commitment to take complete ownership of our work",
-      "Commitment to learning, sharing and improving",
-    ],
-  },
-  {
-    title: "Honesty & integrity",
-    image: imageUrls.coreValue3,
-    points: [
-      "Honesty in dealings, transparent in communication",
-      "Integrity in conduct – inside and outside the company",
-      "Acknowledging mistakes; taking responsibility for them",
-    ],
-  },
-  {
-    title: "Concern for Society & Environment",
-    image: imageUrls.coreValue4,
-    points: [
-      "Caring for the communities we operate in",
-      "Conserving energy, water and the world around us",
-      "Building solutions that solve real environmental challenges",
-    ],
-  },
-];
-
-const awards = [
-  { image: imageUrls.award1, title: "IMD Global Family Business Award — Winner, 2023" },
-  { image: imageUrls.award2, title: "Golden Peacock Award for Excellence in Corporate Governance — 2023" },
-  { image: imageUrls.award3, title: "Energy Excellence Award 2025 — Outstanding Achievement in R&D and Innovation" },
-  { image: imageUrls.award4, title: "AI Gamechanger Challenger Award — for Thermax EDGE Live®" },
-  { image: imageUrls.award5, title: "Platinum Certification for Sustainability — Sri City Plant" },
 ];
 
 export default function CompanyOverviewPage() {
@@ -145,11 +44,11 @@ export default function CompanyOverviewPage() {
         <InnerHero
           title={
             <>
-              Company <br /> Overview
+              Thermax <br /> Vietnam
             </>
           }
-          ariaTitle="Company Overview"
-          description="Welcome to Thermax – an engineering company providing sustainable solutions in energy and the environment"
+          ariaTitle="Thermax Vietnam"
+          description="A focused Vietnam presence backed by Thermax global engineering expertise"
           image={imageUrls.bannerCompany}
           mobileImage={imageUrls.bannerCompanyMobile}
           breadcrumb={[{ label: "About Us", href: "/company-overview" }, { label: "Company Overview" }]}
@@ -158,25 +57,24 @@ export default function CompanyOverviewPage() {
         <section className="inner-intro" data-section="company-intro">
           <div className="inner-intro-grid" data-reveal>
             <h2>
-              The company&apos;s vision for the future is firmly anchored in the belief that to stay competitive,
-              companies need to adopt <span className="red">sustainable development practices.</span>
+              Thermax Vietnam is a local presence focused on supporting industries with
+              <span className="red"> sustainable energy and environment solutions.</span>
             </h2>
             <div>
               <p>
-                Thermax Group is an INR 10,389 Cr. (~1.25 Billion US$) company headquartered in Pune, India. Its
-                business portfolio includes products for heating, cooling, water and waste management, and speciality
-                chemicals, along with its digital capabilities. The company also designs, builds and commissions large
-                boilers for steam and power generation, turnkey power plants, industrial and municipal wastewater
-                treatment plants, waste heat recovery systems and air pollution control projects.
+                Thermax began its journey in Vietnam in 2008, supporting industries with sustainable and
+                energy-efficient solutions through its channel partners.
               </p>
               <p>
-                The systems, products and services developed by Thermax help industry achieve better resource
-                productivity and improve bottom lines, while maintaining a cleaner environment.
+                In 2019, Thermax strengthened its presence by establishing a shared office, marking its first direct
+                presence in the country. Today, the Vietnam presence supports customers across process heating, cooling,
+                power generation, air pollution control, water and wastewater management, and performance-engineered
+                chemicals.
               </p>
             </div>
           </div>
           <div className="inner-intro-stats" data-reveal>
-            {stats.map(([num, label]) => (
+            {vietnamStats.map(([num, label]) => (
               <div className="inner-intro-stats-item" key={label}>
                 <strong>{num}</strong>
                 <p>{label}</p>
@@ -185,116 +83,32 @@ export default function CompanyOverviewPage() {
           </div>
         </section>
 
-        <section className="we-are-thermax" data-section="we-are">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={imageUrls.energyPoster}
-            src={imageUrls.energyVideo}
-          />
-          <button className="play-bt" type="button" aria-label="Play"></button>
-        </section>
-
-        <section className="team-section" data-section="founding-family">
-          <div className="section-title-block" data-reveal>
-            <h2>
-              Founding <span className="red">family</span>
-            </h2>
-            <a className="section-cta" href="/company-overview/leadership/board-of-directors">
-              Meet our team
-            </a>
+        <section className="mission-section" data-section="vietnam-focus">
+          <div className="line-title" data-reveal>
+            <span>Vietnam focus</span>
           </div>
-          <div className="team-grid" data-reveal>
-            {family.map((member) => (
-              <div className="team-card" key={member.name}>
-                <img src={member.image} alt={member.name} />
-                <div className="team-card-body">
-                  <h3>{member.name}</h3>
-                  <p>{member.role}</p>
-                  <a className="section-cta" href="#">
-                    Read more
-                  </a>
-                </div>
+          <div className="mission-grid" data-reveal>
+            {focusAreas.map((item) => (
+              <div className="mission-card" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="vision-section" data-section="vision">
+        <section className="vision-section" data-section="local-role">
           <div className="vision-banner" data-reveal>
-            <img src={imageUrls.visionBanner} alt="Thermax vision" />
+            <img src={imageUrls.hero} alt="Thermax Vietnam" />
           </div>
           <div className="vision-content" data-reveal>
             <div className="line-title">
-              <span>Vision</span>
+              <span>Our role</span>
             </div>
             <p className="vision-text">
-              To be a globally respected high performance organisation offering sustainable solutions in energy and the
-              environment.
+              We help Vietnamese industries improve operational efficiency, meet compliance requirements, and move
+              towards cleaner, more sustainable growth.
             </p>
-          </div>
-        </section>
-
-        <section className="mission-section" data-section="mission">
-          <div className="line-title" data-reveal>
-            <span>Mission</span>
-          </div>
-          <div className="mission-grid" data-reveal>
-            {missions.map((m) => (
-              <div className="mission-card" key={m.title}>
-                <div className="mission-card-icon">
-                  <img src={m.icon} alt="" />
-                </div>
-                <h3>{m.title}</h3>
-                <p>{m.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="core-values-section" data-section="core-values">
-          <h2 className="core-values-title" data-reveal>
-            The Core Values
-            <br />
-            that Drive Us
-          </h2>
-          <div className="core-values-grid" data-reveal>
-            {coreValues.map((value) => (
-              <div className="core-value-card" key={value.title}>
-                <img src={value.image} alt="" />
-                <div className="core-value-content">
-                  <h3>{value.title}</h3>
-                  <ul>
-                    {value.points.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="awards-section" data-section="awards">
-          <div className="section-title-block" data-reveal>
-            <h2 style={{ width: "100%", textAlign: "center" }}>
-              Featured <span className="red">awards</span>
-            </h2>
-          </div>
-          <div className="awards-grid" data-reveal>
-            {awards.map((award) => (
-              <div className="award-card" key={award.title}>
-                <img src={award.image} alt={award.title} />
-                <p>{award.title}</p>
-              </div>
-            ))}
-          </div>
-          <div className="awards-cta-wrap" data-reveal>
-            <a className="section-cta" href="/company-overview/awards-and-recognitions">
-              View all awards
-            </a>
           </div>
         </section>
       </main>
