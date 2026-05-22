@@ -2,10 +2,11 @@ import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
 import { InnerSubNav } from "../../../components/InnerSubNav";
-import { SolutionsTabs } from "../../../components/SolutionsTabs";
+import { ProjectShowcase } from "../../../components/ProjectShowcase";
 import { CaseStudiesRow } from "../../../components/CaseStudiesRow";
 import { imageUrls } from "../../../lib/site";
-import { industrialInfraSolutions, sharedCaseStudies } from "../../../lib/segments";
+import { sharedCaseStudies } from "../../../lib/segments";
+import { industrialInfrastructureProjects } from "../../../lib/projects";
 
 export const metadata = {
   title: "Thermax Industrial Infrastructure | Turnkey EPC, Boilers and Energy Solutions",
@@ -29,8 +30,8 @@ export default function IndustrialInfrastructurePage() {
       <InnerSubNav
         items={[
           { label: "Overview", href: "#overview" },
-          { label: "Solutions", href: "#solutions" },
-          { label: "Industries", href: "#industries" },
+          { label: "Projects", href: "#solutions" },
+          { label: "Case Studies", href: "#cases" },
         ]}
         context="Business Portfolio"
         current="Industrial Infra"
@@ -57,7 +58,7 @@ export default function IndustrialInfrastructurePage() {
         }
       />
 
-      <SolutionsTabs items={industrialInfraSolutions} />
+      <ProjectShowcase items={industrialInfrastructureProjects} />
 
       <CaseStudiesRow items={sharedCaseStudies} />
     </PageShell>

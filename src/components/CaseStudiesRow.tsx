@@ -1,9 +1,14 @@
-import { ArrowIcon } from "./icons";
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
 
 export type CaseStudyItem = {
   title: string;
   image: string;
   href: string;
+  category?: string;
+  date?: string;
+  summary?: string;
 };
 
 export function CaseStudiesRow({
@@ -19,26 +24,29 @@ export function CaseStudiesRow({
   ctaLabel?: string;
   ctaHref?: string;
 }) {
+  const { t } = useLanguage();
+
   return (
-    <section className="case-section" data-section="cases">
+    <section className="case-section" id="cases" data-section="cases">
       <div className="section-title-block" data-reveal>
         <h2>
-          {title} <span className="red">{highlight}</span>
+          {t(title)} <span className="red">{t(highlight)}</span>
         </h2>
         <a className="section-cta" href={ctaHref}>
-          {ctaLabel}
+          {t(ctaLabel)}
         </a>
       </div>
-      <div className="case-row" data-reveal>
+      <div className="news-listing-grid" data-reveal style={{ marginTop: '40px' }}>
         {items.map((item) => (
-          <article className="case-row-card" key={item.title}>
-            <div className="case-row-thumb">
-              <img src={item.image} alt={item.title} />
-            </div>
-            <div className="case-row-card-body">
-              <h3>{item.title}</h3>
-              <a href={item.href}>
-                Read more <ArrowIcon />
+          <article className="news-listing-card" key={item.title}>
+            <img src={item.image} alt={item.title} />
+            <div className="news-listing-card-body">
+              <span>{t(item.category || "Case Study")}</span>
+              <p className="newsroom-date">{t(item.date || "15/05/2026")}</p>
+              <h3>{t(item.title)}</h3>
+              {item.summary && <p>{t(item.summary)}</p>}
+              <a href={item.href} style={{ marginTop: 'auto' }}>
+                {t("Read the case study")}
               </a>
             </div>
           </article>

@@ -6,7 +6,7 @@ type IntroBlockProps = {
 
 export function IntroBlock({ headline, body, stats }: IntroBlockProps) {
   return (
-    <section className="inner-intro" data-section="intro">
+    <section className="inner-intro" id="overview" data-section="intro">
       <div className="inner-intro-grid" data-reveal>
         <h2>{headline}</h2>
         <div>{body}</div>

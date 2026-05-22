@@ -9,7 +9,7 @@ import { useLanguage } from "./LanguageProvider";
 const navHref: Record<string, string> = {
   "About Us": "/company-overview",
   "Business Portfolio": "/business-segments/industrial-products#solutions",
-  Sustainability: "/#capabilities",
+  Sustainability: "/sustainability",
   "Digital Solutions": "/business-portfolio/industrial-infrastructure#solutions",
   "In the News": "/in-the-news",
   Investors: "/investor-overview",
@@ -29,7 +29,7 @@ const megaHref: Record<string, string> = {
   "Projects and Energy Solutions": "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
   "Green Solutions": "/business-segments/green-solutions",
   Chemicals: "/business-portfolio/chemicals",
-  "Thermax Serve": "/#capabilities",
+  "Thermax Serve": "/sustainability",
   Overview: "/sustainability",
   "Corporate Social Responsibility": "/corporate-social-responsibility",
   "Social Compact": "/social-compact",
@@ -104,8 +104,14 @@ export function Header() {
               <button
                 className={menu === item.label ? "nav-link is-active" : "nav-link"}
                 key={item.label}
-                onFocus={() => setMenu(item.label)}
-                onMouseEnter={() => setMenu(item.label)}
+                onFocus={() => {
+                  if (item.label !== "About Us") setMenu(item.label);
+                  else setMenu("");
+                }}
+                onMouseEnter={() => {
+                  if (item.label !== "About Us") setMenu(item.label);
+                  else setMenu("");
+                }}
                 onClick={() => {
                   window.location.href = navHref[item.label] ?? "#";
                 }}
@@ -124,17 +130,6 @@ export function Header() {
               <SearchIcon />
             </button>
             <LanguageSwitch />
-            <button
-              className="icon-button user-enquiry-button"
-              onClick={() => setCallbackOpen(true)}
-              type="button"
-              aria-label={t("User enquiry")}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 21c1.4-4 14.6-4 16 0" />
-              </svg>
-            </button>
           </div>
         </div>
 

@@ -28,6 +28,10 @@ export type CaseStudy = {
   meta: string;
   image: string;
   thumb: string;
+  category: string;
+  date: string;
+  summary: string;
+  href?: string;
 };
 
 export const imageUrls = {
@@ -145,8 +149,8 @@ export const imageUrls = {
 };
 
 export const vietnamOffice = {
-  label: "Vietnam - Regional Office",
-  company: "Thermax Limited",
+  label: "Thermax Vietnam Office",
+  company: "",
   address: [
     "Room 2-3, 1st Floor",
     "WiYO Complex, No. 46 N3C Street",
@@ -232,6 +236,17 @@ export const productSolutionHrefs: Record<string, string> = {
   "Steam Engineering Solutions": "/business-segments/industrial-products?solution=steam-engineering-solutions#solutions",
   "Cooling and Heating Solutions": "/business-segments/industrial-products?solution=cooling-and-heating-solutions#solutions",
   "Water and Waste Solutions": "/business-segments/industrial-products?solution=water-and-waste-solutions#solutions",
+  "Large Boilers and Fired Heaters": "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
+  "Projects and Energy Solutions": "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
+  "Bio-CNG Solutions": "/business-segments/green-solutions?solution=bio-cng-solutions#solutions",
+  "Build-Own-Operate Solutions": "/business-segments/green-solutions?solution=build-own-operate-solutions#solutions",
+  "Green Hydrogen": "/business-segments/green-solutions?solution=green-hydrogen#solutions",
+  "Renewable Energy": "/business-segments/green-solutions?solution=renewable-energy#solutions",
+  "Resins": "/business-portfolio/chemicals?solution=ion-exchange-resins#solutions",
+  "Ion Exchange Resins": "/business-portfolio/chemicals?solution=ion-exchange-resins#solutions",
+  "Water Treatment": "/business-portfolio/chemicals?solution=water-treatment#solutions",
+  "Protective Coatings": "/business-portfolio/chemicals?solution=protective-coatings#solutions",
+  "Admixtures and Sealants": "/business-portfolio/chemicals?solution=admixtures-and-sealants#solutions",
 };
 
 export const businessSegments: BusinessSegment[] = [
@@ -343,12 +358,30 @@ export const caseStudies: CaseStudy[] = [
     meta: "Read the case study",
     image: imageUrls.caseVietnamCoffee,
     thumb: imageUrls.caseVietnamCoffeeThumb,
+    category: "Green Energy",
+    date: "05/05/2026",
+    summary: "Thermax engineered a custom Combipac boiler solution for a major coffee manufacturer, utilizing biomass to generate green steam, reducing fossil fuel consumption and lowering operating costs.",
+    href: "#",
   },
   {
     title: "Thermax’s electrical heat pump delivers sustainable heating for a textile major",
     meta: "Read the case study",
     image: imageUrls.caseVietnamTextile,
     thumb: imageUrls.caseVietnamTextileThumb,
+    category: "Heating Solutions",
+    date: "28/04/2026",
+    summary: "Thermax designed and installed a high-efficiency electrical heat pump system for a leading textile company, providing zero-emission heating and reducing carbon footprint.",
+    href: "#",
+  },
+  {
+    title: "Thermax provides advanced water treatment for a leading food processor",
+    meta: "Read the case study",
+    image: imageUrls.water,
+    thumb: imageUrls.water,
+    category: "Water Treatment",
+    date: "12/04/2026",
+    summary: "An advanced water treatment and recycling plant by Thermax helps a prominent food processing facility achieve zero liquid discharge (ZLD) and secure high-quality process water.",
+    href: "#",
   },
 ];
 
@@ -394,7 +427,7 @@ export const footerGroups = [
   {
     title: "Services",
     links: [
-      { label: "Thermax Serve", href: "/#capabilities" },
+      { label: "Thermax Serve", href: "/sustainability" },
       { label: "EDGE Live", href: "/digital" },
       { label: "Corporate Social Responsibility", href: "/corporate-social-responsibility" },
       { label: "ESG Profile", href: "/esg-profile" },

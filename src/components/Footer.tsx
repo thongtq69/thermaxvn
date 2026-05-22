@@ -2,6 +2,7 @@
 
 import { footerGroups, imageUrls, vietnamOffice } from "../lib/site";
 import { useLanguage } from "./LanguageProvider";
+import { PhoneIcon, EmailIcon, FacebookIcon, LinkedInIcon, YouTubeIcon } from "./icons";
 
 export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
   const { t } = useLanguage();
@@ -28,8 +29,6 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
           <div className="footer-address-block">
             <h3>{t(vietnamOffice.label)}</h3>
             <p>
-              {vietnamOffice.company}
-              <br />
               {vietnamOffice.address.map((line) => (
                 <span key={line}>
                   {line}
@@ -40,11 +39,16 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
           </div>
           <div className="footer-address-block">
             <h3>{t("Contact")}</h3>
-            <p>
-              <a href={vietnamOffice.phoneHref}>{vietnamOffice.phone}</a>
-              <br />
-              <a href={vietnamOffice.emailHref}>{vietnamOffice.email}</a>
-            </p>
+            <div className="footer-contact-links">
+              <a href={vietnamOffice.phoneHref}>
+                <span className="footer-icon"><PhoneIcon /></span>
+                {vietnamOffice.phone}
+              </a>
+              <a href={vietnamOffice.emailHref}>
+                <span className="footer-icon"><EmailIcon /></span>
+                {vietnamOffice.email}
+              </a>
+            </div>
           </div>
           <div className="footer-address-block">
             <h3>{t("Connect")}</h3>
@@ -53,6 +57,11 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
               <br />
               <a href="/careers">{t("Careers")}</a>
             </p>
+            <div className="footer-social">
+              <a href="#" aria-label="Facebook"><FacebookIcon /></a>
+              <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a href="#" aria-label="YouTube"><YouTubeIcon /></a>
+            </div>
           </div>
         </div>
         <div className="footer-links">

@@ -1,26 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
+import { useEffect, useState } from "react";
 import {
   businessSegments,
-  capabilities,
-  caseStudies,
   imageUrls,
+  newsItems,
   productSolutionHrefs,
 } from "../lib/site";
+import { industrialInfrastructureProjects } from "../lib/projects";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { ProjectShowcase } from "../components/ProjectShowcase";
 import { useLanguage } from "../components/LanguageProvider";
 import { RevealWatcher } from "../components/RevealWatcher";
-import { ArrowIcon } from "../components/icons";
 
 const heroWords = ["better", "sustainable", "cleaner"];
+
+const businessSegmentHrefs: Record<string, string> = {
+  "Industrial Products": "/business-segments/industrial-products#solutions",
+  "Industrial Infra": "/business-portfolio/industrial-infrastructure#solutions",
+  "Green Solutions": "/business-segments/green-solutions#solutions",
+  Chemicals: "/business-portfolio/chemicals#solutions",
+};
 
 function RevealWords({ text, highlightFromIndex }: { text: string; highlightFromIndex?: number }) {
   const words = text.split(" ");
@@ -206,7 +207,6 @@ function AboutSection() {
 
 function BusinessSection() {
   const { t, locale } = useLanguage();
-  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <section className="business-section" id="portfolio" data-section="business">
@@ -221,186 +221,70 @@ function BusinessSection() {
         </p>
       </div>
 
-      <div className="business-layout" data-reveal>
-        <Swiper
-          modules={[Navigation]}
-          className="business-swiper"
-          slidesPerView="auto"
-          spaceBetween={30}
-          centeredSlides
-          speed={650}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          breakpoints={{
-            0: { slidesPerView: 1, centeredSlides: false, spaceBetween: 20 },
-            780: { slidesPerView: "auto", centeredSlides: true, spaceBetween: 30 },
-          }}
-        >
-          {businessSegments.map((segment) => (
-            <SwiperSlide className="business-card" key={segment.label}>
-              <img src={segment.image} alt="" />
-              <div>
-                <h3>{t(segment.label)}</h3>
-                <span>{t(segment.body)}</span>
-                <ul>
-                  {segment.links.slice(0, 5).map((link) => {
-                    const href = productSolutionHrefs[link];
-                    return (
-                      <li key={link}>{href ? <a href={href}>{t(link)}</a> : t(link)}</li>
-                    );
-                  })}
-                </ul>
-                <a className="business-more" href="/business-segments/industrial-products#solutions">
-                  {t("Discover more")}
-                </a>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className="source-arrows">
-          <button type="button" onClick={() => swiperRef.current?.slidePrev()} aria-label="Previous business segment">
-            {"<"}
-          </button>
-          <button type="button" onClick={() => swiperRef.current?.slideNext()} aria-label="Next business segment">
-            {">"}
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CapabilitySection() {
-  const { t } = useLanguage();
-  const swiperRef = useRef<SwiperType | null>(null);
-  const [index, setIndex] = useState(0);
-  const total = capabilities.length;
-
-  return (
-    <section className="capability-section" id="capabilities" data-section="capabilities">
-      <div className="source-title">
-        {t("Featured")} <span>{t("capabilities")}</span>
-      </div>
-      <div className="capability-list" aria-label={t("Featured capabilities")}>
-        {capabilities.map((capability, capabilityIndex) => (
-          <button
-            className={index === capabilityIndex ? "capability-link is-active" : "capability-link"}
-            key={capability.label}
-            type="button"
-            onClick={() => swiperRef.current?.slideTo(capabilityIndex)}
-          >
-            {t(capability.label)}
-          </button>
-        ))}
-      </div>
-      <div className="capability-counter">
-        <span className="capability-counter-text">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </span>
-        <div className="capability-arrows">
-          <button type="button" aria-label={t("Previous capability")} onClick={() => swiperRef.current?.slidePrev()}>
-            {"<"}
-          </button>
-          <button type="button" aria-label={t("Next capability")} onClick={() => swiperRef.current?.slideNext()}>
-            {">"}
-          </button>
-        </div>
-      </div>
-      <Swiper
-        modules={[EffectFade]}
-        className="capability-swiper"
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        speed={600}
-        allowTouchMove={false}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-        onSlideChange={(swiper) => setIndex(swiper.realIndex)}
-      >
-        {capabilities.map((capability) => (
-          <SwiperSlide key={capability.label}>
-            <div className="capability-slide">
-              <div className="capability-media">
-                <img src={capability.image} alt="" />
-              </div>
-              <div className="capability-copy">
-                <h2>{t(capability.label)}</h2>
-                <p>{t(capability.body)}</p>
-                {capability.body2 && <p>{t(capability.body2)}</p>}
-                <a className="capability-cta" href="#">
-                  {t("Discover more")}
-                </a>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </section>
-  );
-}
-
-function ImpactSection() {
-  const { t, locale } = useLanguage();
-  const swiperRef = useRef<SwiperType | null>(null);
-
-  return (
-    <section className="impact-section" data-section="impact">
-      <div className="impact-intro" data-reveal>
-        <h2>
-          {locale === "vi" ? (
-            <>
-              <span>Tạo tác động</span>
-              <br />
-              trên nhiều ngành
-            </>
-          ) : (
-            <>
-              <span>Delivering impact</span>
-              <br />
-              across industries
-            </>
-          )}
-        </h2>
-        <p>
-          {t(
-            "Backed by a legacy of trust and a commitment towards a sustainable future, Thermax empowers industries to transform responsibly. Through our expertise in pollution control, energy and water management, and renewable solutions, we help customers reduce emissions, optimise resource use, and enhance operational efficiency, while lowering costs.",
-          )}
-        </p>
-      </div>
-      <div className="case-toolbar" data-reveal>
-        <button type="button" onClick={() => swiperRef.current?.slidePrev()} aria-label={t("Previous case")}>
-          {"<"}
-        </button>
-        <button type="button" onClick={() => swiperRef.current?.slideNext()} aria-label={t("Next case")}>
-          {">"}
-        </button>
-      </div>
-      <Swiper
-        modules={[Navigation]}
-        className="case-swiper"
-        slidesPerView={1}
-        spaceBetween={30}
-        speed={650}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-      >
-        {caseStudies.map((item) => (
-          <SwiperSlide className="case-card" key={item.title}>
-            <img className="case-main" src={item.image} alt="" />
-            <div className="case-content">
-              <img className="case-thumb" src={item.thumb} alt="" />
-              <h3>{t(item.title)}</h3>
-              <a href="#">
-                {t(item.meta)}
-                <ArrowIcon />
+      <div className="business-grid" data-reveal>
+        {businessSegments.map((segment) => (
+          <article className="business-card" key={segment.label}>
+            <img src={segment.image} alt="" />
+            <div>
+              <h3>{t(segment.label)}</h3>
+              <span>{t(segment.body)}</span>
+              <ul>
+                {segment.links.slice(0, 5).map((link) => {
+                  const href = productSolutionHrefs[link];
+                  return <li key={link}>{href ? <a href={href}>{t(link)}</a> : t(link)}</li>;
+                })}
+              </ul>
+              <a
+                className="business-more"
+                href={businessSegmentHrefs[segment.label] ?? "/business-segments/industrial-products#solutions"}
+              >
+                {t("Discover more")}
               </a>
             </div>
-          </SwiperSlide>
+          </article>
         ))}
-      </Swiper>
+      </div>
+    </section>
+  );
+}
+
+function HomeProjectsSection() {
+  return (
+    <ProjectShowcase
+      eyebrow="Projects"
+      title="Featured projects"
+      description="Representative industrial utility and energy projects that show Thermax delivery capability across EPC, boilers and international execution."
+      items={industrialInfrastructureProjects.slice(0, 4)}
+    />
+  );
+}
+
+function HomeNewsSection() {
+  const { t } = useLanguage();
+
+  return (
+    <section className="home-news-section" data-section="home-news">
+      <div className="home-news-header" data-reveal>
+        <div>
+          <p>{t("News")}</p>
+          <h2>{t("Latest updates")}</h2>
+        </div>
+        <a className="section-cta" href="/in-the-news">
+          {t("View all news")}
+        </a>
+      </div>
+      <div className="home-news-grid" data-reveal>
+        {newsItems.map((item) => (
+          <article className="home-news-card" key={item.title}>
+            <img src={item.image} alt="" />
+            <div>
+              <p>{t(item.date)}</p>
+              <h3>{t(item.title)}</h3>
+              <a href="/in-the-news">{t("Read more")}</a>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
@@ -408,13 +292,6 @@ function ImpactSection() {
 function PeopleSection() {
   const { t, locale } = useLanguage();
   const peopleImages = [imageUrls.peopleOne, imageUrls.peopleTwo, imageUrls.peopleThree];
-  const socialImages = [
-    imageUrls.socialVietnamOne,
-    imageUrls.socialVietnamTwo,
-    imageUrls.socialVietnamThree,
-    imageUrls.socialVietnamFour,
-    imageUrls.socialVietnamFive,
-  ];
 
   return (
     <section className="people-section" data-section="people">
@@ -451,18 +328,6 @@ function PeopleSection() {
           ))}
         </div>
       </div>
-
-      <div className="social-follow" data-reveal>
-        <p>{t("Follow us on our social media")}</p>
-        <div className="social-strip">
-          {socialImages.map((image) => (
-            <a href={image} key={image} aria-label={t("Follow us")}>
-              <img src={image} alt="" />
-              <ArrowIcon />
-            </a>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
@@ -476,8 +341,8 @@ export default function Home() {
         <Hero />
         <AboutSection />
         <BusinessSection />
-        <CapabilitySection />
-        <ImpactSection />
+        <HomeProjectsSection />
+        <HomeNewsSection />
         <PeopleSection />
       </main>
       <Footer />

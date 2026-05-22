@@ -8,11 +8,20 @@ export type SolutionItem = {
   description: string;
   image: string;
   href: string;
+  key?: string;
 };
 
 function solutionKey(item: SolutionItem) {
-  const cleanHref = item.href.split("?")[0].split("#")[0];
-  return cleanHref.split("/").filter(Boolean).pop() ?? item.title.toLowerCase().replace(/\s+/g, "-");
+  if (item.key) return item.key;
+
+  return item.title
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/®/g, "")
+    .replace(/&/g, "and")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export function SolutionsTabs({ items, eyebrow = "Solutions" }: { items: SolutionItem[]; eyebrow?: string }) {
