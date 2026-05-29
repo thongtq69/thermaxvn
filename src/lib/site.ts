@@ -239,31 +239,31 @@ export const navItems: NavItem[] = [
 ];
 
 export const productSolutionHrefs: Record<string, string> = {
-  "Air Pollution Control Systems": "/business-segments/industrial-products?solution=air-pollution-control-systems#solutions",
-  "Process Heat Solutions": "/business-segments/industrial-products?solution=process-heat-solutions#solutions",
-  "Steam Engineering Solutions": "/business-segments/industrial-products?solution=steam-engineering-solutions#solutions",
-  "Cooling and Heating Solutions": "/business-segments/industrial-products?solution=cooling-and-heating-solutions#solutions",
-  "Water and Waste Solutions": "/business-segments/industrial-products?solution=water-and-waste-solutions#solutions",
+  "Air Pollution Control Systems": "/industrial-products/air-pollution-control-systems",
+  "Process Heat Solutions": "/industrial-products/process-heat-solutions",
+  "Steam Engineering Solutions": "/industrial-products/steam-engineering-solutions",
+  "Cooling and Heating Solutions": "/industrial-products/cooling-and-heating-solutions",
+  "Water and Waste Solutions": "/industrial-products/water-and-waste-solutions",
   "Large Boilers and Fired Heaters": "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
   "Projects and Energy Solutions": "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
   "Bio-CNG Solutions": "/business-segments/green-solutions?solution=bio-cng-solutions#solutions",
   "Build-Own-Operate Solutions": "/business-segments/green-solutions?solution=build-own-operate-solutions#solutions",
   "Green Hydrogen": "/business-segments/green-solutions?solution=green-hydrogen#solutions",
   "Renewable Energy": "/business-segments/green-solutions?solution=renewable-energy#solutions",
-  "Resins": "/business-portfolio/chemicals?solution=ion-exchange-resins#solutions",
-  "Ion Exchange Resins": "/business-portfolio/chemicals?solution=ion-exchange-resins#solutions",
-  "Water Treatment": "/business-portfolio/chemicals?solution=water-treatment#solutions",
-  "Protective Coatings": "/business-portfolio/chemicals?solution=protective-coatings#solutions",
-  "Admixtures and Sealants": "/business-portfolio/chemicals?solution=admixtures-and-sealants#solutions",
-  "NOx Control": "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
-  "SOx Control": "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
-  "Hot Water Heating Systems": "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
-  "Electric Heat Pumps": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
-  "Closed Circuit Cooling Towers": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
-  "Air Cooled Heat Exchangers": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
-  "Wastewater Recovery": "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
-  "Boiler Water Treatment Chemicals": "https://www.thermaxglobal.com/business-portfolio/chemicals",
-  "Cooling Water Treatment Chemicals": "https://www.thermaxglobal.com/business-portfolio/chemicals",
+  "Resins": "/industrial-products/ion-exchange-resins",
+  "Ion Exchange Resins": "/industrial-products/ion-exchange-resins",
+  "Water Treatment": "/industrial-products/water-treatment",
+  "Protective Coatings": "/industrial-products/protective-coatings",
+  "Admixtures and Sealants": "/industrial-products/admixtures-and-sealants",
+  "NOx Control": "/industrial-products/nox-control",
+  "SOx Control": "/industrial-products/sox-control",
+  "Hot Water Heating Systems": "/industrial-products/hot-water-heating-systems",
+  "Electric Heat Pumps": "/industrial-products/electric-heat-pumps",
+  "Closed Circuit Cooling Towers": "/industrial-products/closed-circuit-cooling-towers",
+  "Air Cooled Heat Exchangers": "/industrial-products/air-cooled-heat-exchangers",
+  "Wastewater Recovery": "/industrial-products/wastewater-recovery",
+  "Boiler Water Treatment Chemicals": "/industrial-products/boiler-water-treatment-chemicals",
+  "Cooling Water Treatment Chemicals": "/industrial-products/cooling-water-treatment-chemicals",
 };
 
 export const businessSegments: BusinessSegment[] = [
@@ -310,15 +310,15 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     children: [
       {
         label: "Electrostatic Precipitator (ESP)",
-        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+        href: "/industrial-products/electrostatic-precipitator-esp",
       },
       {
         label: "Bag House/Bag Filters",
-        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+        href: "/industrial-products/bag-house-bag-filters",
       },
       {
         label: "Combofilter",
-        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+        href: "/industrial-products/combofilter",
       },
       {
         label: "NOx Control",
@@ -336,19 +336,19 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     children: [
       {
         label: "Steam Boilers",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/steam-boilers",
+        href: "/industrial-products/steam-boilers",
       },
       {
         label: "Thermal Oil Heaters",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
+        href: "/industrial-products/thermal-oil-heaters",
       },
       {
         label: "Hot Air Generators",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/hot-air-generators",
+        href: "/industrial-products/hot-air-generators",
       },
       {
         label: "Hot Water Generators",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/hot-water-generators",
+        href: "/industrial-products/hot-water-generators",
       },
     ],
   },
@@ -358,15 +358,15 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     children: [
       {
         label: "Boiler House Products",
-        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions/boiler-house-products",
+        href: "/industrial-products/boiler-house-products",
       },
       {
         label: "Steam Distribution",
-        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+        href: "/industrial-products/steam-distribution",
       },
       {
         label: "Condensate System Management",
-        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+        href: "/industrial-products/condensate-system-management",
       },
       {
         label: "Hot Water Heating Systems",
@@ -380,11 +380,11 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     children: [
       {
         label: "Absorption Chillers",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+        href: "/industrial-products/absorption-chillers",
       },
       {
         label: "Absorption Heat Pumps",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+        href: "/industrial-products/absorption-heat-pumps",
       },
       {
         label: "Electric Heat Pumps",
@@ -406,7 +406,7 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     children: [
       {
         label: "Water Treatment Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+        href: "/industrial-products/water-treatment-solutions",
       },
       {
         label: "Wastewater Recovery",

@@ -40,12 +40,10 @@ const megaHref: Record<string, string> = {
   "Predictive Insights": "/digital",
   "Energy Optimisation": "/digital",
   "Connected Service": "/digital",
-  "Boiler Maintenance Services": "https://www.thermaxglobal.com/thermax-serve/",
-  "Absorption Chiller Maintenance Services": "https://www.thermaxglobal.com/absorption-cooling-services/",
-  "Air Pollution Control System Maintenance Services":
-    "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems",
-  "Automatic Tube Cleaning System (ATCS)":
-    "https://www.thermaxglobal.com/absorption-cooling-services/automatic-tube-cleaning-system/",
+  "Boiler Maintenance Services": "/services/boiler-maintenance-services",
+  "Absorption Chiller Maintenance Services": "/services/absorption-chiller-maintenance-services",
+  "Air Pollution Control System Maintenance Services": "/services/air-pollution-control-system-maintenance-services",
+  "Automatic Tube Cleaning System (ATCS)": "/services/automatic-tube-cleaning-system-atcs",
   "Investor Overview": "/investor-overview",
   "Financial Information": "/investors/quarterly-results",
   "Governance and Regulatory information": "/investors/corporate-governance",

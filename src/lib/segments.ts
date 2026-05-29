@@ -103,26 +103,26 @@ export const chemicalSolutions: SolutionItem[] = [
       "Industry-leading ion exchange resins for water purification, separation, and process applications across diverse industries.",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
-    href: "https://www.thermaxchemicals.com",
+    href: "/industrial-products/ion-exchange-resins",
   },
   {
     title: "Water Treatment",
     description:
       "Specialised treatment chemicals for boiler water, cooling water, process water and wastewater applications.",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
-    href: "https://www.thermaxchemicals.com",
+    href: "/industrial-products/water-treatment",
   },
   {
     title: "Protective Coatings",
     description: "Protective coatings and waterproofing systems for industrial structures, plants and infrastructure assets.",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
-    href: "https://www.thermaxchemicals.com",
+    href: "/industrial-products/protective-coatings",
   },
   {
     title: "Admixtures and Sealants",
     description: "Concrete admixtures, grouts, anchors, sealants and adhesives for construction and repair applications.",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
-    href: "https://www.thermaxchemicals.com",
+    href: "/industrial-products/admixtures-and-sealants",
   },
 ];
 
