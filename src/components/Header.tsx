@@ -170,10 +170,12 @@ export function Header() {
             .join(" ")}
           onMouseEnter={() => setMenu(active.label)}
         >
-          <div className="mega-copy">
-            <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
-            <p>{t(active.summary)}</p>
-          </div>
+          {active.label !== "Business Portfolio" ? (
+            <div className="mega-copy">
+              <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
+              <p>{t(active.summary)}</p>
+            </div>
+          ) : null}
           {active.label === "Business Portfolio" ? (
             <div className="mega-product-browser">
               <div className="mega-product-primary" aria-label={t("Product categories")}>
@@ -216,11 +218,13 @@ export function Header() {
               ))}
             </div>
           )}
-          <div className="mega-card">
-            <p>{t("In the Spotlight")}</p>
-            <img src={active.spotlightImage} alt="" />
-            <strong>{t(active.spotlight)}</strong>
-          </div>
+          {active.label !== "Business Portfolio" ? (
+            <div className="mega-card">
+              <p>{t("In the Spotlight")}</p>
+              <img src={active.spotlightImage} alt="" />
+              <strong>{t(active.spotlight)}</strong>
+            </div>
+          ) : null}
         </div>
 
         <div className={mobileOpen ? "mobile-panel is-open" : "mobile-panel"}>
