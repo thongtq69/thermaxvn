@@ -28,24 +28,21 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
           </a>
           <div className="footer-address-block footer-office-block">
             <h3>{t(vietnamOffice.label)}</h3>
-            <p>
+            <p className="footer-office-details">
               {vietnamOffice.address.map((line) => (
-                <span key={line}>
+                <span className="footer-office-line" key={line}>
                   {line}
-                  <br />
                 </span>
               ))}
-            </p>
-            <div className="footer-contact-links">
-              <a href={vietnamOffice.phoneHref}>
+              <a className="footer-office-contact" href={vietnamOffice.phoneHref}>
                 <span className="footer-icon"><PhoneIcon /></span>
-                {vietnamOffice.phone}
+                <span>{vietnamOffice.phone}</span>
               </a>
-              <a href={vietnamOffice.emailHref}>
+              <a className="footer-office-contact" href={vietnamOffice.emailHref}>
                 <span className="footer-icon"><EmailIcon /></span>
-                {vietnamOffice.email}
+                <span>{vietnamOffice.email}</span>
               </a>
-            </div>
+            </p>
           </div>
         </div>
         <div className="footer-links">

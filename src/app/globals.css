@@ -3448,8 +3448,8 @@ main {
 }
 
 .footer-address-block a {
-  color: #dce8ee;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
   text-decoration: none;
 }
 
@@ -3457,28 +3457,33 @@ main {
   color: #fff;
 }
 
-.footer-contact-links {
+.footer-office-details {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 0;
 }
 
-.footer-office-block .footer-contact-links {
-  margin-top: 18px;
+.footer-office-line {
+  display: block;
 }
 
-.footer-contact-links a {
-  display: flex;
+.footer-office-contact {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #dce8ee;
-  font-weight: 500;
+  width: fit-content;
+  margin-top: 8px;
+  color: #b8c8cf;
+  font: inherit;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.footer-contact-links a:hover {
+.footer-office-contact + .footer-office-contact {
+  margin-top: 2px;
+}
+
+.footer-office-contact:hover {
   color: #fff;
 }
 
