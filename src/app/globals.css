@@ -11,6 +11,8 @@
   --blue: #174a7c;
   --orange: #f08a22;
   --shadow: 0 22px 60px rgba(5, 35, 49, 0.12);
+  --font-sans: "Noto Sans", "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-display: "Noto Sans", "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 * {
@@ -23,17 +25,13 @@ body {
   overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
-  font-family:
-    "Poppins",
-    "Noto Sans",
-    Arial,
-    "Helvetica Neue",
-    Helvetica,
-    sans-serif;
-  font-weight: 300;
+  font-family: var(--font-sans);
+  font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1441,7 +1439,7 @@ svg {
 
 body {
   color: #070707;
-  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 .site-header {
@@ -1778,13 +1776,19 @@ main {
   border: 1px solid #111;
   border-radius: 999px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .callback-button:hover {
-  color: #111;
-  background: #fff;
-  border-color: #111;
+  color: #fff;
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 10px 22px rgba(237, 52, 56, 0.28);
   transform: none;
 }
 
@@ -2439,7 +2443,7 @@ main {
   font-size: 60px;
   font-weight: 200;
   line-height: 72px;
-  font-family: Poppins, Arial, sans-serif;
+  font-family: var(--font-display);
   color: #212529;
   background: linear-gradient(45deg, #000 9%, #ed3438 58%);
   -webkit-background-clip: text;
@@ -8072,7 +8076,7 @@ button,
 input,
 select,
 textarea {
-  font-family: "Poppins", "Noto Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 body,
@@ -8377,11 +8381,13 @@ dd {
 /* Customer change request: simplified Vietnam navigation, product/project carousels and compact footer. */
 .callback-button.is-active,
 .callback-button:active,
+.callback-button:hover,
 .callback-button:focus-visible {
   color: #fff;
   background: var(--red);
   border-color: var(--red);
   outline: none;
+  box-shadow: 0 10px 22px rgba(237, 52, 56, 0.28);
 }
 
 .callback-button.is-active:hover {
