@@ -1,7 +1,6 @@
 import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
-import { InnerSubNav } from "../../../components/InnerSubNav";
 import { SolutionsTabs } from "../../../components/SolutionsTabs";
 import { CaseStudiesRow } from "../../../components/CaseStudiesRow";
 import { imageUrls } from "../../../lib/site";
@@ -24,21 +23,6 @@ export default function IndustrialProductsPage() {
         homeLabel="Trang chủ"
         breadcrumb={[
           { label: "Sản phẩm" },
-        ]}
-      />
-
-      <InnerSubNav
-        items={[
-          { label: "Overview", href: "#overview" },
-          { label: "Solutions", href: "#solutions" },
-          { label: "Industries", href: "#industries" },
-        ]}
-        context="Business Portfolio"
-        current="Industrial Products"
-        options={[
-          { label: "Industrial Infra", href: "/business-portfolio/industrial-infrastructure" },
-          { label: "Green Solutions", href: "/business-segments/green-solutions" },
-          { label: "Chemicals", href: "/business-portfolio/chemicals" },
         ]}
       />
 

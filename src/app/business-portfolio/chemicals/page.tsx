@@ -1,7 +1,6 @@
 import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
-import { InnerSubNav } from "../../../components/InnerSubNav";
 import { SolutionsTabs } from "../../../components/SolutionsTabs";
 import { imageUrls } from "../../../lib/site";
 import { chemicalSolutions } from "../../../lib/segments";
@@ -23,21 +22,6 @@ export default function ChemicalsPage() {
         breadcrumb={[
           { label: "Business Portfolio", href: "#" },
           { label: "Chemicals" },
-        ]}
-      />
-
-      <InnerSubNav
-        items={[
-          { label: "Overview", href: "#overview" },
-          { label: "Solutions", href: "#solutions" },
-          { label: "Industries", href: "#industries" },
-        ]}
-        context="Business Portfolio"
-        current="Chemicals"
-        options={[
-          { label: "Industrial Products", href: "/business-segments/industrial-products" },
-          { label: "Industrial Infra", href: "/business-portfolio/industrial-infrastructure" },
-          { label: "Green Solutions", href: "/business-segments/green-solutions" },
         ]}
       />
 

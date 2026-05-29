@@ -8395,14 +8395,25 @@ dd {
 }
 
 .mega-product-groups {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-content: start;
-  gap: 14px 18px;
+  gap: 18px 22px;
+  overflow: auto;
+}
+
+.mega-menu-products {
+  grid-template-columns: minmax(220px, 22%) minmax(0, 56%) minmax(220px, 22%);
+  height: 500px;
+}
+
+.mega-menu-products .mega-links {
+  padding: 28px 32px;
 }
 
 .mega-product-group {
   min-width: 0;
-  padding: 0 0 10px;
+  padding: 0 0 12px;
   border-bottom: 1px solid #eceff2;
 }
 
@@ -8423,8 +8434,8 @@ dd {
 
 .mega-product-children {
   display: grid;
-  gap: 4px;
-  margin-top: 3px;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .mega-product-children a {
@@ -8436,7 +8447,7 @@ dd {
   border-radius: 0;
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.32;
 }
 
 .mega-product-children a:hover {

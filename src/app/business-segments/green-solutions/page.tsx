@@ -1,7 +1,6 @@
 import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
-import { InnerSubNav } from "../../../components/InnerSubNav";
 import { SolutionsTabs } from "../../../components/SolutionsTabs";
 import { CaseStudiesRow } from "../../../components/CaseStudiesRow";
 import { imageUrls } from "../../../lib/site";
@@ -24,21 +23,6 @@ export default function GreenSolutionsPage() {
         breadcrumb={[
           { label: "Business Portfolio", href: "#" },
           { label: "Green Solutions" },
-        ]}
-      />
-
-      <InnerSubNav
-        items={[
-          { label: "Overview", href: "#overview" },
-          { label: "Solutions", href: "#solutions" },
-          { label: "Industries", href: "#industries" },
-        ]}
-        context="Business Portfolio"
-        current="Green Solutions"
-        options={[
-          { label: "Industrial Products", href: "/business-segments/industrial-products" },
-          { label: "Industrial Infra", href: "/business-portfolio/industrial-infrastructure" },
-          { label: "Chemicals", href: "/business-portfolio/chemicals" },
         ]}
       />
 

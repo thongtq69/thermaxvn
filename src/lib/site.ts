@@ -203,7 +203,12 @@ export const navItems: NavItem[] = [
     label: "Sustainability",
     summary:
       "Thermax Vietnam supports customers with lifecycle service, digital reliability and responsible operations backed by Thermax expertise.",
-    links: ["Thermax Serve", "EDGE Live", "Corporate Social Responsibility", "ESG Profile"],
+    links: [
+      "Boiler Maintenance Services",
+      "Absorption Chiller Maintenance Services",
+      "Air Pollution Control System Maintenance Services",
+      "Automatic Tube Cleaning System (ATCS)",
+    ],
     spotlight: "Lifecycle service and digital reliability",
     spotlightImage: imageUrls.serve,
   },
@@ -219,9 +224,17 @@ export const navItems: NavItem[] = [
     label: "In the News",
     summary:
       "Current updates on Thermax's business performance, clean-energy projects, digital operations and corporate milestones.",
-    links: ["In the News", "Press Releases", "TV Interviews", "Media Kit"],
+    links: ["In the News", "Careers"],
     spotlight: "Latest newsroom updates",
     spotlightImage: imageUrls.newsOne,
+  },
+  {
+    label: "Contact Us",
+    summary:
+      "Connect with Thermax Vietnam for product enquiries, service support and project discussions.",
+    links: [],
+    spotlight: "Thermax Vietnam Office",
+    spotlightImage: imageUrls.bannerContact,
   },
 ];
 
@@ -242,6 +255,15 @@ export const productSolutionHrefs: Record<string, string> = {
   "Water Treatment": "/business-portfolio/chemicals?solution=water-treatment#solutions",
   "Protective Coatings": "/business-portfolio/chemicals?solution=protective-coatings#solutions",
   "Admixtures and Sealants": "/business-portfolio/chemicals?solution=admixtures-and-sealants#solutions",
+  "NOx Control": "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+  "SOx Control": "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+  "Hot Water Heating Systems": "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+  "Electric Heat Pumps": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+  "Closed Circuit Cooling Towers": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+  "Air Cooled Heat Exchangers": "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+  "Wastewater Recovery": "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+  "Boiler Water Treatment Chemicals": "https://www.thermaxglobal.com/business-portfolio/chemicals",
+  "Cooling Water Treatment Chemicals": "https://www.thermaxglobal.com/business-portfolio/chemicals",
 };
 
 export const businessSegments: BusinessSegment[] = [
@@ -299,12 +321,12 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
       },
       {
-        label: "Scrubber",
-        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+        label: "NOx Control",
+        href: productSolutionHrefs["NOx Control"],
       },
       {
-        label: "Thermax Ne0 - Gas Enrichment Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+        label: "SOx Control",
+        href: productSolutionHrefs["SOx Control"],
       },
     ],
   },
@@ -328,14 +350,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         label: "Hot Water Generators",
         href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/hot-water-generators",
       },
-      {
-        label: "Energy Plant",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
-      },
-      {
-        label: "Electric Process Heat Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
-      },
     ],
   },
   {
@@ -355,12 +369,8 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
       },
       {
-        label: "Process Automation",
-        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
-      },
-      {
-        label: "Customised Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+        label: "Hot Water Heating Systems",
+        href: productSolutionHrefs["Hot Water Heating Systems"],
       },
     ],
   },
@@ -373,24 +383,20 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
       },
       {
-        label: "Absorption Chiller-Heaters",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
-      },
-      {
         label: "Absorption Heat Pumps",
         href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
       },
       {
-        label: "Hybrid Chiller",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+        label: "Electric Heat Pumps",
+        href: productSolutionHrefs["Electric Heat Pumps"],
       },
       {
-        label: "SustainX Heating Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+        label: "Closed Circuit Cooling Towers",
+        href: productSolutionHrefs["Closed Circuit Cooling Towers"],
       },
       {
-        label: "SustainX Refrigeration Solutions",
-        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+        label: "Air Cooled Heat Exchangers",
+        href: productSolutionHrefs["Air Cooled Heat Exchangers"],
       },
     ],
   },
@@ -403,20 +409,8 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
       },
       {
-        label: "Sewage Treatment and Recycling Plants",
-        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
-      },
-      {
-        label: "Effluent Treatment & Recycling Plants",
-        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
-      },
-      {
-        label: "Minimum Liquid Discharge",
-        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
-      },
-      {
-        label: "Zero Liquid Discharge System",
-        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+        label: "Wastewater Recovery",
+        href: productSolutionHrefs["Wastewater Recovery"],
       },
     ],
   },
@@ -425,28 +419,16 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     href: "/business-portfolio/chemicals#solutions",
     children: [
       {
-        label: "Adsorbent Resins",
-        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
+        label: "Boiler Water Treatment Chemicals",
+        href: productSolutionHrefs["Boiler Water Treatment Chemicals"],
       },
       {
-        label: "Mixed Bed Resins",
-        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
+        label: "Cooling Water Treatment Chemicals",
+        href: productSolutionHrefs["Cooling Water Treatment Chemicals"],
       },
       {
-        label: "Water Treatment Resins",
-        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
-      },
-      {
-        label: "Water Treatment",
-        href: productSolutionHrefs["Water Treatment"],
-      },
-      {
-        label: "Protective Coatings",
-        href: productSolutionHrefs["Protective Coatings"],
-      },
-      {
-        label: "Admixtures and Sealants",
-        href: productSolutionHrefs["Admixtures and Sealants"],
+        label: "Ion Exchange Resins",
+        href: productSolutionHrefs["Ion Exchange Resins"],
       },
     ],
   },

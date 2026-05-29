@@ -13,6 +13,7 @@ const navHref: Record<string, string> = {
   "Digital Solutions": "/business-portfolio/industrial-infrastructure",
   "In the News": "/in-the-news",
   Investors: "/investor-overview",
+  "Contact Us": "/contact-us",
 };
 
 const megaHref: Record<string, string> = {
@@ -39,6 +40,12 @@ const megaHref: Record<string, string> = {
   "Predictive Insights": "/digital",
   "Energy Optimisation": "/digital",
   "Connected Service": "/digital",
+  "Boiler Maintenance Services": "https://www.thermaxglobal.com/thermax-serve/",
+  "Absorption Chiller Maintenance Services": "https://www.thermaxglobal.com/absorption-cooling-services/",
+  "Air Pollution Control System Maintenance Services":
+    "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems",
+  "Automatic Tube Cleaning System (ATCS)":
+    "https://www.thermaxglobal.com/absorption-cooling-services/automatic-tube-cleaning-system/",
   "Investor Overview": "/investor-overview",
   "Financial Information": "/investors/quarterly-results",
   "Governance and Regulatory information": "/investors/corporate-governance",
@@ -56,12 +63,13 @@ const megaHref: Record<string, string> = {
 };
 
 const navDisplayLabel: Record<string, string> = {
-  "Business Portfolio": "Product Portfolio",
+  "Business Portfolio": "Products",
   Sustainability: "Services",
   "Digital Solutions": "Projects",
+  "In the News": "News",
 };
 
-const directNavLabels = new Set(["About Us", "Digital Solutions", "In the News"]);
+const directNavLabels = new Set(["About Us", "Digital Solutions", "Contact Us"]);
 
 function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
@@ -86,7 +94,6 @@ export function Header() {
           <div />
           <div className="utility-right">
             <a href="/careers">{t("Careers")}</a>
-            <a href="/contact-us">{t("Contact Us")}</a>
           </div>
         </div>
         <div className="main-nav">
@@ -141,7 +148,16 @@ export function Header() {
           </div>
         </div>
 
-        <div className={menu ? "mega-menu is-open" : "mega-menu"} onMouseEnter={() => setMenu(active.label)}>
+        <div
+          className={[
+            "mega-menu",
+            menu ? "is-open" : "",
+            active.label === "Business Portfolio" ? "mega-menu-products" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          onMouseEnter={() => setMenu(active.label)}
+        >
           <div className="mega-copy">
             <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
             <p>{t(active.summary)}</p>
@@ -159,7 +175,7 @@ export function Header() {
                     </span>
                   </a>
                   <div className="mega-product-children">
-                    {group.children.slice(0, 4).map((child) => (
+                    {group.children.map((child) => (
                       <a href={child.href} key={child.label}>
                         {t(child.label)}
                       </a>
@@ -198,9 +214,6 @@ export function Header() {
           <div className="mobile-utility-links">
             <a href="/careers" onClick={() => setMobileOpen(false)}>
               {t("Careers")}
-            </a>
-            <a href="/contact-us" onClick={() => setMobileOpen(false)}>
-              {t("Contact Us")}
             </a>
           </div>
           <div className="mobile-language-row">
