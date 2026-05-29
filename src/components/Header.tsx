@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
+import { businessSegments, imageUrls, navItems, productSolutionHrefs } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
@@ -74,15 +74,29 @@ function getNavDisplayLabel(label: string) {
 }
 
 export function Header() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const [menu, setMenu] = useState("");
+  const [productMenuIndex, setProductMenuIndex] = useState(0);
   const [searchOpen, setSearchOpen] = useState(false);
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = navItems.find((item) => item.label === menu) ?? navItems[0];
+  const activeProductGroup = businessSegments[productMenuIndex] ?? businessSegments[0];
 
   const openMega = (label: string) => {
     setMenu(directNavLabels.has(label) ? "" : label);
+  };
+
+  const localizedHref = (href: string) => {
+    if (typeof window === "undefined") return href;
+
+    const url = new URL(href, window.location.href);
+    if (locale === "en") {
+      url.searchParams.set("lang", "en");
+    } else {
+      url.searchParams.delete("lang");
+    }
+    return `${url.pathname}${url.search}${url.hash}`;
   };
 
   return (
@@ -122,7 +136,7 @@ export function Header() {
                   openMega(item.label);
                 }}
                 onClick={() => {
-                  window.location.href = navHref[item.label] ?? "#";
+                  window.location.href = localizedHref(navHref[item.label] ?? "#");
                 }}
                 type="button"
               >
@@ -161,10 +175,16 @@ export function Header() {
             <p>{t(active.summary)}</p>
           </div>
           {active.label === "Business Portfolio" ? (
-            <div className="mega-links mega-product-groups">
-              {productSubcategoryGroups.map((group) => (
-                <div className="mega-product-group" key={group.label}>
-                  <a className="mega-product-parent" href={group.href}>
+            <div className="mega-product-browser">
+              <div className="mega-product-primary" aria-label={t("Product categories")}>
+                {businessSegments.map((group, index) => (
+                  <a
+                    className={index === productMenuIndex ? "is-active" : ""}
+                    href={megaHref[group.label] ?? "#"}
+                    key={group.label}
+                    onFocus={() => setProductMenuIndex(index)}
+                    onMouseEnter={() => setProductMenuIndex(index)}
+                  >
                     {t(group.label)}
                     <span className="mega-row-arrow" aria-hidden="true">
                       <svg viewBox="0 0 24 24">
@@ -172,15 +192,15 @@ export function Header() {
                       </svg>
                     </span>
                   </a>
-                  <div className="mega-product-children">
-                    {group.children.map((child) => (
-                      <a href={child.href} key={child.label}>
-                        {t(child.label)}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="mega-product-secondary" aria-label={t(activeProductGroup.label)}>
+                {activeProductGroup.links.map((child) => (
+                  <a href={productSolutionHrefs[child] ?? megaHref[child] ?? "#"} key={child}>
+                    {t(child)}
+                  </a>
+                ))}
+              </div>
             </div>
           ) : (
             <div className="mega-links">

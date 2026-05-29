@@ -1,4 +1,5 @@
 import { imageUrls } from "./site";
+import type { Locale } from "./i18n";
 
 export type DetailPage = {
   slug: string;
@@ -14,16 +15,340 @@ export type DetailPage = {
 };
 
 const productImage = {
-  air: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/apc-banner-mobile.jpg",
+  air: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/apc-banner.jpg",
+  airMobile: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/apc-banner-mobile.jpg",
   heat:
+    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Process%20Heat%20Solutions%20Banner.png",
+  heatMobile:
     "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png",
-  steam: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_mobile_banner.jpg",
-  cooling:
+  steam: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_desktop_banner.jpg",
+  steamMobile: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_mobile_banner.jpg",
+  cooling: imageUrls.bannerPortfolio,
+  coolingMobile:
     "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/cooling-heating-mobile.jpg",
-  water: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/water-banner-mobile.jpg",
+  water: imageUrls.bannerPortfolio,
+  waterMobile: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/water-banner-mobile.jpg",
   chemicals: imageUrls.bannerChemicals,
+  chemicalsMobile: imageUrls.bannerChemicalsMobile,
   service: imageUrls.serve,
 };
+
+type DetailPageText = Pick<DetailPage, "title" | "eyebrow" | "description"> &
+  Partial<Pick<DetailPage, "overview" | "highlights" | "applications" | "category">>;
+
+const englishCategory: Record<string, string> = {
+  "Xử lý khí thải": "Air Pollution Control Systems",
+  "Hệ thống gia nhiệt": "Process Heat Solutions",
+  "Hệ thống đường ống hơi": "Steam Engineering Solutions",
+  "Hệ thống lạnh": "Cooling and Heating Solutions",
+  "Xử lý nước": "Water and Waste Solutions",
+  "Hóa chất": "Chemicals",
+  "Dịch vụ": "Services",
+};
+
+const englishApplications: Record<string, string> = {
+  "Xi măng": "Cement",
+  "Kim loại và khai khoáng": "Metals and mining",
+  "Phát điện": "Power generation",
+  "Hóa chất": "Chemicals",
+  "Thực phẩm & đồ uống": "Food and beverages",
+  "Giấy và bột giấy": "Paper and pulp",
+  "Thép": "Steel",
+  "Lò hơi công nghiệp": "Industrial boilers",
+  "Thực phẩm": "Food",
+  "Gỗ": "Wood",
+  "Khoáng sản": "Minerals",
+  "Lò hơi": "Boilers",
+  "Lò gia nhiệt": "Fired heaters",
+  "Luyện kim": "Metallurgy",
+  "Dược phẩm": "Pharmaceuticals",
+  "Dệt may": "Textiles",
+  "Giấy": "Paper",
+  "Cao su": "Rubber",
+  "Dệt nhuộm": "Textile dyeing",
+  "Nhựa": "Plastics",
+  "Sấy nông sản": "Agro drying",
+  "Sơn phủ": "Coatings",
+  "Khách sạn": "Hotels",
+  "Tiện ích nhà máy": "Plant utilities",
+  "Bệnh viện": "Hospitals",
+  "Nhà lò hơi": "Boiler houses",
+  "Tiện ích": "Utilities",
+  "Tòa nhà": "Buildings",
+  "Tòa nhà thương mại": "Commercial buildings",
+  "Dữ liệu": "Data centres",
+  "Điều hòa trung tâm": "Central HVAC",
+  "Dầu khí": "Oil and gas",
+  "Đô thị": "Urban utilities",
+  "Điện": "Power",
+  "Nước cấp": "Process water",
+  "Tháp giải nhiệt": "Cooling towers",
+  "Nước quy trình": "Process water",
+  "Nước thải": "Wastewater",
+  "Kết cấu thép": "Steel structures",
+  "Bê tông": "Concrete",
+  "Hạ tầng": "Infrastructure",
+  "Khu xử lý nước": "Water treatment plants",
+  "Nền công nghiệp": "Industrial flooring",
+  "Sửa chữa kết cấu": "Structural repair",
+  "Chống thấm": "Waterproofing",
+  "Liên kết và trám khe": "Bonding and joint sealing",
+  "Nhà máy hơi": "Steam plants",
+  "Chiller hấp thụ": "Absorption chillers",
+  "Heat pump": "Heat pumps",
+  "ESP": "ESP",
+  "Bag filter": "Bag filters",
+  "Combofilter": "Combofilter",
+  "Hệ HVAC": "HVAC systems",
+  "Nhà máy công nghiệp": "Industrial plants",
+};
+
+const englishHighlightsByCategory: Record<string, string[]> = {
+  "Air Pollution Control Systems": [
+    "Designed for demanding emission limits",
+    "Suitable for new plants and retrofits",
+    "Lifecycle support, audits and upgrades",
+  ],
+  "Process Heat Solutions": [
+    "Fuel-flexible heating platforms",
+    "High thermal efficiency",
+    "Configured for process capacity and safety",
+  ],
+  "Steam Engineering Solutions": [
+    "Improves steam distribution reliability",
+    "Reduces energy and condensate losses",
+    "Supports safer utility operations",
+  ],
+  "Cooling and Heating Solutions": [
+    "Energy-efficient heating and cooling",
+    "Waste heat recovery potential",
+    "Lifecycle service and performance support",
+  ],
+  "Water and Waste Solutions": [
+    "Improves water recovery and reuse",
+    "Supports environmental compliance",
+    "Configured around water quality and process demand",
+  ],
+  Chemicals: [
+    "Performance-engineered chemistry",
+    "Supports process efficiency and equipment protection",
+    "Applicable across industrial operations",
+  ],
+  Services: [
+    "Lifecycle service support",
+    "Health checks, spares and troubleshooting",
+    "Focused on uptime, safety and efficiency",
+  ],
+};
+
+const englishDetailText: Record<string, DetailPageText> = {
+  "air-pollution-control-systems": {
+    title: "Air Pollution Control Systems",
+    eyebrow: "Industrial Products",
+    description: "Particulate and gaseous emission control solutions for industries with strict compliance needs.",
+  },
+  "electrostatic-precipitator-esp": {
+    title: "Electrostatic Precipitator (ESP)",
+    eyebrow: "Air Pollution Control Systems",
+    description: "High-efficiency dust collection equipment for large gas volumes and low emission requirements.",
+  },
+  "bag-house-bag-filters": {
+    title: "Bag House / Bag Filters",
+    eyebrow: "Air Pollution Control Systems",
+    description: "Fabric filtration systems for dry dust, fine particulates and stable outlet emissions.",
+  },
+  combofilter: {
+    title: "Combofilter",
+    eyebrow: "Air Pollution Control Systems",
+    description: "A hybrid solution combining ESP and bag filter strengths to improve particulate removal.",
+  },
+  "nox-control": {
+    title: "NOx Control",
+    eyebrow: "Air Pollution Control Systems",
+    description: "Solutions for reducing NOx emissions from boilers, kilns and fuel-fired process equipment.",
+  },
+  "sox-control": {
+    title: "SOx Control",
+    eyebrow: "Air Pollution Control Systems",
+    description: "Systems for reducing SOx and acid gas emissions from industrial flue gas streams.",
+  },
+  "process-heat-solutions": {
+    title: "Process Heat Solutions",
+    eyebrow: "Industrial Products",
+    description: "Fuel-flexible, efficient and sustainable process heating solutions for multiple industries.",
+  },
+  "steam-boilers": {
+    title: "Steam Boilers",
+    eyebrow: "Process Heat Solutions",
+    description: "Industrial steam boiler platforms for saturated steam, superheated steam and diverse fuels.",
+  },
+  "thermal-oil-heaters": {
+    title: "Thermal Oil Heaters",
+    eyebrow: "Process Heat Solutions",
+    description: "Thermic fluid heating for high-temperature processes operating at relatively low pressure.",
+  },
+  "hot-air-generators": {
+    title: "Hot Air Generators",
+    eyebrow: "Process Heat Solutions",
+    description: "Stable hot air generation for drying, heat treatment and industrial thermal processes.",
+  },
+  "hot-water-generators": {
+    title: "Hot Water Generators",
+    eyebrow: "Process Heat Solutions",
+    description: "Hot water systems for process, sanitation and plant utility requirements.",
+  },
+  "steam-engineering-solutions": {
+    title: "Steam Engineering Solutions",
+    eyebrow: "Industrial Products",
+    description: "Solutions for steam generation, distribution, usage efficiency and condensate recovery.",
+  },
+  "boiler-house-products": {
+    title: "Boiler House Products",
+    eyebrow: "Steam Engineering Solutions",
+    description: "Measurement, monitoring and automation products for boiler house operation.",
+  },
+  "steam-distribution": {
+    title: "Steam Distribution",
+    eyebrow: "Steam Engineering Solutions",
+    description: "Steam piping and distribution optimisation for reliable delivery to points of use.",
+  },
+  "condensate-system-management": {
+    title: "Condensate System Management",
+    eyebrow: "Steam Engineering Solutions",
+    description: "Condensate recovery solutions that save energy, feedwater and treatment chemicals.",
+  },
+  "hot-water-heating-systems": {
+    title: "Hot Water Heating Systems",
+    eyebrow: "Steam Engineering Solutions",
+    description: "Hot water conversion and distribution solutions for processes and utilities.",
+  },
+  "cooling-and-heating-solutions": {
+    title: "Cooling and Heating Solutions",
+    eyebrow: "Industrial Products",
+    description: "Cooling, heating and heat recovery solutions for industrial and commercial applications.",
+  },
+  "absorption-chillers": {
+    title: "Absorption Chillers",
+    eyebrow: "Cooling and Heating Solutions",
+    description: "Thermally driven chillers that generate cooling efficiently and sustainably.",
+  },
+  "absorption-heat-pumps": {
+    title: "Absorption Heat Pumps",
+    eyebrow: "Cooling and Heating Solutions",
+    description: "Absorption heat pumps that upgrade and reuse heat in industrial systems.",
+  },
+  "electric-heat-pumps": {
+    title: "Electric Heat Pumps",
+    eyebrow: "Cooling and Heating Solutions",
+    description: "High-efficiency electric heating solutions for electrification and lower emissions.",
+  },
+  "closed-circuit-cooling-towers": {
+    title: "Closed Circuit Cooling Towers",
+    eyebrow: "Cooling and Heating Solutions",
+    description: "Closed-loop cooling systems that protect process water quality and reduce fouling risk.",
+  },
+  "air-cooled-heat-exchangers": {
+    title: "Air Cooled Heat Exchangers",
+    eyebrow: "Cooling and Heating Solutions",
+    description: "Dry air cooling for locations with limited water or low-maintenance requirements.",
+  },
+  "water-and-waste-solutions": {
+    title: "Water and Waste Solutions",
+    eyebrow: "Industrial Products",
+    description: "Water and wastewater solutions for recovery, reuse and environmental compliance.",
+  },
+  "water-treatment-solutions": {
+    title: "Water Treatment Solutions",
+    eyebrow: "Water and Waste Solutions",
+    description: "Feedwater and process water treatment systems for boilers, utilities and manufacturing.",
+  },
+  "wastewater-recovery": {
+    title: "Wastewater Recovery",
+    eyebrow: "Water and Waste Solutions",
+    description: "Wastewater recycling and recovery solutions for more sustainable operations.",
+  },
+  "boiler-water-treatment-chemicals": {
+    title: "Boiler Water Treatment Chemicals",
+    eyebrow: "Chemicals",
+    description: "Boiler water treatment chemistry for scale, corrosion and steam quality control.",
+  },
+  "water-treatment": {
+    title: "Water Treatment Chemicals",
+    eyebrow: "Chemicals",
+    description: "Chemical programmes for boiler water, cooling water, process water and wastewater.",
+  },
+  "cooling-water-treatment-chemicals": {
+    title: "Cooling Water Treatment Chemicals",
+    eyebrow: "Chemicals",
+    description: "Cooling water chemicals for scale, corrosion, deposits and microbiological control.",
+  },
+  "ion-exchange-resins": {
+    title: "Ion Exchange Resins",
+    eyebrow: "Chemicals",
+    description: "Tulsion ion exchange resins for demineralisation, softening, purification and separation.",
+  },
+  "protective-coatings": {
+    title: "Protective Coatings",
+    eyebrow: "Chemicals",
+    description: "Protective coating and waterproofing systems for industrial structures and infrastructure.",
+  },
+  "admixtures-and-sealants": {
+    title: "Admixtures and Sealants",
+    eyebrow: "Chemicals",
+    description: "Concrete admixtures, grouts, anchors, sealants and repair materials for industrial construction.",
+  },
+  "boiler-maintenance-services": {
+    title: "Boiler Maintenance Services",
+    eyebrow: "Services",
+    description: "Boiler lifecycle support from inspections and spares to upgrades and performance optimisation.",
+  },
+  "absorption-chiller-maintenance-services": {
+    title: "Absorption Chiller Maintenance Services",
+    eyebrow: "Services",
+    description: "Installation, commissioning, maintenance and optimisation support for absorption chillers and heat pumps.",
+  },
+  "air-pollution-control-system-maintenance-services": {
+    title: "Air Pollution Control System Maintenance Services",
+    eyebrow: "Services",
+    description: "Maintenance, assessment and optimisation support for ESP, bag filters and air pollution control equipment.",
+  },
+  "automatic-tube-cleaning-system-atcs": {
+    title: "Automatic Tube Cleaning System (ATCS)",
+    eyebrow: "Services",
+    description: "Automatic tube cleaning that helps maintain chiller heat transfer efficiency during operation.",
+  },
+};
+
+function englishApplicationsFor(items: string[]) {
+  return items.map((item) => englishApplications[item] ?? item);
+}
+
+function localizeDetail(page: DetailPage, locale: Locale): DetailPage {
+  if (locale !== "en") return page;
+
+  const text = englishDetailText[page.slug];
+  const category = text?.category ?? englishCategory[page.category] ?? page.category;
+  const title = text?.title ?? page.title;
+  const description = text?.description ?? page.description;
+
+  return {
+    ...page,
+    title,
+    eyebrow: text?.eyebrow ?? englishCategory[page.eyebrow] ?? page.eyebrow,
+    description,
+    category,
+    overview: text?.overview ?? [
+      `${title} is part of Thermax's ${category.toLowerCase()} portfolio, supporting industrial customers with efficient, reliable and sustainability-focused solutions.`,
+      "The solution is configured around operating conditions, performance targets and compliance requirements, with Thermax Vietnam supporting enquiry, selection and lifecycle service.",
+    ],
+    highlights: text?.highlights ?? englishHighlightsByCategory[category] ?? [
+      "Configured to customer requirements",
+      "Designed for reliable industrial operation",
+      "Supported by Thermax lifecycle expertise",
+    ],
+    applications: text?.applications ?? englishApplicationsFor(page.applications),
+  };
+}
 
 export const productDetailPages: DetailPage[] = [
   {
@@ -534,4 +859,14 @@ export function getProductDetail(slug: string) {
 
 export function getServiceDetail(slug: string) {
   return serviceDetailPages.find((page) => page.slug === slug);
+}
+
+export function getLocalizedProductDetail(slug: string, locale: Locale) {
+  const page = getProductDetail(slug);
+  return page ? localizeDetail(page, locale) : undefined;
+}
+
+export function getLocalizedServiceDetail(slug: string, locale: Locale) {
+  const page = getServiceDetail(slug);
+  return page ? localizeDetail(page, locale) : undefined;
 }

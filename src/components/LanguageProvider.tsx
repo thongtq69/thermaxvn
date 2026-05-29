@@ -35,6 +35,12 @@ function saveLocale(locale: Locale) {
   } catch {
     // Some embedded browsers block storage; language switching should still work.
   }
+
+  try {
+    document.cookie = `${storageKey}=${locale}; path=/; max-age=31536000; samesite=lax`;
+  } catch {
+    // Cookie persistence is only used to help server-rendered pages keep the selected language.
+  }
 }
 
 function getInitialLocale(): Locale {
@@ -123,7 +129,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     } else {
       url.searchParams.set("lang", "en");
     }
-    window.history.replaceState({}, "", url);
+    window.location.href = url.toString();
   }, []);
 
   const t = useCallback((value: string) => translate(value, locale), [locale]);
@@ -149,6 +155,37 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       if (frame) window.cancelAnimationFrame(frame);
       observer.disconnect();
     };
+  }, [locale]);
+
+  useEffect(() => {
+    const handleLinkClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+
+      const target = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
+      if (!target || target.target || target.hasAttribute("download")) return;
+
+      const rawHref = target.getAttribute("href");
+      if (!rawHref || rawHref.startsWith("#") || /^(mailto:|tel:|sms:|javascript:)/i.test(rawHref)) return;
+
+      const url = new URL(rawHref, window.location.href);
+      if (url.origin !== window.location.origin) return;
+
+      if (locale === "en") {
+        url.searchParams.set("lang", "en");
+      } else {
+        url.searchParams.delete("lang");
+      }
+
+      if (url.toString() !== target.href) {
+        event.preventDefault();
+        window.location.href = url.toString();
+      }
+    };
+
+    document.addEventListener("click", handleLinkClick);
+    return () => document.removeEventListener("click", handleLinkClick);
   }, [locale]);
 
   const value = useMemo<LanguageContextValue>(() => ({ locale, setLocale, t }), [locale, setLocale, t]);

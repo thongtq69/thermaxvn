@@ -16,6 +16,7 @@ export const viDictionary: Record<string, string> = {
   "Digital Solutions": "Dự án",
   "Projects": "Dự án",
   "Products": "Sản phẩm",
+  "Product categories": "Nhóm sản phẩm",
   "News": "Tin tức",
   "Digital": "Dự án",
   "Investors": "Nhà đầu tư",

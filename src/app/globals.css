@@ -11,8 +11,8 @@
   --blue: #174a7c;
   --orange: #f08a22;
   --shadow: 0 22px 60px rgba(5, 35, 49, 0.12);
-  --font-sans: "Noto Sans", "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
-  --font-display: "Noto Sans", "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: "Poppins", "Noto Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-display: "Poppins", "Noto Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 * {
@@ -5208,7 +5208,7 @@ main { color: var(--bs-body-color); }
   position: relative;
   width: 98%;
   margin: 170px auto 0;
-  height: auto;
+  height: clamp(420px, 34vw, 620px);
   border-radius: 16px;
   overflow: hidden;
   line-height: 0;
@@ -5218,13 +5218,14 @@ main { color: var(--bs-body-color); }
 .inner-banner > img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .inner-banner > picture img,
 .inner-banner > img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .inner-banner::after {
@@ -7381,7 +7382,7 @@ main { color: var(--bs-body-color); }
 }
 
 @media (max-width: 991px) {
-  .inner-banner { width: 93%; margin-top: 100px; }
+  .inner-banner { width: 93%; height: 360px; margin-top: 100px; }
   .inner-banner-text { padding-bottom: 30px; }
   .inner-banner-text-inner { padding: 0 16px; max-width: 100%; }
   .inner-banner-text h1 { font-size: 32px; }
@@ -8400,65 +8401,85 @@ dd {
   display: none;
 }
 
-.mega-product-groups {
+.mega-menu-products {
+  grid-template-columns: 1fr;
+  height: 420px;
+  padding: 0 68px;
+}
+
+.mega-product-browser {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-content: start;
-  gap: 18px 22px;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(280px, 44%) minmax(0, 56%);
+  width: min(1560px, 100%);
+  height: 100%;
+  margin: 0 auto;
+  border-left: 1px solid rgba(0, 0, 0, 0.18);
+  border-right: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.mega-product-primary,
+.mega-product-secondary {
+  min-width: 0;
+  padding: 36px 0;
   overflow: auto;
 }
 
-.mega-menu-products {
-  grid-template-columns: minmax(220px, 22%) minmax(0, 56%) minmax(220px, 22%);
-  height: 500px;
+.mega-product-primary {
+  border-right: 1px solid rgba(0, 0, 0, 0.18);
 }
 
-.mega-menu-products .mega-links {
-  padding: 28px 32px;
-}
-
-.mega-product-group {
-  min-width: 0;
-  padding: 0 0 12px;
-  border-bottom: 1px solid #eceff2;
-}
-
-.mega-links .mega-product-parent {
-  min-height: 34px;
-  padding: 0;
+.mega-product-primary a,
+.mega-product-secondary a {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 12px 68px;
   color: #070707;
   background: transparent;
+  border-bottom: 1px solid #f0f0f0;
   border-radius: 0;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 1.22;
+  transition: color 160ms ease;
 }
 
-.mega-links .mega-product-parent:hover {
+.mega-product-primary a {
+  justify-content: space-between;
+  min-height: 82px;
+  font-size: 24px;
+}
+
+.mega-product-primary a:hover,
+.mega-product-primary a.is-active,
+.mega-product-secondary a:hover {
   color: var(--red);
   background: transparent;
 }
 
-.mega-product-children {
-  display: grid;
-  gap: 6px;
-  margin-top: 8px;
+.mega-product-primary a.is-active .mega-row-arrow,
+.mega-product-primary a:hover .mega-row-arrow {
+  opacity: 1;
 }
 
-.mega-product-children a {
-  min-height: 0;
-  justify-content: flex-start;
-  padding: 0;
-  color: #6f7780;
-  background: transparent;
-  border-radius: 0;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.32;
+.mega-product-secondary {
+  padding-top: 42px;
 }
 
-.mega-product-children a:hover {
+.mega-product-secondary a {
+  min-height: 44px;
+  padding: 8px 68px;
+  border-bottom: 0;
+  font-size: 22px;
+  letter-spacing: 0.7px;
+}
+
+.mega-product-secondary .mega-product-overview {
+  margin-bottom: 8px;
   color: var(--red);
-  background: transparent;
+  font-weight: 600;
 }
 
 .business-carousel {
@@ -8801,12 +8822,23 @@ dd {
 }
 
 @media (max-width: 1180px) {
-  .mega-product-groups {
-    grid-template-columns: 1fr;
+  .mega-menu-products {
+    padding: 0 36px;
+  }
+
+  .mega-product-primary a,
+  .mega-product-secondary a {
+    padding-left: 36px;
+    padding-right: 36px;
+    font-size: 18px;
   }
 }
 
 @media (max-width: 767px) {
+  .inner-banner {
+    height: 320px;
+  }
+
   .business-carousel {
     width: auto;
     margin: 0 16px;

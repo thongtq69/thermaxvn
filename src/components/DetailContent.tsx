@@ -6,6 +6,11 @@ type DetailContentProps = {
   related?: DetailPage[];
   contactLabel?: string;
   relatedBaseHref?: string;
+  labels?: {
+    highlights: string;
+    applications: string;
+    relatedTitle: string;
+  };
 };
 
 export function DetailContent({
@@ -13,6 +18,11 @@ export function DetailContent({
   related = [],
   contactLabel = "Trao đổi với Thermax Vietnam",
   relatedBaseHref = "/industrial-products",
+  labels = {
+    highlights: "Điểm nổi bật",
+    applications: "Ứng dụng tiêu biểu",
+    relatedTitle: "Các nội dung liên quan",
+  },
 }: DetailContentProps) {
   return (
     <>
@@ -37,7 +47,7 @@ export function DetailContent({
       <section className="detail-info-band" data-section="capabilities">
         <div className="detail-info-grid" data-reveal>
           <article>
-            <p>Điểm nổi bật</p>
+            <p>{labels.highlights}</p>
             <ul>
               {page.highlights.map((item) => (
                 <li key={item}>{item}</li>
@@ -45,7 +55,7 @@ export function DetailContent({
             </ul>
           </article>
           <article>
-            <p>Ứng dụng tiêu biểu</p>
+            <p>{labels.applications}</p>
             <ul>
               {page.applications.map((item) => (
                 <li key={item}>{item}</li>
@@ -59,7 +69,7 @@ export function DetailContent({
         <section className="detail-related-section" data-section="related">
           <div className="detail-related-header" data-reveal>
             <p>{page.category}</p>
-            <h2>Các nội dung liên quan</h2>
+            <h2>{labels.relatedTitle}</h2>
           </div>
           <div className="detail-related-grid" data-reveal>
             {related.map((item) => (

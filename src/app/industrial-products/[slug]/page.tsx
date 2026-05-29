@@ -1,21 +1,55 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { DetailContent } from "../../../components/DetailContent";
 import { InnerHero } from "../../../components/InnerHero";
 import { PageShell } from "../../../components/PageShell";
-import { getProductDetail, productDetailPages } from "../../../lib/productContent";
+import {
+  getLocalizedProductDetail,
+  getProductDetail,
+  productDetailPages,
+} from "../../../lib/productContent";
+import type { Locale } from "../../../lib/i18n";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ lang?: string }>;
 };
+
+async function localeFromRequest(params?: { lang?: string }): Promise<Locale> {
+  if (params?.lang === "en" || params?.lang === "vi") return params.lang;
+
+  const savedLocale = (await cookies()).get("thermax-language")?.value;
+  return savedLocale === "en" ? "en" : "vi";
+}
+
+const detailLabels = {
+  vi: {
+    home: "Trang chủ",
+    products: "Sản phẩm",
+    contact: "Trao đổi với Thermax Vietnam",
+    highlights: "Điểm nổi bật",
+    applications: "Ứng dụng tiêu biểu",
+    relatedTitle: "Các nội dung liên quan",
+  },
+  en: {
+    home: "Home",
+    products: "Products",
+    contact: "Talk to Thermax Vietnam",
+    highlights: "Highlights",
+    applications: "Typical applications",
+    relatedTitle: "Related solutions",
+  },
+} satisfies Record<Locale, Record<string, string>>;
 
 export function generateStaticParams() {
   return productDetailPages.map((page) => ({ slug: page.slug }));
 }
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = getProductDetail(slug);
+  const locale = await localeFromRequest(await searchParams);
+  const page = getLocalizedProductDetail(slug, locale);
 
   if (!page) {
     return {
@@ -29,20 +63,22 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-export default async function ProductDetailPage({ params }: ProductPageProps) {
+export default async function ProductDetailPage({ params, searchParams }: ProductPageProps) {
   const { slug } = await params;
-  const page = getProductDetail(slug);
+  const locale = await localeFromRequest(await searchParams);
+  const rawPage = getProductDetail(slug);
+  const page = getLocalizedProductDetail(slug, locale);
 
-  if (!page) notFound();
+  if (!page || !rawPage) notFound();
 
   const related = productDetailPages
-    .filter((item) => item.category === page.category && item.slug !== page.slug)
+    .filter((item) => item.category === rawPage.category && item.slug !== rawPage.slug)
     .slice(0, 6);
   const breadcrumb =
     page.category === page.title
-      ? [{ label: "Sản phẩm", href: "/business-segments/industrial-products" }, { label: page.title }]
+      ? [{ label: detailLabels[locale].products, href: "/business-segments/industrial-products" }, { label: page.title }]
       : [
-          { label: "Sản phẩm", href: "/business-segments/industrial-products" },
+          { label: detailLabels[locale].products, href: "/business-segments/industrial-products" },
           { label: page.category },
           { label: page.title },
         ];
@@ -54,11 +90,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         description={page.description}
         image={page.image}
         mobileImage={page.mobileImage}
-        homeLabel="Trang chủ"
+        homeLabel={detailLabels[locale].home}
         breadcrumb={breadcrumb}
       />
 
-      <DetailContent page={page} related={related} />
+      <DetailContent
+        page={page}
+        related={related.map((item) => getLocalizedProductDetail(item.slug, locale) ?? item)}
+        contactLabel={detailLabels[locale].contact}
+        labels={{
+          highlights: detailLabels[locale].highlights,
+          applications: detailLabels[locale].applications,
+          relatedTitle: detailLabels[locale].relatedTitle,
+        }}
+      />
     </PageShell>
   );
 }
