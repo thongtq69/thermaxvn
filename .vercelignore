@@ -4,8 +4,11 @@ out/
 .git/
 
 _audit/
+outputs/
 _clone-*.png
 _source-*.png
+
+*.pptx
 
 *.tsbuildinfo
 *.log

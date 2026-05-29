@@ -1,4 +1,9 @@
 import type { SolutionItem } from "../components/SolutionsTabs";
+import { productSubcategoryGroups } from "./site";
+
+function subcategoriesFor(label: string) {
+  return productSubcategoryGroups.find((group) => group.label === label)?.children ?? [];
+}
 
 export const industrialProductsSolutions: SolutionItem[] = [
   {
@@ -6,6 +11,7 @@ export const industrialProductsSolutions: SolutionItem[] = [
     description: "Effective solutions for abatement of particulate and gaseous pollutants",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/apc-banner-mobile.jpg",
     href: "/industrial-products/air-pollution-control-systems",
+    children: subcategoriesFor("Air Pollution Control Systems"),
   },
   {
     title: "Process Heat Solutions",
@@ -13,12 +19,14 @@ export const industrialProductsSolutions: SolutionItem[] = [
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png",
     href: "/industrial-products/process-heat-solutions",
+    children: subcategoriesFor("Process Heat Solutions"),
   },
   {
     title: "Steam Engineering Solutions",
     description: "Driving efficiency, compliance, and sustainability with advanced steam systems",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_mobile_banner.jpg",
     href: "/industrial-products/steam-engineering-solutions",
+    children: subcategoriesFor("Steam Engineering Solutions"),
   },
   {
     title: "Cooling and Heating Solutions",
@@ -26,12 +34,14 @@ export const industrialProductsSolutions: SolutionItem[] = [
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/cooling-heating-mobile.jpg",
     href: "/industrial-products/cooling-and-heating-solutions",
+    children: subcategoriesFor("Cooling and Heating Solutions"),
   },
   {
     title: "Water and Waste Solutions",
     description: "Comprehensive water treatment and wastewater management for sustainable operations",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/water-banner-mobile.jpg",
     href: "/industrial-products/water-and-waste-solutions",
+    children: subcategoriesFor("Water and Waste Solutions"),
   },
 ];
 

@@ -9,6 +9,10 @@ export type SolutionItem = {
   image: string;
   href: string;
   key?: string;
+  children?: {
+    label: string;
+    href: string;
+  }[];
 };
 
 function solutionKey(item: SolutionItem) {
@@ -58,7 +62,7 @@ export function SolutionsTabs({ items, eyebrow = "Solutions" }: { items: Solutio
   };
 
   return (
-    <section className="solutions-section" data-section="solutions">
+    <section className="solutions-section" id="solutions" data-section="solutions">
       <div className="solutions-eyebrow" data-reveal>
         {t(eyebrow)}
       </div>
@@ -84,6 +88,15 @@ export function SolutionsTabs({ items, eyebrow = "Solutions" }: { items: Solutio
           <div className="solutions-panel-text">
             <h2>{t(current.title)}</h2>
             <p>{t(current.description)}</p>
+            {current.children && current.children.length > 0 ? (
+              <div className="solution-child-links" aria-label={t("Product subcategories")}>
+                {current.children.map((child) => (
+                  <a href={child.href} key={`${current.title}-${child.label}`}>
+                    {t(child.label)}
+                  </a>
+                ))}
+              </div>
+            ) : null}
             <a className="section-cta" href={current.href}>
               {t("Discover more")}
             </a>

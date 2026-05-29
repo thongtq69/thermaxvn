@@ -5,9 +5,18 @@ type InnerHeroProps = {
   image: string;
   mobileImage?: string;
   breadcrumb?: { label: string; href?: string }[];
+  homeLabel?: string;
 };
 
-export function InnerHero({ title, ariaTitle, description, image, mobileImage, breadcrumb }: InnerHeroProps) {
+export function InnerHero({
+  title,
+  ariaTitle,
+  description,
+  image,
+  mobileImage,
+  breadcrumb,
+  homeLabel = "Home",
+}: InnerHeroProps) {
   const a11yTitle = ariaTitle ?? (typeof title === "string" ? title : "");
   return (
     <>
@@ -25,7 +34,7 @@ export function InnerHero({ title, ariaTitle, description, image, mobileImage, b
       </section>
       {breadcrumb && breadcrumb.length > 0 ? (
         <nav className="breadcrumb-bar" aria-label="Breadcrumb">
-          <a href="/">Home</a>
+          <a href="/">{homeLabel}</a>
           {breadcrumb.map((bc, i) => (
             <span key={i}>
               <span aria-hidden="true">›</span>

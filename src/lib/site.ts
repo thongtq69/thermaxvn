@@ -8,6 +8,17 @@ export type NavItem = {
   spotlightImage: string;
 };
 
+export type ProductSubcategory = {
+  label: string;
+  href: string;
+};
+
+export type ProductSubcategoryGroup = {
+  label: string;
+  href: string;
+  children: ProductSubcategory[];
+};
+
 export type BusinessSegment = {
   label: string;
   image: string;
@@ -35,7 +46,7 @@ export type CaseStudy = {
 };
 
 export const imageUrls = {
-  logo: `${thermaxAssetBase}/thermax-logo.svg`,
+  logo: `/thermax-logo.svg`,
   hero: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/poster-video.webp`,
   heroVideo: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/thermax-banner-new.mp4`,
   heroAlt: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/indus-pro-newx.webp`,
@@ -170,7 +181,7 @@ export const navItems: NavItem[] = [
     summary:
       "Thermax Vietnam supports local industries with sustainable and energy-efficient solutions, backed by Thermax global engineering expertise.",
     links: ["Company Overview", "Global Presence", "Careers", "Contact Us"],
-    spotlight: "Thermax in Vietnam",
+    spotlight: "Thermax Vietnam",
     spotlightImage: imageUrls.companySpotlight,
   },
   {
@@ -211,22 +222,6 @@ export const navItems: NavItem[] = [
     links: ["In the News", "Press Releases", "TV Interviews", "Media Kit"],
     spotlight: "Latest newsroom updates",
     spotlightImage: imageUrls.newsOne,
-  },
-  {
-    label: "Investors",
-    summary:
-      "Thermax is committed to creating long-term value for its investors and shareholders through consistent performance, transparent governance, and responsible financial management.",
-    links: [
-      "Investor Overview",
-      "Financial Information",
-      "Governance and Regulatory information",
-      "Shareholder Information",
-      "Investor Services Contact",
-      "Dispute Resolution Mechanism",
-      "Disclaimer",
-    ],
-    spotlight: "Quarterly results and reports",
-    spotlightImage: imageUrls.globalSpotlight,
   },
 ];
 
@@ -283,6 +278,177 @@ export const businessSegments: BusinessSegment[] = [
     body:
       "The Chemicals segment offers resins, water treatment, and speciality chemicals, as well as construction chemicals (admixtures, protective coatings, waterproofing, industrial flooring, sealants, adhesives), to help improve processes across a spectrum of industries.",
     links: ["Resins", "Water Treatment", "Protective Coatings", "Admixtures and Sealants"],
+  },
+];
+
+export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
+  {
+    label: "Air Pollution Control Systems",
+    href: productSolutionHrefs["Air Pollution Control Systems"],
+    children: [
+      {
+        label: "Electrostatic Precipitator (ESP)",
+        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+      },
+      {
+        label: "Bag House/Bag Filters",
+        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+      },
+      {
+        label: "Combofilter",
+        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+      },
+      {
+        label: "Scrubber",
+        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+      },
+      {
+        label: "Thermax Ne0 - Gas Enrichment Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/air-pollution-control-systems#products",
+      },
+    ],
+  },
+  {
+    label: "Process Heat Solutions",
+    href: productSolutionHrefs["Process Heat Solutions"],
+    children: [
+      {
+        label: "Steam Boilers",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/steam-boilers",
+      },
+      {
+        label: "Thermal Oil Heaters",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
+      },
+      {
+        label: "Hot Air Generators",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/hot-air-generators",
+      },
+      {
+        label: "Hot Water Generators",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions/hot-water-generators",
+      },
+      {
+        label: "Energy Plant",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
+      },
+      {
+        label: "Electric Process Heat Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/process-heat-solutions",
+      },
+    ],
+  },
+  {
+    label: "Steam Engineering Solutions",
+    href: productSolutionHrefs["Steam Engineering Solutions"],
+    children: [
+      {
+        label: "Boiler House Products",
+        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions/boiler-house-products",
+      },
+      {
+        label: "Steam Distribution",
+        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+      },
+      {
+        label: "Condensate System Management",
+        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+      },
+      {
+        label: "Process Automation",
+        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+      },
+      {
+        label: "Customised Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/steam-engineering-solutions",
+      },
+    ],
+  },
+  {
+    label: "Cooling and Heating Solutions",
+    href: productSolutionHrefs["Cooling and Heating Solutions"],
+    children: [
+      {
+        label: "Absorption Chillers",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+      {
+        label: "Absorption Chiller-Heaters",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+      {
+        label: "Absorption Heat Pumps",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+      {
+        label: "Hybrid Chiller",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+      {
+        label: "SustainX Heating Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+      {
+        label: "SustainX Refrigeration Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/cooling-and-heating-solutions",
+      },
+    ],
+  },
+  {
+    label: "Water and Waste Solutions",
+    href: productSolutionHrefs["Water and Waste Solutions"],
+    children: [
+      {
+        label: "Water Treatment Solutions",
+        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+      },
+      {
+        label: "Sewage Treatment and Recycling Plants",
+        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+      },
+      {
+        label: "Effluent Treatment & Recycling Plants",
+        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+      },
+      {
+        label: "Minimum Liquid Discharge",
+        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+      },
+      {
+        label: "Zero Liquid Discharge System",
+        href: "https://www.thermaxglobal.com/industrial-products/water-and-waste-solutions",
+      },
+    ],
+  },
+  {
+    label: "Chemicals",
+    href: "/business-portfolio/chemicals#solutions",
+    children: [
+      {
+        label: "Adsorbent Resins",
+        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
+      },
+      {
+        label: "Mixed Bed Resins",
+        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
+      },
+      {
+        label: "Water Treatment Resins",
+        href: "https://www.thermaxglobal.com/ion_exchange_resins/",
+      },
+      {
+        label: "Water Treatment",
+        href: productSolutionHrefs["Water Treatment"],
+      },
+      {
+        label: "Protective Coatings",
+        href: productSolutionHrefs["Protective Coatings"],
+      },
+      {
+        label: "Admixtures and Sealants",
+        href: productSolutionHrefs["Admixtures and Sealants"],
+      },
+    ],
   },
 ];
 
@@ -409,8 +575,6 @@ export const footerGroups = [
     links: [
       { label: "Company Overview", href: "/company-overview" },
       { label: "Global Presence", href: "/company-overview/global-presence" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact Us", href: "/contact-us" },
     ],
   },
   {
@@ -431,27 +595,6 @@ export const footerGroups = [
       { label: "EDGE Live", href: "/digital" },
       { label: "Corporate Social Responsibility", href: "/corporate-social-responsibility" },
       { label: "ESG Profile", href: "/esg-profile" },
-    ],
-  },
-  {
-    title: "Projects",
-    links: [
-      { label: "Industrial Infra", href: "/business-portfolio/industrial-infrastructure" },
-      {
-        label: "Projects and Energy Solutions",
-        href: "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
-      },
-      {
-        label: "Large Boilers and Fired Heaters",
-        href: "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
-      },
-    ],
-  },
-  {
-    title: "Investors",
-    links: [
-      { label: "Investor Overview", href: "/investor-overview" },
-      { label: "Contact Us", href: "/contact-us" },
     ],
   },
 ];

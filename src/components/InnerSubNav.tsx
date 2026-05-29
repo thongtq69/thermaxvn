@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
 type NavLink = {
   label: string;
@@ -16,6 +17,7 @@ type InnerSubNavProps = {
 };
 
 export function InnerSubNav({ items, context, current, options, cta }: InnerSubNavProps) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,13 +25,13 @@ export function InnerSubNav({ items, context, current, options, cta }: InnerSubN
       <div className="inner-subnav-inner">
         <details className="inner-subnav-mobile">
           <summary>
-            <span>Navigate to:</span>
-            <strong>Select an option</strong>
+            <span>{t("Navigate to")}:</span>
+            <strong>{t("Select an option")}</strong>
           </summary>
           <ul>
             {items.map((item) => (
               <li key={item.label}>
-                <a href={item.href}>{item.label}</a>
+                <a href={item.href}>{t(item.label)}</a>
               </li>
             ))}
           </ul>
@@ -38,14 +40,14 @@ export function InnerSubNav({ items, context, current, options, cta }: InnerSubN
         <ul className="inner-subnav-links">
           {items.map((item) => (
             <li key={item.label}>
-              <a href={item.href}>{item.label}</a>
+              <a href={item.href}>{t(item.label)}</a>
             </li>
           ))}
         </ul>
 
         {cta ? (
           <a className="inner-subnav-cta" href={cta.href}>
-            {cta.label}
+            {t(cta.label)}
           </a>
         ) : null}
 
@@ -53,7 +55,7 @@ export function InnerSubNav({ items, context, current, options, cta }: InnerSubN
           <div className="inner-subnav-dropdown">
             <button type="button" onClick={() => setOpen((value) => !value)}>
               <span>
-                <strong>{context}</strong> : {current}
+                <strong>{t(context)}</strong> : {t(current)}
               </span>
             </button>
             {options && options.length > 0 ? (
@@ -61,7 +63,7 @@ export function InnerSubNav({ items, context, current, options, cta }: InnerSubN
                 {options.map((item) => (
                   <li key={item.label}>
                     <a href={item.href} onClick={() => setOpen(false)}>
-                      {item.label}
+                      {t(item.label)}
                     </a>
                   </li>
                 ))}

@@ -5,7 +5,6 @@ import {
   businessSegments,
   imageUrls,
   newsItems,
-  productSolutionHrefs,
 } from "../lib/site";
 import { industrialInfrastructureProjects } from "../lib/projects";
 import { Header } from "../components/Header";
@@ -170,11 +169,7 @@ function AboutSection() {
         <img src={imageUrls.hero} alt="" />
       </div>
       <div className="about-copy vietnam-about-copy" data-reveal>
-        <h2>
-          <span>{t("Thermax")}</span>
-          <br />
-          <span className="vietnam-heading-accent">{t("in Vietnam")}</span>
-        </h2>
+        <h2>{t("Thermax Vietnam")}</h2>
         <div className="about-body">
           <p>
             <RevealWords text={t(firstParagraph)} />
@@ -183,9 +178,9 @@ function AboutSection() {
             <RevealWords text={t(secondParagraph)} />
           </p>
         </div>
-        <a className="source-cta" href="/company-overview/legacy-milestone">
+        <a className="source-cta" href="#about">
           <span />
-          {t("Know more about Thermax’s legacy")}
+          {t("Discover more about Thermax")}
         </a>
       </div>
       <div className="stats-grid" data-reveal>
@@ -207,6 +202,19 @@ function AboutSection() {
 
 function BusinessSection() {
   const { t, locale } = useLanguage();
+  const [active, setActive] = useState(0);
+  const segment = businessSegments[active];
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActive((value) => (value + 1) % businessSegments.length);
+    }, 4200);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const goToSegment = (direction: number) => {
+    setActive((value) => (value + direction + businessSegments.length) % businessSegments.length);
+  };
 
   return (
     <section className="business-section" id="portfolio" data-section="business">
@@ -221,28 +229,24 @@ function BusinessSection() {
         </p>
       </div>
 
-      <div className="business-grid" data-reveal>
-        {businessSegments.map((segment) => (
-          <article className="business-card" key={segment.label}>
+      <div className="business-carousel" data-reveal>
+        <article className="business-carousel-card">
+          <a href={businessSegmentHrefs[segment.label] ?? "/business-segments/industrial-products#solutions"}>
             <img src={segment.image} alt="" />
-            <div>
-              <h3>{t(segment.label)}</h3>
-              <span>{t(segment.body)}</span>
-              <ul>
-                {segment.links.slice(0, 5).map((link) => {
-                  const href = productSolutionHrefs[link];
-                  return <li key={link}>{href ? <a href={href}>{t(link)}</a> : t(link)}</li>;
-                })}
-              </ul>
-              <a
-                className="business-more"
-                href={businessSegmentHrefs[segment.label] ?? "/business-segments/industrial-products#solutions"}
-              >
-                {t("Discover more")}
-              </a>
-            </div>
-          </article>
-        ))}
+            <span>{t(segment.label)}</span>
+          </a>
+        </article>
+        <div className="carousel-controls business-carousel-controls" aria-label={t("Products")}>
+          <button type="button" onClick={() => goToSegment(-1)} aria-label={t("Previous")}>
+            &lt;
+          </button>
+          <div className="carousel-counter">
+            {String(active + 1).padStart(2, "0")} / {String(businessSegments.length).padStart(2, "0")}
+          </div>
+          <button type="button" onClick={() => goToSegment(1)} aria-label={t("Next")}>
+            &gt;
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -251,9 +255,9 @@ function BusinessSection() {
 function HomeProjectsSection() {
   return (
     <ProjectShowcase
-      eyebrow="Projects"
-      title="Featured projects"
-      description="Representative industrial utility and energy projects that show Thermax delivery capability across EPC, boilers and international execution."
+      eyebrow=""
+      title="Projects"
+      description=""
       items={industrialInfrastructureProjects.slice(0, 4)}
     />
   );
@@ -266,7 +270,6 @@ function HomeNewsSection() {
     <section className="home-news-section" data-section="home-news">
       <div className="home-news-header" data-reveal>
         <div>
-          <p>{t("News")}</p>
           <h2>{t("Latest updates")}</h2>
         </div>
         <a className="section-cta" href="/in-the-news">
@@ -343,7 +346,6 @@ export default function Home() {
         <BusinessSection />
         <HomeProjectsSection />
         <HomeNewsSection />
-        <PeopleSection />
       </main>
       <Footer />
     </>

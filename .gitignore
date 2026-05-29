@@ -25,6 +25,8 @@ yarn-error.log*
 
 # Local visual audit artifacts
 _audit/
+outputs/
+*.pptx
 _clone-*.png
 _source-*.png
 .vercel

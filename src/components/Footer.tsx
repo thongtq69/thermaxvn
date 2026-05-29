@@ -2,7 +2,7 @@
 
 import { footerGroups, imageUrls, vietnamOffice } from "../lib/site";
 import { useLanguage } from "./LanguageProvider";
-import { PhoneIcon, EmailIcon, FacebookIcon, LinkedInIcon, YouTubeIcon } from "./icons";
+import { PhoneIcon, EmailIcon } from "./icons";
 
 export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
   const { t } = useLanguage();
@@ -26,7 +26,7 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
           <a className="footer-brand" href="/" aria-label="Thermax home">
             <img src={imageUrls.logo} alt="Thermax" />
           </a>
-          <div className="footer-address-block">
+          <div className="footer-address-block footer-office-block">
             <h3>{t(vietnamOffice.label)}</h3>
             <p>
               {vietnamOffice.address.map((line) => (
@@ -36,9 +36,6 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
                 </span>
               ))}
             </p>
-          </div>
-          <div className="footer-address-block">
-            <h3>{t("Contact")}</h3>
             <div className="footer-contact-links">
               <a href={vietnamOffice.phoneHref}>
                 <span className="footer-icon"><PhoneIcon /></span>
@@ -48,19 +45,6 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
                 <span className="footer-icon"><EmailIcon /></span>
                 {vietnamOffice.email}
               </a>
-            </div>
-          </div>
-          <div className="footer-address-block">
-            <h3>{t("Connect")}</h3>
-            <p>
-              <a href="/contact-us">{t("Contact Us")}</a>
-              <br />
-              <a href="/careers">{t("Careers")}</a>
-            </p>
-            <div className="footer-social">
-              <a href="#" aria-label="Facebook"><FacebookIcon /></a>
-              <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
-              <a href="#" aria-label="YouTube"><YouTubeIcon /></a>
             </div>
           </div>
         </div>

@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { imageUrls, navItems, productSolutionHrefs } from "../lib/site";
+import { imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
 
 const navHref: Record<string, string> = {
   "About Us": "/company-overview",
-  "Business Portfolio": "/business-segments/industrial-products#solutions",
+  "Business Portfolio": "/business-segments/industrial-products",
   Sustainability: "/sustainability",
-  "Digital Solutions": "/business-portfolio/industrial-infrastructure#solutions",
+  "Digital Solutions": "/business-portfolio/industrial-infrastructure",
   "In the News": "/in-the-news",
   Investors: "/investor-overview",
 };
@@ -61,6 +61,8 @@ const navDisplayLabel: Record<string, string> = {
   "Digital Solutions": "Projects",
 };
 
+const directNavLabels = new Set(["About Us", "Digital Solutions", "In the News"]);
+
 function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
 }
@@ -72,6 +74,10 @@ export function Header() {
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = navItems.find((item) => item.label === menu) ?? navItems[0];
+
+  const openMega = (label: string) => {
+    setMenu(directNavLabels.has(label) ? "" : label);
+  };
 
   return (
     <>
@@ -105,12 +111,10 @@ export function Header() {
                 className={menu === item.label ? "nav-link is-active" : "nav-link"}
                 key={item.label}
                 onFocus={() => {
-                  if (item.label !== "About Us") setMenu(item.label);
-                  else setMenu("");
+                  openMega(item.label);
                 }}
                 onMouseEnter={() => {
-                  if (item.label !== "About Us") setMenu(item.label);
-                  else setMenu("");
+                  openMega(item.label);
                 }}
                 onClick={() => {
                   window.location.href = navHref[item.label] ?? "#";
@@ -123,8 +127,12 @@ export function Header() {
           </nav>
 
           <div className="nav-actions">
-            <button className="callback-button" onClick={() => setCallbackOpen(true)} type="button">
-              {t("Request a call back")}
+            <button
+              className={callbackOpen ? "callback-button is-active" : "callback-button"}
+              onClick={() => setCallbackOpen(true)}
+              type="button"
+            >
+              {t("Submit enquiry")}
             </button>
             <button className="icon-button" onClick={() => setSearchOpen(true)} type="button" aria-label={t("Search")}>
               <SearchIcon />
@@ -138,18 +146,42 @@ export function Header() {
             <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
             <p>{t(active.summary)}</p>
           </div>
-          <div className="mega-links">
-            {active.links.map((link) => (
-              <a href={megaHref[link] ?? "#"} key={link}>
-                {t(link)}
-                <span className="mega-row-arrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="m9 5 7 7-7 7" />
-                  </svg>
-                </span>
-              </a>
-            ))}
-          </div>
+          {active.label === "Business Portfolio" ? (
+            <div className="mega-links mega-product-groups">
+              {productSubcategoryGroups.map((group) => (
+                <div className="mega-product-group" key={group.label}>
+                  <a className="mega-product-parent" href={group.href}>
+                    {t(group.label)}
+                    <span className="mega-row-arrow" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="m9 5 7 7-7 7" />
+                      </svg>
+                    </span>
+                  </a>
+                  <div className="mega-product-children">
+                    {group.children.slice(0, 4).map((child) => (
+                      <a href={child.href} key={child.label}>
+                        {t(child.label)}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mega-links">
+              {active.links.map((link) => (
+                <a href={megaHref[link] ?? "#"} key={link}>
+                  {t(link)}
+                  <span className="mega-row-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="m9 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
           <div className="mega-card">
             <p>{t("In the Spotlight")}</p>
             <img src={active.spotlightImage} alt="" />
@@ -176,7 +208,7 @@ export function Header() {
             <LanguageSwitch compact />
           </div>
           <button type="button" onClick={() => setCallbackOpen(true)}>
-            {t("Request a call back")}
+            {t("Submit enquiry")}
           </button>
         </div>
       </header>
@@ -243,24 +275,10 @@ function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }
         <h2>{t("Submit your enquiry")}</h2>
         <div className="form-grid">
           <input placeholder={t("Full name*")} />
-          <input placeholder={t("Business email*")} />
+          <input placeholder={t("Company name*")} />
           <input placeholder={t("Phone number*")} />
-          <select defaultValue="">
-            <option value="" disabled>
-              {t("Country*")}
-            </option>
-            <option>{t("India")}</option>
-            <option>{t("Vietnam")}</option>
-            <option>{t("United States")}</option>
-          </select>
-          <select defaultValue="">
-            <option value="" disabled>
-              {t("Select industry")}
-            </option>
-            <option>{t("Power Generation")}</option>
-            <option>{t("Chemicals")}</option>
-            <option>{t("Urban & Infra")}</option>
-          </select>
+          <input placeholder={t("Company address*")} />
+          <input placeholder={t("Email*")} />
           <textarea placeholder={t("How can Thermax help?")} />
         </div>
         <button className="primary-button" type="button">

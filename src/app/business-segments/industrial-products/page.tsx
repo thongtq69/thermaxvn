@@ -8,22 +8,22 @@ import { imageUrls } from "../../../lib/site";
 import { industrialProductsSolutions, sharedCaseStudies } from "../../../lib/segments";
 
 export const metadata = {
-  title: "Thermax Industrial Products | Heating, Cooling, Water, Air Pollution Control and Steam engineering solutions",
+  title: "Sản phẩm | Thermax Vietnam",
   description:
-    "Integrated industrial solutions for energy efficiency, process optimisation, and sustainability needs.",
+    "Giải pháp công nghiệp tích hợp cho hiệu quả năng lượng, tối ưu quy trình và nhu cầu phát triển bền vững.",
 };
 
 export default function IndustrialProductsPage() {
   return (
     <PageShell>
       <InnerHero
-        title="Industrial Products"
-        description="Integrated industrial solutions for energy efficiency, process optimisation, and sustainability needs"
+        title="Sản phẩm"
+        description="Giải pháp công nghiệp tích hợp cho hiệu quả năng lượng, tối ưu quy trình và nhu cầu phát triển bền vững"
         image={imageUrls.bannerPortfolio}
         mobileImage={imageUrls.bannerPortfolioMobile}
+        homeLabel="Trang chủ"
         breadcrumb={[
-          { label: "Business Portfolio", href: "#" },
-          { label: "Industrial Products" },
+          { label: "Sản phẩm" },
         ]}
       />
 
@@ -45,23 +45,20 @@ export default function IndustrialProductsPage() {
       <IntroBlock
         headline={
           <>
-            Our Industrial Products segment is designed to address three critical challenges industries face today:
-            <span className="red"> combatting climate change, securing clean energy, and managing water scarcity.</span>
+            Mảng Sản phẩm công nghiệp của chúng tôi được thiết kế để giải quyết ba thách thức trọng yếu của ngành hiện nay:
+            <span className="red"> ứng phó biến đổi khí hậu, bảo đảm năng lượng sạch và quản lý khan hiếm nước.</span>
           </>
         }
         body={
           <>
             <p>
-              Through our four key businesses – Air Pollution Control, Process Heat Solutions, Cooling and Heating
-              Solutions, and Water &amp; Wastewater Management Solutions, we provide cutting-edge solutions that drive
-              efficiency, sustainability, and regulatory compliance. From advanced emission control systems that ensure
-              cleaner air to energy-efficient heating and cooling solutions that optimise industrial processes, and
-              water and wastewater management technologies that promote conservation and reuse, we enable businesses to
-              operate with minimal environmental impact.
+              Thông qua các mảng giải pháp chính như kiểm soát ô nhiễm không khí, nhiệt quy trình, kỹ thuật hơi,
+              làm mát và gia nhiệt, nước và chất thải, Thermax cung cấp các giải pháp tiên tiến giúp nâng cao
+              hiệu quả vận hành, đáp ứng yêu cầu tuân thủ và giảm tác động môi trường.
             </p>
             <p>
-              These solutions are powered with AI/ML based digital platform, Thermax EDGE Live®, for real-time insights
-              and data-driven decision-making, ensuring peak performance and reliability.
+              Các giải pháp này được hỗ trợ bởi năng lực kỹ thuật toàn cầu và nền tảng số Thermax EDGE Live®,
+              giúp khách hàng theo dõi hiệu suất theo thời gian thực và ra quyết định dựa trên dữ liệu.
             </p>
           </>
         }
