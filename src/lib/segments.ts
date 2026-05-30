@@ -43,6 +43,14 @@ export const industrialProductsSolutions: SolutionItem[] = [
     href: "/industrial-products/water-and-waste-solutions",
     children: subcategoriesFor("Water and Waste Solutions"),
   },
+  {
+    title: "Chemicals",
+    description:
+      "Speciality chemicals, ion exchange resins and treatment programmes for boiler water, cooling water, process water and construction applications.",
+    image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
+    href: "/business-portfolio/chemicals#solutions",
+    children: subcategoriesFor("Chemicals"),
+  },
 ];
 
 export const industrialInfraSolutions: SolutionItem[] = [

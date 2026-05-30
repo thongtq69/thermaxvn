@@ -74,7 +74,7 @@ svg {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 1000;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid rgba(8, 32, 51, 0.08);
   box-shadow: 0 10px 32px rgba(6, 36, 48, 0.06);
@@ -1023,7 +1023,7 @@ svg {
 .modal-shell {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 2000;
   display: grid;
   place-items: center;
   pointer-events: none;

@@ -171,11 +171,11 @@ export default function InTheNewsPage() {
   return (
     <PageShell>
       <InnerHero
-        title={t("News & Media")}
+        title={t("News")}
         description={t("Current updates on Thermax's business performance, clean-energy projects, digital operations and corporate milestones.")}
         image={imageUrls.bannerMedia}
         mobileImage={imageUrls.bannerMediaMobile}
-        breadcrumb={[{ label: t("Media Centre") }]}
+        breadcrumb={[{ label: t("News") }]}
       />
 
       <section className="newsroom-intro" data-section="newsroom-intro">

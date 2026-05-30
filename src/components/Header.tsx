@@ -67,7 +67,7 @@ const navDisplayLabel: Record<string, string> = {
   "In the News": "News",
 };
 
-const directNavLabels = new Set(["About Us", "Digital Solutions", "Contact Us"]);
+const directNavLabels = new Set(["About Us", "Digital Solutions", "In the News", "Contact Us"]);
 
 function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
