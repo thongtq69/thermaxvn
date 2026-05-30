@@ -53,12 +53,12 @@ export default function SustainabilityPage() {
         <div className="driving-block" data-reveal>
           <div className="driving-block-banner">
             <img
-              src="https://www.thermaxglobal.com/themes/thermax/assets/images/decarbonisation-img.jpg"
+              src="/assets/sustainability/decarbonisation-img.jpg"
               alt="Decarbonisation Roadmap"
             />
             <div className="driving-block-banner-content">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/Driving-icon1.svg"
+                src="/assets/sustainability/driving-icon1.svg"
                 alt=""
               />
               <h3>Decarbonisation Roadmap</h3>
@@ -113,7 +113,7 @@ export default function SustainabilityPage() {
                 <p className="roadmap-title">Roadmap till 2030 (%)</p>
                 <div className="roadmap-img">
                   <img
-                    src="https://www.thermaxglobal.com/themes/thermax/assets/images/roadmapImg.jpg"
+                    src="/assets/sustainability/roadmap-img.jpg"
                     alt=""
                   />
                 </div>
@@ -127,7 +127,7 @@ export default function SustainabilityPage() {
                         <div className="label">FY19</div>
                         <div className="grow-arrow">
                           <img
-                            src="https://www.thermaxglobal.com/themes/thermax/assets/images/grow-big-arrow.png"
+                            src="/assets/sustainability/grow-big-arrow.png"
                             alt=""
                           />
                         </div>
@@ -167,7 +167,7 @@ export default function SustainabilityPage() {
                       <div className="col">
                         <div className="down-arrow">
                           <img
-                            src="https://www.thermaxglobal.com/themes/thermax/assets/images/down-big-arrow.png"
+                            src="/assets/sustainability/down-big-arrow.png"
                             alt=""
                           />
                         </div>
@@ -193,12 +193,12 @@ export default function SustainabilityPage() {
         <div className="driving-block" data-reveal>
           <div className="driving-block-banner">
             <img
-              src="https://www.thermaxglobal.com/themes/thermax/assets/images/wastemanagementBanner.jpg"
+              src="/assets/sustainability/waste-management-banner.jpg"
               alt="Waste Management"
             />
             <div className="driving-block-banner-content">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/wastemanagementBannericon.svg"
+                src="/assets/sustainability/waste-management-icon.svg"
                 alt=""
               />
               <h3>Waste Management</h3>
@@ -224,12 +224,12 @@ export default function SustainabilityPage() {
         <div className="driving-block" data-reveal>
           <div className="driving-block-banner">
             <img
-              src="https://www.thermaxglobal.com/themes/thermax/assets/images/Biodiversitybanner.jpg"
+              src="/assets/sustainability/biodiversity-banner.jpg"
               alt="Biodiversity"
             />
             <div className="driving-block-banner-content">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/Biodiversityicon.svg"
+                src="/assets/sustainability/biodiversity-icon.svg"
                 alt=""
               />
               <h3>Biodiversity</h3>
@@ -267,7 +267,7 @@ export default function SustainabilityPage() {
             <div className="bio-card">
               <div className="bio-card-icon">
                 <img
-                  src="https://www.thermaxglobal.com/themes/thermax/assets/images/lab-icon1.svg"
+                  src="/assets/sustainability/lab-icon1.svg"
                   alt=""
                 />
               </div>
@@ -294,7 +294,7 @@ export default function SustainabilityPage() {
             </div>
             <div className="bio-card-image">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/biothumb.jpg"
+                src="/assets/sustainability/bio-thumb.jpg"
                 alt=""
               />
             </div>
@@ -305,12 +305,12 @@ export default function SustainabilityPage() {
         <div className="driving-block" data-reveal>
           <div className="driving-block-banner">
             <img
-              src="https://www.thermaxglobal.com/themes/thermax/assets/images/watermanagementBanner.jpg"
+              src="/assets/sustainability/water-management-banner.jpg"
               alt="Water Management"
             />
             <div className="driving-block-banner-content">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/watericon.svg"
+                src="/assets/sustainability/water-icon.svg"
                 alt=""
               />
               <h3>Water Management</h3>
@@ -362,7 +362,7 @@ export default function SustainabilityPage() {
       </section>
 
       <section className="esg-band" data-section="esg">
-        <img src="https://www.thermaxglobal.com/themes/thermax/assets/images/sustain-bottom-banner.jpg" alt="" />
+        <img src="/assets/sustainability/decarbonisation-img.jpg" alt="" />
         <div className="esg-band-content" data-reveal>
           <div className="esg-band-inner">
             <p>
@@ -373,7 +373,7 @@ export default function SustainabilityPage() {
             <a className="section-cta" href="/esg-profile">
               <span className="cta-arrow">
                 <img
-                  src="https://www.thermaxglobal.com/themes/thermax/assets/images/discover-arrow.svg"
+                  src="/assets/sustainability/discover-arrow.svg"
                   alt=""
                 />
               </span>
@@ -387,7 +387,7 @@ export default function SustainabilityPage() {
             <a className="section-cta" href="#">
               <span className="cta-arrow">
                 <img
-                  src="https://www.thermaxglobal.com/themes/thermax/assets/images/discover-arrow.svg"
+                  src="/assets/sustainability/discover-arrow.svg"
                   alt=""
                 />
               </span>

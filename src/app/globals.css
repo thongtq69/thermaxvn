@@ -3054,7 +3054,7 @@ main {
   height: 390px;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.22)),
-    url("https://www.thermaxglobal.com/themes/thermax/assets/images/investor-bg.webp");
+    url("https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-05/Q4%20Banner.png");
   background-position: center;
   background-size: cover;
 }
@@ -5431,7 +5431,7 @@ main { color: var(--bs-body-color); }
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--red) url("https://www.thermaxglobal.com/themes/thermax/assets/images/discover-arrow.svg") center/14px no-repeat;
+  background: var(--red) url("/assets/sustainability/discover-arrow.svg") center/14px no-repeat;
   flex-shrink: 0;
   transition: transform .35s;
 }
@@ -6091,7 +6091,7 @@ main { color: var(--bs-body-color); }
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--red) url("https://www.thermaxglobal.com/themes/thermax/assets/images/discover-arrow.svg") center/13px no-repeat;
+  background: var(--red) url("/assets/sustainability/discover-arrow.svg") center/13px no-repeat;
   transition: transform .2s;
 }
 .project-showcase-link:hover {
@@ -6731,7 +6731,7 @@ main { color: var(--bs-body-color); }
   content: "";
   width: 14px;
   height: 14px;
-  background: url("https://www.thermaxglobal.com/themes/thermax/assets/images/discover-arrow.svg") center/contain no-repeat;
+  background: url("/assets/sustainability/discover-arrow.svg") center/contain no-repeat;
   filter: invert(20%) sepia(95%) saturate(2000%) hue-rotate(340deg);
 }
 

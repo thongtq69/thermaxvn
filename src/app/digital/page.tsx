@@ -100,7 +100,7 @@ export default function DigitalPage() {
         </h2>
         <div className="digital-overview-diagram-media" data-reveal>
           <img
-            src="https://www.thermaxglobal.com/themes/thermax/assets/images/asset-work-flow-pic.png"
+            src="/assets/digital/asset-work-flow-pic.png"
             alt="Asset performance enhancement using IIoT capability"
           />
         </div>
@@ -151,7 +151,7 @@ export default function DigitalPage() {
           muted
           loop
           playsInline
-          poster="https://www.thermaxglobal.com/themes/thermax/assets/images/digital-portfolio-poster.jpg"
+          poster="/assets/digital/digi-edge-live-ai.jpg"
           src="https://www.thermaxglobal.com/themes/thermax/assets/vid/digital-portfolio-video.mp4"
         />
         <h2 data-reveal>Our digital portfolio</h2>
@@ -220,7 +220,7 @@ export default function DigitalPage() {
           <div className="why-edge-grid">
             <div className="why-edge-img">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/digi-edge-live-ai.jpg"
+                src="/assets/digital/digi-edge-live-ai.jpg"
                 alt=""
               />
             </div>
@@ -264,7 +264,7 @@ export default function DigitalPage() {
             </div>
             <div className="why-edge-img">
               <img
-                src="https://www.thermaxglobal.com/themes/thermax/assets/images/edge-live-operations.jpg"
+                src="/assets/digital/edge-live-operations.jpg"
                 alt=""
               />
             </div>
@@ -281,7 +281,7 @@ export default function DigitalPage() {
             <div className="digital-award-card">
               <div className="digital-award-img">
                 <img
-                  src="https://www.thermaxglobal.com/themes/thermax/assets/images/digital-awards-1.jpg"
+                  src="/assets/digital/digital-awards-1.jpg"
                   alt=""
                 />
               </div>
@@ -297,7 +297,7 @@ export default function DigitalPage() {
             <div className="digital-award-card">
               <div className="digital-award-img">
                 <img
-                  src="https://www.thermaxglobal.com/themes/thermax/assets/images/digital-awards-2.jpg"
+                  src="/assets/digital/digital-awards-2.jpg"
                   alt=""
                 />
               </div>

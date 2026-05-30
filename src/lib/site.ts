@@ -134,11 +134,11 @@ export const imageUrls = {
   bod1: `${thermaxAssetBase}/bod-pic1.jpg`,
   bod2: `${thermaxAssetBase}/bod-pic2.jpg`,
   // Awards
-  award1: `${thermaxAssetBase}/latest-awards-pic1.jpg`,
-  award2: `${thermaxAssetBase}/latest-awards-pic2.jpg`,
-  award3: `${thermaxAssetBase}/latest-awards-pic3.jpg`,
-  award4: `${thermaxAssetBase}/latest-awards-pic4.jpg`,
-  award5: `${thermaxAssetBase}/latest-awards-pic5.jpg`,
+  award1: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-02/Thermax-recognised-with-the-prestigious-Family-Business-Award.jpg`,
+  award2: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-02/Golden-Peacock-Award.jpg`,
+  award3: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-02/Thermax-Wins-Excellence-in-Sustainability-and-Circular-Economy-Award.jpg`,
+  award4: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-03/Untitled-1.png`,
+  award5: `https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-02/Meher-Pudumjee-Receives--EY-Entrepreneur-of-The-Year%E2%84%A2-2024-Award.jpg`,
   // Mission icons
   missionIcon1: `${thermaxAssetBase}/mission-icon1.svg`,
   missionIcon2: `${thermaxAssetBase}/mission-icon2.svg`,
