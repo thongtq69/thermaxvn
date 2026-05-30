@@ -111,7 +111,12 @@ export function Header() {
         <div className="main-nav">
           <button
             className={mobileOpen ? "hamburger is-active" : "hamburger"}
-            onClick={() => setMobileOpen((value) => !value)}
+            onClick={(event) => {
+              setMobileOpen((value) => !value);
+              if (event.detail > 0) {
+                event.currentTarget.blur();
+              }
+            }}
             type="button"
             aria-label={t("Toggle menu")}
           >
@@ -237,10 +242,6 @@ export function Header() {
             <a href="/careers" onClick={() => setMobileOpen(false)}>
               {t("Careers")}
             </a>
-          </div>
-          <div className="mobile-language-row">
-            <span>{t("Language")}</span>
-            <LanguageSwitch compact />
           </div>
           <button type="button" onClick={() => setCallbackOpen(true)}>
             {t("Submit enquiry")}
