@@ -32,21 +32,65 @@ function resolveFallback(src: string) {
 
 export function BrokenImageGuard() {
   useEffect(() => {
-    const handleImageError = (event: Event) => {
-      const target = event.target;
-
-      if (!(target instanceof HTMLImageElement) || target.dataset.fallbackApplied === "true") {
+    const applyFallback = (target: HTMLImageElement) => {
+      if (target.dataset.fallbackApplied === "true") {
         return;
       }
 
+      const fallback = resolveFallback(target.currentSrc || target.src);
+
       target.dataset.fallbackApplied = "true";
       target.dataset.imageFallback = "true";
-      target.src = resolveFallback(target.currentSrc || target.src);
+      target.removeAttribute("srcset");
+      target.closest("picture")?.querySelectorAll("source").forEach((source) => {
+        source.srcset = fallback;
+      });
+      target.src = fallback;
     };
 
+    const handleImageError = (event: Event) => {
+      const target = event.target;
+
+      if (!(target instanceof HTMLImageElement)) {
+        return;
+      }
+
+      applyFallback(target);
+    };
+
+    const scanBrokenImages = () => {
+      document.querySelectorAll("img").forEach((image) => {
+        if (image.complete && (image.naturalWidth === 0 || image.naturalHeight === 0)) {
+          applyFallback(image);
+        }
+      });
+    };
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLImageElement) {
+            if (node.complete && (node.naturalWidth === 0 || node.naturalHeight === 0)) {
+              applyFallback(node);
+            }
+          } else if (node instanceof HTMLElement) {
+            node.querySelectorAll("img").forEach((image) => {
+              if (image.complete && (image.naturalWidth === 0 || image.naturalHeight === 0)) {
+                applyFallback(image);
+              }
+            });
+          }
+        });
+      }
+    });
+
     document.addEventListener("error", handleImageError, true);
+    scanBrokenImages();
+    observer.observe(document.body, { childList: true, subtree: true });
+
     return () => {
       document.removeEventListener("error", handleImageError, true);
+      observer.disconnect();
     };
   }, []);
 

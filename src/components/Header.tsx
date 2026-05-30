@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { businessSegments, imageUrls, navItems, productSolutionHrefs } from "../lib/site";
+import { useEffect, useState } from "react";
+import { businessSegments, imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
@@ -80,8 +80,23 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const active = navItems.find((item) => item.label === menu) ?? navItems[0];
   const activeProductGroup = businessSegments[productMenuIndex] ?? businessSegments[0];
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      setMobileExpanded(null);
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
 
   const openMega = (label: string) => {
     setMenu(directNavLabels.has(label) ? "" : label);
@@ -97,6 +112,15 @@ export function Header() {
       url.searchParams.delete("lang");
     }
     return `${url.pathname}${url.search}${url.hash}`;
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setMobileExpanded(null);
+  };
+
+  const toggleMobileSection = (label: string) => {
+    setMobileExpanded((value) => (value === label ? null : label));
   };
 
   return (
@@ -233,17 +257,86 @@ export function Header() {
         </div>
 
         <div className={mobileOpen ? "mobile-panel is-open" : "mobile-panel"}>
-          {navItems.map((item) => (
-            <a href={navHref[item.label] ?? "#"} key={item.label} onClick={() => setMobileOpen(false)}>
-              {t(getNavDisplayLabel(item.label))}
-            </a>
-          ))}
-          <div className="mobile-utility-links">
-            <a href="/careers" onClick={() => setMobileOpen(false)}>
-              {t("Careers")}
-            </a>
+          <div className="mobile-nav-list">
+            {navItems.map((item) => {
+              const isProducts = item.label === "Business Portfolio";
+              const hasChildren = isProducts || item.links.length > 0;
+              const isExpanded = mobileExpanded === item.label;
+
+              if (!hasChildren) {
+                return (
+                  <div className="mobile-nav-section" key={item.label}>
+                    <a className="mobile-nav-link" href={localizedHref(navHref[item.label] ?? "#")} onClick={closeMobileMenu}>
+                      {t(getNavDisplayLabel(item.label))}
+                    </a>
+                  </div>
+                );
+              }
+
+              return (
+                <div className={isExpanded ? "mobile-nav-section is-open" : "mobile-nav-section"} key={item.label}>
+                  <button
+                    className="mobile-nav-trigger"
+                    type="button"
+                    aria-expanded={isExpanded}
+                    onClick={(event) => {
+                      toggleMobileSection(item.label);
+                      if (event.detail > 0) {
+                        event.currentTarget.blur();
+                      }
+                    }}
+                  >
+                    {t(getNavDisplayLabel(item.label))}
+                  </button>
+                  {isExpanded ? (
+                    <div className="mobile-submenu">
+                      <a
+                        className="mobile-overview-link"
+                        href={localizedHref(navHref[item.label] ?? "#")}
+                        onClick={closeMobileMenu}
+                      >
+                        {t("Overview")}
+                      </a>
+                      {isProducts
+                        ? productSubcategoryGroups.map((group) => (
+                            <details className="mobile-subgroup" key={group.label}>
+                              <summary>{t(group.label)}</summary>
+                              <div className="mobile-subgroup-links">
+                                <a href={localizedHref(group.href)} onClick={closeMobileMenu}>
+                                  {t("Overview")}
+                                </a>
+                                {group.children.map((child) => (
+                                  <a href={localizedHref(child.href)} key={child.label} onClick={closeMobileMenu}>
+                                    {t(child.label)}
+                                  </a>
+                                ))}
+                              </div>
+                            </details>
+                          ))
+                        : item.links.map((link) => (
+                            <a href={localizedHref(megaHref[link] ?? "#")} key={link} onClick={closeMobileMenu}>
+                              {t(link)}
+                            </a>
+                          ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+            <div className="mobile-nav-section">
+              <a className="mobile-nav-link" href={localizedHref("/careers")} onClick={closeMobileMenu}>
+                {t("Careers")}
+              </a>
+            </div>
           </div>
-          <button type="button" onClick={() => setCallbackOpen(true)}>
+          <button
+            className="mobile-enquiry"
+            type="button"
+            onClick={() => {
+              setCallbackOpen(true);
+              closeMobileMenu();
+            }}
+          >
             {t("Submit enquiry")}
           </button>
         </div>

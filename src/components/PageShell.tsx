@@ -1,7 +1,6 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { RevealWatcher } from "./RevealWatcher";
-import { BrokenImageGuard } from "./BrokenImageGuard";
 
 export function PageShell({
   children,
@@ -13,7 +12,6 @@ export function PageShell({
   return (
     <>
       <RevealWatcher />
-      <BrokenImageGuard />
       <Header />
       <main>{children}</main>
       <Footer showFooterCta={showFooterCta} />

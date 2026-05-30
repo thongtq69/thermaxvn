@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { BrokenImageGuard } from "../components/BrokenImageGuard";
 import { LanguageProvider } from "../components/LanguageProvider";
 import "./globals.css";
 
@@ -33,7 +34,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <BrokenImageGuard />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
