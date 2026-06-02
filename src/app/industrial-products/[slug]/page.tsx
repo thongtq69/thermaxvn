@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { DetailContent } from "../../../components/DetailContent";
 import { InnerHero } from "../../../components/InnerHero";
+import { InnerSubNav } from "../../../components/InnerSubNav";
+import { OfficialProductLandingContent } from "../../../components/OfficialProductLandingContent";
 import { PageShell } from "../../../components/PageShell";
 import {
   getLocalizedProductDetail,
@@ -10,6 +12,7 @@ import {
   productDetailPages,
 } from "../../../lib/productContent";
 import type { Locale } from "../../../lib/i18n";
+import { getOfficialProductLanding } from "../../../lib/officialProductLanding";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -68,6 +71,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
   const locale = await localeFromRequest(await searchParams);
   const rawPage = getProductDetail(slug);
   const page = getLocalizedProductDetail(slug, locale);
+  const officialLanding = getOfficialProductLanding(slug, locale);
 
   if (!page || !rawPage) notFound();
 
@@ -82,6 +86,52 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
           { label: page.category },
           { label: page.title },
         ];
+
+  if (officialLanding) {
+    const subnavItems = [
+      { label: locale === "vi" ? "Tổng quan" : "Overview", href: "#overview" },
+      { label: officialLanding.productHeading, href: "#products" },
+      ...(officialLanding.services?.length
+        ? [{ label: officialLanding.serviceHeading ?? (locale === "vi" ? "Dịch vụ" : "Services"), href: "#services" }]
+        : []),
+      ...(officialLanding.features?.length
+        ? [
+            {
+              label: officialLanding.featureHeading ?? (locale === "vi" ? "Năng lực nổi bật" : "Featured capabilities"),
+              href: "#featured-capabilities",
+            },
+          ]
+        : []),
+    ];
+
+    return (
+      <PageShell>
+        <InnerHero
+          title={officialLanding.title}
+          description={officialLanding.heroDescription}
+          image={officialLanding.image}
+          mobileImage={officialLanding.mobileImage}
+          homeLabel={detailLabels[locale].home}
+          breadcrumb={[
+            { label: detailLabels[locale].products, href: "/business-segments/industrial-products" },
+            { label: officialLanding.title },
+          ]}
+        />
+        <InnerSubNav
+          items={subnavItems}
+          cta={{ label: locale === "vi" ? "Gửi yêu cầu" : "Submit your enquiry", href: "/contact-us" }}
+        />
+        <OfficialProductLandingContent
+          page={officialLanding}
+          labels={{
+            office: "Thermax Vietnam Office",
+            contact: detailLabels[locale].contact,
+            discover: locale === "vi" ? "Khám phá thêm" : "Discover more",
+          }}
+        />
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>

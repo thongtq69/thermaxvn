@@ -319,6 +319,30 @@ const englishDetailText: Record<string, DetailPageText> = {
   },
 };
 
+const supplementalEnglishText = {
+  scrubber: ["Scrubber", "Air Pollution Control Systems", "Wet and dry scrubbing solutions for particulate, acid gas and industrial emission control."],
+  "thermax-neo-gas-enrichment-solutions": ["Thermax Ne0 - Gas Enrichment Solutions", "Air Pollution Control Systems", "Efficient, clean and green gas enrichment technologies for industrial applications."],
+  "energy-plant": ["Energy Plant", "Process Heat Solutions", "Integrated steam, thermic fluid and hot gas systems for optimised plant-level energy use."],
+  "electric-process-heat-solutions": ["Electric Process Heat Solutions", "Process Heat Solutions", "Zero-emission electric heating platforms with high efficiency and compact installation."],
+  "process-automation": ["Process Automation", "Steam Engineering Solutions", "Automation for steam-intensive processes to improve performance, quality and energy savings."],
+  "customised-solutions": ["Customised Solutions", "Steam Engineering Solutions", "Packaged hot water and washdown solutions with precise temperature control."],
+  "absorption-chiller-heaters": ["Absorption Chiller-Heaters", "Cooling and Heating Solutions", "Dual-function cooling and heating using sustainable thermal energy sources."],
+  "absorption-heat-transformer": ["Absorption Heat Transformer", "Cooling and Heating Solutions", "Waste heat upgrading technology for usable medium-grade industrial heat."],
+  "hybrid-chiller": ["Hybrid Chiller", "Cooling and Heating Solutions", "Flexible cooling through combined vapour compression and absorption technologies."],
+  "heating-solutions": ["Heating Solutions", "Cooling and Heating Solutions", "Electrical and hybrid heat pump solutions for adaptable process heating."],
+  "wet-cooling-solutions": ["Wet Cooling Solutions", "Cooling and Heating Solutions", "Evaporation-based cooling solutions for efficient heat rejection."],
+  "dry-cooling-solutions": ["Dry Cooling Solutions", "Cooling and Heating Solutions", "Water-free cooling solutions for sustainable thermal management."],
+  "industrial-refrigeration-unit": ["Refrigeration Solutions", "Cooling and Heating Solutions", "Reliable low-temperature cooling for demanding industrial processes."],
+  "sewage-treatment-and-recycling-plants": ["Sewage Treatment and Recycling Plants", "Water and Waste Solutions", "Treatment and recycling systems for sewage and urban wastewater reuse."],
+  "effluent-treatment-recycling-plants": ["Effluent Treatment & Recycling Plants", "Water and Waste Solutions", "Industrial effluent treatment and recycling systems for compliant discharge and reuse."],
+  "minimum-liquid-discharge": ["Minimum Liquid Discharge", "Water and Waste Solutions", "Water recovery systems that minimise liquid discharge from industrial operations."],
+  "zero-liquid-discharge-system": ["Zero Liquid Discharge System", "Water and Waste Solutions", "Integrated systems designed to eliminate liquid waste discharge."],
+} satisfies Record<string, [string, string, string]>;
+
+for (const [slug, [title, eyebrow, description]] of Object.entries(supplementalEnglishText)) {
+  englishDetailText[slug] = { title, eyebrow, description };
+}
+
 function englishApplicationsFor(items: string[]) {
   return items.map((item) => englishApplications[item] ?? item);
 }
@@ -349,6 +373,176 @@ function localizeDetail(page: DetailPage, locale: Locale): DetailPage {
     applications: text?.applications ?? englishApplicationsFor(page.applications),
   };
 }
+
+function supplementalProduct({
+  slug,
+  title,
+  category,
+  description,
+  image,
+  applications,
+}: {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  applications: string[];
+}): DetailPage {
+  return {
+    slug,
+    title,
+    eyebrow: category,
+    description,
+    image,
+    category,
+    overview: [
+      description,
+      "Thermax Vietnam hỗ trợ lựa chọn cấu hình, trao đổi yêu cầu kỹ thuật và dịch vụ vòng đời phù hợp với điều kiện vận hành thực tế.",
+    ],
+    highlights: ["Thiết kế theo yêu cầu vận hành", "Tối ưu hiệu suất", "Hỗ trợ kỹ thuật vòng đời"],
+    applications,
+  };
+}
+
+const supplementalProductDetailPages: DetailPage[] = [
+  supplementalProduct({
+    slug: "scrubber",
+    title: "Tháp rửa khí",
+    category: "Xử lý khí thải",
+    description: "Giải pháp rửa khí ướt và khô để xử lý bụi, khí axit và phát thải công nghiệp.",
+    image: productImage.air,
+    applications: ["Hóa chất", "Xi măng", "Kim loại và khai khoáng", "Phát điện"],
+  }),
+  supplementalProduct({
+    slug: "thermax-neo-gas-enrichment-solutions",
+    title: "Thermax Ne0 - Giải pháp làm giàu khí",
+    category: "Xử lý khí thải",
+    description: "Công nghệ làm giàu khí hiệu quả, sạch và thân thiện môi trường cho ứng dụng công nghiệp.",
+    image: productImage.air,
+    applications: ["Hóa chất", "Dầu khí", "Phát điện"],
+  }),
+  supplementalProduct({
+    slug: "energy-plant",
+    title: "Nhà máy năng lượng",
+    category: "Hệ thống gia nhiệt",
+    description: "Hệ thống tích hợp hơi, dầu tải nhiệt và khí nóng để tối ưu năng lượng ở cấp nhà máy.",
+    image: productImage.heat,
+    applications: ["Thực phẩm", "Hóa chất", "Dệt may", "Giấy và bột giấy"],
+  }),
+  supplementalProduct({
+    slug: "electric-process-heat-solutions",
+    title: "Giải pháp gia nhiệt quy trình bằng điện",
+    category: "Hệ thống gia nhiệt",
+    description: "Nền tảng gia nhiệt điện không phát thải tại chỗ, hiệu suất cao và lắp đặt gọn.",
+    image: productImage.heat,
+    applications: ["Dược phẩm", "Thực phẩm", "Dệt may", "Hóa chất"],
+  }),
+  supplementalProduct({
+    slug: "process-automation",
+    title: "Tự động hóa quy trình",
+    category: "Hệ thống đường ống hơi",
+    description: "Tự động hóa cho quy trình sử dụng nhiều hơi nhằm cải thiện hiệu suất, chất lượng và tiết kiệm năng lượng.",
+    image: productImage.steam,
+    applications: ["Dệt may", "Thực phẩm", "Dược phẩm", "Hóa chất"],
+  }),
+  supplementalProduct({
+    slug: "customised-solutions",
+    title: "Giải pháp tùy chỉnh",
+    category: "Hệ thống đường ống hơi",
+    description: "Giải pháp nước nóng và vệ sinh đóng gói với khả năng kiểm soát nhiệt độ chính xác.",
+    image: productImage.steam,
+    applications: ["Thực phẩm", "Dược phẩm", "Khách sạn", "Bệnh viện"],
+  }),
+  supplementalProduct({
+    slug: "absorption-chiller-heaters",
+    title: "Chiller hấp thụ hai chiều nóng - lạnh",
+    category: "Hệ thống lạnh",
+    description: "Giải pháp hai chiều làm mát và gia nhiệt bằng nguồn năng lượng nhiệt bền vững.",
+    image: productImage.cooling,
+    applications: ["Tòa nhà", "Thực phẩm", "Dược phẩm", "Hóa chất"],
+  }),
+  supplementalProduct({
+    slug: "absorption-heat-transformer",
+    title: "Bộ nâng cấp nhiệt hấp thụ",
+    category: "Hệ thống lạnh",
+    description: "Công nghệ nâng cấp nhiệt thải nhiệt độ thấp thành nguồn nhiệt hữu ích cho công nghiệp.",
+    image: productImage.cooling,
+    applications: ["Hóa chất", "Dệt may", "Thực phẩm", "Tiện ích"],
+  }),
+  supplementalProduct({
+    slug: "hybrid-chiller",
+    title: "Chiller lai",
+    category: "Hệ thống lạnh",
+    description: "Giải pháp làm mát linh hoạt kết hợp công nghệ nén hơi và hấp thụ.",
+    image: productImage.cooling,
+    applications: ["Tòa nhà thương mại", "Dữ liệu", "Dược phẩm", "Thực phẩm"],
+  }),
+  supplementalProduct({
+    slug: "heating-solutions",
+    title: "Giải pháp gia nhiệt",
+    category: "Hệ thống lạnh",
+    description: "Heat pump điện và lai cho nhu cầu gia nhiệt quy trình linh hoạt, hiệu quả.",
+    image: productImage.cooling,
+    applications: ["Dệt may", "Thực phẩm", "Dược phẩm", "Tòa nhà"],
+  }),
+  supplementalProduct({
+    slug: "wet-cooling-solutions",
+    title: "Giải pháp làm mát ướt",
+    category: "Hệ thống lạnh",
+    description: "Giải pháp làm mát bay hơi để thải nhiệt hiệu quả.",
+    image: productImage.cooling,
+    applications: ["Tòa nhà", "Dữ liệu", "Hóa chất", "Thực phẩm"],
+  }),
+  supplementalProduct({
+    slug: "dry-cooling-solutions",
+    title: "Giải pháp làm mát khô",
+    category: "Hệ thống lạnh",
+    description: "Giải pháp làm mát không dùng nước cho quản lý nhiệt bền vững.",
+    image: productImage.cooling,
+    applications: ["Dữ liệu", "Dầu khí", "Hóa chất", "Phát điện"],
+  }),
+  supplementalProduct({
+    slug: "industrial-refrigeration-unit",
+    title: "Giải pháp làm lạnh công nghiệp",
+    category: "Hệ thống lạnh",
+    description: "Giải pháp làm lạnh nhiệt độ thấp ổn định cho quy trình công nghiệp khắt khe.",
+    image: productImage.cooling,
+    applications: ["Thực phẩm", "Kho lạnh", "Hóa chất", "Dược phẩm"],
+  }),
+  supplementalProduct({
+    slug: "sewage-treatment-and-recycling-plants",
+    title: "Nhà máy xử lý và tái chế nước thải sinh hoạt",
+    category: "Xử lý nước",
+    description: "Hệ thống xử lý và tái chế nước thải sinh hoạt cho nhu cầu tái sử dụng nước.",
+    image: productImage.water,
+    applications: ["Đô thị", "Tòa nhà", "Khu công nghiệp", "Khách sạn"],
+  }),
+  supplementalProduct({
+    slug: "effluent-treatment-recycling-plants",
+    title: "Nhà máy xử lý và tái chế nước thải công nghiệp",
+    category: "Xử lý nước",
+    description: "Hệ thống xử lý và tái chế nước thải công nghiệp để tuân thủ và tái sử dụng.",
+    image: productImage.water,
+    applications: ["Dệt nhuộm", "Hóa chất", "Thực phẩm", "Giấy"],
+  }),
+  supplementalProduct({
+    slug: "minimum-liquid-discharge",
+    title: "Giảm thiểu xả thải lỏng",
+    category: "Xử lý nước",
+    description: "Hệ thống thu hồi nước giúp giảm thiểu lượng xả thải lỏng trong vận hành công nghiệp.",
+    image: productImage.water,
+    applications: ["Dệt nhuộm", "Hóa chất", "Điện", "Thực phẩm"],
+  }),
+  supplementalProduct({
+    slug: "zero-liquid-discharge-system",
+    title: "Hệ thống không xả thải lỏng",
+    category: "Xử lý nước",
+    description: "Hệ thống tích hợp được thiết kế để loại bỏ hoàn toàn xả thải lỏng.",
+    image: productImage.water,
+    applications: ["Dệt nhuộm", "Hóa chất", "Điện", "Giấy"],
+  }),
+];
 
 export const productDetailPages: DetailPage[] = [
   {
@@ -790,6 +984,7 @@ export const productDetailPages: DetailPage[] = [
     highlights: ["Tăng hiệu suất vật liệu", "Hỗ trợ sửa chữa và phục hồi", "Dải ứng dụng xây dựng công nghiệp"],
     applications: ["Bê tông", "Nền công nghiệp", "Sửa chữa kết cấu", "Chống thấm", "Liên kết và trám khe"],
   },
+  ...supplementalProductDetailPages,
 ];
 
 export const serviceDetailPages: DetailPage[] = [

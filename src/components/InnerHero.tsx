@@ -23,7 +23,7 @@ export function InnerHero({
       <section className="inner-banner" aria-label={a11yTitle} data-title={a11yTitle}>
         <picture>
           {mobileImage ? <source srcSet={mobileImage} media="(max-width: 767px)" /> : null}
-          <img src={image} alt="" />
+        <img src={image} alt="" fetchPriority="high" loading="eager" />
         </picture>
         <div className="inner-banner-text">
           <div className="inner-banner-text-inner">

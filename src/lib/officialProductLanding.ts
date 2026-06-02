@@ -1,0 +1,487 @@
+import type { Locale } from "./i18n";
+
+export type LandingCard = {
+  title: string;
+  description?: string;
+  image?: string;
+  href?: string;
+  badge?: string;
+};
+
+export type OfficialProductLanding = {
+  slug: string;
+  title: string;
+  heroDescription: string;
+  image: string;
+  mobileImage: string;
+  intro: string;
+  productHeading: string;
+  products: LandingCard[];
+  serviceHeading?: string;
+  serviceIntro?: string;
+  services?: LandingCard[];
+  featureHeading?: string;
+  features?: LandingCard[];
+};
+
+const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
+
+const productPages: Record<Locale, OfficialProductLanding[]> = {
+  en: [
+    {
+      slug: "air-pollution-control-systems",
+      title: "Air Pollution Control Systems",
+      heroDescription: "Effective solutions for abatement of particulate and gaseous pollutants",
+      image: `${s3}/2025-12/LP%20Banner%20Image_1800X700_2.jpg`,
+      mobileImage: `${s3}/2025-09/apc-banner-mobile.jpg`,
+      intro: "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.",
+      productHeading: "Our products",
+      products: [
+        {
+          title: "Electrostatic Precipitator (ESP)",
+          description: "Available in dry and wet types, with automatic DSP-based control and power optimisation for dependable particulate capture.",
+          image: `${s3}/2025-09/ESP.jpg`,
+          href: "/industrial-products/electrostatic-precipitator-esp",
+        },
+        {
+          title: "Bag House / Bag Filters",
+          image: `${s3}/2026-04/Bag%20HouseBag%20Filters.png`,
+          href: "/industrial-products/bag-house-bag-filters",
+        },
+        {
+          title: "Combofilter",
+          image: `${s3}/2025-12/Combofilter.png`,
+          href: "/industrial-products/combofilter",
+        },
+        {
+          title: "Scrubber",
+          image: `${s3}/2025-11/APC-Scrubber.jpg`,
+          href: "/industrial-products/scrubber",
+        },
+        {
+          title: "Thermax Ne0 - Gas Enrichment Solutions",
+          image: `${s3}/2025-12/Thermax%20Ne0%20-%20Gas%20Enrichment%20Solutions.jpg`,
+          href: "/industrial-products/thermax-neo-gas-enrichment-solutions",
+        },
+      ],
+      serviceHeading: "Our services",
+      serviceIntro: "Thermax offers comprehensive support across the product lifecycle that extends beyond brand boundaries.",
+      services: [
+        { title: "Spare parts management for all air pollution control equipment" },
+        { title: "Conditional assessment, health check-up and troubleshooting" },
+        { title: "Design engineering services, including efficient gas distribution" },
+        { title: "Optimisation studies and performance audits" },
+        { title: "Remote assistance and virtual technical support" },
+        { title: "Annual maintenance and service contracts" },
+        { title: "Overhauling and repairs" },
+      ],
+      featureHeading: "Featured capabilities",
+      features: [
+        {
+          title: "Thermax Ne0",
+          description: "Efficient, clean and green technologies for gas enrichment",
+          image: `${s3}/2025-12/Thermax%20Ne0%20-%20Featured%20Capability_0.png`,
+        },
+        { title: "Thermax Filter Bag", image: `${s3}/2025-12/Thermax%20Filter%20Bag.png` },
+        { title: "Opticor®", image: `${s3}/2025-12/Thermax%20Opticor.png` },
+        { title: "Cartridge Filter", image: `${s3}/2026-01/Thermax%20Cartridge%20Filter_0.png` },
+        { title: "Value-Added Services", image: `${s3}/2025-12/Value%20added%20services.png` },
+      ],
+    },
+    {
+      slug: "process-heat-solutions",
+      title: "Process Heat Solutions",
+      heroDescription: "Reliable, fuel-flexible, efficient, and sustainable heating solutions for every industry",
+      image: `${s3}/2026-04/Process%20Heat%20Solutions%20Banner.png`,
+      mobileImage: `${s3}/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png`,
+      intro: "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.",
+      productHeading: "Product categories",
+      products: [
+        {
+          title: "Steam Boilers",
+          description: "Steam generation capacities of up to 50 TPH, available in solid fuel, biomass, oil, and gas variants.",
+          image: `${s3}/2025-07/product1.png`,
+          href: "/industrial-products/steam-boilers",
+        },
+        {
+          title: "Thermal Oil Heaters",
+          description: "Available up to 20 Mn kcal/hr for high-temperature indirect heating applications.",
+          image: `${s3}/2026-03/Thermal%20Oil%20Heaters%20Listing.png`,
+          href: "/industrial-products/thermal-oil-heaters",
+        },
+        {
+          title: "Hot Air Generators",
+          description: "Solid fuel-fired systems delivering hot air for industrial drying applications.",
+          image: `${s3}/2026-03/Hot%20Air%20Generators%20listing.png`,
+          href: "/industrial-products/hot-air-generators",
+        },
+        {
+          title: "Hot Water Generators",
+          description: "Direct and indirect heating designs for commercial and industrial requirements.",
+          image: `${s3}/2025-07/product4.png`,
+          href: "/industrial-products/hot-water-generators",
+        },
+        {
+          title: "Energy Plant",
+          description: "Integrated steam, thermic fluid, and hot gas systems with capacities up to 100 MW.",
+          image: `${s3}/2025-12/Energy%20Plant_tile%20image.jpg`,
+          href: "/industrial-products/energy-plant",
+        },
+        {
+          title: "Electric Process Heat Solutions",
+          description: "Zero-emission electric boilers, thermal oil heaters, and hot water generators.",
+          image: `${s3}/2025-12/510%20X%20650%20tile.jpg`,
+          href: "/industrial-products/electric-process-heat-solutions",
+        },
+      ],
+      serviceHeading: "Our services",
+      serviceIntro: "Thermax offers comprehensive support across the product lifecycle.",
+      services: [
+        { title: "Installation and commissioning" },
+        { title: "Annual maintenance contracts (AMC)" },
+        { title: "Remote monitoring (IoT-enabled)" },
+        { title: "Retrofit and revamp capabilities" },
+        { title: "Training and operator skill development" },
+        { title: "Genuine services and spares" },
+      ],
+      featureHeading: "Featured capabilities",
+      features: [
+        {
+          title: "Biomass Centre of Excellence",
+          description: "Helping industries adopt biomass-based heating with suitable technologies and operating support.",
+          image: `${s3}/2025-07/feature-bg2.jpg`,
+        },
+        {
+          title: "Straw-Fired Heating Solutions",
+          image: `${s3}/2026-04/Untitled%20design%20%2838%29.png`,
+        },
+        {
+          title: "Electric Heating Solutions",
+          image: `${s3}/2026-04/Untitled%20design%20%2840%29.png`,
+        },
+      ],
+    },
+    {
+      slug: "steam-engineering-solutions",
+      title: "Steam Engineering Solutions",
+      heroDescription: "Driving efficiency, compliance, and sustainability with advanced steam systems",
+      image: `${s3}/2025-09/Untitled%20design%20%2884%29.png`,
+      mobileImage: `${s3}/2025-09/steam_mobile_banner.jpg`,
+      intro: "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.",
+      productHeading: "Our products and solutions",
+      products: [
+        {
+          title: "Boiler House Products",
+          description: "Precise measurement, monitoring, and automation for steam and water systems.",
+          image: `${s3}/2025-12/Boiler%20House%20Products.png`,
+          href: "/industrial-products/boiler-house-products",
+        },
+        {
+          title: "Steam Distribution",
+          description: "An integrated portfolio that precisely controls flow, temperature, and pressure.",
+          image: `${s3}/2025-12/steam%20distribution_tile_510%20X%20650.jpg`,
+          href: "/industrial-products/steam-distribution",
+        },
+        {
+          title: "Condensate System Management",
+          description: "Maximising heat recovery, reducing water consumption, and improving boiler efficiency.",
+          image: `${s3}/2025-12/Condensate%20System_tile_510%20X%20650.jpg`,
+          href: "/industrial-products/condensate-system-management",
+        },
+        {
+          title: "Process Automation",
+          description: "Automation for steam-intensive processes to improve performance, quality, and energy savings.",
+          image: `${s3}/2025-12/Process%20Automation_tile_510%20X%20650.jpg`,
+          href: "/industrial-products/process-automation",
+        },
+        {
+          title: "Customised Solutions",
+          description: "On-demand hot water generation and efficient washdown systems with precise temperature control.",
+          image: `${s3}/2025-12/Customised%20Solutions_510%20X%20650.jpg`,
+          href: "/industrial-products/customised-solutions",
+        },
+      ],
+      serviceHeading: "Our services",
+      serviceIntro: "Choose the best with Thermax's Steam Engineering services.",
+      services: [
+        { title: "Utility piping consultancy" },
+        { title: "Energy audits" },
+        { title: "Turnkey installations" },
+        { title: "Performance monitoring" },
+      ],
+      featureHeading: "Featured capabilities",
+      features: [
+        {
+          title: "Instaheat 2.0 - Instantaneous Hot Water Generator",
+          image: `${s3}/2026-03/Instaheat%202.0%20%E2%80%93%20Instantaneous%20Hot%20water%20generator_0.jpg`,
+        },
+        { title: "CPCRS", image: `${s3}/2026-03/2.jpg` },
+        { title: "A2Zflo-S Steam Flow Meter", image: `${s3}/2026-03/3.jpg` },
+        { title: "RealSteam", image: `${s3}/2026-03/4.jpg` },
+        { title: "TACTS-Rx", image: `${s3}/2026-03/5.jpg` },
+      ],
+    },
+    {
+      slug: "cooling-and-heating-solutions",
+      title: "Cooling and Heating Solutions",
+      heroDescription: "Innovative thermal solutions that maximise energy efficiency, utilise waste heat, save water and support a sustainable future",
+      image: `${s3}/2026-04/Cooling%20and%20Heating%20Solutions%20Banner%20updated.png`,
+      mobileImage: `${s3}/2026-04/Cooling%20and%20Heating%20Solutions.png`,
+      intro: "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.",
+      productHeading: "Our products",
+      products: [
+        {
+          title: "Absorption Chillers",
+          description: "Thermally driven chillers for efficient and sustainable industrial and commercial cooling.",
+          image: `${s3}/2026-03/Absorption%20Chillers%20Listing.png`,
+          href: "/industrial-products/absorption-chillers",
+        },
+        {
+          title: "Absorption Chiller-Heaters",
+          description: "Dual-function cooling and heating using sustainable thermal energy sources.",
+          image: `${s3}/2026-03/Absorption%20Chiller-Heaters%20Listing_0.png`,
+          href: "/industrial-products/absorption-chiller-heaters",
+        },
+        {
+          title: "Absorption Heat Pumps",
+          description: "Energy-efficient heating and cooling by transferring thermal energy.",
+          image: `${s3}/2026-03/Absorpption-heat-pump%20Listing.png`,
+          href: "/industrial-products/absorption-heat-pumps",
+        },
+        {
+          title: "Absorption Heat Transformer",
+          description: "Upgrades low-temperature waste heat into usable medium-grade heat.",
+          image: `${s3}/2026-04/Absorption%20Heat%20transformer.png`,
+          href: "/industrial-products/absorption-heat-transformer",
+        },
+        {
+          title: "Hybrid Chiller",
+          description: "Combines vapour compression and vapour absorption technologies for flexible cooling.",
+          image: `${s3}/2026-03/Hybrid%20chillers%20%20Listing.png`,
+          href: "/industrial-products/hybrid-chiller",
+        },
+        {
+          title: "Heating Solutions",
+          description: "Electrical and hybrid heat pumps for efficient, adaptable process heating.",
+          image: `${s3}/2026-02/banner-heating-solutions-proc.jpg`,
+          href: "/industrial-products/heating-solutions",
+          badge: "SustainX",
+        },
+        {
+          title: "Wet Cooling Solutions",
+          description: "Evaporation-based cooling towers and evaporative condensers.",
+          image: `${s3}/2026-02/banner-wet-cooling-proc.jpg`,
+          href: "/industrial-products/wet-cooling-solutions",
+          badge: "SustainX",
+        },
+        {
+          title: "Dry Cooling Solutions",
+          description: "Water-free cooling through air-cooled heat exchangers and dry coolers.",
+          image: `${s3}/2026-02/banner-dry-cooling-solution-proc_0.jpg`,
+          href: "/industrial-products/dry-cooling-solutions",
+          badge: "SustainX",
+        },
+        {
+          title: "Refrigeration Solutions",
+          description: "Reliable low-temperature cooling for demanding industrial processes.",
+          image: `${s3}/2026-02/banner-refrigeration-unit-mainpg.jpg`,
+          href: "/industrial-products/industrial-refrigeration-unit",
+          badge: "SustainX",
+        },
+      ],
+      serviceHeading: "Our services",
+      serviceIntro: "Comprehensive lifecycle support.",
+      services: [
+        { title: "Timely installation, commissioning, and lifecycle support" },
+        { title: "Value-added products, upgrades, retrofits, and engineered components" },
+        { title: "Wide service network with global presence and local support" },
+        { title: "Optimisation, health assessments, troubleshooting, and maintenance" },
+        { title: "Real-time monitoring and controlling using digital solutions" },
+        { title: "Customised solutions and process optimisation" },
+      ],
+    },
+    {
+      slug: "water-and-waste-solutions",
+      title: "Water and Waste Solutions",
+      heroDescription: "Delivering advanced water and wastewater management technologies, ensuring resource efficiency, regulatory compliance, and sustainable industrial operations",
+      image: `${s3}/2025-08/water_waste_banner_0.jpg`,
+      mobileImage: `${s3}/2025-08/water_waste_banner_mobile_0.jpg`,
+      intro: "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.",
+      productHeading: "Offerings",
+      products: [
+        { title: "Water Treatment Solutions", href: "/industrial-products/water-treatment-solutions" },
+        { title: "Sewage Treatment and Recycling Plants", href: "/industrial-products/sewage-treatment-and-recycling-plants" },
+        { title: "Effluent Treatment & Recycling Plants", href: "/industrial-products/effluent-treatment-recycling-plants" },
+        { title: "Minimum Liquid Discharge", href: "/industrial-products/minimum-liquid-discharge" },
+        { title: "Zero Liquid Discharge System", href: "/industrial-products/zero-liquid-discharge-system" },
+      ],
+      serviceHeading: "Our services",
+      services: [
+        { title: "Plant upgrade and improvement" },
+        { title: "Plant management services" },
+        { title: "Spare parts management" },
+        { title: "Plant audit and evaluation" },
+      ],
+      featureHeading: "Featured capabilities",
+      features: [
+        {
+          title: "Thermax Edge Live®",
+          description: "Real-time monitoring, predictive analytics, and intelligent control for water treatment.",
+          image: `${s3}/2025-08/feature-bg1_0.jpg`,
+          href: "/digital",
+        },
+        { title: "Seawater Desalination", image: `${s3}/2026-04/Sea-water%20Desalination.png` },
+        { title: "Zero Liquid Discharge", image: `${s3}/2026-03/fc-zeroliquid-wastewatercapabilities_0.jpg` },
+        { title: "Urthh", image: `${s3}/2026-03/FC-urthh-bg.jpg` },
+        {
+          title: "Manufacturing Facility",
+          image: `${s3}/2026-04/Manufacturing%20Facility%20%282%29.png`,
+          href: "/company-overview/manufacturing-facilities",
+        },
+      ],
+    },
+  ],
+  vi: [],
+};
+
+const translations: Record<string, string> = {
+  "Air Pollution Control Systems": "Xử lý khí thải",
+  "Effective solutions for abatement of particulate and gaseous pollutants": "Giải pháp hiệu quả để kiểm soát bụi và khí ô nhiễm",
+  "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.": "Mảng xử lý khí thải của Thermax hoạt động với một niềm tin đơn giản: chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
+  "Our products": "Sản phẩm",
+  "Our services": "Dịch vụ",
+  "Featured capabilities": "Năng lực nổi bật",
+  "Product categories": "Danh mục sản phẩm",
+  "Our products and solutions": "Sản phẩm và giải pháp",
+  Offerings: "Giải pháp",
+  "Process Heat Solutions": "Hệ thống gia nhiệt",
+  "Reliable, fuel-flexible, efficient, and sustainable heating solutions for every industry": "Giải pháp gia nhiệt tin cậy, linh hoạt nhiên liệu, hiệu quả và bền vững cho mọi ngành",
+  "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.": "Danh mục giải pháp gia nhiệt của Thermax cung cấp nhiều giải pháp tiết kiệm năng lượng, linh hoạt nhiên liệu và thân thiện môi trường, phù hợp với nhu cầu đa dạng của từng ngành.",
+  "Steam Engineering Solutions": "Hệ thống đường ống hơi",
+  "Driving efficiency, compliance, and sustainability with advanced steam systems": "Nâng cao hiệu quả, tuân thủ và tính bền vững bằng hệ thống hơi tiên tiến",
+  "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.": "Mảng kỹ thuật hơi của Thermax cung cấp các giải pháp tiên tiến để tối ưu hệ thống tạo hơi, phân phối, sử dụng hơi và thu hồi nước ngưng.",
+  "Cooling and Heating Solutions": "Hệ thống lạnh",
+  "Innovative thermal solutions that maximise energy efficiency, utilise waste heat, save water and support a sustainable future": "Giải pháp nhiệt đổi mới giúp tối đa hiệu quả năng lượng, tận dụng nhiệt thải, tiết kiệm nước và hướng tới tương lai bền vững",
+  "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.": "Giải pháp làm mát và gia nhiệt của Thermax sử dụng công nghệ thu hồi và truyền năng lượng tiên tiến để giảm tác động môi trường trong vận hành công nghiệp và thương mại.",
+  "Water and Waste Solutions": "Xử lý nước",
+  "Delivering advanced water and wastewater management technologies, ensuring resource efficiency, regulatory compliance, and sustainable industrial operations": "Công nghệ quản lý nước và nước thải tiên tiến, bảo đảm hiệu quả tài nguyên, tuân thủ quy định và vận hành công nghiệp bền vững",
+  "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.": "Chúng tôi cung cấp giải pháp nước và nước thải tích hợp, hỗ trợ số hóa để thu hồi, tái sử dụng và tái định hình cách quản lý nước, giúp các ngành công nghiệp và đô thị phát triển bền vững trong bối cảnh tài nguyên hạn chế, đồng thời đáp ứng mục tiêu về hiệu quả và tuân thủ.",
+  "Electrostatic Precipitator (ESP)": "Bộ lọc tĩnh điện (ESP)",
+  "Bag House / Bag Filters": "Bộ lọc túi",
+  Scrubber: "Tháp rửa khí",
+  "Thermax Ne0 - Gas Enrichment Solutions": "Thermax Ne0 - Giải pháp làm giàu khí",
+  "Steam Boilers": "Lò hơi",
+  "Thermal Oil Heaters": "Lò dầu tải nhiệt",
+  "Hot Air Generators": "Gia nhiệt không khí nóng",
+  "Hot Water Generators": "Gia nhiệt nước nóng",
+  "Energy Plant": "Nhà máy năng lượng",
+  "Electric Process Heat Solutions": "Giải pháp gia nhiệt quy trình bằng điện",
+  "Boiler House Products": "Phụ kiện nhà lò hơi",
+  "Steam Distribution": "Hệ thống phân phối hơi",
+  "Condensate System Management": "Hệ thống thu hồi nước ngưng",
+  "Process Automation": "Tự động hóa quy trình",
+  "Customised Solutions": "Giải pháp tùy chỉnh",
+  "Absorption Chillers": "Chiller hấp thụ",
+  "Absorption Chiller-Heaters": "Chiller hấp thụ hai chiều nóng - lạnh",
+  "Absorption Heat Pumps": "Heat pump hấp thụ",
+  "Absorption Heat Transformer": "Bộ nâng cấp nhiệt hấp thụ",
+  "Hybrid Chiller": "Chiller lai",
+  "Heating Solutions": "Giải pháp gia nhiệt",
+  "Wet Cooling Solutions": "Giải pháp làm mát ướt",
+  "Dry Cooling Solutions": "Giải pháp làm mát khô",
+  "Refrigeration Solutions": "Giải pháp làm lạnh công nghiệp",
+  "Water Treatment Solutions": "Xử lý nước cấp",
+  "Sewage Treatment and Recycling Plants": "Nhà máy xử lý và tái chế nước thải sinh hoạt",
+  "Effluent Treatment & Recycling Plants": "Nhà máy xử lý và tái chế nước thải công nghiệp",
+  "Minimum Liquid Discharge": "Giảm thiểu xả thải lỏng",
+  "Zero Liquid Discharge System": "Hệ thống không xả thải lỏng",
+  "Plant upgrade and improvement": "Nâng cấp và cải thiện nhà máy",
+  "Plant management services": "Dịch vụ quản lý nhà máy",
+  "Spare parts management": "Quản lý phụ tùng",
+  "Plant audit and evaluation": "Kiểm toán và đánh giá nhà máy",
+  "Comprehensive lifecycle support.": "Hỗ trợ toàn diện trong suốt vòng đời.",
+  "Available in dry and wet types, with automatic DSP-based control and power optimisation for dependable particulate capture.": "Có phiên bản khô và ướt, tích hợp điều khiển DSP tự động và tối ưu công suất để thu giữ bụi ổn định.",
+  "Efficient, clean and green technologies for gas enrichment": "Công nghệ làm giàu khí hiệu quả, sạch và thân thiện môi trường",
+  "Spare parts management for all air pollution control equipment": "Quản lý phụ tùng cho toàn bộ thiết bị xử lý khí thải",
+  "Thermax offers comprehensive support across the product lifecycle that extends beyond brand boundaries.": "Thermax cung cấp hỗ trợ toàn diện trong suốt vòng đời sản phẩm, không giới hạn theo thương hiệu thiết bị.",
+  "Conditional assessment, health check-up and troubleshooting": "Đánh giá tình trạng, kiểm tra sức khỏe thiết bị và xử lý sự cố",
+  "Design engineering services, including efficient gas distribution": "Dịch vụ thiết kế kỹ thuật, bao gồm tối ưu phân phối khí",
+  "Optimisation studies and performance audits": "Nghiên cứu tối ưu và kiểm toán hiệu suất",
+  "Remote assistance and virtual technical support": "Hỗ trợ từ xa và tư vấn kỹ thuật trực tuyến",
+  "Annual maintenance and service contracts": "Hợp đồng bảo trì và dịch vụ định kỳ",
+  "Overhauling and repairs": "Đại tu và sửa chữa",
+  "Steam generation capacities of up to 50 TPH, available in solid fuel, biomass, oil, and gas variants.": "Công suất tạo hơi đến 50 TPH, với các phiên bản dùng nhiên liệu rắn, sinh khối, dầu và khí.",
+  "Available up to 20 Mn kcal/hr for high-temperature indirect heating applications.": "Công suất đến 20 triệu kcal/giờ cho các ứng dụng gia nhiệt gián tiếp nhiệt độ cao.",
+  "Solid fuel-fired systems delivering hot air for industrial drying applications.": "Hệ thống đốt nhiên liệu rắn cung cấp khí nóng cho ứng dụng sấy công nghiệp.",
+  "Direct and indirect heating designs for commercial and industrial requirements.": "Thiết kế gia nhiệt trực tiếp và gián tiếp cho nhu cầu thương mại và công nghiệp.",
+  "Integrated steam, thermic fluid, and hot gas systems with capacities up to 100 MW.": "Hệ thống tích hợp hơi, dầu tải nhiệt và khí nóng với công suất đến 100 MW.",
+  "Zero-emission electric boilers, thermal oil heaters, and hot water generators.": "Lò hơi điện, lò dầu tải nhiệt và bộ gia nhiệt nước nóng không phát thải tại chỗ.",
+  "Thermax offers comprehensive support across the product lifecycle.": "Thermax cung cấp hỗ trợ toàn diện trong suốt vòng đời sản phẩm.",
+  "Installation and commissioning": "Lắp đặt và chạy thử",
+  "Annual maintenance contracts (AMC)": "Hợp đồng bảo trì định kỳ (AMC)",
+  "Remote monitoring (IoT-enabled)": "Giám sát từ xa hỗ trợ IoT",
+  "Retrofit and revamp capabilities": "Năng lực cải tạo và nâng cấp",
+  "Training and operator skill development": "Đào tạo và phát triển kỹ năng vận hành",
+  "Genuine services and spares": "Dịch vụ và phụ tùng chính hãng",
+  "Helping industries adopt biomass-based heating with suitable technologies and operating support.": "Hỗ trợ doanh nghiệp chuyển đổi sang gia nhiệt bằng sinh khối với công nghệ phù hợp và hỗ trợ vận hành.",
+  "Biomass Centre of Excellence": "Trung tâm xuất sắc về sinh khối",
+  "Straw-Fired Heating Solutions": "Giải pháp gia nhiệt đốt rơm",
+  "Electric Heating Solutions": "Giải pháp gia nhiệt điện",
+  "Precise measurement, monitoring, and automation for steam and water systems.": "Đo lường, giám sát và tự động hóa chính xác cho hệ thống hơi và nước.",
+  "An integrated portfolio that precisely controls flow, temperature, and pressure.": "Danh mục tích hợp giúp kiểm soát chính xác lưu lượng, nhiệt độ và áp suất.",
+  "Maximising heat recovery, reducing water consumption, and improving boiler efficiency.": "Tối đa thu hồi nhiệt, giảm tiêu thụ nước và cải thiện hiệu suất lò hơi.",
+  "Automation for steam-intensive processes to improve performance, quality, and energy savings.": "Tự động hóa quy trình sử dụng nhiều hơi để cải thiện hiệu suất, chất lượng và tiết kiệm năng lượng.",
+  "On-demand hot water generation and efficient washdown systems with precise temperature control.": "Cấp nước nóng theo nhu cầu và hệ thống vệ sinh hiệu quả với khả năng kiểm soát nhiệt độ chính xác.",
+  "Choose the best with Thermax's Steam Engineering services.": "Lựa chọn tối ưu với dịch vụ kỹ thuật hơi của Thermax.",
+  "Utility piping consultancy": "Tư vấn đường ống tiện ích",
+  "Energy audits": "Kiểm toán năng lượng",
+  "Turnkey installations": "Lắp đặt trọn gói",
+  "Performance monitoring": "Giám sát hiệu suất",
+  "Instaheat 2.0 - Instantaneous Hot Water Generator": "Instaheat 2.0 - Bộ gia nhiệt nước nóng tức thời",
+  "Thermally driven chillers for efficient and sustainable industrial and commercial cooling.": "Chiller vận hành bằng nhiệt để làm mát hiệu quả và bền vững cho công nghiệp và thương mại.",
+  "Dual-function cooling and heating using sustainable thermal energy sources.": "Làm mát và gia nhiệt hai chiều bằng nguồn năng lượng nhiệt bền vững.",
+  "Energy-efficient heating and cooling by transferring thermal energy.": "Gia nhiệt và làm mát tiết kiệm năng lượng bằng công nghệ truyền nhiệt.",
+  "Upgrades low-temperature waste heat into usable medium-grade heat.": "Nâng cấp nhiệt thải nhiệt độ thấp thành nguồn nhiệt trung cấp có thể sử dụng.",
+  "Combines vapour compression and vapour absorption technologies for flexible cooling.": "Kết hợp công nghệ nén hơi và hấp thụ để tạo giải pháp làm mát linh hoạt.",
+  "Electrical and hybrid heat pumps for efficient, adaptable process heating.": "Heat pump điện và lai cho nhu cầu gia nhiệt quy trình linh hoạt, hiệu quả.",
+  "Evaporation-based cooling towers and evaporative condensers.": "Tháp giải nhiệt và bình ngưng bay hơi cho làm mát hiệu quả.",
+  "Water-free cooling through air-cooled heat exchangers and dry coolers.": "Làm mát không dùng nước bằng bộ trao đổi nhiệt không khí và bộ làm mát khô.",
+  "Reliable low-temperature cooling for demanding industrial processes.": "Làm lạnh nhiệt độ thấp ổn định cho quy trình công nghiệp khắt khe.",
+  "Timely installation, commissioning, and lifecycle support": "Lắp đặt, chạy thử kịp thời và hỗ trợ vòng đời",
+  "Value-added products, upgrades, retrofits, and engineered components": "Sản phẩm giá trị gia tăng, nâng cấp, cải tạo và linh kiện kỹ thuật",
+  "Wide service network with global presence and local support": "Mạng lưới dịch vụ rộng, hiện diện toàn cầu và hỗ trợ tại địa phương",
+  "Optimisation, health assessments, troubleshooting, and maintenance": "Tối ưu, đánh giá tình trạng, xử lý sự cố và bảo trì",
+  "Real-time monitoring and controlling using digital solutions": "Giám sát và điều khiển thời gian thực bằng giải pháp số",
+  "Customised solutions and process optimisation": "Giải pháp tùy chỉnh và tối ưu quy trình",
+  "Real-time monitoring, predictive analytics, and intelligent control for water treatment.": "Giám sát thời gian thực, phân tích dự đoán và điều khiển thông minh cho xử lý nước.",
+  "Thermax Edge Live®": "Thermax EDGE Live®",
+  "Seawater Desalination": "Khử mặn nước biển",
+  "Zero Liquid Discharge": "Không xả thải lỏng",
+  "Manufacturing Facility": "Cơ sở sản xuất",
+};
+
+function translateCard(card: LandingCard): LandingCard {
+  return {
+    ...card,
+    title: translations[card.title] ?? card.title,
+    description: card.description ? translations[card.description] ?? card.description : undefined,
+  };
+}
+
+productPages.vi = productPages.en.map((page) => ({
+  ...page,
+  title: translations[page.title] ?? page.title,
+  heroDescription: translations[page.heroDescription] ?? page.heroDescription,
+  intro: translations[page.intro] ?? page.intro,
+  productHeading: translations[page.productHeading] ?? page.productHeading,
+  serviceHeading: page.serviceHeading ? translations[page.serviceHeading] ?? page.serviceHeading : undefined,
+  serviceIntro: page.serviceIntro ? translations[page.serviceIntro] ?? page.serviceIntro : undefined,
+  featureHeading: page.featureHeading ? translations[page.featureHeading] ?? page.featureHeading : undefined,
+  products: page.products.map(translateCard),
+  services: page.services?.map(translateCard),
+  features: page.features?.map(translateCard),
+}));
+
+export function getOfficialProductLanding(slug: string, locale: Locale) {
+  return productPages[locale].find((page) => page.slug === slug);
+}
