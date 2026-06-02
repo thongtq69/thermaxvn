@@ -6,6 +6,24 @@ export type LandingCard = {
   image?: string;
   href?: string;
   badge?: string;
+  items?: string[];
+};
+
+export type LandingStat = {
+  value: string;
+  label: string;
+};
+
+export type LandingChallenge = {
+  number: string;
+  title: string;
+  description: string;
+};
+
+export type LandingResource = {
+  title: string;
+  type: string;
+  href?: string;
 };
 
 export type OfficialProductLanding = {
@@ -15,6 +33,9 @@ export type OfficialProductLanding = {
   image: string;
   mobileImage: string;
   intro: string;
+  overviewParagraphs?: string[];
+  stats?: LandingStat[];
+  challenges?: LandingChallenge[];
   productHeading: string;
   products: LandingCard[];
   serviceHeading?: string;
@@ -22,6 +43,9 @@ export type OfficialProductLanding = {
   services?: LandingCard[];
   featureHeading?: string;
   features?: LandingCard[];
+  industries?: string[];
+  caseStudies?: LandingCard[];
+  resources?: LandingResource[];
 };
 
 const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
@@ -307,37 +331,151 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2025-08/water_waste_banner_0.jpg`,
       mobileImage: `${s3}/2025-08/water_waste_banner_mobile_0.jpg`,
       intro: "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.",
+      overviewParagraphs: [
+        "With over 50 years of experience in providing innovative water and wastewater treatment solutions, we are committed to transforming the way industries manage water. From raw water treatment to sewage and effluent recycling, we deliver complete, digitally enabled solutions designed for performance, compliance, and sustainability.",
+        "Thermax offers one-stop solutions for water and wastewater treatment, recycling, zero liquid discharge, and seawater desalination plants, along with standardised products, digitally enabled operations and maintenance, spares, audit support, and plant improvement services.",
+      ],
+      stats: [
+        { value: "30,000", label: "Installations" },
+        { value: "500 MLD", label: "Water treated" },
+        { value: "130 MLD", label: "Water recycled" },
+        { value: "70 MLD", label: "Wastewater treated" },
+      ],
+      challenges: [
+        {
+          number: "01",
+          title: "Stringent environmental regulations",
+          description: "We help ensure full compliance with local and global standards through advanced treatment systems and consistent performance monitoring.",
+        },
+        {
+          number: "02",
+          title: "Water scarcity & rising freshwater costs",
+          description: "Our solutions maximise water recovery, reduce dependency on freshwater, and enable circular water use across industrial processes.",
+        },
+        {
+          number: "03",
+          title: "Treating complex industrial wastewater",
+          description: "Robust, proven technologies are tailored for high TDS, COD, variable loads, and emerging contaminants, ensuring reliability under demanding conditions.",
+        },
+        {
+          number: "04",
+          title: "Ensuring operational stability & efficiency",
+          description: "Digitally enabled operations and maintenance services provide remote monitoring, predictive insights, and round-the-clock support.",
+        },
+      ],
       productHeading: "Offerings",
       products: [
-        { title: "Water Treatment Solutions", href: "/industrial-products/water-treatment-solutions" },
-        { title: "Sewage Treatment and Recycling Plants", href: "/industrial-products/sewage-treatment-and-recycling-plants" },
-        { title: "Effluent Treatment & Recycling Plants", href: "/industrial-products/effluent-treatment-recycling-plants" },
-        { title: "Minimum Liquid Discharge", href: "/industrial-products/minimum-liquid-discharge" },
-        { title: "Zero Liquid Discharge System", href: "/industrial-products/zero-liquid-discharge-system" },
+        {
+          title: "Water Treatment Solutions",
+          description: "Innovative, high-performance water solutions for efficient, sustainable resource optimisation.",
+          href: "/industrial-products/water-treatment-solutions",
+          items: ["Standard Product Range", "Industrial Project Range"],
+        },
+        {
+          title: "Sewage Treatment and Recycling Plants",
+          description: "Modular, energy-efficient plants that treat sewage and recover water for non-potable applications.",
+          href: "/industrial-products/sewage-treatment-and-recycling-plants",
+          items: ["Industrial Project Range", "Standard Product Range"],
+        },
+        {
+          title: "Effluent Treatment & Recycling Plants",
+          description: "Engineered systems for complex effluent streams with options for complete water recycling.",
+          href: "/industrial-products/effluent-treatment-recycling-plants",
+          items: ["Physico Chemical Treatment", "Oil Removing System", "Biological Treatment", "Advanced Oxidation", "Special Media Filter"],
+        },
+        {
+          title: "Minimum Liquid Discharge",
+          description: "High-efficiency MLD systems that maximise water recovery while significantly reducing liquid waste.",
+          href: "/industrial-products/minimum-liquid-discharge",
+          items: ["Advanced Reverse Osmosis (ARO)", "Electrodialysis Reversal (EDR)"],
+        },
+        {
+          title: "Zero Liquid Discharge System",
+          description: "Fully integrated ZLD packages for total elimination of liquid effluent discharge.",
+          href: "/industrial-products/zero-liquid-discharge-system",
+          items: ["VapoNovae+", "SteMNovas+", "Stripper", "ATFD"],
+        },
       ],
       serviceHeading: "Our services",
       services: [
-        { title: "Plant upgrade and improvement" },
-        { title: "Plant management services" },
-        { title: "Spare parts management" },
-        { title: "Plant audit and evaluation" },
+        {
+          title: "Plant Upgrade & Improvement",
+          description: "Engineered solutions to upgrade water and waste treatment plants by using existing and new units to meet current requirements with enhanced results.",
+          image: `${s3}/2026-04/Plant%20Upgrade%20%26%20Improvement%20%282%29.png`,
+        },
+        {
+          title: "Plant Management Services",
+          description: "Operations and maintenance support backed by decades of experience in designing, installing, commissioning, and troubleshooting treatment systems.",
+          image: `${s3}/2026-04/Plant%20Management%20Services.png`,
+        },
+        {
+          title: "Spare Parts Management",
+          description: "Genuine spares designed for Thermax equipment and systems to maintain performance, extend equipment life, and keep plants dependable.",
+          image: `${s3}/2026-04/Spare%20Parts%20Management.png`,
+        },
+        {
+          title: "Plant Audit & Evaluation",
+          description: "Water audits assess usage, treatment performance, reuse opportunities, and long-term improvement strategies for industrial operations.",
+          image: `${s3}/2026-04/Plant%20Audit%20%26%20Evaluation%20%282%29.png`,
+        },
       ],
       featureHeading: "Featured capabilities",
       features: [
         {
           title: "Thermax Edge Live®",
-          description: "Real-time monitoring, predictive analytics, and intelligent control for water treatment.",
+          description: "Real-time monitoring, predictive analytics, and intelligent control for dynamic water treatment operations with varying loads and water quality.",
           image: `${s3}/2025-08/feature-bg1_0.jpg`,
-          href: "/digital",
+          href: "https://edgelive.thermaxglobal.com/",
         },
-        { title: "Seawater Desalination", image: `${s3}/2026-04/Sea-water%20Desalination.png` },
-        { title: "Zero Liquid Discharge", image: `${s3}/2026-03/fc-zeroliquid-wastewatercapabilities_0.jpg` },
-        { title: "Urthh", image: `${s3}/2026-03/FC-urthh-bg.jpg` },
+        {
+          title: "Sea-water Desalination",
+          description: "Reliable water supply solutions built on experience across major desalination technologies and industrial water demands.",
+          image: `${s3}/2026-04/Sea-water%20Desalination.png`,
+        },
+        {
+          title: "Zero Liquid Discharge",
+          description: "Advanced effluent treatment that recycles wastewater into reusable process water while converting salts into solid by-products.",
+          image: `${s3}/2026-03/fc-zeroliquid-wastewatercapabilities_0.jpg`,
+        },
+        {
+          title: "Urthh",
+          description: "Urban, digitally enabled operations and maintenance solutions designed for modern water management challenges.",
+          image: `${s3}/2026-03/FC-urthh-bg.jpg`,
+        },
         {
           title: "Manufacturing Facility",
+          description: "A state-of-the-art IGBC-compliant facility using automated production, robotic welding, solar power, and water-conscious processes.",
           image: `${s3}/2026-04/Manufacturing%20Facility%20%282%29.png`,
           href: "/company-overview/manufacturing-facilities",
         },
+      ],
+      industries: [
+        "Automobile",
+        "Cement",
+        "Chemical",
+        "Drugs and Pharmaceuticals",
+        "Engineering & OEM",
+        "Food & Beverage",
+        "Infrastructure",
+        "Metals",
+        "Paper & Pulp",
+        "Wood",
+        "Power",
+        "Refinery & Petrochemicals",
+        "Tyres and Rubber",
+        "Textile",
+      ],
+      caseStudies: [
+        {
+          title: "Thermax's ZLD technology enables glass manufacturer reduce freshwater consumption",
+          description: "Water and Waste Solutions",
+          image: `${s3}/2026-04/Tumbnail_23.jpg`,
+          href: "https://www.thermaxglobal.com/case-study/thermaxs-zld-technology-enables-glass-manufacturer-reduce-freshwater-consumption",
+        },
+      ],
+      resources: [
+        { type: "Brochure", title: "Thermax Water & Wastewater Solutions Download" },
+        { type: "Brochure", title: "Product Portfolio Download" },
       ],
     },
   ],
@@ -456,30 +594,125 @@ const translations: Record<string, string> = {
   "Real-time monitoring, predictive analytics, and intelligent control for water treatment.": "Giám sát thời gian thực, phân tích dự đoán và điều khiển thông minh cho xử lý nước.",
   "Thermax Edge Live®": "Thermax EDGE Live®",
   "Seawater Desalination": "Khử mặn nước biển",
+  "Sea-water Desalination": "Khử mặn nước biển",
   "Zero Liquid Discharge": "Không xả thải lỏng",
   "Manufacturing Facility": "Cơ sở sản xuất",
+  "With over 50 years of experience in providing innovative water and wastewater treatment solutions, we are committed to transforming the way industries manage water. From raw water treatment to sewage and effluent recycling, we deliver complete, digitally enabled solutions designed for performance, compliance, and sustainability.": "Với hơn 50 năm kinh nghiệm cung cấp các giải pháp xử lý nước và nước thải đổi mới, Thermax hỗ trợ doanh nghiệp thay đổi cách quản lý tài nguyên nước. Từ xử lý nước thô đến xử lý nước thải sinh hoạt và tái chế nước thải công nghiệp, chúng tôi cung cấp giải pháp trọn gói, hỗ trợ số hóa, được thiết kế cho hiệu suất, tuân thủ và phát triển bền vững.",
+  "Thermax offers one-stop solutions for water and wastewater treatment, recycling, zero liquid discharge, and seawater desalination plants, along with standardised products, digitally enabled operations and maintenance, spares, audit support, and plant improvement services.": "Thermax cung cấp giải pháp một điểm đến cho xử lý nước, xử lý và tái chế nước thải, hệ thống không xả thải lỏng và nhà máy khử mặn nước biển, cùng các sản phẩm tiêu chuẩn, vận hành bảo trì hỗ trợ số hóa, phụ tùng, kiểm toán và dịch vụ cải thiện nhà máy.",
+  Installations: "Hệ thống đã lắp đặt",
+  "Water treated": "Nước được xử lý",
+  "Water recycled": "Nước được tái chế",
+  "Wastewater treated": "Nước thải được xử lý",
+  "Stringent environmental regulations": "Quy định môi trường ngày càng nghiêm ngặt",
+  "We help ensure full compliance with local and global standards through advanced treatment systems and consistent performance monitoring.": "Chúng tôi hỗ trợ doanh nghiệp đáp ứng tiêu chuẩn trong nước và quốc tế thông qua hệ thống xử lý tiên tiến và giám sát hiệu suất liên tục.",
+  "Water scarcity & rising freshwater costs": "Khan hiếm nước và chi phí nước sạch tăng",
+  "Our solutions maximise water recovery, reduce dependency on freshwater, and enable circular water use across industrial processes.": "Các giải pháp của Thermax tối đa hóa khả năng thu hồi nước, giảm phụ thuộc vào nước sạch và thúc đẩy mô hình tuần hoàn nước trong quy trình công nghiệp.",
+  "Treating complex industrial wastewater": "Xử lý nước thải công nghiệp phức tạp",
+  "Robust, proven technologies are tailored for high TDS, COD, variable loads, and emerging contaminants, ensuring reliability under demanding conditions.": "Các công nghệ đã được chứng minh được tùy chỉnh cho nước thải có TDS, COD cao, tải lượng biến động và chất ô nhiễm mới, bảo đảm độ tin cậy trong điều kiện vận hành khắt khe.",
+  "Ensuring operational stability & efficiency": "Duy trì ổn định và hiệu quả vận hành",
+  "Digitally enabled operations and maintenance services provide remote monitoring, predictive insights, and round-the-clock support.": "Dịch vụ vận hành và bảo trì hỗ trợ số hóa cung cấp giám sát từ xa, phân tích dự báo và hỗ trợ liên tục.",
+  "Innovative, high-performance water solutions for efficient, sustainable resource optimisation.": "Giải pháp xử lý nước hiệu suất cao giúp tối ưu tài nguyên theo hướng hiệu quả và bền vững.",
+  "Modular, energy-efficient plants that treat sewage and recover water for non-potable applications.": "Hệ thống mô-đun tiết kiệm năng lượng xử lý nước thải sinh hoạt và thu hồi nước cho các ứng dụng không dùng để uống.",
+  "Engineered systems for complex effluent streams with options for complete water recycling.": "Hệ thống kỹ thuật cho các dòng nước thải công nghiệp phức tạp, có tùy chọn tái chế nước hoàn chỉnh.",
+  "High-efficiency MLD systems that maximise water recovery while significantly reducing liquid waste.": "Hệ thống MLD hiệu suất cao giúp tối đa hóa thu hồi nước và giảm đáng kể lượng chất thải lỏng.",
+  "Fully integrated ZLD packages for total elimination of liquid effluent discharge.": "Gói ZLD tích hợp toàn diện nhằm loại bỏ hoàn toàn xả thải lỏng ra môi trường.",
+  "Standard Product Range": "Dải sản phẩm tiêu chuẩn",
+  "Industrial Project Range": "Dải giải pháp dự án công nghiệp",
+  "Physico Chemical Treatment": "Xử lý hóa lý",
+  "Oil Removing System": "Hệ thống tách dầu",
+  "Biological Treatment": "Xử lý sinh học",
+  "Advanced Oxidation": "Oxy hóa nâng cao",
+  "Special Media Filter": "Bộ lọc vật liệu chuyên dụng",
+  "Advanced Reverse Osmosis (ARO)": "Thẩm thấu ngược nâng cao (ARO)",
+  "Electrodialysis Reversal (EDR)": "Điện thẩm tách đảo chiều (EDR)",
+  "Plant Upgrade & Improvement": "Nâng cấp và cải thiện nhà máy",
+  "Plant Management Services": "Dịch vụ quản lý nhà máy",
+  "Spare Parts Management": "Quản lý phụ tùng",
+  "Plant Audit & Evaluation": "Kiểm toán và đánh giá nhà máy",
+  "Engineered solutions to upgrade water and waste treatment plants by using existing and new units to meet current requirements with enhanced results.": "Giải pháp kỹ thuật giúp nâng cấp nhà máy xử lý nước và nước thải bằng cách kết hợp hạng mục hiện hữu với thiết bị mới để đáp ứng yêu cầu hiện tại và nâng cao kết quả vận hành.",
+  "Operations and maintenance support backed by decades of experience in designing, installing, commissioning, and troubleshooting treatment systems.": "Hỗ trợ vận hành và bảo trì dựa trên nhiều thập kỷ kinh nghiệm thiết kế, lắp đặt, chạy thử và xử lý sự cố hệ thống xử lý nước.",
+  "Genuine spares designed for Thermax equipment and systems to maintain performance, extend equipment life, and keep plants dependable.": "Phụ tùng chính hãng được thiết kế cho thiết bị và hệ thống Thermax, giúp duy trì hiệu suất, kéo dài tuổi thọ thiết bị và bảo đảm độ tin cậy của nhà máy.",
+  "Water audits assess usage, treatment performance, reuse opportunities, and long-term improvement strategies for industrial operations.": "Kiểm toán nước đánh giá mức sử dụng, hiệu suất xử lý, cơ hội tái sử dụng và chiến lược cải thiện dài hạn cho vận hành công nghiệp.",
+  "Real-time monitoring, predictive analytics, and intelligent control for dynamic water treatment operations with varying loads and water quality.": "Giám sát thời gian thực, phân tích dự báo và điều khiển thông minh cho vận hành xử lý nước có tải lượng và chất lượng nước biến động.",
+  "Reliable water supply solutions built on experience across major desalination technologies and industrial water demands.": "Giải pháp cấp nước tin cậy dựa trên kinh nghiệm triển khai các công nghệ khử mặn chính và nhu cầu nước công nghiệp.",
+  "Advanced effluent treatment that recycles wastewater into reusable process water while converting salts into solid by-products.": "Giải pháp xử lý nước thải tiên tiến tái chế nước thải thành nước quy trình có thể tái sử dụng, đồng thời chuyển muối thành phụ phẩm rắn.",
+  "Urban, digitally enabled operations and maintenance solutions designed for modern water management challenges.": "Giải pháp vận hành và bảo trì đô thị hỗ trợ số hóa, được thiết kế cho các thách thức quản lý nước hiện đại.",
+  "A state-of-the-art IGBC-compliant facility using automated production, robotic welding, solar power, and water-conscious processes.": "Cơ sở hiện đại đạt định hướng IGBC, ứng dụng sản xuất tự động, hàn robot, năng lượng mặt trời và quy trình chú trọng tiết kiệm nước.",
+  Automobile: "Ô tô",
+  Cement: "Xi măng",
+  Chemical: "Hóa chất",
+  "Drugs and Pharmaceuticals": "Dược phẩm",
+  "Engineering & OEM": "Kỹ thuật và OEM",
+  "Food & Beverage": "Thực phẩm và đồ uống",
+  Infrastructure: "Hạ tầng",
+  Metals: "Kim loại",
+  "Paper & Pulp": "Giấy và bột giấy",
+  Wood: "Gỗ",
+  Power: "Điện",
+  "Refinery & Petrochemicals": "Lọc dầu và hóa dầu",
+  "Tyres and Rubber": "Lốp xe và cao su",
+  Textile: "Dệt may",
+  "Thermax's ZLD technology enables glass manufacturer reduce freshwater consumption": "Công nghệ ZLD của Thermax giúp nhà sản xuất kính giảm tiêu thụ nước sạch",
+  "Thermax Water & Wastewater Solutions Download": "Tải brochure Giải pháp nước và nước thải Thermax",
+  "Product Portfolio Download": "Tải danh mục sản phẩm",
+  Brochure: "Brochure",
 };
+
+function tr(value: string): string {
+  return translations[value] ?? value;
+}
 
 function translateCard(card: LandingCard): LandingCard {
   return {
     ...card,
-    title: translations[card.title] ?? card.title,
-    description: card.description ? translations[card.description] ?? card.description : undefined,
+    title: tr(card.title),
+    description: card.description ? tr(card.description) : undefined,
+    badge: card.badge ? tr(card.badge) : undefined,
+    items: card.items?.map(tr),
+  };
+}
+
+function translateStat(stat: LandingStat): LandingStat {
+  return {
+    ...stat,
+    label: tr(stat.label),
+  };
+}
+
+function translateChallenge(challenge: LandingChallenge): LandingChallenge {
+  return {
+    ...challenge,
+    title: tr(challenge.title),
+    description: tr(challenge.description),
+  };
+}
+
+function translateResource(resource: LandingResource): LandingResource {
+  return {
+    ...resource,
+    type: tr(resource.type),
+    title: tr(resource.title),
   };
 }
 
 productPages.vi = productPages.en.map((page) => ({
   ...page,
-  title: translations[page.title] ?? page.title,
-  heroDescription: translations[page.heroDescription] ?? page.heroDescription,
-  intro: translations[page.intro] ?? page.intro,
-  productHeading: translations[page.productHeading] ?? page.productHeading,
-  serviceHeading: page.serviceHeading ? translations[page.serviceHeading] ?? page.serviceHeading : undefined,
-  serviceIntro: page.serviceIntro ? translations[page.serviceIntro] ?? page.serviceIntro : undefined,
-  featureHeading: page.featureHeading ? translations[page.featureHeading] ?? page.featureHeading : undefined,
+  title: tr(page.title),
+  heroDescription: tr(page.heroDescription),
+  intro: tr(page.intro),
+  overviewParagraphs: page.overviewParagraphs?.map(tr),
+  stats: page.stats?.map(translateStat),
+  challenges: page.challenges?.map(translateChallenge),
+  productHeading: tr(page.productHeading),
+  serviceHeading: page.serviceHeading ? tr(page.serviceHeading) : undefined,
+  serviceIntro: page.serviceIntro ? tr(page.serviceIntro) : undefined,
+  featureHeading: page.featureHeading ? tr(page.featureHeading) : undefined,
   products: page.products.map(translateCard),
   services: page.services?.map(translateCard),
   features: page.features?.map(translateCard),
+  industries: page.industries?.map(tr),
+  caseStudies: page.caseStudies?.map(translateCard),
+  resources: page.resources?.map(translateResource),
 }));
 
 export function getOfficialProductLanding(slug: string, locale: Locale) {

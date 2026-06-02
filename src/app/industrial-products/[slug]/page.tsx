@@ -31,6 +31,10 @@ const detailLabels = {
     home: "Trang chủ",
     products: "Sản phẩm",
     contact: "Trao đổi với Thermax Vietnam",
+    challenges: "Thách thức",
+    industries: "Ngành ứng dụng",
+    caseStudies: "Nghiên cứu điển hình",
+    resources: "Tài nguyên",
     highlights: "Điểm nổi bật",
     applications: "Ứng dụng tiêu biểu",
     relatedTitle: "Các nội dung liên quan",
@@ -39,6 +43,10 @@ const detailLabels = {
     home: "Home",
     products: "Products",
     contact: "Talk to Thermax Vietnam",
+    challenges: "Challenges",
+    industries: "Industries",
+    caseStudies: "Case studies",
+    resources: "Resources",
     highlights: "Highlights",
     applications: "Typical applications",
     relatedTitle: "Related solutions",
@@ -90,6 +98,9 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
   if (officialLanding) {
     const subnavItems = [
       { label: locale === "vi" ? "Tổng quan" : "Overview", href: "#overview" },
+      ...(officialLanding.challenges?.length
+        ? [{ label: detailLabels[locale].challenges, href: "#challenges" }]
+        : []),
       { label: officialLanding.productHeading, href: "#products" },
       ...(officialLanding.services?.length
         ? [{ label: officialLanding.serviceHeading ?? (locale === "vi" ? "Dịch vụ" : "Services"), href: "#services" }]
@@ -101,6 +112,15 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               href: "#featured-capabilities",
             },
           ]
+        : []),
+      ...(officialLanding.industries?.length
+        ? [{ label: detailLabels[locale].industries, href: "#industries" }]
+        : []),
+      ...(officialLanding.caseStudies?.length
+        ? [{ label: detailLabels[locale].caseStudies, href: "#case-studies" }]
+        : []),
+      ...(officialLanding.resources?.length
+        ? [{ label: detailLabels[locale].resources, href: "#resources" }]
         : []),
     ];
 
@@ -127,6 +147,10 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
             office: "Thermax Vietnam Office",
             contact: detailLabels[locale].contact,
             discover: locale === "vi" ? "Khám phá thêm" : "Discover more",
+            challenges: detailLabels[locale].challenges,
+            industries: detailLabels[locale].industries,
+            caseStudies: detailLabels[locale].caseStudies,
+            resources: detailLabels[locale].resources,
           }}
         />
       </PageShell>

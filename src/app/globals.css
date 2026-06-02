@@ -7387,7 +7387,7 @@ main { color: var(--bs-body-color); }
 }
 
 @media (max-width: 991px) {
-  .inner-banner { width: 93%; height: 360px; margin-top: 100px; }
+  .inner-banner { width: 93%; height: 360px; margin-top: 24px; }
   .inner-banner-text { padding-bottom: 30px; }
   .inner-banner-text-inner { padding: 0 16px; max-width: 100%; }
   .inner-banner-text h1 { font-size: 32px; }
@@ -8820,12 +8820,17 @@ dd {
 .official-intro-section,
 .official-product-section,
 .official-service-section,
-.official-feature-section {
+.official-feature-section,
+.official-challenge-section,
+.official-industries-section,
+.official-proof-section {
   padding: 76px 0;
+  scroll-margin-top: 150px;
 }
 
 .official-product-section,
-.official-feature-section {
+.official-feature-section,
+.official-industries-section {
   background: #eef3f6;
 }
 
@@ -8856,6 +8861,61 @@ dd {
   color: #20242a;
   font-size: clamp(34px, 3.2vw, 56px);
   line-height: 1.12;
+}
+
+.official-overview-panel {
+  width: min(1540px, calc(100% - 180px));
+  margin: 44px auto 0;
+  padding: 34px;
+  border: 1px solid #dce5eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.official-copy {
+  max-width: 1180px;
+}
+
+.official-copy p {
+  margin: 0 0 16px;
+  color: #4e5b66;
+  font-size: var(--fs-18);
+  line-height: 1.65;
+}
+
+.official-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.official-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.official-stat-card {
+  min-height: 156px;
+  padding: 24px;
+  border: 1px solid #e0e7ec;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fff 0%, #f8fbfc 100%);
+}
+
+.official-stat-card strong {
+  display: block;
+  margin-bottom: 34px;
+  color: #7d1118;
+  font-size: clamp(36px, 4vw, 62px);
+  font-weight: var(--font-weight-500);
+  line-height: 0.95;
+}
+
+.official-stat-card span {
+  color: #20242a;
+  font-size: var(--fs-18);
+  font-weight: var(--font-weight-600);
+  line-height: 1.25;
 }
 
 .official-office-card {
@@ -8917,10 +8977,53 @@ dd {
   line-height: 1.6;
 }
 
+.official-challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.official-challenge-card {
+  min-height: 310px;
+  padding: 28px;
+  border: 1px solid #dbe4e8;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(8, 32, 51, 0.05);
+}
+
+.official-challenge-card span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 32px;
+  color: #fff;
+  background: var(--red);
+  border-radius: 8px;
+  font-size: var(--fs-18);
+  font-weight: var(--font-weight-700);
+}
+
+.official-challenge-card h3 {
+  margin: 0 0 14px;
+  color: #20242a;
+  font-size: var(--fs-22);
+  line-height: 1.18;
+}
+
+.official-challenge-card p {
+  margin: 0;
+  color: #5a6670;
+  font-size: var(--fs-15);
+  line-height: 1.58;
+}
+
 .official-product-grid,
 .official-feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 22px;
 }
 
@@ -8987,18 +9090,73 @@ dd {
   line-height: 1.5;
 }
 
+.official-card-list {
+  display: grid;
+  gap: 0;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #dfe8ed;
+}
+
+.official-card-list li {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  color: #303841;
+  border-bottom: 1px solid #dfe8ed;
+  font-size: var(--fs-14);
+  font-weight: var(--font-weight-600);
+  line-height: 1.25;
+}
+
+.official-card-list li::after {
+  margin-left: auto;
+  color: var(--red);
+  content: "→";
+}
+
 .official-service-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
-.official-service-grid article {
+.official-service-card {
   min-height: 150px;
   padding: 24px;
   border: 1px solid #e1e6ea;
   border-radius: 8px;
   background: #fff;
+}
+
+.official-service-card.has-image {
+  display: flex;
+  flex-direction: column;
+  min-height: 410px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 18px 38px rgba(8, 32, 51, 0.06);
+}
+
+.official-service-card-media {
+  height: 190px;
+  overflow: hidden;
+}
+
+.official-service-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.official-service-card.has-image:hover .official-service-card-media img {
+  transform: scale(1.04);
+}
+
+.official-service-card-copy {
+  padding: 24px;
 }
 
 .official-service-grid span {
@@ -9015,6 +9173,89 @@ dd {
   color: #20242a;
   font-size: var(--fs-18);
   line-height: 1.35;
+}
+
+.official-service-grid p {
+  margin: 12px 0 0;
+  color: #5a6670;
+  font-size: var(--fs-15);
+  line-height: 1.55;
+}
+
+.official-industries-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.official-industry-chip {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 14px 16px;
+  color: #20242a;
+  background: #fff;
+  border: 1px solid #dce5eb;
+  border-radius: 8px;
+  font-size: var(--fs-15);
+  font-weight: var(--font-weight-600);
+  line-height: 1.25;
+}
+
+.official-proof-block + .official-resource-block {
+  margin-top: 64px;
+}
+
+.official-proof-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 660px);
+  gap: 22px;
+}
+
+.official-resource-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.official-resource-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  padding: 26px 72px 26px 26px;
+  color: #20242a;
+  background: #fff;
+  border: 1px solid #dce5eb;
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.official-resource-card::after {
+  position: absolute;
+  right: 26px;
+  bottom: 26px;
+  color: var(--red);
+  font-size: 24px;
+  content: "→";
+}
+
+.official-resource-card:hover {
+  border-color: rgba(239, 51, 58, 0.45);
+  box-shadow: 0 18px 38px rgba(8, 32, 51, 0.08);
+}
+
+.official-resource-card span {
+  margin-bottom: 22px;
+  color: var(--red);
+  font-size: var(--fs-13);
+  font-weight: var(--font-weight-700);
+}
+
+.official-resource-card strong {
+  color: #20242a;
+  font-size: var(--fs-22);
+  line-height: 1.25;
 }
 
 .footer-address-block h3 {
@@ -9366,6 +9607,9 @@ dd {
 @media (max-width: 767px) {
   .inner-banner {
     height: 320px;
+    width: calc(100% - 32px);
+    margin-top: 24px;
+    border-radius: 14px;
   }
 
   .business-carousel {
@@ -9455,12 +9699,17 @@ dd {
   .official-intro-section,
   .official-product-section,
   .official-service-section,
-  .official-feature-section {
+  .official-feature-section,
+  .official-challenge-section,
+  .official-industries-section,
+  .official-proof-section {
     padding: 48px 0;
+    scroll-margin-top: 132px;
   }
 
   .official-intro-grid,
-  .official-section-inner {
+  .official-section-inner,
+  .official-overview-panel {
     width: auto;
     margin-right: 16px;
     margin-left: 16px;
@@ -9473,6 +9722,43 @@ dd {
 
   .official-intro-grid h2 {
     font-size: 32px;
+  }
+
+  .official-overview-panel {
+    margin-top: 28px;
+    padding: 22px;
+  }
+
+  .official-copy p {
+    font-size: var(--fs-16);
+  }
+
+  .official-stat-grid,
+  .official-challenge-grid,
+  .official-industries-grid,
+  .official-resource-list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .official-stat-card,
+  .official-challenge-card,
+  .official-service-card.has-image,
+  .official-resource-card {
+    min-height: 0;
+  }
+
+  .official-stat-card strong {
+    margin-bottom: 20px;
+    font-size: 46px;
+  }
+
+  .official-challenge-card {
+    padding: 22px;
+  }
+
+  .official-challenge-card span {
+    margin-bottom: 22px;
   }
 
   .official-product-grid,
@@ -9503,8 +9789,29 @@ dd {
     display: none;
   }
 
-  .official-service-grid article {
+  .official-card-list {
+    margin-top: 16px;
+  }
+
+  .official-card-list li {
+    min-height: 34px;
+    font-size: var(--fs-13);
+  }
+
+  .official-service-card {
     min-height: 0;
+    padding: 20px;
+  }
+
+  .official-service-card.has-image {
+    padding: 0;
+  }
+
+  .official-service-card-media {
+    height: 180px;
+  }
+
+  .official-service-card-copy {
     padding: 20px;
   }
 
