@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { businessSegments, imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
+import { imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
@@ -45,12 +45,12 @@ const megaHref: Record<string, string> = {
   "Air Pollution Control System Maintenance Services": "/services/air-pollution-control-system-maintenance-services",
   "Automatic Tube Cleaning System (ATCS)": "/services/automatic-tube-cleaning-system-atcs",
   "Investor Overview": "/investor-overview",
-  "Financial Information": "/investors/quarterly-results",
-  "Governance and Regulatory information": "/investors/corporate-governance",
-  "Shareholder Information": "/investors/shareholding-pattern",
-  "Investor Services Contact": "/investors/investor-services-contact",
+  "Financial Information": "/investor-overview#latest-results",
+  "Governance and Regulatory information": "/investor-overview#shareholder-info",
+  "Shareholder Information": "/investor-overview#shareholder-info",
+  "Investor Services Contact": "/investor-overview#investor-contact",
   "Dispute Resolution Mechanism": "/investor-overview",
-  Disclaimer: "/investors/investor-disclaimer",
+  Disclaimer: "/investor-overview",
   "In the News": "/in-the-news",
   "Press Releases": "/in-the-news",
   "TV Interviews": "/in-the-news",
@@ -67,7 +67,7 @@ const navDisplayLabel: Record<string, string> = {
   "In the News": "News",
 };
 
-const directNavLabels = new Set(["About Us", "Digital Solutions", "In the News", "Contact Us"]);
+const directNavLabels = new Set(["About Us", "Digital Solutions", "Contact Us"]);
 
 function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
@@ -82,7 +82,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const active = navItems.find((item) => item.label === menu) ?? navItems[0];
-  const activeProductGroup = businessSegments[productMenuIndex] ?? businessSegments[0];
+  const activeProductGroup = productSubcategoryGroups[productMenuIndex] ?? productSubcategoryGroups[0];
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -128,9 +128,7 @@ export function Header() {
       <header className="site-header" onMouseLeave={() => setMenu("")} data-no-translate>
         <div className="utility-bar">
           <div />
-          <div className="utility-right">
-            <a href="/careers">{t("Careers")}</a>
-          </div>
+          <div className="utility-right" />
         </div>
         <div className="main-nav">
           <button
@@ -207,11 +205,15 @@ export function Header() {
           ) : null}
           {active.label === "Business Portfolio" ? (
             <div className="mega-product-browser">
+              <div className="mega-product-intro">
+                <h2>{t("Product categories")}</h2>
+                <p>{t(active.summary)}</p>
+              </div>
               <div className="mega-product-primary" aria-label={t("Product categories")}>
-                {businessSegments.map((group, index) => (
+                {productSubcategoryGroups.map((group, index) => (
                   <a
                     className={index === productMenuIndex ? "is-active" : ""}
-                    href={megaHref[group.label] ?? "#"}
+                    href={group.href}
                     key={group.label}
                     onFocus={() => setProductMenuIndex(index)}
                     onMouseEnter={() => setProductMenuIndex(index)}
@@ -225,13 +227,19 @@ export function Header() {
                   </a>
                 ))}
               </div>
-              <div className="mega-product-secondary" aria-label={t(activeProductGroup.label)}>
-                {activeProductGroup.links.map((child) => (
-                  <a href={productSolutionHrefs[child] ?? megaHref[child] ?? "#"} key={child}>
-                    {t(child)}
+              <div className="mega-product-children" aria-label={t("Product subcategories")}>
+                <p>{t(activeProductGroup.label)}</p>
+                {activeProductGroup.children.map((child) => (
+                  <a href={child.href} key={child.href}>
+                    {t(child.label)}
                   </a>
                 ))}
               </div>
+              <a className="mega-product-spotlight" href="/business-segments/green-solutions">
+                <span>{t("In the Spotlight")}</span>
+                <img src={imageUrls.greenHydrogen} alt={t(active.spotlight)} />
+                <strong>{t(active.spotlight)}</strong>
+              </a>
             </div>
           ) : (
             <div className="mega-links">
@@ -260,6 +268,7 @@ export function Header() {
           <div className="mobile-nav-list">
             {navItems.map((item) => {
               const isProducts = item.label === "Business Portfolio";
+              const isNews = item.label === "In the News";
               const hasChildren = isProducts || item.links.length > 0;
               const isExpanded = mobileExpanded === item.label;
 
@@ -290,13 +299,15 @@ export function Header() {
                   </button>
                   {isExpanded ? (
                     <div className="mobile-submenu">
-                      <a
-                        className="mobile-overview-link"
-                        href={localizedHref(navHref[item.label] ?? "#")}
-                        onClick={closeMobileMenu}
-                      >
-                        {t("Overview")}
-                      </a>
+                      {!isNews ? (
+                        <a
+                          className="mobile-overview-link"
+                          href={localizedHref(navHref[item.label] ?? "#")}
+                          onClick={closeMobileMenu}
+                        >
+                          {t("Overview")}
+                        </a>
+                      ) : null}
                       {isProducts
                         ? productSubcategoryGroups.map((group) => (
                             <details className="mobile-subgroup" key={group.label}>
@@ -323,11 +334,6 @@ export function Header() {
                 </div>
               );
             })}
-            <div className="mobile-nav-section">
-              <a className="mobile-nav-link" href={localizedHref("/careers")} onClick={closeMobileMenu}>
-                {t("Careers")}
-              </a>
-            </div>
           </div>
           <button
             className="mobile-enquiry"

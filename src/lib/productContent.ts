@@ -23,11 +23,14 @@ const productImage = {
     "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png",
   steam: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_desktop_banner.jpg",
   steamMobile: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/steam_mobile_banner.jpg",
-  cooling: imageUrls.bannerPortfolio,
+  cooling:
+    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Cooling%20and%20Heating%20Solutions%20Banner%20updated.png",
   coolingMobile:
-    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/cooling-heating-mobile.jpg",
-  water: imageUrls.bannerPortfolio,
-  waterMobile: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/water-banner-mobile.jpg",
+    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Cooling%20and%20Heating%20Solutions.png",
+  water:
+    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-08/water_waste_banner_0.jpg",
+  waterMobile:
+    "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-08/water_waste_banner_mobile_0.jpg",
   chemicals: imageUrls.bannerChemicals,
   chemicalsMobile: imageUrls.bannerChemicalsMobile,
   service: imageUrls.serve,

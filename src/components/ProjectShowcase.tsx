@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 import type { ProjectShowcaseItem } from "../lib/projects";
 
@@ -78,9 +79,9 @@ export function ProjectShowcase({
                 <dd>{t(current.scope)}</dd>
               </div>
             </dl>
-            <a className="project-showcase-link" href={current.href}>
+            <Link className="project-showcase-link" href={current.href}>
               {t("View project")}
-            </a>
+            </Link>
           </div>
         </article>
         <div className="carousel-controls project-showcase-controls" aria-label={t("Projects")}>

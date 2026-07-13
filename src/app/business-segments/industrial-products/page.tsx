@@ -2,9 +2,9 @@ import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
 import { SolutionsTabs } from "../../../components/SolutionsTabs";
-import { CaseStudiesRow } from "../../../components/CaseStudiesRow";
 import { imageUrls } from "../../../lib/site";
-import { industrialProductsSolutions, sharedCaseStudies } from "../../../lib/segments";
+import { industrialProductsSolutions } from "../../../lib/segments";
+import { IndustrialProductHighlights } from "../../../components/IndustrialProductHighlights";
 
 export const metadata = {
   title: "Sản phẩm | Thermax Vietnam",
@@ -49,8 +49,7 @@ export default function IndustrialProductsPage() {
       />
 
       <SolutionsTabs items={industrialProductsSolutions} />
-
-      <CaseStudiesRow items={sharedCaseStudies} />
+      <IndustrialProductHighlights />
     </PageShell>
   );
 }

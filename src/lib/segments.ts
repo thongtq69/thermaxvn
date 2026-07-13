@@ -32,14 +32,14 @@ export const industrialProductsSolutions: SolutionItem[] = [
     title: "Cooling and Heating Solutions",
     description: "Energy-efficient cooling and heating systems for industrial and commercial spaces",
     image:
-      "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/cooling-heating-mobile.jpg",
+      "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Cooling%20and%20Heating%20Solutions.png",
     href: "/industrial-products/cooling-and-heating-solutions",
     children: subcategoriesFor("Cooling and Heating Solutions"),
   },
   {
     title: "Water and Waste Solutions",
     description: "Comprehensive water treatment and wastewater management for sustainable operations",
-    image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/water-banner-mobile.jpg",
+    image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-03/fc-zeroliquid-wastewatercapabilities_0.jpg",
     href: "/industrial-products/water-and-waste-solutions",
     children: subcategoriesFor("Water and Waste Solutions"),
   },
@@ -60,7 +60,7 @@ export const industrialInfraSolutions: SolutionItem[] = [
       "From concept to commissioning and beyond, turnkey EPC and asset management solutions delivering assured performance, safe and timely execution, and the lowest lifetime cost",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/process-and-energy-solutions-mobile.jpg",
-    href: "/industrial-infra/projects-and-energy-solutions",
+    href: "/business-portfolio/industrial-infrastructure?solution=projects-and-energy-solutions#solutions",
   },
   {
     title: "Large Boilers and Fired Heaters",
@@ -68,7 +68,7 @@ export const industrialInfraSolutions: SolutionItem[] = [
       "Advanced boiler and fired heater solutions enabling efficient steam and energy generation worldwide",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Untitled%20design%20%2843%29.png",
-    href: "/industrial-infra/large-boilers-and-fired-heaters",
+    href: "/business-portfolio/industrial-infrastructure?solution=large-boilers-and-fired-heaters#solutions",
   },
 ];
 
@@ -78,7 +78,7 @@ export const greenSolutions: SolutionItem[] = [
     description: "Enabling circular energy with scalable bio-CNG solutions",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/bioenergy-solutions-mobile.jpg",
-    href: "/green-solutions/bio-energy-solutions",
+    href: "/business-segments/green-solutions?solution=bio-cng-solutions#solutions",
   },
   {
     title: "Build-Own-Operate Solutions",
@@ -86,21 +86,21 @@ export const greenSolutions: SolutionItem[] = [
       "TOESL's assured green utility solutions are based on the build-own-operate model for optimised lifecycle performance",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Build-Own-Operate%20Solutions%20Mobile.png",
-    href: "/green-solutions/build-own-operate-solutions",
+    href: "/business-segments/green-solutions?solution=build-own-operate-solutions#solutions",
   },
   {
     title: "Green Hydrogen",
     description: "Powering a green transition through scalable alkaline systems and solid oxide electrolysers",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Green%20hydrogen%20mobile_0.png",
-    href: "/green-solutions/green-hydrogen",
+    href: "/business-segments/green-solutions?solution=green-hydrogen#solutions",
   },
   {
     title: "Renewable Energy",
     description: "First Energy (FEPL), under the Thermax brand, delivers bespoke renewable energy solutions worldwide",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/banner-solar-energy-mob_0.jpg",
-    href: "/green-solutions/renewable-energy",
+    href: "/business-segments/green-solutions?solution=renewable-energy#solutions",
   },
 ];
 
@@ -138,7 +138,7 @@ export const sharedCaseStudies = [
   {
     title: "Thermax Opticor® improves clinker cooler ESP performance by 25%",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Desktop.jpg",
-    href: "/case-study/thermax-opticor-improves-clinker-cooler-esp-performance-by-25",
+    href: "/industrial-products/air-pollution-control-systems",
     category: "Air Pollution Control",
     date: "18/04/2026",
     summary: "Thermax Opticor® solution improves the clinker cooler electrostatic precipitator (ESP) performance by 25%, ensuring strict emissions compliance.",
@@ -146,7 +146,7 @@ export const sharedCaseStudies = [
   {
     title: "Thermax's CLCT boosts reliability and performance of heat exchangers for an IT major",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Desktop_8.jpg",
-    href: "/case-study/thermaxs-clct-boosts-reliability-and-performance-of-heat-exchangers-for-an-it-major",
+    href: "/industrial-products/cooling-and-heating-solutions",
     category: "Cooling & Heating",
     date: "08/04/2026",
     summary: "Thermax's closed loop cooling tower (CLCT) boosts reliability and performance of heat exchangers for a prominent IT major's data centre.",
@@ -154,7 +154,7 @@ export const sharedCaseStudies = [
   {
     title: "Bi-drum boiler installed and commissioned in just 40 days for a pharmaceutical major",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Desktop_11.jpg",
-    href: "/case-study/thermax-sets-a-record-by-installing-and-commissioning-a-bi-drum-boiler-in-just-40-days-for-a-pharmaceutical-major-in-indonesia",
+    href: "/industrial-products/process-heat-solutions",
     category: "Process Heat",
     date: "26/03/2026",
     summary: "Thermax set a record by installing and commissioning a bi-drum boiler in just 40 days for a pharmaceutical major in Indonesia.",

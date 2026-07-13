@@ -19,7 +19,7 @@ export const industrialInfrastructureProjects: ProjectShowcaseItem[] = [
       "End-to-end EPC and asset management for steam, power and process utility requirements.",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/process-and-energy-solutions-mobile.jpg",
-    href: "/industrial-infra/projects-and-energy-solutions",
+    href: "/projects/projects-and-energy-solutions",
     region: "Industrial utilities",
     capacity: "Steam and power packages",
     scope: "Concept to commissioning",
@@ -31,7 +31,7 @@ export const industrialInfrastructureProjects: ProjectShowcaseItem[] = [
       "Advanced boiler and fired heater packages supporting efficient steam generation and heat duty.",
     image:
       "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Untitled%20design%20%2843%29.png",
-    href: "/industrial-infra/large-boilers-and-fired-heaters",
+    href: "/projects/large-boilers-and-fired-heaters",
     region: "Global industrial sites",
     capacity: "High-pressure steam",
     scope: "Design, supply and commissioning",
@@ -42,7 +42,7 @@ export const industrialInfrastructureProjects: ProjectShowcaseItem[] = [
     description:
       "A fast-track installation and commissioning reference for a pharmaceutical major in Indonesia.",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Desktop_11.jpg",
-    href: "/case-study/thermax-sets-a-record-by-installing-and-commissioning-a-bi-drum-boiler-in-just-40-days-for-a-pharmaceutical-major-in-indonesia",
+    href: "/projects/bi-drum-boiler-40-days",
     region: "Indonesia",
     capacity: "40-day delivery",
     scope: "Installation and commissioning",
@@ -53,7 +53,7 @@ export const industrialInfrastructureProjects: ProjectShowcaseItem[] = [
     description:
       "Manufacturing, supply, installation supervision and performance testing for an ultra-supercritical power project.",
     image: imageUrls.bannerInfra,
-    href: "/in-the-news",
+    href: "/projects/ultra-supercritical-boiler-800-mw",
     region: "Central India",
     capacity: "1x800 MW",
     scope: "Boiler package supply",
@@ -64,7 +64,7 @@ export const industrialInfrastructureProjects: ProjectShowcaseItem[] = [
     description:
       "Engineering, procurement, manufacturing and modular supply for large high-pressure utility boilers.",
     image: imageUrls.heroAlt,
-    href: "/in-the-news",
+    href: "/projects/refinery-petrochemical-units",
     region: "Nigeria",
     capacity: "4 x 400 TPH",
     scope: "Engineering and modular supply",

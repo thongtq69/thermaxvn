@@ -2,9 +2,8 @@ import { PageShell } from "../../../components/PageShell";
 import { InnerHero } from "../../../components/InnerHero";
 import { IntroBlock } from "../../../components/IntroBlock";
 import { SolutionsTabs } from "../../../components/SolutionsTabs";
-import { CaseStudiesRow } from "../../../components/CaseStudiesRow";
 import { imageUrls } from "../../../lib/site";
-import { greenSolutions, sharedCaseStudies } from "../../../lib/segments";
+import { greenSolutions } from "../../../lib/segments";
 
 export const metadata = {
   title: "Thermax Green Solutions | Bio-CNG, Renewable Energy, Build-Own-Operate, Green Hydrogen",
@@ -44,8 +43,6 @@ export default function GreenSolutionsPage() {
       />
 
       <SolutionsTabs items={greenSolutions} />
-
-      <CaseStudiesRow items={sharedCaseStudies} />
     </PageShell>
   );
 }

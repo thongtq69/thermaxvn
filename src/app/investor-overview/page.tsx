@@ -57,19 +57,19 @@ const investorContacts = [
 ];
 
 const shareholderLinks = [
-  { label: "IEPF/Unpaid/Unclaimed dividend details", href: "/investors/iepf-investor-education-protection-fund" },
+  { label: "IEPF/Unpaid/Unclaimed dividend details", href: "/investor-overview#shareholder-info" },
   {
     label: "Disclosure under Regulation 46 of SEBI (LODR) Regulations",
-    href: "/investors/disclosure-under-regulation-46-of-sebi-lodr-regulations",
+    href: "/investor-overview#shareholder-info",
   },
-  { label: "Investor documents", href: "/investors/investor-documents" },
-  { label: "Disclosures pursuant to SEBI SBEB regulations", href: "/investors/thermax-disclosures-under-sebi-sbeb-regulations" },
-  { label: "Shareholding pattern", href: "/investors/shareholding-pattern" },
-  { label: "Stock exchange intimations", href: "/investors/stock-exchange-intimations" },
-  { label: "Insider trading", href: "/investors/insider-trading" },
-  { label: "Credit ratings", href: "/investors/credit-ratings" },
-  { label: "Postal ballot", href: "/investors/postal-ballot" },
-  { label: "Corporate governance", href: "/investors/corporate-governance" },
+  { label: "Investor documents", href: "/investor-overview#shareholder-info" },
+  { label: "Disclosures pursuant to SEBI SBEB regulations", href: "/investor-overview#shareholder-info" },
+  { label: "Shareholding pattern", href: "/investor-overview#shareholder-info" },
+  { label: "Stock exchange intimations", href: "/investor-overview#shareholder-info" },
+  { label: "Insider trading", href: "/investor-overview#shareholder-info" },
+  { label: "Credit ratings", href: "/investor-overview#shareholder-info" },
+  { label: "Postal ballot", href: "/investor-overview#shareholder-info" },
+  { label: "Corporate governance", href: "/investor-overview#shareholder-info" },
 ];
 
 export default function InvestorOverviewPage() {
@@ -94,10 +94,10 @@ export default function InvestorOverviewPage() {
         context="Investors"
         current="Investor Relations"
         options={[
-          { label: "Quarterly results", href: "/investors/quarterly-results" },
-          { label: "Annual reports", href: "/investors/annual-reports" },
-          { label: "AGM", href: "/investors/agm" },
-          { label: "Investor services contact", href: "/investors/investor-services-contact" },
+          { label: "Quarterly results", href: "/investor-overview#latest-results" },
+          { label: "Annual reports", href: "/investor-overview#latest-results" },
+          { label: "AGM", href: "/investor-overview#agm" },
+          { label: "Investor services contact", href: "/investor-overview#investor-contact" },
         ]}
       />
 
@@ -150,7 +150,7 @@ export default function InvestorOverviewPage() {
       <section className="agm-section" id="agm" data-section="agm">
         <div className="agm-inner" data-reveal>
           <h2 className="agm-title">AGM information</h2>
-          <a className="agm-explore" href="/investors/agm">
+          <a className="agm-explore" href="/investor-overview#agm">
             <span className="cta-arrow">→</span> Explore more
           </a>
           <div className="agm-grid">

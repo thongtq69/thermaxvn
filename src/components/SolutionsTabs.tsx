@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 
+const solutionFallbackImage =
+  "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-09/Industrial_product_banner.jpg";
+
 export type SolutionItem = {
   title: string;
   description: string;
@@ -83,7 +86,17 @@ export function SolutionsTabs({ items, eyebrow = "Solutions" }: { items: Solutio
 
         <div className="solutions-panel">
           <div className="solutions-panel-img">
-            <img src={current.image} alt={t(current.title)} />
+            <img
+              key={current.image}
+              src={current.image}
+              alt={t(current.title)}
+              onError={(event) => {
+                const image = event.currentTarget;
+                if (image.dataset.fallbackApplied) return;
+                image.dataset.fallbackApplied = "true";
+                image.src = solutionFallbackImage;
+              }}
+            />
           </div>
           <div className="solutions-panel-text">
             <h2>{t(current.title)}</h2>
