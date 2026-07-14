@@ -95,7 +95,9 @@ export function createId(prefix: string) {
 
 export async function getManagedProjectBySlug(slug: string): Promise<ManagedProject | null> {
   const projects = await getCmsSection<ManagedProject[]>("projects");
-  return projects.find((project) => project.slug === slug || project.href.endsWith(`/${slug}`)) ?? null;
+  return projects.find(
+    (project) => project.status !== "draft" && (project.slug === slug || project.href.endsWith(`/${slug}`)),
+  ) ?? null;
 }
 
 export async function addAsset(asset: Omit<ManagedAsset, "id" | "createdAt">) {

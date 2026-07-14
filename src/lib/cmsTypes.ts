@@ -20,11 +20,13 @@ export type ManagedNewsItem = {
   sourceUrl?: string;
   summary: string;
   highlights?: string[];
+  status?: "draft" | "published";
 };
 
 export type ManagedProject = ProjectShowcaseItem & {
   id: string;
   slug: string;
+  status?: "draft" | "published";
 };
 
 export type CmsData = {

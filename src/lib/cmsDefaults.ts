@@ -14,12 +14,14 @@ export const defaultNews: ManagedNewsItem[] = newsItems.map((item, index) => ({
   sourceUrl: "/in-the-news",
   summary: item.title,
   highlights: [],
+  status: "published",
 }));
 
 export const defaultProjects: ManagedProject[] = industrialInfrastructureProjects.map((project, index) => ({
   ...project,
   id: `default-project-${index + 1}`,
   slug: slugFromHref(project.href),
+  status: "published",
 }));
 
 export const defaultCmsData: CmsData = {

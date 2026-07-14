@@ -184,7 +184,7 @@ export default function InTheNewsPage() {
       .then((response) => (response.ok ? response.json() : null))
       .then((items) => {
         if (mounted && Array.isArray(items) && items.length > 0) {
-          setManagedNews(items);
+          setManagedNews(items.filter((item: ManagedNewsItem) => item.status !== "draft"));
         }
       })
       .catch(() => undefined);

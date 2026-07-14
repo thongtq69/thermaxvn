@@ -30,7 +30,7 @@ export function ProjectShowcase({
       .then((response) => (response.ok ? response.json() : null))
       .then((projects) => {
         if (mounted && Array.isArray(projects) && projects.length > 0) {
-          setManagedItems(projects);
+          setManagedItems(projects.filter((project) => project.status !== "draft"));
         }
       })
       .catch(() => {
