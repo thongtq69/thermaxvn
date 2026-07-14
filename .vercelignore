@@ -13,3 +13,4 @@ _source-*.png
 *.tsbuildinfo
 *.log
 .DS_Store
+.env*
