@@ -5,7 +5,8 @@ import { InnerHero } from "../../../components/InnerHero";
 import { PageShell } from "../../../components/PageShell";
 import { ProjectDetailContent } from "../../../components/ProjectDetailContent";
 import type { Locale } from "../../../lib/i18n";
-import { getProjectDetail, projectDetails } from "../../../lib/projectDetails";
+import { getManagedProjectBySlug } from "../../../lib/cmsServer";
+import { getProjectDetail, projectDetails, type ProjectDetail } from "../../../lib/projectDetails";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -23,7 +24,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params, searchParams }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectDetail(slug);
+  const project = getProjectDetail(slug) ?? projectFromManaged(await getManagedProjectBySlug(slug));
   const locale = await localeFromRequest(await searchParams);
 
   if (!project) return { title: "Dự án | Thermax Vietnam" };
@@ -36,7 +37,7 @@ export async function generateMetadata({ params, searchParams }: ProjectPageProp
 
 export default async function ProjectPage({ params, searchParams }: ProjectPageProps) {
   const { slug } = await params;
-  const project = getProjectDetail(slug);
+  const project = getProjectDetail(slug) ?? projectFromManaged(await getManagedProjectBySlug(slug));
   const locale = await localeFromRequest(await searchParams);
 
   if (!project) notFound();
@@ -62,3 +63,28 @@ export default async function ProjectPage({ params, searchParams }: ProjectPageP
   );
 }
 
+function projectFromManaged(project: Awaited<ReturnType<typeof getManagedProjectBySlug>>): ProjectDetail | null {
+  if (!project) return null;
+
+  return {
+    slug: project.slug,
+    title: { en: project.title, vi: project.title },
+    eyebrow: { en: project.category, vi: project.category },
+    summary: { en: project.description, vi: project.description },
+    image: project.image,
+    facts: [
+      { label: { en: "Region", vi: "Khu vá»±c" }, value: { en: project.region, vi: project.region } },
+      { label: { en: "Capacity", vi: "CÃ´ng suáº¥t" }, value: { en: project.capacity, vi: project.capacity } },
+      { label: { en: "Scope", vi: "Pháº¡m vi" }, value: { en: project.scope, vi: project.scope } },
+    ],
+    sections: [
+      {
+        title: { en: "Project information", vi: "ThÃ´ng tin dá»± Ã¡n" },
+        image: project.image,
+        imageAlt: { en: project.title, vi: project.title },
+        paragraphs: [{ en: project.description, vi: project.description }],
+      },
+    ],
+    sourceUrl: project.href,
+  };
+}

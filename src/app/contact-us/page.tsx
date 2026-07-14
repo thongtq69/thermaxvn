@@ -64,16 +64,31 @@ export default function ContactUsPage() {
           </div>
           <form
             className="contact-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Thanks! We will get in touch shortly.");
+            onSubmit={async (event) => {
+              event.preventDefault();
+              const form = new FormData(event.currentTarget);
+              const response = await fetch("/api/contact-requests", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fullName: `${form.get("firstName") || ""} ${form.get("lastName") || ""}`.trim(),
+                  email: form.get("email"),
+                  phone: form.get("phone"),
+                  country: form.get("country"),
+                  industry: form.get("industry"),
+                  message: form.get("message"),
+                  source: "contact-page",
+                }),
+              });
+              alert(response.ok ? "Thanks! We will get in touch shortly." : "Please try again later.");
+              if (response.ok) event.currentTarget.reset();
             }}
           >
-            <input placeholder="First name*" required />
-            <input placeholder="Last name*" required />
-            <input placeholder="Business email*" type="email" required />
-            <input placeholder="Phone number*" type="tel" required />
-            <select className="full" defaultValue="">
+            <input name="firstName" placeholder="First name*" required />
+            <input name="lastName" placeholder="Last name*" required />
+            <input name="email" placeholder="Business email*" type="email" required />
+            <input name="phone" placeholder="Phone number*" type="tel" required />
+            <select name="country" className="full" defaultValue="">
               <option value="" disabled>
                 Country*
               </option>
@@ -84,7 +99,7 @@ export default function ContactUsPage() {
               <option>Thailand</option>
               <option>Other</option>
             </select>
-            <select className="full" defaultValue="">
+            <select name="industry" className="full" defaultValue="">
               <option value="" disabled>
                 Select industry
               </option>
@@ -94,7 +109,7 @@ export default function ContactUsPage() {
               <option>Steel</option>
               <option>Pharma</option>
             </select>
-            <textarea placeholder="How can Thermax help?" />
+            <textarea name="message" placeholder="How can Thermax help?" />
             <button type="submit">
               Submit enquiry <ArrowIcon />
             </button>

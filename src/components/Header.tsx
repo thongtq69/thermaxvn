@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
+import type { ProductSubcategoryGroup } from "../lib/site";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
@@ -81,8 +82,24 @@ export function Header() {
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [managedProductGroups, setManagedProductGroups] = useState<ProductSubcategoryGroup[]>(productSubcategoryGroups);
   const active = navItems.find((item) => item.label === menu) ?? navItems[0];
-  const activeProductGroup = productSubcategoryGroups[productMenuIndex] ?? productSubcategoryGroups[0];
+  const activeProductGroup = managedProductGroups[productMenuIndex] ?? managedProductGroups[0];
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/cms/productGroups")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((groups) => {
+        if (mounted && Array.isArray(groups) && groups.length > 0) {
+          setManagedProductGroups(groups);
+        }
+      })
+      .catch(() => undefined);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -210,7 +227,7 @@ export function Header() {
                 <p>{t(active.summary)}</p>
               </div>
               <div className="mega-product-primary" aria-label={t("Product categories")}>
-                {productSubcategoryGroups.map((group, index) => (
+                {managedProductGroups.map((group, index) => (
                   <a
                     className={index === productMenuIndex ? "is-active" : ""}
                     href={group.href}
@@ -309,7 +326,7 @@ export function Header() {
                         </a>
                       ) : null}
                       {isProducts
-                        ? productSubcategoryGroups.map((group) => (
+                        ? managedProductGroups.map((group) => (
                             <details className="mobile-subgroup" key={group.label}>
                               <summary>{t(group.label)}</summary>
                               <div className="mobile-subgroup-links">
@@ -392,6 +409,7 @@ function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }
 
 function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useLanguage();
+  const [status, setStatus] = useState("");
 
   return (
     <div
@@ -402,21 +420,48 @@ function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }
       data-no-translate
     >
       <button className="modal-backdrop" type="button" onClick={onClose} aria-label={t("Close form")} />
-      <form className="callback-panel">
+      <form
+        className="callback-panel"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          const form = new FormData(event.currentTarget);
+          setStatus(t("Sending..."));
+          const response = await fetch("/api/contact-requests", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              fullName: form.get("fullName"),
+              companyName: form.get("companyName"),
+              phone: form.get("phone"),
+              address: form.get("address"),
+              email: form.get("email"),
+              message: form.get("message"),
+              source: "header-callback",
+            }),
+          });
+          if (response.ok) {
+            event.currentTarget.reset();
+            setStatus(t("Thanks! We will get in touch shortly."));
+          } else {
+            setStatus(t("Please try again later."));
+          }
+        }}
+      >
         <button className="close-button" type="button" onClick={onClose} aria-label={t("Close")}>
           <CloseIcon />
         </button>
         <p>{t("Request a call back")}</p>
         <h2>{t("Submit your enquiry")}</h2>
         <div className="form-grid">
-          <input placeholder={t("Full name*")} />
-          <input placeholder={t("Company name*")} />
-          <input placeholder={t("Phone number*")} />
-          <input placeholder={t("Company address*")} />
-          <input placeholder={t("Email*")} />
-          <textarea placeholder={t("How can Thermax help?")} />
+          <input name="fullName" placeholder={t("Full name*")} required />
+          <input name="companyName" placeholder={t("Company name*")} />
+          <input name="phone" placeholder={t("Phone number*")} required />
+          <input name="address" placeholder={t("Company address*")} />
+          <input name="email" placeholder={t("Email*")} type="email" required />
+          <textarea name="message" placeholder={t("How can Thermax help?")} />
         </div>
-        <button className="primary-button" type="button">
+        {status ? <span className="form-status">{status}</span> : null}
+        <button className="primary-button" type="submit">
           {t("Submit enquiry")}
           <ArrowIcon />
         </button>

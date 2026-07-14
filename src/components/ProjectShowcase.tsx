@@ -22,25 +22,43 @@ export function ProjectShowcase({
 }) {
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
+  const [managedItems, setManagedItems] = useState<ProjectShowcaseItem[]>(items);
 
   useEffect(() => {
-    setActive(0);
+    let mounted = true;
+    fetch("/api/cms/projects")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((projects) => {
+        if (mounted && Array.isArray(projects) && projects.length > 0) {
+          setManagedItems(projects);
+        }
+      })
+      .catch(() => {
+        if (mounted) setManagedItems(items);
+      });
+    return () => {
+      mounted = false;
+    };
   }, [items]);
 
   useEffect(() => {
-    if (items.length < 2) return;
+    setActive(0);
+  }, [managedItems]);
+
+  useEffect(() => {
+    if (managedItems.length < 2) return;
 
     const interval = window.setInterval(() => {
-      setActive((value) => (value + 1) % items.length);
+      setActive((value) => (value + 1) % managedItems.length);
     }, 5200);
     return () => window.clearInterval(interval);
-  }, [items.length]);
+  }, [managedItems.length]);
 
-  if (items.length === 0) return null;
+  if (managedItems.length === 0) return null;
 
-  const current = items[active];
+  const current = managedItems[active] ?? managedItems[0];
   const goToProject = (direction: number) => {
-    setActive((value) => (value + direction + items.length) % items.length);
+    setActive((value) => (value + direction + managedItems.length) % managedItems.length);
   };
 
   return (
@@ -89,7 +107,7 @@ export function ProjectShowcase({
             &lt;
           </button>
           <div className="carousel-counter">
-            {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+            {String(active + 1).padStart(2, "0")} / {String(managedItems.length).padStart(2, "0")}
           </div>
           <button type="button" onClick={() => goToProject(1)} aria-label={t("Next")}>
             &gt;

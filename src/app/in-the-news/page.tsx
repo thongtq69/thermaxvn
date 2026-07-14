@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PageShell } from "../../components/PageShell";
 import { InnerHero } from "../../components/InnerHero";
 import { ArrowIcon } from "../../components/icons";
 import { useLanguage } from "../../components/LanguageProvider";
 import { imageUrls } from "../../lib/site";
+import type { ManagedNewsItem } from "../../lib/cmsTypes";
 
 const filters = [
   "All",
@@ -36,8 +37,9 @@ const newsroomStats = [
   { label: "FY2025-26 PAT", value: "Rs. 720 cr", detail: "+15% YoY" },
 ];
 
-const newsItems = [
+const fallbackNewsItems: ManagedNewsItem[] = [
   {
+    id: "local-news-1",
     title: "Thermax reports stronger Q4 with 13% revenue growth and 18% PAT growth",
     date: "May 07, 2026",
     category: "Financial results",
@@ -53,6 +55,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-2",
     title: "Rs. 1,600 crore boiler package reinforces Thermax's industrial infrastructure pipeline",
     date: "March 27, 2026",
     category: "Orders",
@@ -68,6 +71,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-3",
     title: "Order book momentum points to demand across power, process and green utilities",
     date: "May 08, 2026",
     category: "Financial results",
@@ -83,6 +87,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-4",
     title: "Thermax and HPCL partner on green hydrogen, carbon capture and bio-based fuels",
     date: "January 29, 2026",
     category: "Energy transition",
@@ -98,6 +103,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-5",
     title: "Digital reliability expands as Exactspace becomes a Thermax subsidiary",
     date: "April 09, 2026",
     category: "Digital & operations",
@@ -113,6 +119,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-6",
     title: "Thermax marks 30 years of NSE listing with a stronger energy-transition identity",
     date: "December 08, 2025",
     category: "Corporate updates",
@@ -128,6 +135,7 @@ const newsItems = [
     ],
   },
   {
+    id: "local-news-7",
     title: "African utility boiler order highlights Thermax's international project reach",
     date: "November 26, 2025",
     category: "Orders",
@@ -165,8 +173,27 @@ const editorialBriefs = [
 export default function InTheNewsPage() {
   const { t } = useLanguage();
   const [filter, setFilter] = useState("All");
-  const filtered = filter === "All" ? newsItems : newsItems.filter((n) => n.category === filter);
-  const featured = newsItems[0];
+  const [managedNews, setManagedNews] = useState<ManagedNewsItem[]>(fallbackNewsItems);
+  const activeFilters = useMemo(
+    () => ["All", ...Array.from(new Set(managedNews.map((item) => item.category).filter(Boolean)))],
+    [managedNews],
+  );
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/cms/news")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((items) => {
+        if (mounted && Array.isArray(items) && items.length > 0) {
+          setManagedNews(items);
+        }
+      })
+      .catch(() => undefined);
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  const filtered = filter === "All" ? managedNews : managedNews.filter((n) => n.category === filter);
+  const featured = managedNews[0] ?? fallbackNewsItems[0];
 
   return (
     <PageShell>
@@ -209,17 +236,21 @@ export default function InTheNewsPage() {
             <p className="newsroom-date">{t(featured.date)}</p>
             <h2>{t(featured.title)}</h2>
             <p>{t(featured.summary)}</p>
-            <ul>
-              {featured.highlights.map((highlight) => (
-                <li key={highlight}>{t(highlight)}</li>
-              ))}
-            </ul>
-            <a className="section-cta" href={featured.sourceUrl} target="_blank" rel="noreferrer">
-              <span className="cta-arrow">
-                <ArrowIcon />
-              </span>
-              {t(featured.sourceLabel)}
-            </a>
+            {featured.highlights?.length ? (
+              <ul>
+                {featured.highlights.map((highlight) => (
+                  <li key={highlight}>{t(highlight)}</li>
+                ))}
+              </ul>
+            ) : null}
+            {featured.sourceUrl ? (
+              <a className="section-cta" href={featured.sourceUrl} target="_blank" rel="noreferrer">
+                <span className="cta-arrow">
+                  <ArrowIcon />
+                </span>
+                {t(featured.sourceLabel || "Read more")}
+              </a>
+            ) : null}
           </div>
         </article>
       </section>
@@ -230,7 +261,7 @@ export default function InTheNewsPage() {
           <p>{t("Filter by theme to scan the developments most relevant to your team.")}</p>
         </div>
         <div className="news-listing-filter" data-reveal>
-          {filters.map((f) => (
+          {activeFilters.map((f) => (
             <button
               key={f}
               type="button"
@@ -250,9 +281,11 @@ export default function InTheNewsPage() {
                 <p className="newsroom-date">{t(item.date)}</p>
                 <h3>{t(item.title)}</h3>
                 <p>{t(item.summary)}</p>
-                <a href={item.sourceUrl} target="_blank" rel="noreferrer">
-                  {t(item.sourceLabel)}
-                </a>
+                {item.sourceUrl ? (
+                  <a href={item.sourceUrl} target="_blank" rel="noreferrer">
+                    {t(item.sourceLabel || "Read more")}
+                  </a>
+                ) : null}
               </div>
             </article>
           ))}
