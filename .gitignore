@@ -29,4 +29,5 @@ outputs/
 *.pptx
 _clone-*.png
 _source-*.png
+.local-cms.json
 .vercel
