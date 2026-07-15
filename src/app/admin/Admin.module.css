@@ -188,6 +188,10 @@
 .subcategoryHeader p { margin: 0; color: var(--admin-muted); font-size: 10px; }
 .childList { display: grid; gap: 8px; }
 .childRow { display: grid; grid-template-columns: 25px 1fr 1fr 38px; align-items: end; gap: 10px; padding: 12px; border: 1px solid #e7ebf0; border-radius: 9px; background: #fff; }
+.footerSettingsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.footerContactFields { display: grid; align-content: start; gap: 15px; }
+.footerSaveBar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--admin-line); }
+.footerSaveBar span { color: var(--admin-muted); font-size: 11px; }
 .dragHandle { align-self: center; color: #9aa4b1; }
 .dragHandle svg { width: 18px; height: 18px; }
 .iconDanger { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid #f0d2d5; border-radius: 8px; background: #fff; color: #d6313c; }
@@ -345,9 +349,9 @@
   .statGrid, .assetGrid { grid-template-columns: 1fr; }.dashboardTask { grid-template-columns: 40px 1fr; }.dashboardTask button { grid-column: 2; justify-self: start; }.quickGrid { grid-template-columns: 1fr 1fr; }
   .recentTable > div { grid-template-columns: 65px 1fr 110px; padding: 10px 0; }.recentTable > div span:nth-child(3), .recentTable a { display: none; }
   .surface { padding: 18px; }.sectionHeading { align-items: flex-start; flex-direction: column; }.sectionHeading > :last-child { width: 100%; }.toolbar { width: 100%; flex-wrap: wrap; }.toolbar .search, .toolbar .search input { width: 100%; }
-  .uploadForm, .formGrid2, .formGrid3 { grid-template-columns: 1fr; }
+  .uploadForm, .formGrid2, .formGrid3, .footerSettingsGrid { grid-template-columns: 1fr; }
   .editorLayout { display: block; overflow: visible; }.contentList { border-right: 0; border-bottom: 1px solid var(--admin-line); }.contentListScroll { display: flex; max-height: none; overflow-x: auto; }.contentListItem { min-width: 250px; }.editorPane { padding: 20px 15px 90px; }.editorCardHeader { align-items: flex-start; flex-direction: column; }.editorHeaderActions { width: 100%; justify-content: space-between; }
-  .childRow { grid-template-columns: 22px 1fr 38px; }.childRow .field:nth-child(3) { grid-column: 2 / -1; }.subcategoryHeader, .editorFooter { align-items: flex-start; flex-direction: column; }.editorFooter > div { order: 2; }.categoryEditor { padding: 17px; }
+  .childRow { grid-template-columns: 22px 1fr 38px; }.childRow .field:nth-child(3) { grid-column: 2 / -1; }.subcategoryHeader, .editorFooter, .footerSaveBar { align-items: flex-start; flex-direction: column; }.editorFooter > div { order: 2; }.categoryEditor { padding: 17px; }
   .requestToolbar { align-items: stretch; flex-direction: column; }.requestToolbar .search, .requestToolbar .search input { width: 100%; }.segmented { overflow-x: auto; }.requestCard { grid-template-columns: 36px 1fr; padding: 13px; }.requestAvatar { width: 36px; height: 36px; }.requestTitle { flex-direction: column; gap: 5px; }.requestActions { flex-wrap: wrap; }.requestActions .iconDanger { margin-left: 0; }
   .loginPage { grid-template-columns: 1fr; }.loginVisual { min-height: 245px; padding: 28px; }.loginMessage h1 { font-size: 36px; }.loginMessage p, .loginFoot { display: none; }.loginPanel { padding: 22px 15px; }.loginCard { padding: 28px 22px; }
 }

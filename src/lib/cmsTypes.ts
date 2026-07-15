@@ -29,11 +29,37 @@ export type ManagedProject = ProjectShowcaseItem & {
   status?: "draft" | "published";
 };
 
+export type FooterLink = {
+  id: string;
+  label: string;
+  href: string;
+};
+
+export type FooterGroup = {
+  id: string;
+  title: string;
+  links: FooterLink[];
+};
+
+export type ManagedFooter = {
+  logoUrl: string;
+  officeLabel: string;
+  address: string[];
+  phone: string;
+  phoneHref: string;
+  email: string;
+  emailHref: string;
+  groups: FooterGroup[];
+  copyright: string;
+  legalLinks: FooterLink[];
+};
+
 export type CmsData = {
   assets: ManagedAsset[];
   productGroups: ProductSubcategoryGroup[];
   news: ManagedNewsItem[];
   projects: ManagedProject[];
+  footer: ManagedFooter;
 };
 
 export type ContactRequest = {

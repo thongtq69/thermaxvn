@@ -1,19 +1,21 @@
 "use client";
 
 import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
-import type { CmsData, ContactRequest, ManagedAsset, ManagedNewsItem, ManagedProject } from "../../lib/cmsTypes";
+import type { CmsData, ContactRequest, FooterGroup, ManagedAsset, ManagedFooter, ManagedNewsItem, ManagedProject } from "../../lib/cmsTypes";
+import { defaultFooter } from "../../lib/cmsDefaults";
 import type { ProductSubcategoryGroup } from "../../lib/site";
 import styles from "./Admin.module.css";
 
-type Tab = "dashboard" | "assets" | "productGroups" | "news" | "projects" | "requests";
+type Tab = "dashboard" | "assets" | "productGroups" | "footer" | "news" | "projects" | "requests";
 type Notice = { tone: "success" | "error" | "info"; text: string } | null;
 
-const emptyCms: CmsData = { assets: [], productGroups: [], news: [], projects: [] };
+const emptyCms: CmsData = { assets: [], productGroups: [], news: [], projects: [], footer: defaultFooter };
 
 const navItems: Array<{ id: Tab; label: string; description: string; icon: IconName }> = [
   { id: "dashboard", label: "Tổng quan", description: "Tình hình website", icon: "dashboard" },
   { id: "assets", label: "Thư viện ảnh", description: "Ảnh và tệp truyền thông", icon: "image" },
   { id: "productGroups", label: "Sản phẩm", description: "Danh mục và thư mục con", icon: "products" },
+  { id: "footer", label: "Chân trang", description: "Thông tin và liên kết cuối trang", icon: "footer" },
   { id: "news", label: "Tin tức", description: "Bài viết mới nhất", icon: "news" },
   { id: "projects", label: "Dự án", description: "Hồ sơ dự án", icon: "projects" },
   { id: "requests", label: "Yêu cầu khách hàng", description: "Thông tin liên hệ", icon: "inbox" },
@@ -23,6 +25,7 @@ const pageMeta: Record<Tab, { eyebrow: string; title: string; description: strin
   dashboard: { eyebrow: "Trung tâm quản trị", title: "Tổng quan website", description: "Theo dõi nội dung và các yêu cầu mới tại một nơi." },
   assets: { eyebrow: "Nội dung", title: "Thư viện ảnh", description: "Tải lên, tìm kiếm và quản lý ảnh dùng trên website." },
   productGroups: { eyebrow: "Nội dung", title: "Danh mục sản phẩm", description: "Sắp xếp danh mục chính và các sản phẩm con trong menu." },
+  footer: { eyebrow: "Nội dung", title: "Chân trang website", description: "Chỉnh sửa thông tin văn phòng, các cột liên kết và nội dung pháp lý." },
   news: { eyebrow: "Nội dung", title: "Tin tức", description: "Soạn, lưu nháp và xuất bản tin tức mới nhất." },
   projects: { eyebrow: "Nội dung", title: "Dự án", description: "Quản lý thông tin và trang chi tiết của các dự án." },
   requests: { eyebrow: "Khách hàng", title: "Yêu cầu gửi về", description: "Tiếp nhận và theo dõi các yêu cầu từ website." },
@@ -256,6 +259,7 @@ export default function AdminPage() {
               {tab === "dashboard" ? <Dashboard cms={cms} requests={requests} onNavigate={navigate} /> : null}
               {tab === "assets" ? <AssetsPanel assets={cms.assets} busyKey={busyKey} dirty={dirty.has("assets")} onUpload={uploadImage} onChange={(value) => updateSection("assets", value)} onSave={() => saveSection("assets", cms.assets)} onDelete={deleteAsset} /> : null}
               {tab === "productGroups" ? <ProductsPanel groups={cms.productGroups} dirty={dirty.has("productGroups")} busy={busyKey === "save-productGroups"} onChange={(value) => updateSection("productGroups", value)} onSave={() => saveSection("productGroups", cms.productGroups)} /> : null}
+              {tab === "footer" ? <FooterPanel footer={cms.footer} dirty={dirty.has("footer")} busy={busyKey === "save-footer"} onChange={(value) => updateSection("footer", value)} onSave={() => saveSection("footer", cms.footer)} /> : null}
               {tab === "news" ? <NewsPanel news={cms.news} assets={cms.assets} dirty={dirty.has("news")} busy={busyKey === "save-news"} onChange={(value) => updateSection("news", value)} onSave={() => saveSection("news", cms.news)} /> : null}
               {tab === "projects" ? <ProjectsPanel projects={cms.projects} assets={cms.assets} dirty={dirty.has("projects")} busy={busyKey === "save-projects"} onChange={(value) => updateSection("projects", value)} onSave={() => saveSection("projects", cms.projects)} /> : null}
               {tab === "requests" ? <RequestsPanel requests={requests} busyKey={busyKey} onRead={saveRequestStatus} onDelete={deleteRequest} onRefresh={loadRequests} /> : null}
@@ -358,6 +362,65 @@ function ProductsPanel({ groups, dirty, busy, onChange, onSave }: { groups: Prod
   </div>;
 }
 
+function FooterPanel({ footer, dirty, busy, onChange, onSave }: { footer: ManagedFooter; dirty: boolean; busy: boolean; onChange: (footer: ManagedFooter) => void; onSave: () => void }) {
+  const [openGroupId, setOpenGroupId] = useState(footer.groups[0]?.id ?? "");
+  const update = (patch: Partial<ManagedFooter>) => onChange({ ...footer, ...patch });
+  const updateGroup = (groupId: string, patch: Partial<FooterGroup>) => update({
+    groups: footer.groups.map((group) => group.id === groupId ? { ...group, ...patch } : group),
+  });
+  const addGroup = () => {
+    const group: FooterGroup = { id: createId("footer-group"), title: "Cột liên kết mới", links: [] };
+    update({ groups: [...footer.groups, group] });
+    setOpenGroupId(group.id);
+  };
+  const moveGroup = (index: number, direction: -1 | 1) => {
+    const target = index + direction;
+    if (target < 0 || target >= footer.groups.length) return;
+    const groups = [...footer.groups];
+    [groups[index], groups[target]] = [groups[target], groups[index]];
+    update({ groups });
+  };
+
+  return <div className={styles.panelStack}>
+    <section className={styles.surface}>
+      <SectionHeading title="Thông tin văn phòng" description="Nội dung hiển thị ở cột bên trái của chân trang." action={<button className={styles.primaryButton} disabled={!dirty || busy} type="button" onClick={onSave}>{busy ? <Spinner /> : <Icon name="save" />} Lưu thay đổi</button>} />
+      <div className={styles.footerSettingsGrid}>
+        <Field label="URL logo"><input value={footer.logoUrl} onChange={(event) => update({ logoUrl: event.target.value })} placeholder="/thermax-logo.svg" /></Field>
+        <Field label="Tên văn phòng" required><input value={footer.officeLabel} onChange={(event) => update({ officeLabel: event.target.value })} /></Field>
+        <Field label="Địa chỉ" hint="Mỗi dòng sẽ hiển thị thành một dòng riêng"><textarea rows={6} value={footer.address.join("\n")} onChange={(event) => update({ address: toLines(event.target.value) })} /></Field>
+        <div className={styles.footerContactFields}>
+          <div className={styles.formGrid2}><Field label="Số điện thoại"><input value={footer.phone} onChange={(event) => update({ phone: event.target.value })} /></Field><Field label="Liên kết điện thoại"><input value={footer.phoneHref} onChange={(event) => update({ phoneHref: event.target.value })} placeholder="tel:+84..." /></Field></div>
+          <div className={styles.formGrid2}><Field label="Email"><input type="email" value={footer.email} onChange={(event) => update({ email: event.target.value })} /></Field><Field label="Liên kết email"><input value={footer.emailHref} onChange={(event) => update({ emailHref: event.target.value })} placeholder="mailto:..." /></Field></div>
+        </div>
+      </div>
+    </section>
+
+    <section className={styles.surface}>
+      <SectionHeading title="Các cột liên kết" description="Thêm, chỉnh sửa, sắp xếp hoặc xóa các nhóm và liên kết xuất hiện trong chân trang." action={<button className={styles.secondaryButton} type="button" onClick={addGroup}><Icon name="plus" /> Thêm cột</button>} />
+      <div className={styles.categoryList}>{footer.groups.map((group, index) => <article className={`${styles.categoryCard} ${openGroupId === group.id ? styles.categoryOpen : ""}`} key={group.id}>
+        <button className={styles.categorySummary} type="button" onClick={() => setOpenGroupId(openGroupId === group.id ? "" : group.id)}><span className={styles.orderNumber}>{String(index + 1).padStart(2, "0")}</span><span><strong>{group.title || "Cột chưa đặt tên"}</strong><small>{group.links.length} liên kết</small></span><Icon name={openGroupId === group.id ? "chevronUp" : "chevronDown"} /></button>
+        {openGroupId === group.id ? <div className={styles.categoryEditor}>
+          <Field label="Tiêu đề cột" required><input value={group.title} onChange={(event) => updateGroup(group.id, { title: event.target.value })} /></Field>
+          <div className={styles.subcategoryHeader}><div><h3>Liên kết</h3><p>Mỗi liên kết gồm tên hiển thị và đường dẫn đích.</p></div><button className={styles.secondaryButton} type="button" onClick={() => updateGroup(group.id, { links: [...group.links, { id: createId("footer-link"), label: "Liên kết mới", href: "/" }] })}><Icon name="plus" /> Thêm liên kết</button></div>
+          <div className={styles.childList}>{group.links.map((link, linkIndex) => <div className={styles.childRow} key={link.id}><span className={styles.dragHandle}><Icon name="drag" /></span><Field label="Tên hiển thị"><input value={link.label} onChange={(event) => { const links = [...group.links]; links[linkIndex] = { ...link, label: event.target.value }; updateGroup(group.id, { links }); }} /></Field><Field label="Đường dẫn"><input value={link.href} onChange={(event) => { const links = [...group.links]; links[linkIndex] = { ...link, href: event.target.value }; updateGroup(group.id, { links }); }} /></Field><button className={styles.iconDanger} type="button" title="Xóa liên kết" onClick={() => updateGroup(group.id, { links: group.links.filter((item) => item.id !== link.id) })}><Icon name="trash" /></button></div>)}</div>
+          {!group.links.length ? <div className={styles.inlineEmpty}>Chưa có liên kết. Nhấn “Thêm liên kết” để bắt đầu.</div> : null}
+          <div className={styles.editorFooter}><div><button type="button" disabled={index === 0} onClick={() => moveGroup(index, -1)}><Icon name="arrowUp" /> Đưa lên</button><button type="button" disabled={index === footer.groups.length - 1} onClick={() => moveGroup(index, 1)}><Icon name="arrowDown" /> Đưa xuống</button></div><button className={styles.dangerButton} type="button" onClick={() => { if (window.confirm(`Xóa cột “${group.title}” và toàn bộ liên kết bên trong?`)) { update({ groups: footer.groups.filter((item) => item.id !== group.id) }); setOpenGroupId(footer.groups.find((item) => item.id !== group.id)?.id ?? ""); } }}><Icon name="trash" /> Xóa cột</button></div>
+        </div> : null}
+      </article>)}</div>
+      {!footer.groups.length ? <div className={styles.inlineEmpty}>Chưa có cột liên kết nào. Nhấn “Thêm cột” để tạo nội dung.</div> : null}
+    </section>
+
+    <section className={styles.surface}>
+      <SectionHeading title="Dòng cuối chân trang" description="Chỉnh sửa bản quyền và các liên kết pháp lý." />
+      <Field label="Nội dung bản quyền"><input value={footer.copyright} onChange={(event) => update({ copyright: event.target.value })} /></Field>
+      <div className={styles.subcategoryHeader}><div><h3>Liên kết pháp lý</h3><p>Có thể chỉnh sửa hoặc xóa từng liên kết.</p></div><button className={styles.secondaryButton} type="button" onClick={() => update({ legalLinks: [...footer.legalLinks, { id: createId("footer-legal"), label: "Liên kết mới", href: "#" }] })}><Icon name="plus" /> Thêm liên kết</button></div>
+      <div className={styles.childList}>{footer.legalLinks.map((link, index) => <div className={styles.childRow} key={link.id}><span className={styles.dragHandle}><Icon name="drag" /></span><Field label="Tên hiển thị"><input value={link.label} onChange={(event) => { const legalLinks = [...footer.legalLinks]; legalLinks[index] = { ...link, label: event.target.value }; update({ legalLinks }); }} /></Field><Field label="Đường dẫn"><input value={link.href} onChange={(event) => { const legalLinks = [...footer.legalLinks]; legalLinks[index] = { ...link, href: event.target.value }; update({ legalLinks }); }} /></Field><button className={styles.iconDanger} type="button" title="Xóa liên kết" onClick={() => update({ legalLinks: footer.legalLinks.filter((item) => item.id !== link.id) })}><Icon name="trash" /></button></div>)}</div>
+      {!footer.legalLinks.length ? <div className={styles.inlineEmpty}>Chưa có liên kết pháp lý.</div> : null}
+      <div className={styles.footerSaveBar}><span>{dirty ? "Có thay đổi chưa lưu" : "Dữ liệu đã được lưu"}</span><button className={styles.primaryButton} disabled={!dirty || busy} type="button" onClick={onSave}>{busy ? <Spinner /> : <Icon name="save" />} {busy ? "Đang lưu..." : "Lưu thay đổi"}</button></div>
+    </section>
+  </div>;
+}
+
 function NewsPanel({ news, assets, dirty, busy, onChange, onSave }: { news: ManagedNewsItem[]; assets: ManagedAsset[]; dirty: boolean; busy: boolean; onChange: (news: ManagedNewsItem[]) => void; onSave: () => void }) {
   const [activeId, setActiveId] = useState(news[0]?.id ?? "");
   const [query, setQuery] = useState("");
@@ -445,11 +508,11 @@ function EmptyState({ icon, title, text }: { icon: IconName; title: string; text
 function Toast({ notice, onClose }: { notice: Exclude<Notice, null>; onClose: () => void }) { return <div className={`${styles.toast} ${styles[`toast_${notice.tone}`]}`}><span><Icon name={notice.tone === "success" ? "check" : notice.tone === "error" ? "warning" : "info"} /></span><p>{notice.text}</p><button type="button" onClick={onClose}><Icon name="close" /></button></div>; }
 function Spinner() { return <span className={styles.spinner} aria-hidden="true" />; }
 
-type IconName = "dashboard" | "image" | "products" | "news" | "projects" | "inbox" | "external" | "logout" | "menu" | "close" | "chevron" | "chevronUp" | "chevronDown" | "check" | "arrow" | "plus" | "save" | "upload" | "copy" | "trash" | "drag" | "arrowUp" | "arrowDown" | "refresh" | "mail" | "phone" | "location" | "search" | "lock" | "warning" | "settings" | "info";
+type IconName = "dashboard" | "image" | "products" | "footer" | "news" | "projects" | "inbox" | "external" | "logout" | "menu" | "close" | "chevron" | "chevronUp" | "chevronDown" | "check" | "arrow" | "plus" | "save" | "upload" | "copy" | "trash" | "drag" | "arrowUp" | "arrowDown" | "refresh" | "mail" | "phone" | "location" | "search" | "lock" | "warning" | "settings" | "info";
 function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, ReactNode> = {
     dashboard: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>,
-    image: <><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></>, products: <><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12 8 4.5 8-4.5M4 16.5l8 4.5 8-4.5"/></>, news: <><path d="M5 3h14a2 2 0 0 1 2 2v14H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M7 7h8M7 11h10M7 15h6"/></>, projects: <><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></>, inbox: <><path d="M4 4h16l2 10v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5L4 4Z"/><path d="M2 14h6l2 3h4l2-3h6"/></>, external: <><path d="M14 3h7v7M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></>, logout: <><path d="M10 17l5-5-5-5M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></>, menu: <path d="M4 7h16M4 12h16M4 17h16"/>, close: <path d="m6 6 12 12M18 6 6 18"/>, chevron: <path d="m9 18 6-6-6-6"/>, chevronUp: <path d="m18 15-6-6-6 6"/>, chevronDown: <path d="m6 9 6 6 6-6"/>, check: <path d="m5 12 4 4L19 6"/>, arrow: <path d="M5 12h14M13 6l6 6-6 6"/>, plus: <path d="M12 5v14M5 12h14"/>, save: <><path d="M5 3h12l4 4v14H3V3h2Z"/><path d="M7 3v6h10V3M7 21v-8h10v8"/></>, upload: <><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 15v5h16v-5"/></>, copy: <><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M15 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4"/></>, trash: <><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V3h6v4"/></>, drag: <path d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01"/>, arrowUp: <path d="M12 19V5M6 11l6-6 6 6"/>, arrowDown: <path d="M12 5v14M18 13l-6 6-6-6"/>, refresh: <><path d="M20 7h-5V2"/><path d="M20 7a9 9 0 1 0 1 8"/></>, mail: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></>, phone: <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.8 2.1Z"/>, location: <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>, search: <><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></>, lock: <><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></>, warning: <><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5M12 18h.01"/></>, settings: <><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></>, info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></>,
+    image: <><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></>, products: <><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12 8 4.5 8-4.5M4 16.5l8 4.5 8-4.5"/></>, footer: <><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14h18M7 17h4M14 17h3"/></>, news: <><path d="M5 3h14a2 2 0 0 1 2 2v14H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M7 7h8M7 11h10M7 15h6"/></>, projects: <><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></>, inbox: <><path d="M4 4h16l2 10v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5L4 4Z"/><path d="M2 14h6l2 3h4l2-3h6"/></>, external: <><path d="M14 3h7v7M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></>, logout: <><path d="M10 17l5-5-5-5M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></>, menu: <path d="M4 7h16M4 12h16M4 17h16"/>, close: <path d="m6 6 12 12M18 6 6 18"/>, chevron: <path d="m9 18 6-6-6-6"/>, chevronUp: <path d="m18 15-6-6-6 6"/>, chevronDown: <path d="m6 9 6 6 6-6"/>, check: <path d="m5 12 4 4L19 6"/>, arrow: <path d="M5 12h14M13 6l6 6-6 6"/>, plus: <path d="M12 5v14M5 12h14"/>, save: <><path d="M5 3h12l4 4v14H3V3h2Z"/><path d="M7 3v6h10V3M7 21v-8h10v8"/></>, upload: <><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 15v5h16v-5"/></>, copy: <><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M15 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4"/></>, trash: <><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V3h6v4"/></>, drag: <path d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01"/>, arrowUp: <path d="M12 19V5M6 11l6-6 6 6"/>, arrowDown: <path d="M12 5v14M18 13l-6 6-6-6"/>, refresh: <><path d="M20 7h-5V2"/><path d="M20 7a9 9 0 1 0 1 8"/></>, mail: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></>, phone: <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.8 2.1Z"/>, location: <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>, search: <><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></>, lock: <><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></>, warning: <><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5M12 18h.01"/></>, settings: <><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></>, info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></>,
   };
   return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
 }

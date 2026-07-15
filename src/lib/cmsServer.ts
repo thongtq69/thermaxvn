@@ -4,7 +4,7 @@ import type { CmsData, ContactRequest, ManagedAsset, ManagedNewsItem, ManagedPro
 import { defaultCmsData } from "./cmsDefaults";
 import { getDb, isMongoConfigured, serializeDocument, toObjectId } from "./mongodb";
 
-type CmsSection = "assets" | "productGroups" | "news" | "projects";
+type CmsSection = keyof CmsData;
 type CmsDocument = { _id: string; data?: Partial<CmsData>; createdAt?: Date; updatedAt?: Date };
 type LocalStore = { cms?: Partial<CmsData>; contactRequests?: ContactRequest[] };
 
@@ -43,6 +43,7 @@ function mergeCmsData(data?: Partial<CmsData>): CmsData {
     productGroups: data?.productGroups?.length ? data.productGroups : defaultCmsData.productGroups,
     news: data?.news?.length ? data.news : defaultCmsData.news,
     projects: data?.projects?.length ? data.projects : defaultCmsData.projects,
+    footer: data?.footer ? { ...defaultCmsData.footer, ...data.footer } : defaultCmsData.footer,
   };
 }
 

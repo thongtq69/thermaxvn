@@ -1,11 +1,24 @@
 "use client";
 
-import { footerGroups, imageUrls, vietnamOffice } from "../lib/site";
+import { useEffect, useState } from "react";
+import { defaultFooter } from "../lib/cmsDefaults";
+import type { ManagedFooter } from "../lib/cmsTypes";
+import { imageUrls } from "../lib/site";
 import { useLanguage } from "./LanguageProvider";
 import { PhoneIcon, EmailIcon } from "./icons";
 
 export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
   const { t } = useLanguage();
+  const [footer, setFooter] = useState<ManagedFooter>(defaultFooter);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/cms/footer", { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((data: ManagedFooter) => setFooter(data))
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, []);
 
   return (
     <footer className="site-footer" id="contact" data-no-translate>
@@ -24,33 +37,33 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
       <div className="footer-grid">
         <div className="footer-brand-col">
           <a className="footer-brand" href="/" aria-label="Thermax home">
-            <img src={imageUrls.logo} alt="Thermax" />
+            <img src={footer.logoUrl || imageUrls.logo} alt="Thermax" />
           </a>
           <div className="footer-address-block footer-office-block">
-            <h3>{t(vietnamOffice.label)}</h3>
+            <h3>{t(footer.officeLabel)}</h3>
             <p className="footer-office-details">
-              {vietnamOffice.address.map((line) => (
-                <span className="footer-office-line" key={line}>
+              {footer.address.map((line, index) => (
+                <span className="footer-office-line" key={`${line}-${index}`}>
                   {line}
                 </span>
               ))}
-              <a className="footer-office-contact" href={vietnamOffice.phoneHref}>
+              <a className="footer-office-contact" href={footer.phoneHref}>
                 <span className="footer-icon"><PhoneIcon /></span>
-                <span>{vietnamOffice.phone}</span>
+                <span>{footer.phone}</span>
               </a>
-              <a className="footer-office-contact" href={vietnamOffice.emailHref}>
+              <a className="footer-office-contact" href={footer.emailHref}>
                 <span className="footer-icon"><EmailIcon /></span>
-                <span>{vietnamOffice.email}</span>
+                <span>{footer.email}</span>
               </a>
             </p>
           </div>
         </div>
         <div className="footer-links">
-          {footerGroups.map((group) => (
-            <div className="footer-link-col" key={group.title}>
+          {footer.groups.map((group) => (
+            <div className="footer-link-col" key={group.id}>
               <h3>{t(group.title)}</h3>
               {group.links.map((link) => (
-                <a href={link.href} key={link.label}>
+                <a href={link.href} key={link.id}>
                   {t(link.label)}
                 </a>
               ))}
@@ -59,10 +72,11 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>{t("© Copyright 2026 Thermax Limited. All Rights Reserved.")}</span>
+        <span>{t(footer.copyright)}</span>
         <div>
-          <a href="#">{t("Privacy Policy")}</a>
-          <a href="#">{t("Terms of Use")}</a>
+          {footer.legalLinks.map((link) => (
+            <a href={link.href} key={link.id}>{t(link.label)}</a>
+          ))}
         </div>
       </div>
     </footer>
