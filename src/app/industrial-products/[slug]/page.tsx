@@ -13,7 +13,7 @@ import {
 } from "../../../lib/productContent";
 import type { Locale } from "../../../lib/i18n";
 import { getOfficialProductLanding } from "../../../lib/officialProductLanding";
-import { officialProductCatalog } from "../../../lib/officialProductCatalog";
+import { getOfficialProductCatalog } from "../../../lib/officialProductCatalog";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -172,11 +172,14 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
       />
 
       <DetailContent
-        page={{ ...page, products: officialProductCatalog[slug] }}
+        page={{ ...page, products: getOfficialProductCatalog(slug, locale) }}
         related={related.map((item) => getLocalizedProductDetail(item.slug, locale) ?? item)}
         contactLabel={detailLabels[locale].contact}
         labels={{
           catalog: detailLabels[locale].catalog,
+          capacity: locale === "vi" ? "Phạm vi dung lượng" : "Capacity Range",
+          fuel: locale === "vi" ? "Các loại nhiên liệu" : "Fuel Types",
+          discover: locale === "vi" ? "Khám phá thêm" : "Discover more",
           highlights: detailLabels[locale].highlights,
           applications: detailLabels[locale].applications,
           relatedTitle: detailLabels[locale].relatedTitle,

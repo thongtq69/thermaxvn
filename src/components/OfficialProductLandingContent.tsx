@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { LandingCard, OfficialProductLanding } from "../lib/officialProductLanding";
 import { vietnamOffice } from "../lib/site";
+import { OfficialProductCarousel } from "./OfficialProductCarousel";
 import { OfficialProductShowcase } from "./OfficialProductShowcase";
 
 type OfficialProductLandingContentProps = {
@@ -163,7 +164,11 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
           <div className="official-section-title" data-reveal>
             <h2>{page.productHeading}</h2>
           </div>
-          <OfficialProductShowcase products={page.products} />
+          {page.slug === "air-pollution-control-systems" ? (
+            <OfficialProductShowcase products={page.products} />
+          ) : (
+            <OfficialProductCarousel products={page.products} />
+          )}
         </div>
       </section>
 

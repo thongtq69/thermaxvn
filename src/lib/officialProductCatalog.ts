@@ -1,6 +1,10 @@
 export type OfficialCatalogProduct = {
   title: string;
   image: string;
+  description?: string;
+  capacity?: string;
+  fuel?: string;
+  href?: string;
 };
 
 const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
@@ -114,3 +118,109 @@ export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = 
     p("SteMNovas+", "2026-03/SteMNovas%2B%20listing.png"), p("VapoNovae+", "2026-03/VapoNovae%2B.png"),
   ],
 };
+
+type CatalogLocale = "vi" | "en";
+
+const absorptionProductDetails: Record<
+  string,
+  { viTitle: string; viDescription: string; enDescription: string; fuelVi: string; fuelEn: string }
+> = {
+  "Steam-Driven Absorption Chiller": {
+    viTitle: "Máy làm lạnh hấp thụ dẫn động bằng hơi nước",
+    viDescription: "Giải pháp làm mát công nghiệp sử dụng năng lượng hơi nước, vận hành tin cậy và giúp giảm phát thải carbon.",
+    enDescription: "Industrial cooling solutions using steam energy for reliable performance and reduced carbon footprint.",
+    fuelVi: "Hơi nước bão hòa",
+    fuelEn: "Saturated steam",
+  },
+  "Direct Fired Absorption Chiller": {
+    viTitle: "Máy làm lạnh hấp thụ đốt trực tiếp",
+    viDescription: "Hệ thống làm mát hiệu quả, thân thiện với môi trường, phù hợp với các ứng dụng công nghiệp bền vững.",
+    enDescription: "Efficient, eco-friendly cooling for sustainable industrial applications.",
+    fuelVi: "Khí đốt",
+    fuelEn: "Gas",
+  },
+  "Hot Water Driven Absorption Chiller": {
+    viTitle: "Máy làm lạnh hấp thụ dùng nước nóng",
+    viDescription: "Cung cấp khả năng làm mát bền vững bằng cách tận dụng nguồn nước nóng thải hoặc nước nóng chất lượng thấp.",
+    enDescription: "Efficiently delivers sustainable cooling using waste or low-grade hot water sources.",
+    fuelVi: "Nước nóng",
+    fuelEn: "Hot water",
+  },
+  "Exhaust Driven Absorption Chillers": {
+    viTitle: "Máy làm lạnh hấp thụ dẫn động bằng khí thải",
+    viDescription: "Tận dụng nhiệt khí thải để tạo nước lạnh, giúp thu hồi năng lượng và giảm chi phí vận hành.",
+    enDescription: "Efficient cooling powered by waste exhaust heat, transforming energy recovery into sustainable chilled water.",
+    fuelVi: "Khí thải",
+    fuelEn: "Exhaust gas",
+  },
+  "Multi-Energy Absorption Chiller": {
+    viTitle: "Máy làm lạnh hấp thụ đa năng lượng",
+    viDescription: "Giải pháp làm mát linh hoạt sử dụng nhiều nguồn nhiệt để nâng cao hiệu suất và tính bền vững.",
+    enDescription: "Flexible, energy-efficient cooling using multiple heat sources for enhanced sustainability and performance.",
+    fuelVi: "Nhiều nguồn nhiệt",
+    fuelEn: "Multiple heat sources",
+  },
+  "Thermic Fluid Driven Absorption Chiller": {
+    viTitle: "Máy làm lạnh hấp thụ dẫn động bằng dầu tải nhiệt",
+    viDescription: "Giải pháp làm mát sử dụng nhiệt từ dầu tải nhiệt, phù hợp cho thu hồi năng lượng trong công nghiệp.",
+    enDescription: "Efficient cooling powered by thermic fluid heat, ideal for energy recovery in industrial applications.",
+    fuelVi: "Dầu tải nhiệt",
+    fuelEn: "Thermic fluid",
+  },
+};
+
+const catalogGroupDescriptions: Record<string, { vi: string; en: string }> = {
+  "steam-boilers": { vi: "Giải pháp tạo hơi hiệu suất cao, vận hành tin cậy và phù hợp với nhiều loại nhiên liệu.", en: "High-efficiency steam generation engineered for reliable operation and flexible fuel use." },
+  "thermal-oil-heaters": { vi: "Giải pháp gia nhiệt gián tiếp ở nhiệt độ cao cho nhiều quy trình công nghiệp.", en: "High-temperature indirect heating for a wide range of industrial processes." },
+  "hot-air-generators": { vi: "Cung cấp khí nóng ổn định cho các ứng dụng sấy và gia nhiệt công nghiệp.", en: "Reliable hot-air generation for industrial drying and process heating." },
+  "hot-water-generators": { vi: "Cung cấp nước nóng hiệu quả cho nhu cầu thương mại và công nghiệp.", en: "Efficient hot-water generation for commercial and industrial requirements." },
+  "electric-process-heat-solutions": { vi: "Giải pháp gia nhiệt điện sạch, hiệu quả và dễ tích hợp vào hệ thống hiện hữu.", en: "Clean, efficient electric process heating designed for easy integration." },
+  "boiler-house-products": { vi: "Thiết bị đo lường, giám sát và tự động hóa giúp tối ưu hệ thống hơi và nước.", en: "Measurement, monitoring and automation products for optimised steam and water systems." },
+  "steam-distribution": { vi: "Kiểm soát chính xác lưu lượng, nhiệt độ và áp suất trong mạng lưới phân phối hơi.", en: "Precise flow, temperature and pressure control across steam distribution networks." },
+  "condensate-system-management": { vi: "Tối đa hóa thu hồi nhiệt, giảm tiêu thụ nước và nâng cao hiệu suất lò hơi.", en: "Maximises heat recovery, reduces water use and improves boiler efficiency." },
+  "absorption-chiller-heaters": { vi: "Kết hợp làm lạnh và sưởi ấm bằng các nguồn năng lượng nhiệt bền vững.", en: "Combined cooling and heating powered by sustainable thermal energy sources." },
+  "absorption-heat-pumps": { vi: "Thu hồi và nâng cấp nhiệt để cung cấp nhiệt hoặc lạnh với hiệu suất năng lượng cao.", en: "Recovers and upgrades heat for energy-efficient heating and cooling." },
+  "heating-solutions": { vi: "Giải pháp bơm nhiệt điện và lai cho nhu cầu gia nhiệt quy trình linh hoạt.", en: "Electric and hybrid heat pumps for flexible process heating." },
+  "wet-cooling-solutions": { vi: "Giải pháp làm mát bay hơi hiệu quả cho hệ thống công nghiệp.", en: "Efficient evaporative cooling solutions for industrial systems." },
+  "dry-cooling-solutions": { vi: "Giải pháp làm mát bằng không khí giúp giảm hoặc loại bỏ nhu cầu sử dụng nước.", en: "Air-based cooling that reduces or eliminates water consumption." },
+  "water-treatment-solutions": { vi: "Công nghệ xử lý nước hiệu suất cao, tối ưu tài nguyên và đáp ứng yêu cầu chất lượng.", en: "High-performance water treatment technology for resource optimisation and quality compliance." },
+  "sewage-treatment-and-recycling-plants": { vi: "Hệ thống xử lý nước thải sinh hoạt và thu hồi nước có thiết kế mô-đun, tiết kiệm năng lượng.", en: "Modular, energy-efficient sewage treatment and water recovery systems." },
+  "effluent-treatment-recycling-plants": { vi: "Giải pháp xử lý dòng thải công nghiệp phức tạp và tái sử dụng nước.", en: "Engineered treatment for complex industrial effluent and water reuse." },
+  "minimum-liquid-discharge": { vi: "Tăng tối đa tỷ lệ thu hồi nước và giảm đáng kể lượng chất thải lỏng.", en: "Maximises water recovery while significantly reducing liquid waste." },
+  "zero-liquid-discharge-system": { vi: "Giải pháp đồng bộ giúp loại bỏ hoàn toàn việc xả thải lỏng.", en: "Integrated systems designed to eliminate liquid effluent discharge." },
+};
+
+export function getOfficialProductCatalog(slug: string, locale: CatalogLocale): OfficialCatalogProduct[] | undefined {
+  const products = officialProductCatalog[slug];
+  if (!products) return undefined;
+
+  const groupDescription = catalogGroupDescriptions[slug];
+
+  return products.map((product) => {
+    const absorptionDetail = slug === "absorption-chillers" ? absorptionProductDetails[product.title] : undefined;
+    const title = locale === "vi" && absorptionDetail ? absorptionDetail.viTitle : product.title.replaceAll("â„¢", "™");
+    const description = absorptionDetail
+      ? locale === "vi"
+        ? absorptionDetail.viDescription
+        : absorptionDetail.enDescription
+      : groupDescription?.[locale] ??
+        (locale === "vi"
+          ? `Giải pháp ${title} được thiết kế để vận hành hiệu quả, tin cậy và phù hợp với nhu cầu công nghiệp.`
+          : `${title} is engineered for efficient, reliable operation across industrial applications.`);
+
+    return {
+      ...product,
+      title,
+      description,
+      capacity: absorptionDetail ? (locale === "vi" ? "30 TR đến 3000 TR" : "30 TR to 3000 TR") : locale === "vi" ? "Theo cấu hình dự án" : "Project-specific",
+      fuel: absorptionDetail
+        ? locale === "vi"
+          ? absorptionDetail.fuelVi
+          : absorptionDetail.fuelEn
+        : locale === "vi"
+          ? "Tùy theo sản phẩm"
+          : "Product-specific",
+      href: `/contact-us?product=${encodeURIComponent(product.title)}`,
+    };
+  });
+}

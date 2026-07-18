@@ -8,6 +8,9 @@ type DetailContentProps = {
   relatedBaseHref?: string;
   labels?: {
     catalog?: string;
+    capacity?: string;
+    fuel?: string;
+    discover?: string;
     highlights: string;
     applications: string;
     relatedTitle: string;
@@ -100,11 +103,33 @@ export function DetailContent({
             </div>
             <div className="detail-catalog-grid" data-reveal>
               {page.products.map((product) => (
-                <article className="detail-catalog-card" key={product.title}>
+                <article className="detail-catalog-card detail-catalog-card-rich" key={product.title}>
+                  <h3>{product.title}</h3>
                   <div className="detail-catalog-media">
                     <img src={product.image} alt={product.title} loading="lazy" decoding="async" />
                   </div>
-                  <h3>{product.title}</h3>
+                  <div className="detail-catalog-body">
+                    {product.description ? <p>{product.description}</p> : null}
+                    {product.capacity || product.fuel ? (
+                      <dl>
+                        {product.capacity ? (
+                          <div>
+                            <dt>{labels.capacity ?? "Capacity Range"}</dt>
+                            <dd>{product.capacity}</dd>
+                          </div>
+                        ) : null}
+                        {product.fuel ? (
+                          <div>
+                            <dt>{labels.fuel ?? "Fuel Types"}</dt>
+                            <dd>{product.fuel}</dd>
+                          </div>
+                        ) : null}
+                      </dl>
+                    ) : null}
+                  </div>
+                  <a className="detail-catalog-cta" href={product.href ?? "/contact-us"}>
+                    {labels.discover ?? "Discover more"}
+                  </a>
                 </article>
               ))}
             </div>
