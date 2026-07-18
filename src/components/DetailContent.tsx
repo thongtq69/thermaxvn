@@ -13,6 +13,20 @@ type DetailContentProps = {
   };
 };
 
+function OverviewText({ paragraph, accent }: { paragraph: string; accent: boolean }) {
+  if (!accent) return paragraph;
+
+  const accentStart = paragraph.indexOf(",");
+  if (accentStart === -1 || accentStart === paragraph.length - 1) return paragraph;
+
+  return (
+    <>
+      {paragraph.slice(0, accentStart + 1)}{" "}
+      <span className="detail-overview-accent">{paragraph.slice(accentStart + 1).trimStart()}</span>
+    </>
+  );
+}
+
 export function DetailContent({
   page,
   related = [],
@@ -29,8 +43,10 @@ export function DetailContent({
       <section className="detail-overview-section" id="overview" data-section="overview">
         <div className="detail-overview-grid" data-reveal>
           <div className="detail-copy">
-            {page.overview.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {page.overview.map((paragraph, index) => (
+              <p key={paragraph}>
+                <OverviewText paragraph={paragraph} accent={index === 0} />
+              </p>
             ))}
           </div>
           <aside className="detail-contact-card" aria-label={contactLabel}>
