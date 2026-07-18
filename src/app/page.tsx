@@ -267,7 +267,8 @@ function HomeProjectsSection() {
       eyebrow=""
       title="Projects"
       description=""
-      items={industrialInfrastructureProjects.slice(0, 4)}
+      items={industrialInfrastructureProjects}
+      stacked
     />
   );
 }

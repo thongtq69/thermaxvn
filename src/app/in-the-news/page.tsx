@@ -1,21 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { PageShell } from "../../components/PageShell";
 import { InnerHero } from "../../components/InnerHero";
 import { ArrowIcon } from "../../components/icons";
 import { useLanguage } from "../../components/LanguageProvider";
 import { imageUrls } from "../../lib/site";
 import type { ManagedNewsItem } from "../../lib/cmsTypes";
-
-const filters = [
-  "All",
-  "Financial results",
-  "Orders",
-  "Energy transition",
-  "Digital & operations",
-  "Corporate updates",
-];
 
 const sources = {
   q4Results:
@@ -152,32 +143,9 @@ const fallbackNewsItems: ManagedNewsItem[] = [
   },
 ];
 
-const editorialBriefs = [
-  {
-    title: "What matters now",
-    body:
-      "The near-term story is a combination of order-book visibility, execution discipline and demand for cleaner industrial utilities. Q4 FY2025-26 indicates stronger project inflows, while the large boiler order adds scale to the Industrial Infra pipeline.",
-  },
-  {
-    title: "Energy transition signal",
-    body:
-      "The HPCL MoU, green utilities momentum and digital reliability updates show that Thermax is positioning around practical decarbonisation: hydrogen, carbon capture, bio-based fuels, waste-to-energy and efficient plant operations.",
-  },
-  {
-    title: "Customer lens",
-    body:
-      "For industrial buyers, the news flow points to a single theme: reduce energy cost, improve uptime and meet environmental goals without slowing core operations. That is the editorial thread behind this newsroom update.",
-  },
-];
-
 export default function InTheNewsPage() {
   const { t } = useLanguage();
-  const [filter, setFilter] = useState("All");
   const [managedNews, setManagedNews] = useState<ManagedNewsItem[]>(fallbackNewsItems);
-  const activeFilters = useMemo(
-    () => ["All", ...Array.from(new Set(managedNews.map((item) => item.category).filter(Boolean)))],
-    [managedNews],
-  );
   useEffect(() => {
     let mounted = true;
     fetch("/api/cms/news")
@@ -192,7 +160,6 @@ export default function InTheNewsPage() {
       mounted = false;
     };
   }, []);
-  const filtered = filter === "All" ? managedNews : managedNews.filter((n) => n.category === filter);
   const featured = managedNews[0] ?? fallbackNewsItems[0];
 
   return (
@@ -258,22 +225,9 @@ export default function InTheNewsPage() {
       <section className="news-listing" data-section="news-listing">
         <div className="news-listing-header" data-reveal>
           <h2>{t("Latest newsroom updates")}</h2>
-          <p>{t("Filter by theme to scan the developments most relevant to your team.")}</p>
-        </div>
-        <div className="news-listing-filter" data-reveal>
-          {activeFilters.map((f) => (
-            <button
-              key={f}
-              type="button"
-              className={f === filter ? "is-active" : ""}
-              onClick={() => setFilter(f)}
-            >
-              {t(f)}
-            </button>
-          ))}
         </div>
         <div className="news-listing-grid" data-reveal>
-          {filtered.map((item) => (
+          {managedNews.map((item) => (
             <article className="news-listing-card" key={item.title}>
               <img src={item.image} alt="" />
               <div className="news-listing-card-body">
@@ -292,20 +246,6 @@ export default function InTheNewsPage() {
         </div>
       </section>
 
-      <section className="newsroom-editorial" data-section="editorial-brief">
-        <div className="news-listing-header" data-reveal>
-          <h2>{t("Editorial brief")}</h2>
-          <p>{t("A short reading of the current situation behind the headlines.")}</p>
-        </div>
-        <div className="newsroom-editorial-grid" data-reveal>
-          {editorialBriefs.map((brief) => (
-            <article className="newsroom-editorial-card" key={brief.title}>
-              <h3>{t(brief.title)}</h3>
-              <p>{t(brief.body)}</p>
-            </article>
-          ))}
-        </div>
-      </section>
     </PageShell>
   );
 }

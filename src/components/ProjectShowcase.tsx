@@ -13,12 +13,14 @@ export function ProjectShowcase({
   description = "A concise view of Thermax delivery capabilities across EPC, large boilers, fired heaters and industrial utility packages.",
   items,
   showHeader = true,
+  stacked = false,
 }: {
   eyebrow?: string;
   title?: string;
   description?: string;
   items: ProjectShowcaseItem[];
   showHeader?: boolean;
+  stacked?: boolean;
 }) {
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
@@ -46,13 +48,13 @@ export function ProjectShowcase({
   }, [managedItems]);
 
   useEffect(() => {
-    if (managedItems.length < 2) return;
+    if (stacked || managedItems.length < 2) return;
 
     const interval = window.setInterval(() => {
       setActive((value) => (value + 1) % managedItems.length);
     }, 5200);
     return () => window.clearInterval(interval);
-  }, [managedItems.length]);
+  }, [managedItems.length, stacked]);
 
   if (managedItems.length === 0) return null;
 
@@ -73,46 +75,50 @@ export function ProjectShowcase({
         </div>
       ) : null}
 
-      <div className="project-showcase-track" data-reveal>
-        <article className="project-showcase-card" key={current.title}>
-          <div className="project-showcase-media">
-            <img src={current.image} alt={t(current.title)} />
-            <span>{String(active + 1).padStart(2, "0")}</span>
+      <div className={stacked ? "project-showcase-track is-stacked" : "project-showcase-track"} data-reveal>
+        {(stacked ? managedItems : [current]).map((project, index) => (
+          <article className="project-showcase-card" key={project.title}>
+            <div className="project-showcase-media">
+              <img src={project.image} alt={t(project.title)} />
+              <span>{String(stacked ? index + 1 : active + 1).padStart(2, "0")}</span>
+            </div>
+            <div className="project-showcase-body">
+              <p className="project-showcase-kicker">{t(project.category)}</p>
+              <h3>{t(project.title)}</h3>
+              <p>{t(project.description)}</p>
+              <dl>
+                <div>
+                  <dt>{t("Region")}</dt>
+                  <dd>{t(project.region)}</dd>
+                </div>
+                <div>
+                  <dt>{t("Capacity")}</dt>
+                  <dd>{t(project.capacity)}</dd>
+                </div>
+                <div>
+                  <dt>{t("Scope")}</dt>
+                  <dd>{t(project.scope)}</dd>
+                </div>
+              </dl>
+              <Link className="project-showcase-link" href={project.href}>
+                {t("View project")}
+              </Link>
+            </div>
+          </article>
+        ))}
+        {!stacked ? (
+          <div className="carousel-controls project-showcase-controls" aria-label={t("Projects")}>
+            <button type="button" onClick={() => goToProject(-1)} aria-label={t("Previous")}>
+              &lt;
+            </button>
+            <div className="carousel-counter">
+              {String(active + 1).padStart(2, "0")} / {String(managedItems.length).padStart(2, "0")}
+            </div>
+            <button type="button" onClick={() => goToProject(1)} aria-label={t("Next")}>
+              &gt;
+            </button>
           </div>
-          <div className="project-showcase-body">
-            <p className="project-showcase-kicker">{t(current.category)}</p>
-            <h3>{t(current.title)}</h3>
-            <p>{t(current.description)}</p>
-            <dl>
-              <div>
-                <dt>{t("Region")}</dt>
-                <dd>{t(current.region)}</dd>
-              </div>
-              <div>
-                <dt>{t("Capacity")}</dt>
-                <dd>{t(current.capacity)}</dd>
-              </div>
-              <div>
-                <dt>{t("Scope")}</dt>
-                <dd>{t(current.scope)}</dd>
-              </div>
-            </dl>
-            <Link className="project-showcase-link" href={current.href}>
-              {t("View project")}
-            </Link>
-          </div>
-        </article>
-        <div className="carousel-controls project-showcase-controls" aria-label={t("Projects")}>
-          <button type="button" onClick={() => goToProject(-1)} aria-label={t("Previous")}>
-            &lt;
-          </button>
-          <div className="carousel-counter">
-            {String(active + 1).padStart(2, "0")} / {String(managedItems.length).padStart(2, "0")}
-          </div>
-          <button type="button" onClick={() => goToProject(1)} aria-label={t("Next")}>
-            &gt;
-          </button>
-        </div>
+        ) : null}
       </div>
     </section>
   );

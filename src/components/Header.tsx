@@ -251,18 +251,8 @@ export function Header() {
             .join(" ")}
           onMouseEnter={() => setMenu(active.label)}
         >
-          {active.label !== "Business Portfolio" ? (
-            <div className="mega-copy">
-              <h2>{t(active.label === "About Us" ? "Thermax" : getNavDisplayLabel(active.label))}</h2>
-              <p>{t(active.summary)}</p>
-            </div>
-          ) : null}
           {active.label === "Business Portfolio" ? (
             <div className="mega-product-browser">
-              <div className="mega-product-intro">
-                <h2>{t("Product categories")}</h2>
-                <p>{t(active.summary)}</p>
-              </div>
               <div className="mega-product-primary" aria-label={t("Product categories")}>
                 {managedProductGroups.map((group, index) => (
                   <a
@@ -289,11 +279,6 @@ export function Header() {
                   </a>
                 ))}
               </div>
-              <a className="mega-product-spotlight" href="/business-segments/green-solutions">
-                <span>{t("In the Spotlight")}</span>
-                <img src={imageUrls.greenHydrogen} alt={t(active.spotlight)} />
-                <strong>{t(active.spotlight)}</strong>
-              </a>
             </div>
           ) : (
             <div className="mega-links">
@@ -309,13 +294,6 @@ export function Header() {
               ))}
             </div>
           )}
-          {active.label !== "Business Portfolio" ? (
-            <div className="mega-card">
-              <p>{t("In the Spotlight")}</p>
-              <img src={active.spotlightImage} alt="" />
-              <strong>{t(active.spotlight)}</strong>
-            </div>
-          ) : null}
         </div>
 
         <div className={mobileOpen ? "mobile-panel is-open" : "mobile-panel"}>
