@@ -3,6 +3,7 @@
 import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 import type { CmsData, ContactRequest, FooterGroup, ManagedAsset, ManagedFooter, ManagedNewsItem, ManagedProject } from "../../lib/cmsTypes";
 import { defaultFooter } from "../../lib/cmsDefaults";
+import { translate } from "../../lib/i18n";
 import type { ProductSubcategoryGroup } from "../../lib/site";
 import styles from "./Admin.module.css";
 
@@ -499,7 +500,7 @@ function NewsPanel({ news, assets, dirty, busy, onChange, onSave }: { news: Mana
   const [query, setQuery] = useState("");
   const activeIndex = news.findIndex((item) => item.id === activeId);
   const active = news[activeIndex] ?? news[0];
-  const filtered = news.filter((item) => matchesSearch(`${item.title} ${item.category}`, query));
+  const filtered = news.filter((item) => matchesSearch(`${item.title} ${translate(item.title, "vi")} ${item.category} ${translate(item.category, "vi")}`, query));
   function update(patch: Partial<ManagedNewsItem>) { const index = news.findIndex((item) => item.id === active?.id); if (index < 0) return; const next = [...news]; next[index] = { ...next[index], ...patch }; onChange(next); }
   function add() { const item: ManagedNewsItem = { id: createId("news"), title: "Tin tức mới", date: new Date().toLocaleDateString("vi-VN"), category: "Tin doanh nghiệp", image: "", summary: "", highlights: [], status: "draft" }; onChange([item, ...news]); setActiveId(item.id); }
   return <ContentEditorLayout title="Danh sách tin tức" count={news.length} query={query} onQuery={setQuery} onAdd={add} addLabel="Thêm tin tức" dirty={dirty} busy={busy} onSave={onSave}
@@ -520,7 +521,7 @@ function ProjectsPanel({ projects, assets, dirty, busy, onChange, onSave }: { pr
   const [query, setQuery] = useState("");
   const activeIndex = projects.findIndex((item) => item.id === activeId);
   const active = projects[activeIndex] ?? projects[0];
-  const filtered = projects.filter((item) => matchesSearch(`${item.title} ${item.region} ${item.category}`, query));
+  const filtered = projects.filter((item) => matchesSearch(`${item.title} ${translate(item.title, "vi")} ${item.region} ${translate(item.region, "vi")} ${item.category} ${translate(item.category, "vi")}`, query));
   function update(patch: Partial<ManagedProject>) { const index = projects.findIndex((item) => item.id === active?.id); if (index < 0) return; const next = [...projects]; next[index] = { ...next[index], ...patch }; onChange(next); }
   function add() { const slug = `du-an-moi-${Date.now().toString().slice(-5)}`; const item: ManagedProject = { id: createId("project"), slug, title: "Dự án mới", category: "Dự án", description: "", image: "", href: `/projects/${slug}`, region: "", capacity: "", scope: "", status: "draft" }; onChange([item, ...projects]); setActiveId(item.id); }
   return <ContentEditorLayout title="Danh sách dự án" count={projects.length} query={query} onQuery={setQuery} onAdd={add} addLabel="Thêm dự án" dirty={dirty} busy={busy} onSave={onSave}
