@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import type { LandingCard, OfficialProductLanding } from "../lib/officialProductLanding";
 import { vietnamOffice } from "../lib/site";
+import { OfficialProductShowcase } from "./OfficialProductShowcase";
 
 type OfficialProductLandingContentProps = {
   page: OfficialProductLanding;
@@ -58,6 +60,39 @@ function LandingCardLink({ card }: { card: LandingCard }) {
     </a>
   ) : (
     <article className="official-product-card">{content}</article>
+  );
+}
+
+function IndustryIcon({ index }: { index: number }) {
+  const variant = index % 4;
+
+  return (
+    <svg aria-hidden="true" viewBox="0 0 48 48">
+      {variant === 0 ? (
+        <>
+          <path d="M7 35h34M10 35V20l10 5v-8l10 6V11h7v24" />
+          <path d="M14 31h3m6 0h3m6 0h3" />
+        </>
+      ) : null}
+      {variant === 1 ? (
+        <>
+          <circle cx="24" cy="24" r="15" />
+          <path d="M24 5v7m0 24v7M5 24h7m24 0h7M13 13l5 5m12 12 5 5m0-22-5 5M18 30l-5 5" />
+        </>
+      ) : null}
+      {variant === 2 ? (
+        <>
+          <path d="M7 36h34L36 15H12L7 36Z" />
+          <path d="M15 15V8h7v7m5 7h6m-18 7h18" />
+        </>
+      ) : null}
+      {variant === 3 ? (
+        <>
+          <path d="M17 8h14v8l5 7v16H12V23l5-7V8Z" />
+          <path d="M17 16h14M18 27h12m-12 6h12" />
+        </>
+      ) : null}
+    </svg>
   );
 }
 
@@ -128,37 +163,35 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
           <div className="official-section-title" data-reveal>
             <h2>{page.productHeading}</h2>
           </div>
-          <div className="official-product-grid" data-reveal>
-            {page.products.map((card) => (
-              <LandingCardLink card={card} key={card.title} />
-            ))}
-          </div>
+          <OfficialProductShowcase products={page.products} />
         </div>
       </section>
 
       {page.services && page.services.length > 0 ? (
         <section className="official-service-section" id="services" data-section="services">
           <div className="official-section-inner">
-            <div className="official-section-title" data-reveal>
-              <h2>{page.serviceHeading}</h2>
-              {page.serviceIntro ? <div>{page.serviceIntro}</div> : null}
-            </div>
-            <div className="official-service-grid" data-reveal>
-              {page.services.map((item) => (
-                <article className={item.image ? "official-service-card has-image" : "official-service-card"} key={item.title}>
-                  {item.image ? (
-                    <div className="official-service-card-media">
-                      <img src={item.image} alt="" loading="lazy" decoding="async" />
+            <div className="official-service-layout">
+              <div className="official-section-title official-service-intro" data-reveal>
+                <h2>{page.serviceHeading}</h2>
+                {page.serviceIntro ? <div>{page.serviceIntro}</div> : null}
+              </div>
+              <div className="official-service-grid" data-reveal>
+                {page.services.map((item) => (
+                  <article className="official-service-card" key={item.title}>
+                    {item.image ? (
+                      <div className="official-service-card-media">
+                        <img src={item.image} alt="" loading="lazy" decoding="async" />
+                      </div>
+                    ) : (
+                      <span aria-hidden="true">+</span>
+                    )}
+                    <div className="official-service-card-copy">
+                      <h3>{item.title}</h3>
+                      {item.description ? <p>{item.description}</p> : null}
                     </div>
-                  ) : (
-                    <span aria-hidden="true">+</span>
-                  )}
-                  <div className="official-service-card-copy">
-                    <h3>{item.title}</h3>
-                    {item.description ? <p>{item.description}</p> : null}
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -180,29 +213,24 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
       ) : null}
 
       {page.industryCards?.length || page.industries?.length ? (
-        <section className="official-industries-section" id="industries" data-section="industries">
-          <div className="official-section-inner">
+        <section
+          className="official-industries-section"
+          id="industries"
+          data-section="industries"
+          style={{ "--official-industry-background": `url(${page.image})` } as CSSProperties}
+        >
+          <div className="official-section-inner official-industries-layout">
             <div className="official-section-title" data-reveal>
               <h2>{labels.industries}</h2>
             </div>
-            {page.industryCards?.length ? (
-              <div className="official-industry-card-grid" data-reveal>
-                {page.industryCards.map((industry) => (
-                  <article className="official-industry-card" key={industry.title}>
-                    {industry.image ? <img src={industry.image} alt="" loading="lazy" decoding="async" /> : null}
-                    <span>{industry.title}</span>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="official-industries-grid" data-reveal>
-                {page.industries?.map((industry) => (
-                  <span key={industry} className="official-industry-chip">
-                    {industry}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div className="official-industries-list" data-reveal>
+              {(page.industryCards?.map((industry) => industry.title) ?? page.industries ?? []).map((industry, index) => (
+                <span key={industry} className="official-industry-row">
+                  <IndustryIcon index={index} />
+                  <strong>{industry}</strong>
+                </span>
+              ))}
+            </div>
           </div>
         </section>
       ) : null}

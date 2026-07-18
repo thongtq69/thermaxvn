@@ -60,8 +60,8 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       heroDescription: "Effective solutions for abatement of particulate and gaseous pollutants",
       image: `${s3}/2025-12/LP%20Banner%20Image_1800X700_2.jpg`,
       mobileImage: `${s3}/2025-09/apc-banner-mobile.jpg`,
-      intro: "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.",
-      introHighlight: "while pollutants may be inevitable, pollution is not.",
+      intro: "Thermax's Air Pollution Control division operates on a simple belief: while pollutants may be unavoidable, pollution is not.",
+      introHighlight: "Thermax's Air Pollution Control division",
       overviewParagraphs: [
         "The business delivers advanced solutions for particulate and gaseous emission control—from bag filters and electrostatic precipitators (ESPs) to scrubbers and flue gas desulphurisation (FGD) systems, along with biogas and hydrogen purification and upgradation technologies—ensuring cleaner air, greener energy, and regulatory compliance.",
       ],
@@ -721,8 +721,8 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
 const translations: Record<string, string> = {
   "Air Pollution Control Systems": "Xử lý khí thải",
   "Effective solutions for abatement of particulate and gaseous pollutants": "Giải pháp hiệu quả để kiểm soát bụi và khí ô nhiễm",
-  "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.": "Mảng xử lý khí thải của Thermax hoạt động với một niềm tin đơn giản: chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
-  "while pollutants may be inevitable, pollution is not.": "chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
+  "Thermax's Air Pollution Control division operates on a simple belief: while pollutants may be unavoidable, pollution is not.": "Bộ phận Kiểm soát Ô nhiễm Không khí của Thermax hoạt động dựa trên niềm tin đơn giản: trong khi các chất gây ô nhiễm có thể không thể tránh khỏi, thì ô nhiễm lại không thể tránh khỏi.",
+  "Thermax's Air Pollution Control division": "Bộ phận Kiểm soát Ô nhiễm Không khí",
   "The business delivers advanced solutions for particulate and gaseous emission control—from bag filters and electrostatic precipitators (ESPs) to scrubbers and flue gas desulphurisation (FGD) systems, along with biogas and hydrogen purification and upgradation technologies—ensuring cleaner air, greener energy, and regulatory compliance.": "Mảng này cung cấp các giải pháp tiên tiến để kiểm soát bụi và khí thải, từ bộ lọc túi, bộ lọc tĩnh điện (ESP), tháp rửa khí đến hệ thống khử lưu huỳnh khí thải (FGD), cùng công nghệ tinh sạch và nâng cấp khí sinh học, hydro, góp phần bảo đảm không khí sạch hơn, năng lượng xanh hơn và tuân thủ quy định.",
   "Years of expertise": "Năm kinh nghiệm",
   "Air cleaned annually": "Lưu lượng không khí được làm sạch mỗi giờ",
