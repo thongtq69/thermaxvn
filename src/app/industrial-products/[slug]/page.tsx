@@ -13,6 +13,7 @@ import {
 } from "../../../lib/productContent";
 import type { Locale } from "../../../lib/i18n";
 import { getOfficialProductLanding } from "../../../lib/officialProductLanding";
+import { officialProductCatalog } from "../../../lib/officialProductCatalog";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,7 @@ const detailLabels = {
     highlights: "Điểm nổi bật",
     applications: "Ứng dụng tiêu biểu",
     relatedTitle: "Các nội dung liên quan",
+    catalog: "Sản phẩm",
   },
   en: {
     home: "Home",
@@ -50,6 +52,7 @@ const detailLabels = {
     highlights: "Highlights",
     applications: "Typical applications",
     relatedTitle: "Related solutions",
+    catalog: "Products",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -169,10 +172,11 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
       />
 
       <DetailContent
-        page={page}
+        page={{ ...page, products: officialProductCatalog[slug] }}
         related={related.map((item) => getLocalizedProductDetail(item.slug, locale) ?? item)}
         contactLabel={detailLabels[locale].contact}
         labels={{
+          catalog: detailLabels[locale].catalog,
           highlights: detailLabels[locale].highlights,
           applications: detailLabels[locale].applications,
           relatedTitle: detailLabels[locale].relatedTitle,

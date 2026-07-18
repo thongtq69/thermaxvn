@@ -7,6 +7,7 @@ type DetailContentProps = {
   contactLabel?: string;
   relatedBaseHref?: string;
   labels?: {
+    catalog?: string;
     highlights: string;
     applications: string;
     relatedTitle: string;
@@ -65,6 +66,7 @@ export function DetailContent({
   contactLabel = "Trao đổi với Thermax Vietnam",
   relatedBaseHref = "/industrial-products",
   labels = {
+    catalog: "Sản phẩm",
     highlights: "Điểm nổi bật",
     applications: "Ứng dụng tiêu biểu",
     relatedTitle: "Các nội dung liên quan",
@@ -89,6 +91,26 @@ export function DetailContent({
           </aside>
         </div>
       </section>
+
+      {page.products?.length ? (
+        <section className="detail-catalog-section" id="products" data-section="products">
+          <div className="detail-catalog-inner">
+            <div className="detail-related-header" data-reveal>
+              <h2>{labels.catalog ?? "Sản phẩm"}</h2>
+            </div>
+            <div className="detail-catalog-grid" data-reveal>
+              {page.products.map((product) => (
+                <article className="detail-catalog-card" key={product.title}>
+                  <div className="detail-catalog-media">
+                    <img src={product.image} alt={product.title} loading="lazy" decoding="async" />
+                  </div>
+                  <h3>{product.title}</h3>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="detail-info-band" data-section="capabilities">
         <div className="detail-info-grid" data-reveal>

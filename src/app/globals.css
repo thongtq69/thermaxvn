@@ -9664,17 +9664,70 @@ dd {
 }
 
 .detail-overview-section,
+.detail-catalog-section,
 .detail-info-band,
 .detail-related-section {
   padding: 76px 0;
 }
 
 .detail-overview-grid,
+.detail-catalog-inner,
 .detail-info-grid,
 .detail-related-header,
 .detail-related-grid {
   width: min(1540px, calc(100% - 180px));
   margin: 0 auto;
+}
+
+.detail-catalog-section {
+  background: #f2f6f8;
+  scroll-margin-top: 150px;
+}
+
+.detail-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.detail-catalog-card {
+  overflow: hidden;
+  border: 1px solid #dce5eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(8, 32, 51, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.detail-catalog-card:hover {
+  box-shadow: 0 22px 44px rgba(8, 32, 51, 0.12);
+  transform: translateY(-3px);
+}
+
+.detail-catalog-media {
+  height: 280px;
+  overflow: hidden;
+  background: #e9eef1;
+}
+
+.detail-catalog-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.detail-catalog-card:hover .detail-catalog-media img {
+  transform: scale(1.025);
+}
+
+.detail-catalog-card h3 {
+  margin: 0;
+  padding: 24px;
+  color: #20242a;
+  font-size: var(--fs-22);
+  font-weight: var(--font-weight-600);
+  line-height: 1.25;
 }
 
 .detail-overview-grid {
@@ -10947,12 +11000,14 @@ dd {
   }
 
   .detail-overview-section,
+  .detail-catalog-section,
   .detail-info-band,
   .detail-related-section {
     padding: 50px 0;
   }
 
   .detail-overview-grid,
+  .detail-catalog-inner,
   .detail-info-grid,
   .detail-related-header,
   .detail-related-grid {
@@ -10962,10 +11017,20 @@ dd {
   }
 
   .detail-overview-grid,
+  .detail-catalog-grid,
   .detail-info-grid,
   .detail-related-grid {
     grid-template-columns: 1fr;
     gap: 18px;
+  }
+
+  .detail-catalog-media {
+    height: 230px;
+  }
+
+  .detail-catalog-card h3 {
+    padding: 20px;
+    font-size: var(--fs-20);
   }
 
   .detail-contact-card {

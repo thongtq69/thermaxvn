@@ -1,0 +1,116 @@
+export type OfficialCatalogProduct = {
+  title: string;
+  image: string;
+};
+
+const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
+const p = (title: string, path: string): OfficialCatalogProduct => ({ title, image: `${s3}/${path}` });
+
+export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = {
+  "steam-boilers": [
+    p("UltraPac™", "2025-12/Ultrapac-min.jpg"), p("CombiPac™", "2025-12/Combipac.png"),
+    p("Bi-Drum (PowerMax)", "2025-12/Bi-Drum.png"), p("GreenPac™", "2025-10/steamboiler-prod-thumb-greenpac.jpg"),
+    p("ComBloc", "2025-12/ComBloc-min_0.jpg"), p("HuskPac™ Ultra", "2026-02/Huskpac%20Ultra%20Listing.png"),
+    p("TherMeon-A", "2025-12/Thermeon%202.0_TEON%202.jpg"), p("WoodPac", "2025-08/woodpac_product.jpg"),
+    p("CocoMax", "2026-02/Cocomax%20Listing.png"), p("ThermoSyphon", "2025-12/Thermosyphon.jpg"),
+    p("SteaMatic", "2026-02/Steamatic%20listing.png"), p("ShellMax Global Ultra", "2025-08/product-intro-rhs-pic.png"),
+    p("RevoMax Nxt", "2025-10/steamboiler-prod-revomax.png"),
+  ],
+  "thermal-oil-heaters": [
+    p("GreenBloc™", "2025-12/GreenBloc.png"), p("ThermoPac™ Global", "2025-12/Thermopac%20Global.jpg"),
+    p("DynaTherm™", "2025-12/Dynatherm_used.jpg"), p("HT Thermal Oil Heater Solutions", "2025-12/HT%20Thermal%20Oil%20Heater.png"),
+  ],
+  "hot-air-generators": [p("AquaeroTherm-XT", "2025-11/hot-air-thumb-aquaerotherm.jpg")],
+  "hot-water-generators": [
+    p("ShellMax Global - W", "2026-02/Shellmax%20Global%20-%20W%20Listing.png"), p("AquaTherm", "2026-02/Aquatherm-listing.png"),
+    p("AquaMatic", "2026-02/Aquamatic.png"), p("HT Hot Water Generator Solutions", "2026-02/HT%20Hot%20Water%20Generator%20Solutions%20%282%29.png"),
+  ],
+  "electric-process-heat-solutions": [
+    p("Effitron™", "2025-12/Effitron-used.jpg"), p("ThermoTron™", "2025-08/thermotron_product_1.jpg"),
+    p("AquaNexa E-Series", "2026-02/Aquanexa%20E-Series-listing.png"),
+  ],
+  "boiler-house-products": [
+    p("A2Zflo-S Steam Flow Meter", "2025-12/A2Zflo-S%20%E2%80%93%20Steam%20Flow%20Meter-listing.png"),
+    p("RealSteam™", "2025-12/RealSteam%E2%84%A2.png"), p("SABCO: Surface Auto Blowdown Control System", "2026-03/SABCO%20listing.png"),
+    p("Magnetic Level Gauge", "2025-11/prod-intro-banner-mlg_0.jpg"), p("A2Zflo-W Water Flow Meter", "2025-12/A2Zflo-W.png"),
+  ],
+  "steam-distribution": [
+    p("Steam Traps", "2025-12/th-steam-trap.jpg"), p("Pre Fabricated Modules", "2026-03/Prefabricated%20Modules_thumbnail.png"),
+    p("Bellow Seal Valves", "2025-12/th-valves.jpg"), p("Pressure Reducing Stations (PRS)", "2026-03/PRS%20thumbnail.png"),
+    p("Pressure Reducing and Desuperheating System (PRDS)", "2025-12/th-PRDS.jpg"), p("Steam Line Mountings", "2026-03/Line%20Mountings_thumbnail.png"),
+  ],
+  "condensate-system-management": [
+    p("Compact Pressurised Condensate Recovery System (CPCRS)", "2025-12/CPCRS_product_0.jpg"),
+    p("High-Pressure Condensate Recovery System (HPCRS)", "2025-12/Untitled%20design%20%2829%29.png"),
+    p("Pumping Trap Condensate Recovery System (PTCRS)", "2025-12/PTCRS_product.jpg"),
+    p("Thermax Compact Automatic Condensate Transfer Pump (TACTS-RX)", "2025-12/TACT-RS_product%20listing.jpg"),
+    p("Thermax Automatic Condensate Transfer System (TACTS)", "2025-12/TACTS-Pump_0.jpg"),
+    p("Thermax Atmospheric Deaerator with Immersion Tube (TADIT)", "2025-12/TADIT_1300X800_0.jpg"),
+    p("Thermax Atmospheric Flash System (TAFS)", "2025-12/Untitled%20design%20%2832%29.png"),
+  ],
+  "absorption-chillers": [
+    p("Steam-Driven Absorption Chiller", "2025-09/steam-driven-absorption-chiller-listing.jpg"),
+    p("Direct Fired Absorption Chiller", "2026-01/th-direct-fired-absorption-chiller.jpg"),
+    p("Hot Water Driven Absorption Chiller", "2026-01/th-hot-water-absorption-chiller.jpg"),
+    p("Exhaust Driven Absorption Chillers", "2026-01/th-exhaust-absorption-chiller.jpg"),
+    p("Multi-Energy Absorption Chiller", "2026-01/th-multi-energy-absorption-chiller.jpg"),
+    p("Thermic Fluid Driven Absorption Chiller", "2026-01/th-thermic-fluid-driven-chiller.jpg"),
+  ],
+  "absorption-chiller-heaters": [
+    p("Steam-Driven Absorption Chiller-Heater", "2026-01/th-steam-driven-absorption-chiller-heater.jpg"),
+    p("Hot Water-Driven Absorption Chiller-Heater", "2026-01/th-hot-water-driven-absorption-chiller-heater.jpg"),
+    p("Exhaust Gas-Driven Absorption Chiller-Heater", "2026-04/Exhaust%20Gas-Driven%20Absorption%20Chiller-Heater%20listing.png"),
+  ],
+  "absorption-heat-pumps": [
+    p("Steam-Driven Absorption Heat Pump", "2026-04/Steam-Driven%20Absorption%20Heat%20Pump_0.png"),
+    p("Hot Water-Driven Absorption Heat Pump", "2026-01/th-steam-driven-absorption-heat-pump_0.jpg"),
+    p("Exhaust-Driven Absorption Heat Pump", "2026-04/Exhaust-Driven%20Absorption%20Heat%20Pump%20Listing.png"),
+    p("Heat Pump Chiller", "2026-01/th-heat-pump-chiller.jpg"), p("Chiller Heat Pump", "2026-01/th-chiller-heat-pump_0.jpg"),
+  ],
+  "heating-solutions": [
+    p("Hybrid Heat Pump", "2026-01/th-hybrid-heat-pump.jpg"), p("Electrical Heat Pump", "2026-01/th-electrical-heat-pump.jpg"),
+  ],
+  "wet-cooling-solutions": [
+    p("Adiabatic Cooling Tower", "2026-01/th-adct.jpg"), p("Evaporative Condenser", "2026-01/th-evaporative-condenser.jpg"),
+    p("Hybrid Closed Loop Cooling Tower", "2026-01/th-hybrid-closed-loop-cooling-tower.jpg"),
+    p("Closed Loop Cooling Tower", "2026-01/th-closed-loop-cooling-tower.jpg"),
+  ],
+  "dry-cooling-solutions": [
+    p("Dry Cooler", "2026-01/th-dry-cooler.jpg"), p("Air Cooled Heat Exchanger", "2026-01/th-heat-exchnager.jpg"),
+  ],
+  "water-treatment-solutions": [
+    p("Automated Softeners", "2026-04/Automated%20Softeners%20Listing.png"), p("Containerised Plants", "2026-03/th-containerised-plant.jpg"),
+    p("Demineralisation Plant (DM)", "2026-04/Demineralisation%20Plant%20Listing.png"), p("Klarimax", "2026-03/th-klarimax_0.jpg"),
+    p("PuriSmart", "2026-04/PuriSmart%20Listing.png"), p("Digilite", "2026-04/Digilite%20Listing.png"),
+    p("E Series RO", "2026-03/th-e-series.jpg"), p("LoFlo RO", "2026-04/LoFlo%20RO%20Listing.png"),
+    p("SIRO", "2026-04/SIRO%20Lisitng.png"), p("eFlo", "2026-03/th-eflo.jpg"), p("Port D-Sal", "2026-03/th-port-d-sal_0.jpg"),
+    p("Nanofiltration", "2026-03/th-nanofiltration.jpg"), p("Ultra Pure Water (UPW)", "2026-03/th-upw.jpg"),
+    p("Ultrafiltration", "2026-02/th-ultrafiltration.jpg"), p("Low Pressure Condensate Polishing Unit", "2026-02/th-hl-condenstae-polishing-unit.jpg"),
+    p("High-Pressure Condensate Polishing Unit (CPCU)", "2026-02/th-hl-condenstae-polishing-unit.jpg"),
+    p("RO Plants", "2026-02/th-ro-plants.jpg"), p("Specialised Ion Exchange Removal", "2026-02/th-spl-ion-exchange-removal.jpg"),
+    p("Dealkaliser", "2026-02/th-dealkaliser.jpg"), p("Softening Plant", "2026-02/th-softening-plant.jpg"),
+    p("Demineralisation Plant", "2026-02/th-dimeralisation-plant.jpg"), p("Side Stream Filters", "2026-02/th-side-stream-filters_0.jpg"),
+    p("Gravity Filter", "2026-02/th-gravity-filter.jpg"), p("Pressurised Filters (DMF & ACF)", "2026-02/th-pressurised-filters.jpg"),
+    p("Clarifiers", "2026-02/th-clarifier.jpg"),
+  ],
+  "sewage-treatment-and-recycling-plants": [
+    p("Special Media Filter", "2026-04/Special%20Media%20Filter%20Listing.png"), p("BioSONR", "2026-03/th-biosonr.jpg"),
+    p("SBR-Based", "2026-03/th-sbr.jpg"), p("Membrane Bioreactor (MBR) based", "2026-03/th-mbr-based.jpg"),
+    p("MBBR-Based", "2026-03/th-mbbr.jpg"), p("Trickling Filter-Based", "2026-03/th-trickling-filter.jpg"),
+    p("Activated Sludge Process (ASP)", "2026-03/th-activated-sludge.jpg"), p("atoM", "2026-03/th-atoM.jpg"),
+    p("SeqtreaT", "2026-03/th-SeqtreaT.jpg"), p("BioCask", "2026-03/th-Biocask.jpg"), p("CuBe", "2026-03/th-cuBe.jpg"),
+    p("BioFilter Pro", "2026-03/th-Biofilter-Pro.jpg"), p("FABx", "2026-03/th-FABx.jpg"),
+  ],
+  "effluent-treatment-recycling-plants": [
+    p("Physico Chemical Treatment", "2026-03/th-physico-chemical-treatment.jpg"), p("Anaerobic Treatment", "2026-04/Anaerobic%20Filter%20Listing.png"),
+    p("Aerobic Treatment", "2026-04/Aerobic%20Treatment%20Listing.png"), p("Special Media Filter", "2026-03/th-spl-media-filter.jpg"),
+    p("Advance Oxidation", "2026-03/th-advance-oxidation.jpg"), p("Oil Removing System", "2026-03/Oil%20Removing%20System%20Listing.png"),
+  ],
+  "minimum-liquid-discharge": [
+    p("Electrodialysis Reversal (EDR)", "2026-03/th-edr.jpg"), p("Advanced Reverse Osmosis (ARO)", "2026-03/th-aro.jpg"),
+  ],
+  "zero-liquid-discharge-system": [
+    p("Agitated Thin Film Dryer (ATFD)", "2026-03/th-atfd.jpg"), p("Stripper", "2026-03/th-stripper.jpg"),
+    p("SteMNovas+", "2026-03/SteMNovas%2B%20listing.png"), p("VapoNovae+", "2026-03/VapoNovae%2B.png"),
+  ],
+};

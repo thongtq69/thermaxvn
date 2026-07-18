@@ -112,30 +112,21 @@ function getNavDisplayLabel(label: string) {
 }
 
 function mergeOfficialProductGroups(groups: ProductSubcategoryGroup[]) {
-  const merged = productSubcategoryGroups.map((officialGroup) => {
+  return productSubcategoryGroups.map((officialGroup) => {
     const managedGroup = groups.find(
       (group) => group.href === officialGroup.href || group.label === officialGroup.label,
     );
 
     if (!managedGroup) return officialGroup;
-
-    const children = [...managedGroup.children];
-    officialGroup.children.forEach((officialChild) => {
-      if (!children.some((child) => child.href === officialChild.href)) {
-        children.push(officialChild);
-      }
-    });
-
-    return { ...managedGroup, children };
+    return {
+      ...officialGroup,
+      label: managedGroup.label || officialGroup.label,
+      children: officialGroup.children.map((officialChild) => {
+        const managedChild = managedGroup.children.find((child) => child.href === officialChild.href);
+        return managedChild ? { ...officialChild, label: managedChild.label || officialChild.label } : officialChild;
+      }),
+    };
   });
-
-  groups.forEach((managedGroup) => {
-    if (!merged.some((group) => group.href === managedGroup.href || group.label === managedGroup.label)) {
-      merged.push(managedGroup);
-    }
-  });
-
-  return merged;
 }
 
 export function Header() {

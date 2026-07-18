@@ -1,5 +1,6 @@
 import { imageUrls } from "./site";
 import type { Locale } from "./i18n";
+import type { OfficialCatalogProduct } from "./officialProductCatalog";
 
 export type DetailPage = {
   slug: string;
@@ -12,6 +13,7 @@ export type DetailPage = {
   overview: string[];
   highlights: string[];
   applications: string[];
+  products?: OfficialCatalogProduct[];
 };
 
 const productImage = {

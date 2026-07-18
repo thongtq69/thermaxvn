@@ -321,38 +321,12 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "/industrial-products/combofilter",
       },
       {
-        label: "NOx Control",
-        href: productSolutionHrefs["NOx Control"],
+        label: "Scrubber",
+        href: "/industrial-products/scrubber",
       },
       {
-        label: "SOx Control",
-        href: productSolutionHrefs["SOx Control"],
-      },
-    ],
-  },
-  {
-    label: "Cooling and Heating Solutions",
-    href: productSolutionHrefs["Cooling and Heating Solutions"],
-    children: [
-      {
-        label: "Absorption Chillers",
-        href: "/industrial-products/absorption-chillers",
-      },
-      {
-        label: "Absorption Heat Pumps",
-        href: "/industrial-products/absorption-heat-pumps",
-      },
-      {
-        label: "Electric Heat Pumps",
-        href: productSolutionHrefs["Electric Heat Pumps"],
-      },
-      {
-        label: "Closed Circuit Cooling Towers",
-        href: productSolutionHrefs["Closed Circuit Cooling Towers"],
-      },
-      {
-        label: "Air Cooled Heat Exchangers",
-        href: productSolutionHrefs["Air Cooled Heat Exchangers"],
+        label: "Thermax Ne0 - Gas Enrichment Solutions",
+        href: "/industrial-products/thermax-neo-gas-enrichment-solutions",
       },
     ],
   },
@@ -376,6 +350,14 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         label: "Hot Water Generators",
         href: "/industrial-products/hot-water-generators",
       },
+      {
+        label: "Energy Plant",
+        href: "/industrial-products/energy-plant",
+      },
+      {
+        label: "Electric Process Heat Solutions",
+        href: "/industrial-products/electric-process-heat-solutions",
+      },
     ],
   },
   {
@@ -395,8 +377,54 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "/industrial-products/condensate-system-management",
       },
       {
-        label: "Hot Water Heating Systems",
-        href: productSolutionHrefs["Hot Water Heating Systems"],
+        label: "Process Automation",
+        href: "/industrial-products/process-automation",
+      },
+      {
+        label: "Customised Solutions",
+        href: "/industrial-products/customised-solutions",
+      },
+    ],
+  },
+  {
+    label: "Cooling and Heating Solutions",
+    href: productSolutionHrefs["Cooling and Heating Solutions"],
+    children: [
+      {
+        label: "Absorption Chillers",
+        href: "/industrial-products/absorption-chillers",
+      },
+      {
+        label: "Absorption Chiller-Heaters",
+        href: "/industrial-products/absorption-chiller-heaters",
+      },
+      {
+        label: "Absorption Heat Pumps",
+        href: "/industrial-products/absorption-heat-pumps",
+      },
+      {
+        label: "Absorption Heat Transformer",
+        href: "/industrial-products/absorption-heat-transformer",
+      },
+      {
+        label: "Hybrid Chiller",
+        href: "/industrial-products/hybrid-chiller",
+      },
+      {
+        label: "SustainX Heating Solutions",
+        href: "/industrial-products/heating-solutions",
+      },
+      {
+        label: "SustainX Wet Cooling Solutions",
+        href: "/industrial-products/wet-cooling-solutions",
+      },
+      {
+        label: "SustainX Dry Cooling Solutions",
+        href: "/industrial-products/dry-cooling-solutions",
+      },
+      {
+        label: "SustainX Refrigeration Solutions",
+        href: "/industrial-products/industrial-refrigeration-unit",
       },
     ],
   },
@@ -409,26 +437,20 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "/industrial-products/water-treatment-solutions",
       },
       {
-        label: "Wastewater Recovery",
-        href: productSolutionHrefs["Wastewater Recovery"],
-      },
-    ],
-  },
-  {
-    label: "Chemicals",
-    href: "/business-portfolio/chemicals#solutions",
-    children: [
-      {
-        label: "Boiler Water Treatment Chemicals",
-        href: productSolutionHrefs["Boiler Water Treatment Chemicals"],
+        label: "Sewage Treatment and Recycling Plants",
+        href: "/industrial-products/sewage-treatment-and-recycling-plants",
       },
       {
-        label: "Cooling Water Treatment Chemicals",
-        href: productSolutionHrefs["Cooling Water Treatment Chemicals"],
+        label: "Effluent Treatment & Recycling Plants",
+        href: "/industrial-products/effluent-treatment-recycling-plants",
       },
       {
-        label: "Ion Exchange Resins",
-        href: productSolutionHrefs["Ion Exchange Resins"],
+        label: "Minimum Liquid Discharge",
+        href: "/industrial-products/minimum-liquid-discharge",
+      },
+      {
+        label: "Zero Liquid Discharge System",
+        href: "/industrial-products/zero-liquid-discharge-system",
       },
     ],
   },
@@ -567,7 +589,6 @@ export const footerGroups = [
       { label: "Steam Engineering Solutions", href: productSolutionHrefs["Steam Engineering Solutions"] },
       { label: "Cooling and Heating Solutions", href: productSolutionHrefs["Cooling and Heating Solutions"] },
       { label: "Water and Waste Solutions", href: productSolutionHrefs["Water and Waste Solutions"] },
-      { label: "Chemicals", href: "/business-portfolio/chemicals" },
     ],
   },
   {
