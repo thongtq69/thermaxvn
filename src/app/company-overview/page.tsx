@@ -54,7 +54,7 @@ export default function CompanyOverviewPage() {
           breadcrumb={[{ label: "About Us", href: "/company-overview" }, { label: "Company Overview" }]}
         />
 
-        <section className="inner-intro" data-section="company-intro">
+        <section className="inner-intro company-overview-intro" data-section="company-intro">
           <div className="inner-intro-grid" data-reveal>
             <h2>
               Thermax Vietnam is a local presence focused on supporting industries with
@@ -97,7 +97,7 @@ export default function CompanyOverviewPage() {
           </div>
         </section>
 
-        <section className="vision-section" data-section="local-role">
+        <section className="vision-section company-overview-vision" data-section="local-role">
           <div className="vision-banner" data-reveal>
             <img src={imageUrls.hero} alt="Thermax Vietnam" />
           </div>
@@ -107,7 +107,7 @@ export default function CompanyOverviewPage() {
             </div>
             <p className="vision-text">
               We help Vietnamese industries improve operational efficiency, meet compliance requirements, and move
-              towards cleaner, more sustainable growth.
+              towards <span className="red">cleaner, more sustainable growth.</span>
             </p>
           </div>
         </section>

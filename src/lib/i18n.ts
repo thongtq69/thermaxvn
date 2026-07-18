@@ -286,6 +286,8 @@ export const viDictionary: Record<string, string> = {
   "The Vietnam team combines local customer understanding with Thermax's global engineering experience to improve efficiency, compliance, and long-term reliability.": "Đội ngũ tại Việt Nam kết hợp hiểu biết khách hàng địa phương với kinh nghiệm kỹ thuật toàn cầu của Thermax để nâng cao hiệu quả, đáp ứng tuân thủ và tăng độ tin cậy dài hạn.",
   "Our role": "Vai trò của chúng tôi",
   "We help Vietnamese industries improve operational efficiency, meet compliance requirements, and move towards cleaner, more sustainable growth.": "Chúng tôi giúp các ngành công nghiệp Việt Nam nâng cao hiệu quả vận hành, đáp ứng yêu cầu tuân thủ và hướng tới tăng trưởng sạch hơn, bền vững hơn.",
+  "We help Vietnamese industries improve operational efficiency, meet compliance requirements, and move towards": "Chúng tôi giúp các ngành công nghiệp Việt Nam nâng cao hiệu quả vận hành, đáp ứng yêu cầu tuân thủ và hướng tới",
+  "cleaner, more sustainable growth.": "tăng trưởng sạch hơn, bền vững hơn.",
   "Vietnam presence since 2008, with direct office presence strengthened in 2019.": "Hiện diện tại Việt Nam từ năm 2008, với văn phòng trực tiếp được củng cố từ năm 2019.",
   "Local Coverage": "Phạm vi hỗ trợ",
   "Connect": "Kết nối",

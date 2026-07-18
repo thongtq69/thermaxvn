@@ -5745,6 +5745,22 @@ main { color: var(--bs-body-color); }
   letter-spacing: 0;
 }
 
+.company-overview-intro .inner-intro-grid > div > p {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.company-overview-vision .vision-text {
+  font-size: var(--fs-32);
+  line-height: 1.3;
+  font-weight: var(--font-weight-500);
+  letter-spacing: -1.6px;
+}
+
+.company-overview-vision .vision-text .red {
+  color: var(--red);
+}
+
 @media (max-width: 991px) {
   .vision-banner, .vision-content {
     margin-left: 16px;
@@ -5754,6 +5770,20 @@ main { color: var(--bs-body-color); }
   }
   .vision-content { grid-template-columns: 1fr; gap: 16px; }
   .vision-text { font-size: 24px; line-height: 32px; }
+  .company-overview-vision .vision-text { font-size: var(--fs-32); line-height: 1.3; }
+}
+
+@media (max-width: 780px) {
+  .company-overview-intro .inner-intro-grid > div > p {
+    font-size: var(--fs-16);
+    line-height: 24px;
+  }
+
+  .company-overview-vision .vision-text {
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
 }
 
 /* ============================================
