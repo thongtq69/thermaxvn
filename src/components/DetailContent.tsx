@@ -16,13 +16,45 @@ type DetailContentProps = {
 function OverviewText({ paragraph, accent }: { paragraph: string; accent: boolean }) {
   if (!accent) return paragraph;
 
-  const accentStart = paragraph.indexOf(",");
-  if (accentStart === -1 || accentStart === paragraph.length - 1) return paragraph;
+  const commaIndex = paragraph.indexOf(",");
+  let accentStart = commaIndex >= 0 ? commaIndex + 1 : -1;
+
+  if (accentStart === -1) {
+    const markers = [
+      " hướng tới ",
+      " giúp ",
+      " để ",
+      " nhằm ",
+      " phù hợp ",
+      " hỗ trợ ",
+      " designed to ",
+      " helps ",
+      " supports ",
+      " to improve ",
+    ];
+    const markerIndexes = markers
+      .map((marker) => paragraph.toLowerCase().indexOf(marker))
+      .filter((index) => index > paragraph.length * 0.2);
+
+    if (markerIndexes.length > 0) {
+      accentStart = Math.min(...markerIndexes) + 1;
+    }
+  }
+
+  if (accentStart === -1) {
+    const fallbackStart = paragraph.indexOf(" ", Math.floor(paragraph.length * 0.58));
+    accentStart = fallbackStart >= 0 ? fallbackStart + 1 : -1;
+  }
+
+  if (accentStart <= 0 || accentStart >= paragraph.length) return paragraph;
+
+  const regularText = paragraph.slice(0, accentStart).trimEnd();
+  const accentText = paragraph.slice(accentStart).trimStart();
 
   return (
     <>
-      {paragraph.slice(0, accentStart + 1)}{" "}
-      <span className="detail-overview-accent">{paragraph.slice(accentStart + 1).trimStart()}</span>
+      {regularText}{" "}
+      <span className="detail-overview-accent">{accentText}</span>
     </>
   );
 }

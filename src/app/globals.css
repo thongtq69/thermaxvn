@@ -7665,6 +7665,12 @@ main { color: var(--bs-body-color); }
   font-size: var(--fs-16);
   line-height: 1.65;
 }
+
+.newsroom-intro .newsroom-intro-copy h2,
+.newsroom-intro .newsroom-intro-copy p {
+  font-size: var(--fs-18);
+  line-height: 27px;
+}
 .newsroom-stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
