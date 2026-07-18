@@ -39,15 +39,15 @@ async function writeLocalStore(store: LocalStore) {
 
 function mergeCmsData(data?: Partial<CmsData>): CmsData {
   return {
-    assets: data?.assets?.length ? data.assets : defaultCmsData.assets,
-    productGroups: data?.productGroups?.length ? data.productGroups : defaultCmsData.productGroups,
-    news: data?.news?.length ? data.news : defaultCmsData.news,
-    projects: data?.projects?.length ? data.projects : defaultCmsData.projects,
+    assets: Array.isArray(data?.assets) ? data.assets : defaultCmsData.assets,
+    productGroups: Array.isArray(data?.productGroups) ? data.productGroups : defaultCmsData.productGroups,
+    news: Array.isArray(data?.news) ? data.news : defaultCmsData.news,
+    projects: Array.isArray(data?.projects) ? data.projects : defaultCmsData.projects,
     footer: data?.footer ? { ...defaultCmsData.footer, ...data.footer } : defaultCmsData.footer,
   };
 }
 
-export async function getCmsData(): Promise<CmsData> {
+export async function getCmsData(options: { fallbackOnError?: boolean } = {}): Promise<CmsData> {
   if (shouldUseLocalStore()) {
     const store = await readLocalStore();
     return mergeCmsData(store.cms);
@@ -59,13 +59,17 @@ export async function getCmsData(): Promise<CmsData> {
     const db = await getDb();
     const document = await db.collection<CmsDocument>("cms").findOne({ _id: cmsId });
     return mergeCmsData(document?.data);
-  } catch {
+  } catch (error) {
+    if (options.fallbackOnError === false) throw error;
     return defaultCmsData;
   }
 }
 
-export async function getCmsSection<T extends CmsData[CmsSection]>(section: CmsSection): Promise<T> {
-  const data = await getCmsData();
+export async function getCmsSection<T extends CmsData[CmsSection]>(
+  section: CmsSection,
+  options: { fallbackOnError?: boolean } = {},
+): Promise<T> {
+  const data = await getCmsData(options);
   return data[section] as T;
 }
 
@@ -102,7 +106,7 @@ export async function getManagedProjectBySlug(slug: string): Promise<ManagedProj
 }
 
 export async function addAsset(asset: Omit<ManagedAsset, "id" | "createdAt">) {
-  const assets = await getCmsSection<ManagedAsset[]>("assets");
+  const assets = await getCmsSection<ManagedAsset[]>("assets", { fallbackOnError: false });
   const nextAsset = { ...asset, id: createId("asset"), createdAt: new Date().toISOString() };
   await updateCmsSection("assets", [nextAsset, ...assets]);
   return nextAsset;

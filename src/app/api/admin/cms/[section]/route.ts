@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "../../../../../lib/adminAuth";
-import { getCmsData, updateCmsSection } from "../../../../../lib/cmsServer";
+import { updateCmsSection } from "../../../../../lib/cmsServer";
 import type { CmsData } from "../../../../../lib/cmsTypes";
 
 type Section = keyof CmsData;
@@ -23,7 +23,10 @@ export async function PUT(request: Request, context: { params: Promise<{ section
     return NextResponse.json({ error: "Invalid CMS section payload" }, { status: 400 });
   }
 
-  await updateCmsSection(section as Section, body as CmsData[Section]);
-  const data = await getCmsData();
-  return NextResponse.json(data[section as Section]);
+  try {
+    await updateCmsSection(section as Section, body as CmsData[Section]);
+    return NextResponse.json(body);
+  } catch {
+    return NextResponse.json({ error: "Không thể lưu dữ liệu vào cơ sở dữ liệu." }, { status: 503 });
+  }
 }

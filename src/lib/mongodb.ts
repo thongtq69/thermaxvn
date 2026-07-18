@@ -15,8 +15,19 @@ export async function getDb(): Promise<Db> {
   }
 
   if (!globalThis.thermaxMongoClientPromise) {
-    const client = new MongoClient(process.env.MONGODB_URI);
-    globalThis.thermaxMongoClientPromise = client.connect();
+    const timeout = Number(process.env.MONGODB_SERVER_SELECTION_TIMEOUT_MS || 8000);
+    const client = new MongoClient(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: Number.isFinite(timeout) ? timeout : 8000,
+    });
+    const connection = client.connect();
+    globalThis.thermaxMongoClientPromise = connection;
+
+    connection.catch(() => {
+      if (globalThis.thermaxMongoClientPromise === connection) {
+        globalThis.thermaxMongoClientPromise = undefined;
+      }
+      void client.close().catch(() => undefined);
+    });
   }
 
   const client = await globalThis.thermaxMongoClientPromise;

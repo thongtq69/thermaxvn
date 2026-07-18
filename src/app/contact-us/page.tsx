@@ -66,22 +66,27 @@ export default function ContactUsPage() {
             className="contact-form"
             onSubmit={async (event) => {
               event.preventDefault();
-              const form = new FormData(event.currentTarget);
-              const response = await fetch("/api/contact-requests", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  fullName: `${form.get("firstName") || ""} ${form.get("lastName") || ""}`.trim(),
-                  email: form.get("email"),
-                  phone: form.get("phone"),
-                  country: form.get("country"),
-                  industry: form.get("industry"),
-                  message: form.get("message"),
-                  source: "contact-page",
-                }),
-              });
-              alert(response.ok ? "Thanks! We will get in touch shortly." : "Please try again later.");
-              if (response.ok) event.currentTarget.reset();
+              const formElement = event.currentTarget;
+              const form = new FormData(formElement);
+              try {
+                const response = await fetch("/api/contact-requests", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    fullName: `${form.get("firstName") || ""} ${form.get("lastName") || ""}`.trim(),
+                    email: form.get("email"),
+                    phone: form.get("phone"),
+                    country: form.get("country"),
+                    industry: form.get("industry"),
+                    message: form.get("message"),
+                    source: "contact-page",
+                  }),
+                });
+                alert(response.ok ? "Thanks! We will get in touch shortly." : "Please try again later.");
+                if (response.ok) formElement.reset();
+              } catch {
+                alert("Please try again later.");
+              }
             }}
           >
             <input name="firstName" placeholder="First name*" required />

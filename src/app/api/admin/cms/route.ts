@@ -6,5 +6,9 @@ export async function GET() {
   const unauthorized = await requireAdmin();
   if (unauthorized) return unauthorized;
 
-  return NextResponse.json(await getCmsData());
+  try {
+    return NextResponse.json(await getCmsData({ fallbackOnError: false }));
+  } catch {
+    return NextResponse.json({ error: "Không thể kết nối cơ sở dữ liệu." }, { status: 503 });
+  }
 }

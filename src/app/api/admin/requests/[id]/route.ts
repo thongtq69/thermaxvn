@@ -8,8 +8,14 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
 
   const { id } = await context.params;
   const { status } = await request.json().catch(() => ({ status: "read" }));
-  const ok = await updateContactRequest(id, status === "new" ? "new" : "read");
-  return NextResponse.json({ ok });
+  try {
+    const ok = await updateContactRequest(id, status === "new" ? "new" : "read");
+    return ok
+      ? NextResponse.json({ ok: true })
+      : NextResponse.json({ error: "Không tìm thấy yêu cầu." }, { status: 404 });
+  } catch {
+    return NextResponse.json({ error: "Không thể cập nhật yêu cầu." }, { status: 503 });
+  }
 }
 
 export async function DELETE(_request: Request, context: { params: Promise<{ id: string }> }) {
@@ -17,6 +23,12 @@ export async function DELETE(_request: Request, context: { params: Promise<{ id:
   if (unauthorized) return unauthorized;
 
   const { id } = await context.params;
-  const ok = await deleteContactRequest(id);
-  return NextResponse.json({ ok });
+  try {
+    const ok = await deleteContactRequest(id);
+    return ok
+      ? NextResponse.json({ ok: true })
+      : NextResponse.json({ error: "Không tìm thấy yêu cầu." }, { status: 404 });
+  } catch {
+    return NextResponse.json({ error: "Không thể xóa yêu cầu." }, { status: 503 });
+  }
 }

@@ -12,17 +12,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const contactRequest = await createContactRequest({
-    fullName: String(body.fullName),
-    companyName: body.companyName ? String(body.companyName) : "",
-    email: String(body.email),
-    phone: String(body.phone),
-    address: body.address ? String(body.address) : "",
-    country: body.country ? String(body.country) : "",
-    industry: body.industry ? String(body.industry) : "",
-    message: body.message ? String(body.message) : "",
-    source: body.source ? String(body.source) : "website",
-  });
+  try {
+    const contactRequest = await createContactRequest({
+      fullName: String(body.fullName),
+      companyName: body.companyName ? String(body.companyName) : "",
+      email: String(body.email),
+      phone: String(body.phone),
+      address: body.address ? String(body.address) : "",
+      country: body.country ? String(body.country) : "",
+      industry: body.industry ? String(body.industry) : "",
+      message: body.message ? String(body.message) : "",
+      source: body.source ? String(body.source) : "website",
+    });
 
-  return NextResponse.json(contactRequest, { status: 201 });
+    return NextResponse.json(contactRequest, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: "Không thể gửi yêu cầu lúc này. Vui lòng thử lại sau." }, { status: 503 });
+  }
 }

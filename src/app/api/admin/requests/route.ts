@@ -5,5 +5,9 @@ import { listContactRequests } from "../../../../lib/cmsServer";
 export async function GET() {
   const unauthorized = await requireAdmin();
   if (unauthorized) return unauthorized;
-  return NextResponse.json(await listContactRequests());
+  try {
+    return NextResponse.json(await listContactRequests());
+  } catch {
+    return NextResponse.json({ error: "Không thể tải yêu cầu khách hàng." }, { status: 503 });
+  }
 }

@@ -424,25 +424,30 @@ function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }
         className="callback-panel"
         onSubmit={async (event) => {
           event.preventDefault();
-          const form = new FormData(event.currentTarget);
+          const formElement = event.currentTarget;
+          const form = new FormData(formElement);
           setStatus(t("Sending..."));
-          const response = await fetch("/api/contact-requests", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              fullName: form.get("fullName"),
-              companyName: form.get("companyName"),
-              phone: form.get("phone"),
-              address: form.get("address"),
-              email: form.get("email"),
-              message: form.get("message"),
-              source: "header-callback",
-            }),
-          });
-          if (response.ok) {
-            event.currentTarget.reset();
-            setStatus(t("Thanks! We will get in touch shortly."));
-          } else {
+          try {
+            const response = await fetch("/api/contact-requests", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                fullName: form.get("fullName"),
+                companyName: form.get("companyName"),
+                phone: form.get("phone"),
+                address: form.get("address"),
+                email: form.get("email"),
+                message: form.get("message"),
+                source: "header-callback",
+              }),
+            });
+            if (response.ok) {
+              formElement.reset();
+              setStatus(t("Thanks! We will get in touch shortly."));
+            } else {
+              setStatus(t("Please try again later."));
+            }
+          } catch {
             setStatus(t("Please try again later."));
           }
         }}

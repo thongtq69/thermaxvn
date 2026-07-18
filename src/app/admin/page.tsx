@@ -51,6 +51,11 @@ function formatDate(value: string) {
   }
 }
 
+async function responseError(response: Response, fallback: string) {
+  const data = await response.json().catch(() => null) as { error?: string } | null;
+  return data?.error || fallback;
+}
+
 export default function AdminPage() {
   const [tab, setTab] = useState<Tab>("dashboard");
   const [password, setPassword] = useState("");
@@ -91,33 +96,48 @@ export default function AdminPage() {
   }, [notice]);
 
   async function loadCms() {
-    const response = await fetch("/api/admin/cms");
-    if (response.ok) setCms(await response.json());
-    else if (response.status === 401) setAuthenticated(false);
+    try {
+      const response = await fetch("/api/admin/cms");
+      if (response.ok) setCms(await response.json());
+      else if (response.status === 401) setAuthenticated(false);
+      else setNotice({ tone: "error", text: await responseError(response, "Không thể tải dữ liệu CMS.") });
+    } catch {
+      setNotice({ tone: "error", text: "Không thể kết nối tới CMS." });
+    }
   }
 
   async function loadRequests() {
-    const response = await fetch("/api/admin/requests");
-    if (response.ok) setRequests(await response.json());
-    else if (response.status === 401) setAuthenticated(false);
+    try {
+      const response = await fetch("/api/admin/requests");
+      if (response.ok) setRequests(await response.json());
+      else if (response.status === 401) setAuthenticated(false);
+      else setNotice({ tone: "error", text: await responseError(response, "Không thể tải yêu cầu khách hàng.") });
+    } catch {
+      setNotice({ tone: "error", text: "Không thể kết nối tới hộp thư khách hàng." });
+    }
   }
 
   async function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusyKey("login");
     setNotice(null);
-    const response = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    setBusyKey("");
-    if (!response.ok) {
-      setNotice({ tone: "error", text: "Mật khẩu không đúng. Vui lòng kiểm tra và thử lại." });
-      return;
+    try {
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: "Mật khẩu không đúng. Vui lòng kiểm tra và thử lại." });
+        return;
+      }
+      setAuthenticated(true);
+      setPassword("");
+    } catch {
+      setNotice({ tone: "error", text: "Không thể kết nối tới hệ thống quản trị." });
+    } finally {
+      setBusyKey("");
     }
-    setAuthenticated(true);
-    setPassword("");
   }
 
   function updateSection<K extends keyof CmsData>(section: K, value: CmsData[K]) {
@@ -127,77 +147,123 @@ export default function AdminPage() {
 
   async function saveSection<K extends keyof CmsData>(section: K, value: CmsData[K]) {
     setBusyKey(`save-${section}`);
-    const response = await fetch(`/api/admin/cms/${section}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(value),
-    });
-    setBusyKey("");
-    if (!response.ok) {
-      setNotice({ tone: "error", text: "Chưa thể lưu thay đổi. Vui lòng kiểm tra kết nối và thử lại." });
+    try {
+      const response = await fetch(`/api/admin/cms/${section}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(value),
+      });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: await responseError(response, "Chưa thể lưu thay đổi. Vui lòng thử lại.") });
+        return false;
+      }
+      setDirty((current) => {
+        const next = new Set(current);
+        next.delete(section);
+        return next;
+      });
+      setNotice({ tone: "success", text: "Đã lưu thay đổi thành công." });
+      return true;
+    } catch {
+      setNotice({ tone: "error", text: "Mất kết nối khi lưu. Thay đổi vẫn được giữ trên màn hình để anh/chị thử lại." });
       return false;
+    } finally {
+      setBusyKey("");
     }
-    setDirty((current) => {
-      const next = new Set(current);
-      next.delete(section);
-      return next;
-    });
-    setNotice({ tone: "success", text: "Đã lưu thay đổi thành công." });
-    return true;
   }
 
   async function uploadImage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     setBusyKey("upload");
-    const response = await fetch("/api/admin/upload", { method: "POST", body: form });
-    setBusyKey("");
-    if (!response.ok) {
-      setNotice({ tone: "error", text: "Tải ảnh thất bại. Vui lòng kiểm tra định dạng ảnh hoặc cấu hình Cloudinary." });
-      return;
+    try {
+      const response = await fetch("/api/admin/upload", { method: "POST", body: form });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: await responseError(response, "Tải ảnh thất bại.") });
+        return;
+      }
+      const asset = await response.json();
+      setCms((current) => ({ ...current, assets: [asset, ...current.assets] }));
+      formElement.reset();
+      setNotice({ tone: "success", text: "Ảnh đã được tải lên và lưu vào thư viện." });
+    } catch {
+      setNotice({ tone: "error", text: "Mất kết nối khi tải ảnh. Không có thay đổi nào được xác nhận." });
+    } finally {
+      setBusyKey("");
     }
-    const asset = await response.json();
-    setCms((current) => ({ ...current, assets: [asset, ...current.assets] }));
-    event.currentTarget.reset();
-    setNotice({ tone: "success", text: "Ảnh đã được tải lên thư viện." });
   }
 
   async function deleteAsset(asset: ManagedAsset) {
     if (!window.confirm(`Xóa ảnh “${asset.title}”? Ảnh đang được dùng trên website có thể không còn hiển thị.`)) return;
     setBusyKey(`asset-${asset.id}`);
-    const cloudResponse = await fetch("/api/admin/delete-asset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ publicId: asset.publicId }),
-    });
     const next = cms.assets.filter((item) => item.id !== asset.id);
-    const saved = cloudResponse.ok && await saveSection("assets", next);
-    setBusyKey("");
-    if (saved) setCms((current) => ({ ...current, assets: next }));
+    try {
+      const response = await fetch("/api/admin/delete-asset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ publicId: asset.publicId, assets: next }),
+      });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: await responseError(response, "Chưa thể xóa ảnh.") });
+        return;
+      }
+      const result = await response.json() as { assets?: ManagedAsset[]; cleanupPending?: boolean };
+      setCms((current) => ({ ...current, assets: result.assets ?? next }));
+      setDirty((current) => {
+        const updated = new Set(current);
+        updated.delete("assets");
+        return updated;
+      });
+      setNotice({
+        tone: result.cleanupPending ? "info" : "success",
+        text: result.cleanupPending
+          ? "Đã xóa ảnh khỏi thư viện; file Cloudinary sẽ cần được dọn lại sau."
+          : "Đã xóa ảnh an toàn khỏi thư viện.",
+      });
+    } catch {
+      setNotice({ tone: "error", text: "Mất kết nối khi xóa ảnh. Ảnh chưa bị xóa khỏi thư viện." });
+    } finally {
+      setBusyKey("");
+    }
   }
 
   async function saveRequestStatus(id: string, status: "new" | "read") {
     setBusyKey(`request-${id}`);
-    const response = await fetch(`/api/admin/requests/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
-    setBusyKey("");
-    if (response.ok) {
+    try {
+      const response = await fetch(`/api/admin/requests/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: await responseError(response, "Không thể cập nhật yêu cầu.") });
+        return;
+      }
       setRequests((current) => current.map((item) => item.id === id ? { ...item, status } : item));
       setNotice({ tone: "success", text: status === "read" ? "Đã đánh dấu yêu cầu là đã xử lý." : "Đã chuyển yêu cầu về trạng thái mới." });
+    } catch {
+      setNotice({ tone: "error", text: "Mất kết nối khi cập nhật yêu cầu." });
+    } finally {
+      setBusyKey("");
     }
   }
 
   async function deleteRequest(id: string) {
     if (!window.confirm("Xóa yêu cầu này? Thao tác không thể hoàn tác.")) return;
     setBusyKey(`request-${id}`);
-    const response = await fetch(`/api/admin/requests/${id}`, { method: "DELETE" });
-    setBusyKey("");
-    if (response.ok) {
+    try {
+      const response = await fetch(`/api/admin/requests/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+        setNotice({ tone: "error", text: await responseError(response, "Không thể xóa yêu cầu.") });
+        return;
+      }
       setRequests((current) => current.filter((item) => item.id !== id));
       setNotice({ tone: "success", text: "Đã xóa yêu cầu." });
+    } catch {
+      setNotice({ tone: "error", text: "Mất kết nối khi xóa yêu cầu." });
+    } finally {
+      setBusyKey("");
     }
   }
 
