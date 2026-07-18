@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { imageUrls, navItems, productSolutionHrefs, productSubcategoryGroups } from "../lib/site";
 import type { ProductSubcategoryGroup } from "../lib/site";
+import type { ManagedNewsItem, ManagedProject } from "../lib/cmsTypes";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { ArrowIcon, CloseIcon, SearchIcon } from "./icons";
 import { useLanguage } from "./LanguageProvider";
@@ -69,6 +70,42 @@ const navDisplayLabel: Record<string, string> = {
 };
 
 const directNavLabels = new Set(["About Us", "Digital Solutions", "Contact Us"]);
+
+type LocalizedSearchPage = {
+  title: Record<Locale, string>;
+  description: Record<Locale, string>;
+  href: string;
+  keywords: string;
+};
+
+type SearchResult = {
+  title: string;
+  description: string;
+  href: string;
+  keywords: string;
+  kind: string;
+};
+
+const siteSearchPages: LocalizedSearchPage[] = [
+  { title: { en: "Company Overview", vi: "Tổng quan công ty" }, description: { en: "Learn about Thermax and its presence in Vietnam.", vi: "Tìm hiểu về Thermax và hoạt động tại Việt Nam." }, href: "/company-overview", keywords: "about company giới thiệu công ty thermax vietnam" },
+  { title: { en: "Global Presence", vi: "Hiện diện toàn cầu" }, description: { en: "Explore Thermax offices and facilities around the world.", vi: "Khám phá văn phòng và cơ sở Thermax trên toàn thế giới." }, href: "/company-overview/global-presence", keywords: "global presence bản đồ văn phòng nhà máy thế giới" },
+  { title: { en: "Industrial Products", vi: "Sản phẩm công nghiệp" }, description: { en: "Browse Thermax products and industrial solutions.", vi: "Xem sản phẩm và giải pháp công nghiệp của Thermax." }, href: "/business-segments/industrial-products", keywords: "products sản phẩm giải pháp công nghiệp" },
+  { title: { en: "Industrial Infrastructure", vi: "Hạ tầng công nghiệp" }, description: { en: "Projects, boilers, fired heaters and energy solutions.", vi: "Dự án, lò hơi, thiết bị gia nhiệt và giải pháp năng lượng." }, href: "/business-portfolio/industrial-infrastructure", keywords: "industrial infrastructure boiler heater dự án lò hơi hạ tầng" },
+  { title: { en: "Green Solutions", vi: "Giải pháp xanh" }, description: { en: "Clean energy and decarbonisation solutions.", vi: "Giải pháp năng lượng sạch và giảm phát thải carbon." }, href: "/business-segments/green-solutions", keywords: "green hydrogen clean energy hydro xanh năng lượng sạch carbon" },
+  { title: { en: "Chemicals", vi: "Hóa chất" }, description: { en: "Performance chemicals for industrial applications.", vi: "Hóa chất hiệu năng cho các ứng dụng công nghiệp." }, href: "/business-portfolio/chemicals", keywords: "chemicals hóa chất resin nhựa trao đổi ion" },
+  { title: { en: "Sustainability", vi: "Phát triển bền vững" }, description: { en: "Thermax sustainability commitments and services.", vi: "Cam kết và dịch vụ phát triển bền vững của Thermax." }, href: "/sustainability", keywords: "sustainability service bền vững dịch vụ thermax serve" },
+  { title: { en: "Digital Solutions", vi: "Giải pháp số" }, description: { en: "Connected operations, insights and EDGE Live.", vi: "Vận hành kết nối, phân tích dữ liệu và EDGE Live." }, href: "/digital", keywords: "digital edge live ai số hóa vận hành kết nối" },
+  { title: { en: "News", vi: "Tin tức" }, description: { en: "Latest Thermax business and technology updates.", vi: "Tin mới nhất về hoạt động và công nghệ Thermax." }, href: "/in-the-news", keywords: "news press release tin tức cập nhật" },
+  { title: { en: "Careers", vi: "Tuyển dụng" }, description: { en: "Career opportunities and life at Thermax.", vi: "Cơ hội nghề nghiệp và môi trường làm việc tại Thermax." }, href: "/careers", keywords: "careers jobs tuyển dụng việc làm" },
+  { title: { en: "Contact Us", vi: "Liên hệ" }, description: { en: "Contact Thermax Vietnam for support and enquiries.", vi: "Liên hệ Thermax Việt Nam để được tư vấn và hỗ trợ." }, href: "/contact-us", keywords: "contact enquiry liên hệ tư vấn điện thoại email" },
+  { title: { en: "Corporate Social Responsibility", vi: "Trách nhiệm xã hội" }, description: { en: "Thermax community and social initiatives.", vi: "Các chương trình cộng đồng và trách nhiệm xã hội của Thermax." }, href: "/corporate-social-responsibility", keywords: "csr social community trách nhiệm xã hội cộng đồng" },
+  { title: { en: "ESG Profile", vi: "Hồ sơ ESG" }, description: { en: "Environmental, social and governance profile.", vi: "Thông tin môi trường, xã hội và quản trị doanh nghiệp." }, href: "/esg-profile", keywords: "esg environment social governance môi trường quản trị" },
+  { title: { en: "People", vi: "Con người Thermax" }, description: { en: "Meet the people and culture behind Thermax Vietnam.", vi: "Tìm hiểu con người và văn hóa Thermax Việt Nam." }, href: "/people", keywords: "people culture con người văn hóa" },
+];
+
+function normalizeSearchValue(value: string) {
+  return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+}
 
 function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
@@ -365,14 +402,98 @@ export function Header() {
         </div>
       </header>
 
-      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} productGroups={managedProductGroups} />
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
     </>
   );
 }
 
-function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { t } = useLanguage();
+function SearchOverlay({ open, onClose, productGroups }: { open: boolean; onClose: () => void; productGroups: ProductSubcategoryGroup[] }) {
+  const { locale, t } = useLanguage();
+  const [query, setQuery] = useState("");
+  const [managedContent, setManagedContent] = useState<{ news: ManagedNewsItem[]; projects: ManagedProject[] }>({ news: [], projects: [] });
+
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+      return;
+    }
+
+    const controller = new AbortController();
+    Promise.all([
+      fetch("/api/cms/news", { signal: controller.signal }).then((response) => response.ok ? response.json() : []),
+      fetch("/api/cms/projects", { signal: controller.signal }).then((response) => response.ok ? response.json() : []),
+    ])
+      .then(([news, projects]) => {
+        setManagedContent({
+          news: Array.isArray(news) ? news.filter((item: ManagedNewsItem) => item.status !== "draft") : [],
+          projects: Array.isArray(projects) ? projects.filter((item: ManagedProject) => item.status !== "draft") : [],
+        });
+      })
+      .catch(() => undefined);
+
+    return () => controller.abort();
+  }, [open]);
+
+  const searchResults = useMemo(() => {
+    const pageKind = locale === "vi" ? "Trang" : "Page";
+    const productKind = locale === "vi" ? "Sản phẩm" : "Product";
+    const newsKind = locale === "vi" ? "Tin tức" : "News";
+    const projectKind = locale === "vi" ? "Dự án" : "Project";
+    const genericProductDescription = locale === "vi" ? "Sản phẩm và giải pháp Thermax" : "Thermax product and solution";
+
+    const pages: SearchResult[] = siteSearchPages.map((item) => ({
+      title: item.title[locale],
+      description: item.description[locale],
+      href: item.href,
+      keywords: `${item.keywords} ${item.title.en} ${item.title.vi}`,
+      kind: pageKind,
+    }));
+    const products: SearchResult[] = productGroups.flatMap((group) => [
+      { title: t(group.label), description: genericProductDescription, href: group.href, keywords: `${group.label} ${t(group.label)}`, kind: productKind },
+      ...group.children.map((item) => ({ title: t(item.label), description: t(group.label), href: item.href, keywords: `${item.label} ${group.label} ${t(item.label)}`, kind: productKind })),
+    ]);
+    const news: SearchResult[] = managedContent.news.map((item) => ({
+      title: t(item.title),
+      description: t(item.summary),
+      href: "/in-the-news",
+      keywords: `${item.title} ${item.category} ${item.summary}`,
+      kind: newsKind,
+    }));
+    const projects: SearchResult[] = managedContent.projects.map((item) => ({
+      title: t(item.title),
+      description: t(item.description),
+      href: item.href,
+      keywords: `${item.title} ${item.category} ${item.region} ${item.description}`,
+      kind: projectKind,
+    }));
+    const terms = normalizeSearchValue(query).split(/\s+/).filter(Boolean);
+    if (terms.length === 0) return [];
+
+    return [...pages, ...products, ...news, ...projects]
+      .filter((item) => {
+        const searchable = normalizeSearchValue(`${item.title} ${item.description} ${item.keywords}`);
+        return terms.every((term) => searchable.includes(term));
+      })
+      .sort((first, second) => {
+        const normalizedQuery = normalizeSearchValue(query.trim());
+        const firstStarts = normalizeSearchValue(first.title).startsWith(normalizedQuery) ? 1 : 0;
+        const secondStarts = normalizeSearchValue(second.title).startsWith(normalizedQuery) ? 1 : 0;
+        return secondStarts - firstStarts;
+      })
+      .slice(0, 8);
+  }, [locale, managedContent, productGroups, query, t]);
+
+  const resultHref = (href: string) => {
+    const url = new URL(href, window.location.origin);
+    if (locale === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    return `${url.pathname}${url.search}${url.hash}`;
+  };
+
+  const goToResult = (href: string) => {
+    window.location.href = resultHref(href);
+  };
 
   return (
     <div
@@ -380,6 +501,8 @@ function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }
       role="dialog"
       aria-modal="true"
       aria-label={t("Search")}
+      aria-hidden={!open}
+      inert={!open}
       data-no-translate
     >
       <button className="modal-backdrop" type="button" onClick={onClose} aria-label={t("Close search")} />
@@ -387,21 +510,41 @@ function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }
         <button className="close-button" type="button" onClick={onClose} aria-label={t("Close")}>
           <CloseIcon />
         </button>
-        <label htmlFor="site-search">{t("Search Results")}</label>
-        <div className="search-input">
+        <label htmlFor="site-search">{locale === "vi" ? "Tìm kiếm trên website" : "Search the website"}</label>
+        <form className="search-input" onSubmit={(event) => { event.preventDefault(); if (searchResults[0]) goToResult(searchResults[0].href); }}>
           <SearchIcon />
-          <input id="site-search" placeholder={t("Search Thermax solutions")} autoComplete="off" />
-        </div>
-        <p>{t("Popular searches")}</p>
-        <div className="chip-row">
-          {["Air Pollution Control", "Cooling and Heating", "Process Heat", "Water and Waste", "Green Hydrogen"].map(
-            (item) => (
-              <button type="button" key={item}>
-                {t(item)}
-              </button>
-            ),
-          )}
-        </div>
+          <input id="site-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t("Search Thermax solutions")} autoComplete="off" />
+          <button className="search-submit" type="submit" disabled={!searchResults.length} aria-label={locale === "vi" ? "Mở kết quả đầu tiên" : "Open first result"}><SearchIcon /></button>
+        </form>
+        {query.trim() ? (
+          <div className="search-results" aria-live="polite">
+            <div className="search-results-heading">
+              <p>{locale === "vi" ? "Kết quả tìm kiếm" : "Search results"}</p>
+              <span>{searchResults.length} {locale === "vi" ? "kết quả" : "results"}</span>
+            </div>
+            {searchResults.length ? (
+              <div className="search-result-list">
+                {searchResults.map((item) => (
+                  <a href={resultHref(item.href)} key={`${item.kind}-${item.href}-${item.title}`}>
+                    <span>{item.kind}</span>
+                    <strong>{item.title}</strong>
+                    <small>{item.description}</small>
+                    <ArrowIcon />
+                  </a>
+                ))}
+              </div>
+            ) : <div className="search-empty">{locale === "vi" ? "Không tìm thấy nội dung phù hợp. Hãy thử từ khóa khác." : "No matching content found. Try another keyword."}</div>}
+          </div>
+        ) : (
+          <>
+            <p>{t("Popular searches")}</p>
+            <div className="chip-row">
+              {["Air Pollution Control", "Cooling and Heating", "Process Heat", "Water and Waste", "Green Hydrogen"].map((item) => (
+                <button type="button" key={item} onClick={() => setQuery(t(item))}>{t(item)}</button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -417,6 +560,8 @@ function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }
       role="dialog"
       aria-modal="true"
       aria-label={t("Request a call back")}
+      aria-hidden={!open}
+      inert={!open}
       data-no-translate
     >
       <button className="modal-backdrop" type="button" onClick={onClose} aria-label={t("Close form")} />

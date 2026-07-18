@@ -39,6 +39,13 @@ function slugify(value: string) {
   return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
+function matchesSearch(value: string, query: string) {
+  const normalize = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+  const terms = normalize(query).split(/\s+/).filter(Boolean);
+  const searchable = normalize(value);
+  return terms.every((term) => searchable.includes(term));
+}
+
 function toLines(value: string) {
   return value.split("\n").map((line) => line.trim()).filter(Boolean);
 }
@@ -379,7 +386,7 @@ function Dashboard({ cms, requests, onNavigate }: { cms: CmsData; requests: Cont
 
 function AssetsPanel({ assets, busyKey, dirty, onUpload, onChange, onSave, onDelete }: { assets: ManagedAsset[]; busyKey: string; dirty: boolean; onUpload: (event: FormEvent<HTMLFormElement>) => void; onChange: (assets: ManagedAsset[]) => void; onSave: () => void; onDelete: (asset: ManagedAsset) => void }) {
   const [query, setQuery] = useState("");
-  const filtered = assets.filter((asset) => `${asset.title} ${asset.alt ?? ""}`.toLowerCase().includes(query.toLowerCase()));
+  const filtered = assets.filter((asset) => matchesSearch(`${asset.title} ${asset.alt ?? ""}`, query));
   return <div className={styles.panelStack}>
     <section className={`${styles.surface} ${styles.uploadSurface}`}>
       <div className={styles.uploadIntro}><span className={styles.bigIcon}><Icon name="upload" /></span><div><h2>Tải ảnh mới</h2><p>Hỗ trợ JPG, PNG, WEBP. Nên dùng ảnh dưới 5 MB và đặt mô tả rõ ràng.</p></div></div>
@@ -492,7 +499,7 @@ function NewsPanel({ news, assets, dirty, busy, onChange, onSave }: { news: Mana
   const [query, setQuery] = useState("");
   const activeIndex = news.findIndex((item) => item.id === activeId);
   const active = news[activeIndex] ?? news[0];
-  const filtered = news.filter((item) => `${item.title} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
+  const filtered = news.filter((item) => matchesSearch(`${item.title} ${item.category}`, query));
   function update(patch: Partial<ManagedNewsItem>) { const index = news.findIndex((item) => item.id === active?.id); if (index < 0) return; const next = [...news]; next[index] = { ...next[index], ...patch }; onChange(next); }
   function add() { const item: ManagedNewsItem = { id: createId("news"), title: "Tin tức mới", date: new Date().toLocaleDateString("vi-VN"), category: "Tin doanh nghiệp", image: "", summary: "", highlights: [], status: "draft" }; onChange([item, ...news]); setActiveId(item.id); }
   return <ContentEditorLayout title="Danh sách tin tức" count={news.length} query={query} onQuery={setQuery} onAdd={add} addLabel="Thêm tin tức" dirty={dirty} busy={busy} onSave={onSave}
@@ -513,7 +520,7 @@ function ProjectsPanel({ projects, assets, dirty, busy, onChange, onSave }: { pr
   const [query, setQuery] = useState("");
   const activeIndex = projects.findIndex((item) => item.id === activeId);
   const active = projects[activeIndex] ?? projects[0];
-  const filtered = projects.filter((item) => `${item.title} ${item.region} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
+  const filtered = projects.filter((item) => matchesSearch(`${item.title} ${item.region} ${item.category}`, query));
   function update(patch: Partial<ManagedProject>) { const index = projects.findIndex((item) => item.id === active?.id); if (index < 0) return; const next = [...projects]; next[index] = { ...next[index], ...patch }; onChange(next); }
   function add() { const slug = `du-an-moi-${Date.now().toString().slice(-5)}`; const item: ManagedProject = { id: createId("project"), slug, title: "Dự án mới", category: "Dự án", description: "", image: "", href: `/projects/${slug}`, region: "", capacity: "", scope: "", status: "draft" }; onChange([item, ...projects]); setActiveId(item.id); }
   return <ContentEditorLayout title="Danh sách dự án" count={projects.length} query={query} onQuery={setQuery} onAdd={add} addLabel="Thêm dự án" dirty={dirty} busy={busy} onSave={onSave}
@@ -532,7 +539,7 @@ function ProjectsPanel({ projects, assets, dirty, busy, onChange, onSave }: { pr
 function RequestsPanel({ requests, busyKey, onRead, onDelete, onRefresh }: { requests: ContactRequest[]; busyKey: string; onRead: (id: string, status: "new" | "read") => void; onDelete: (id: string) => void; onRefresh: () => void }) {
   const [filter, setFilter] = useState<"all" | "new" | "read">("all");
   const [query, setQuery] = useState("");
-  const filtered = requests.filter((item) => (filter === "all" || item.status === filter) && `${item.fullName} ${item.email} ${item.phone} ${item.companyName ?? ""}`.toLowerCase().includes(query.toLowerCase()));
+  const filtered = requests.filter((item) => (filter === "all" || item.status === filter) && matchesSearch(`${item.fullName} ${item.email} ${item.phone} ${item.companyName ?? ""}`, query));
   return <section className={styles.surface}>
     <SectionHeading title={`Hộp thư (${requests.length})`} description="Các yêu cầu được gửi từ biểu mẫu liên hệ và nút Gửi yêu cầu trên website." action={<button className={styles.secondaryButton} type="button" onClick={onRefresh}><Icon name="refresh" /> Làm mới</button>} />
     <div className={styles.requestToolbar}><div className={styles.segmented}><button className={filter === "all" ? styles.segmentActive : ""} type="button" onClick={() => setFilter("all")}>Tất cả <span>{requests.length}</span></button><button className={filter === "new" ? styles.segmentActive : ""} type="button" onClick={() => setFilter("new")}>Chưa đọc <span>{requests.filter((item) => item.status === "new").length}</span></button><button className={filter === "read" ? styles.segmentActive : ""} type="button" onClick={() => setFilter("read")}>Đã xử lý <span>{requests.filter((item) => item.status === "read").length}</span></button></div><Search value={query} onChange={setQuery} placeholder="Tìm tên, email, số điện thoại..." /></div>
