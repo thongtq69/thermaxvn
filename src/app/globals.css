@@ -9681,15 +9681,6 @@ dd {
   text-transform: none;
 }
 
-.detail-copy h2 {
-  margin: 0 0 28px;
-  color: #20242a;
-  font-family: var(--font-display);
-  font-size: clamp(38px, 4vw, 64px);
-  font-weight: var(--font-weight-700);
-  line-height: 1.05;
-}
-
 .detail-copy p:not(.detail-eyebrow) {
   margin: 0 0 18px;
   color: #4f5b66;
@@ -10926,10 +10917,6 @@ dd {
   .detail-contact-card {
     position: static;
     padding: 24px;
-  }
-
-  .detail-copy h2 {
-    font-size: 34px;
   }
 
   .detail-copy p:not(.detail-eyebrow),

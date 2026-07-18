@@ -29,7 +29,6 @@ export function DetailContent({
       <section className="detail-overview-section" id="overview" data-section="overview">
         <div className="detail-overview-grid" data-reveal>
           <div className="detail-copy">
-            <h2>{page.title}</h2>
             {page.overview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
