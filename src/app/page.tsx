@@ -12,8 +12,17 @@ import { Footer } from "../components/Footer";
 import { ProjectShowcase } from "../components/ProjectShowcase";
 import { useLanguage } from "../components/LanguageProvider";
 import { RevealWatcher } from "../components/RevealWatcher";
+import type { ManagedNewsItem } from "../lib/cmsTypes";
 
 const heroWords = ["better", "sustainable", "cleaner"];
+
+const fallbackHomeNews: ManagedNewsItem[] = newsItems.map((item, index) => ({
+  ...item,
+  id: `fallback-home-news-${index + 1}`,
+  category: "",
+  summary: item.title,
+  status: "published",
+}));
 
 const businessSegmentHrefs: Record<string, string> = {
   "Industrial Products": "/business-segments/industrial-products#solutions",
@@ -265,6 +274,24 @@ function HomeProjectsSection() {
 
 function HomeNewsSection() {
   const { t } = useLanguage();
+  const [managedNews, setManagedNews] = useState<ManagedNewsItem[]>(fallbackHomeNews);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/cms/news", { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((items: ManagedNewsItem[]) => {
+        if (Array.isArray(items)) {
+          setManagedNews(items.filter((item) => item.status !== "draft").slice(0, 3));
+        }
+      })
+      .catch(() => undefined);
+
+    return () => controller.abort();
+  }, []);
+
+  if (managedNews.length === 0) return null;
 
   return (
     <section className="home-news-section" data-section="home-news">
@@ -277,8 +304,8 @@ function HomeNewsSection() {
         </a>
       </div>
       <div className="home-news-grid" data-reveal>
-        {newsItems.map((item) => (
-          <article className="home-news-card" key={item.title}>
+        {managedNews.map((item) => (
+          <article className="home-news-card" key={item.id}>
             <img src={item.image} alt="" />
             <div>
               <p>{t(item.date)}</p>
