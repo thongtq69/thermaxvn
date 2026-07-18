@@ -11072,6 +11072,41 @@ dd {
   border-right: 0;
 }
 
+/* Contact typography aligned with the supplied references. */
+.contact-info-grid h3,
+.contact-form-grid h3 {
+  font-family: "Noto Sans", Arial, "Helvetica Neue", sans-serif;
+  font-weight: 500;
+}
+
+.contact-info-grid p,
+.contact-form-grid p,
+.contact-customer-support a {
+  font-family: "Poppins", "Noto Sans", Arial, sans-serif;
+  font-weight: 400;
+}
+
+.contact-info-grid p,
+.contact-form-grid p {
+  font-size: 15px;
+}
+
+.contact-customer-support a {
+  font-size: 16px;
+}
+
+/* Keep the full-width Services and News dropdowns, with their rows centred. */
+.mega-menu:not(.mega-menu-products) .mega-links a {
+  position: relative;
+  justify-content: center;
+  text-align: center;
+}
+
+.mega-menu:not(.mega-menu-products) .mega-links .mega-row-arrow {
+  position: absolute;
+  right: 28px;
+}
+
 .project-showcase-track.is-stacked {
   gap: 32px;
 }
