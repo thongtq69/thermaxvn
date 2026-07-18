@@ -27,6 +27,7 @@ export default function IndustrialProductsPage() {
       />
 
       <IntroBlock
+        className="industrial-products-intro"
         headline={
           <>
             Mảng Sản phẩm công nghiệp của chúng tôi được thiết kế để giải quyết ba thách thức trọng yếu của ngành hiện nay:

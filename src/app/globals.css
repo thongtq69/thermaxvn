@@ -5472,6 +5472,11 @@ main { color: var(--bs-body-color); }
 }
 .inner-intro-grid > div > p:last-child { margin-bottom: 0; }
 
+.industrial-products-intro .inner-intro-grid > div > p {
+  font-size: 18px;
+  line-height: 27px;
+}
+
 /* Inner intro stats (.inner-intro-stats mirrors .infoNos cards) */
 .inner-intro-stats {
   margin: 48px auto 0;
@@ -10475,6 +10480,11 @@ dd {
 
   .inner-intro-grid > div {
     padding-left: 0;
+  }
+
+  .industrial-products-intro .inner-intro-grid > div > p {
+    font-size: var(--fs-16);
+    line-height: 24px;
   }
 
   .inner-intro-stats {

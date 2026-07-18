@@ -2,11 +2,12 @@ type IntroBlockProps = {
   headline: React.ReactNode;
   body: React.ReactNode;
   stats?: { value: string; label: string }[];
+  className?: string;
 };
 
-export function IntroBlock({ headline, body, stats }: IntroBlockProps) {
+export function IntroBlock({ headline, body, stats, className }: IntroBlockProps) {
   return (
-    <section className="inner-intro" id="overview" data-section="intro">
+    <section className={`inner-intro${className ? ` ${className}` : ""}`} id="overview" data-section="intro">
       <div className="inner-intro-grid" data-reveal>
         <h2>{headline}</h2>
         <div>{body}</div>
