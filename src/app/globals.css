@@ -11088,11 +11088,13 @@ dd {
 
 .contact-info-grid p,
 .contact-form-grid p {
-  font-size: 15px;
+  font-size: 18px;
+  line-height: 1.55;
 }
 
 .contact-customer-support a {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.45;
 }
 
 /* Keep the full-width Services and News dropdowns, with their rows centred. */
@@ -11165,10 +11167,31 @@ textarea {
 }
 
 .mega-menu:not(.mega-menu-products) .mega-links a {
-  min-height: 48px;
+  min-height: 42px;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
+}
+
+.mega-menu:not(.mega-menu-products) .mega-links {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.mega-menu-products {
+  height: auto;
+  min-height: 336px;
+}
+
+.mega-menu-products .mega-product-browser {
+  height: auto;
+  min-height: 336px;
+}
+
+.mega-menu-products .mega-product-primary,
+.mega-menu-products .mega-product-children {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 /* News items are listed vertically while retaining a compact image/content balance. */
