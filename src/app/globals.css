@@ -11022,7 +11022,7 @@ dd {
 .desktop-nav,
 .desktop-nav .nav-link,
 .nav-actions .callback-button {
-  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .desktop-nav .nav-link {
@@ -11075,14 +11075,14 @@ dd {
 /* Contact typography aligned with the supplied references. */
 .contact-info-grid h3,
 .contact-form-grid h3 {
-  font-family: "Noto Sans", Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 500;
 }
 
 .contact-info-grid p,
 .contact-form-grid p,
 .contact-customer-support a {
-  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
 }
 
@@ -11123,12 +11123,12 @@ button,
 input,
 select,
 textarea {
-  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .contact-info-grid h3,
 .contact-form-grid h3 {
-  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .desktop-nav {
@@ -11136,12 +11136,12 @@ textarea {
 }
 
 .desktop-nav .nav-link {
-  font-size: clamp(14px, 0.84vw, 16px);
+  font-size: clamp(18px, 1.04vw, 20px);
   font-weight: 400;
 }
 
 .nav-actions .callback-button {
-  font-size: clamp(14px, 0.82vw, 15px);
+  font-size: 18px;
   font-weight: 400;
 }
 
