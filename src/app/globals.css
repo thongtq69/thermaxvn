@@ -11179,27 +11179,27 @@ textarea {
 .mega-product-primary a {
   min-height: 52px;
   padding: 10px 26px;
-  font-size: 15px;
+  font-size: clamp(18px, 1.04vw, 20px);
   font-weight: 500;
   line-height: 1.35;
 }
 
 .mega-product-children > p {
-  font-size: 13px;
+  font-size: clamp(18px, 1.04vw, 20px);
   line-height: 1.35;
 }
 
 .mega-product-children a {
   min-height: 46px;
   padding: 9px 28px;
-  font-size: 14px;
+  font-size: clamp(18px, 1.04vw, 20px);
   font-weight: 400;
   line-height: 1.4;
 }
 
 .mega-menu:not(.mega-menu-products) .mega-links a {
   min-height: 42px;
-  font-size: 15px;
+  font-size: clamp(18px, 1.04vw, 20px);
   font-weight: 400;
   line-height: 1.4;
 }
