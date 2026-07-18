@@ -14,7 +14,6 @@ type MapLocation = {
   title: LocalizedText;
   description: LocalizedText;
   address?: LocalizedText[];
-  href: string;
   x: number;
   y: number;
 };
@@ -31,7 +30,6 @@ const locations: MapLocation[] = [
       en: "Sales, engineering and service support for customers across North and South America.",
       vi: "Mạng lưới bán hàng, kỹ thuật và dịch vụ hỗ trợ khách hàng trên khắp Bắc Mỹ và Nam Mỹ.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/americas",
     x: 20,
     y: 34,
   },
@@ -43,7 +41,6 @@ const locations: MapLocation[] = [
       en: "Thermax supports industrial customers in Brazil and the wider Latin American market.",
       vi: "Thermax hỗ trợ khách hàng công nghiệp tại Brazil và thị trường Mỹ Latinh.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/americas",
     x: 32,
     y: 68,
   },
@@ -55,7 +52,6 @@ const locations: MapLocation[] = [
       en: "Regional commercial and service presence serving the United Kingdom.",
       vi: "Hiện diện thương mại và dịch vụ khu vực phục vụ thị trường Vương quốc Anh.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/europe",
     x: 47,
     y: 27,
   },
@@ -67,7 +63,6 @@ const locations: MapLocation[] = [
       en: "One of Thermax's four overseas manufacturing locations.",
       vi: "Một trong bốn địa điểm sản xuất của Thermax bên ngoài Ấn Độ.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/europe",
     x: 51,
     y: 22,
   },
@@ -83,7 +78,6 @@ const locations: MapLocation[] = [
       { en: "Bahnhofstrasse 11,", vi: "Bahnhofstrasse 11," },
       { en: "56457 Westerburg, Germany", vi: "56457 Westerburg, Đức" },
     ],
-    href: "https://www.thermaxglobal.com/global-presence/europe",
     x: 51,
     y: 31,
   },
@@ -95,7 +89,6 @@ const locations: MapLocation[] = [
       en: "A key Thermax manufacturing and engineering location in Europe.",
       vi: "Địa điểm sản xuất và kỹ thuật quan trọng của Thermax tại châu Âu.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/europe",
     x: 54,
     y: 28,
   },
@@ -107,7 +100,6 @@ const locations: MapLocation[] = [
       en: "Sales and service support for industrial customers in West Africa.",
       vi: "Hỗ trợ bán hàng và dịch vụ cho khách hàng công nghiệp tại Tây Phi.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/sub-saharan-africa",
     x: 48,
     y: 54,
   },
@@ -119,7 +111,6 @@ const locations: MapLocation[] = [
       en: "Regional presence supporting customers across East Africa.",
       vi: "Hiện diện khu vực hỗ trợ khách hàng trên khắp Đông Phi.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/sub-saharan-africa",
     x: 57,
     y: 61,
   },
@@ -131,7 +122,6 @@ const locations: MapLocation[] = [
       en: "Thermax's regional hub for the Middle East and North Africa.",
       vi: "Trung tâm khu vực của Thermax phục vụ Trung Đông và Bắc Phi.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/mena",
     x: 63,
     y: 47,
   },
@@ -144,7 +134,6 @@ const locations: MapLocation[] = [
       { en: "D-13, MIDC Industrial Area, R. D. Aga Road, Chinchwad,", vi: "D-13, Khu công nghiệp MIDC, đường R. D. Aga, Chinchwad," },
       { en: "Pune 411019, Maharashtra, India", vi: "Pune 411019, Maharashtra, Ấn Độ" },
     ],
-    href: "https://www.thermaxglobal.com/company-overview/global-presence",
     x: 68,
     y: 49,
   },
@@ -156,7 +145,6 @@ const locations: MapLocation[] = [
       en: "Local sales and service support for Bangladesh's industrial market.",
       vi: "Đội ngũ bán hàng và dịch vụ địa phương hỗ trợ thị trường công nghiệp Bangladesh.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/other-sea-countries",
     x: 72,
     y: 48,
   },
@@ -168,7 +156,6 @@ const locations: MapLocation[] = [
       en: "Thermax solutions and service expertise for customers in Sri Lanka.",
       vi: "Giải pháp và chuyên môn dịch vụ Thermax dành cho khách hàng tại Sri Lanka.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/other-sea-countries",
     x: 68,
     y: 61,
   },
@@ -180,7 +167,6 @@ const locations: MapLocation[] = [
       en: "Sales, service and operational support for Thai industries.",
       vi: "Bán hàng, dịch vụ và hỗ trợ vận hành cho các ngành công nghiệp Thái Lan.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/thailand",
     x: 76,
     y: 54,
   },
@@ -193,7 +179,6 @@ const locations: MapLocation[] = [
       { en: "WiYO Complex, No. 46 N3C Street, Binh Trung Ward,", vi: "WiYO Complex, số 46 đường N3C, phường Bình Trưng," },
       { en: "Ho Chi Minh City, Vietnam", vi: "Thành phố Hồ Chí Minh, Việt Nam" },
     ],
-    href: "https://www.thermaxglobal.com/global-presence/vietnam",
     x: 79,
     y: 53,
   },
@@ -205,7 +190,6 @@ const locations: MapLocation[] = [
       en: "Sales and service coverage for Malaysia and nearby markets.",
       vi: "Mạng lưới bán hàng và dịch vụ cho Malaysia và các thị trường lân cận.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/other-sea-countries",
     x: 77,
     y: 63,
   },
@@ -217,7 +201,6 @@ const locations: MapLocation[] = [
       en: "Manufacturing, sales and service operations serving the Indonesian market.",
       vi: "Hoạt động sản xuất, bán hàng và dịch vụ phục vụ thị trường Indonesia.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/indonesia",
     x: 80,
     y: 68,
   },
@@ -229,7 +212,6 @@ const locations: MapLocation[] = [
       en: "Thermax solutions and service support for customers in the Philippines.",
       vi: "Giải pháp và dịch vụ Thermax hỗ trợ khách hàng tại Philippines.",
     },
-    href: "https://www.thermaxglobal.com/global-presence/other-sea-countries",
     x: 83,
     y: 55,
   },
@@ -246,14 +228,12 @@ export function GlobalPresenceMap() {
         zoomIn: "Phóng to bản đồ",
         zoomOut: "Thu nhỏ bản đồ",
         close: "Đóng thông tin địa điểm",
-        details: "Xem chi tiết khu vực",
       }
     : {
         instruction: "Click a location marker to view details.",
         zoomIn: "Zoom in",
         zoomOut: "Zoom out",
         close: "Close location details",
-        details: "View regional details",
       };
 
   return (
@@ -294,10 +274,6 @@ export function GlobalPresenceMap() {
             <h3>{selected.title[locale]}</h3>
             <p>{selected.description[locale]}</p>
             {selected.address?.map((line) => <p key={line.en}>{line[locale]}</p>)}
-            <a href={selected.href} target="_blank" rel="noreferrer">
-              {copy.details}
-              <span aria-hidden="true">↗</span>
-            </a>
           </aside>
         ) : null}
       </div>
