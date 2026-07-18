@@ -209,7 +209,7 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
                 </div>
                 <div className="official-resource-list">
                   {page.resources.map((resource) => (
-                    <a className="official-resource-card" href={resource.href ?? "#"} key={`${resource.type}-${resource.title}`}>
+                    <a className="official-resource-card" href={resource.href ?? "/contact-us"} key={`${resource.type}-${resource.title}`}>
                       <span>{resource.type}</span>
                       <strong>{resource.title}</strong>
                     </a>

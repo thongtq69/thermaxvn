@@ -16,7 +16,7 @@ export function CaseStudiesRow({
   highlight = "impact",
   items,
   ctaLabel = "View all case studies",
-  ctaHref = "#",
+  ctaHref = "https://www.thermaxglobal.com/global-presence/vietnam",
 }: {
   title?: string;
   highlight?: string;

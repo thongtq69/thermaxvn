@@ -81,13 +81,19 @@ export default function CareersPage() {
           <h2>
             Open <span className="red">roles</span>
           </h2>
-          <a className="section-cta" href="#">
+          <a className="section-cta" href="https://www.thermaxglobal.com/careers" target="_blank" rel="noreferrer">
             See all roles
           </a>
         </div>
         <div className="feature-cards-grid" data-reveal>
           {jobs.map((job) => (
-            <a className="feature-card" key={job.title} href="#">
+            <a
+              className="feature-card"
+              key={job.title}
+              href="https://www.thermaxglobal.com/careers"
+              target="_blank"
+              rel="noreferrer"
+            >
               <div className="feature-card-body">
                 <h3>{job.title}</h3>
                 <p style={{ marginBottom: 6 }}>{job.body}</p>

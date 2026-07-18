@@ -45,8 +45,16 @@ export const defaultFooter: ManagedFooter = {
   })),
   copyright: "© Copyright 2026 Thermax Limited. All Rights Reserved.",
   legalLinks: [
-    footerLink("Privacy Policy", "#", "default-footer-legal-1"),
-    footerLink("Terms of Use", "#", "default-footer-legal-2"),
+    footerLink(
+      "Privacy Policy",
+      "https://www.thermaxglobal.com/sites/default/files/2026-01/Thermax-PDPF-Policy.pdf",
+      "default-footer-legal-1",
+    ),
+    footerLink(
+      "Terms of Use",
+      "https://www.thermaxglobal.com/themes/thermax/assets/pdf/Terms-of-Use.pdf",
+      "default-footer-legal-2",
+    ),
   ],
 };
 

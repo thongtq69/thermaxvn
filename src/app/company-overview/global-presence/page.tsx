@@ -9,14 +9,46 @@ export const metadata = {
 };
 
 const regions = [
-  { name: "Americas", body: "Sales and service across North and South America." },
-  { name: "Europe", body: "Manufacturing and engineering across Denmark, Poland, Germany." },
-  { name: "Sub-Saharan Africa", body: "Sales and service teams supporting customers across Africa." },
-  { name: "Middle East & North Africa", body: "Strong presence in cement, steel, and oil & gas customers." },
-  { name: "Indonesia", body: "Manufacturing facility and sales team serving the archipelago." },
-  { name: "Thailand", body: "Sales, service, and operations support for Thai industries." },
-  { name: "Vietnam", body: "Growing presence supporting Vietnam's industrial expansion." },
-  { name: "Other SEA Countries", body: "Coverage across Singapore, Malaysia, Philippines, and beyond." },
+  {
+    name: "Americas",
+    body: "Sales and service across North and South America.",
+    href: "https://www.thermaxglobal.com/global-presence/americas",
+  },
+  {
+    name: "Europe",
+    body: "Manufacturing and engineering across Denmark, Poland, Germany.",
+    href: "https://www.thermaxglobal.com/global-presence/europe",
+  },
+  {
+    name: "Sub-Saharan Africa",
+    body: "Sales and service teams supporting customers across Africa.",
+    href: "https://www.thermaxglobal.com/global-presence/sub-saharan-africa",
+  },
+  {
+    name: "Middle East & North Africa",
+    body: "Strong presence in cement, steel, and oil & gas customers.",
+    href: "https://www.thermaxglobal.com/global-presence/mena",
+  },
+  {
+    name: "Indonesia",
+    body: "Manufacturing facility and sales team serving the archipelago.",
+    href: "https://www.thermaxglobal.com/global-presence/indonesia",
+  },
+  {
+    name: "Thailand",
+    body: "Sales, service, and operations support for Thai industries.",
+    href: "https://www.thermaxglobal.com/global-presence/thailand",
+  },
+  {
+    name: "Vietnam",
+    body: "Growing presence supporting Vietnam's industrial expansion.",
+    href: "https://www.thermaxglobal.com/global-presence/vietnam",
+  },
+  {
+    name: "Other SEA Countries",
+    body: "Coverage across Singapore, Malaysia, Philippines, and beyond.",
+    href: "https://www.thermaxglobal.com/global-presence/other-sea-countries",
+  },
 ];
 
 export default function GlobalPresencePage() {
@@ -64,7 +96,7 @@ export default function GlobalPresencePage() {
         </div>
         <div className="feature-cards-grid" data-reveal>
           {regions.map((r) => (
-            <a className="feature-card" key={r.name} href={`/global-presence/${r.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+            <a className="feature-card" key={r.name} href={r.href} target="_blank" rel="noreferrer">
               <div className="feature-card-body">
                 <h3>{r.name}</h3>
                 <p>{r.body}</p>

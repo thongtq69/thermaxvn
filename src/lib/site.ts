@@ -509,7 +509,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Green Energy",
     date: "05/05/2026",
     summary: "Thermax engineered a custom Combipac boiler solution for a major coffee manufacturer, utilizing biomass to generate green steam, reducing fossil fuel consumption and lowering operating costs.",
-    href: "#",
+    href: "https://www.thermaxglobal.com/case-study/thermaxs-combipac-boilers-enable-green-steam-generation-for-a-coffee-manufacturer",
   },
   {
     title: "Thermax’s electrical heat pump delivers sustainable heating for a textile major",
@@ -519,7 +519,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Heating Solutions",
     date: "28/04/2026",
     summary: "Thermax designed and installed a high-efficiency electrical heat pump system for a leading textile company, providing zero-emission heating and reducing carbon footprint.",
-    href: "#",
+    href: "https://www.thermaxglobal.com/case-study/thermaxs-electrical-heat-pump-delivers-sustainable-heating-for-a-textile-major",
   },
   {
     title: "Thermax provides advanced water treatment for a leading food processor",
@@ -529,7 +529,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Water Treatment",
     date: "12/04/2026",
     summary: "An advanced water treatment and recycling plant by Thermax helps a prominent food processing facility achieve zero liquid discharge (ZLD) and secure high-quality process water.",
-    href: "#",
+    href: "https://www.thermaxglobal.com/case-study/thermaxs-seawater-treatment-solution-optimises-water-recovery-for-process-industries",
   },
 ];
 

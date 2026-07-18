@@ -20,7 +20,7 @@ export default function ChemicalsPage() {
         image={imageUrls.bannerChemicals}
         mobileImage={imageUrls.bannerChemicalsMobile}
         breadcrumb={[
-          { label: "Business Portfolio", href: "#" },
+          { label: "Business Portfolio", href: "/business-segments/industrial-products" },
           { label: "Chemicals" },
         ]}
       />

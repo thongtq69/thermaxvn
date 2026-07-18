@@ -384,7 +384,12 @@ export default function SustainabilityPage() {
               performance metrics, and policies under India&apos;s SEBI framework. It demonstrates our ongoing efforts
               toward transparency, accountability, and sustainable value creation
             </p>
-            <a className="section-cta" href="#">
+            <a
+              className="section-cta"
+              href="https://www.thermaxglobal.com/sites/default/files/2026-07/Thermax-Annual-Report-2025-26.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
               <span className="cta-arrow">
                 <img
                   src="/assets/sustainability/discover-arrow.svg"

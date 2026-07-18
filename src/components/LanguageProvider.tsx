@@ -99,9 +99,22 @@ function translateDom(locale: Locale) {
   });
 
   document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[placeholder]").forEach((element) => {
-    const original = element.dataset.i18nPlaceholder ?? element.getAttribute("placeholder") ?? "";
-    element.dataset.i18nPlaceholder = original;
-    element.placeholder = translate(original, locale);
+    if (element.closest("[data-no-translate]")) return;
+
+    const savedOriginal = element.dataset.i18nPlaceholder;
+    if (savedOriginal) {
+      element.placeholder = locale === "en" ? savedOriginal : translate(savedOriginal, locale);
+      return;
+    }
+
+    const current = element.getAttribute("placeholder") ?? "";
+    if (locale === "en") return;
+
+    const translated = translate(current, locale);
+    if (translated === current) return;
+
+    element.dataset.i18nPlaceholder = current;
+    element.placeholder = translated;
   });
 
   document.querySelectorAll<HTMLElement>("[aria-label]").forEach((element) => {

@@ -73,13 +73,13 @@ function projectFromManaged(project: Awaited<ReturnType<typeof getManagedProject
     summary: { en: project.description, vi: project.description },
     image: project.image,
     facts: [
-      { label: { en: "Region", vi: "Khu vá»±c" }, value: { en: project.region, vi: project.region } },
-      { label: { en: "Capacity", vi: "CÃ´ng suáº¥t" }, value: { en: project.capacity, vi: project.capacity } },
-      { label: { en: "Scope", vi: "Pháº¡m vi" }, value: { en: project.scope, vi: project.scope } },
+      { label: { en: "Region", vi: "Khu vực" }, value: { en: project.region, vi: project.region } },
+      { label: { en: "Capacity", vi: "Công suất" }, value: { en: project.capacity, vi: project.capacity } },
+      { label: { en: "Scope", vi: "Phạm vi" }, value: { en: project.scope, vi: project.scope } },
     ],
     sections: [
       {
-        title: { en: "Project information", vi: "ThÃ´ng tin dá»± Ã¡n" },
+        title: { en: "Project information", vi: "Thông tin dự án" },
         image: project.image,
         imageAlt: { en: project.title, vi: project.title },
         paragraphs: [{ en: project.description, vi: project.description }],

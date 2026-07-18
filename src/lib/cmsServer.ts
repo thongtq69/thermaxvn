@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { CmsData, ContactRequest, ManagedAsset, ManagedNewsItem, ManagedProject } from "./cmsTypes";
+import type { CmsData, ContactRequest, ManagedAsset, ManagedFooter, ManagedNewsItem, ManagedProject } from "./cmsTypes";
 import { defaultCmsData } from "./cmsDefaults";
 import { getDb, isMongoConfigured, serializeDocument, toObjectId } from "./mongodb";
 
@@ -9,6 +9,8 @@ type CmsDocument = { _id: string; data?: Partial<CmsData>; createdAt?: Date; upd
 type LocalStore = { cms?: Partial<CmsData>; contactRequests?: ContactRequest[] };
 
 const cmsId = "thermax-cms";
+const officialPrivacyPolicy = "https://www.thermaxglobal.com/sites/default/files/2026-01/Thermax-PDPF-Policy.pdf";
+const officialTermsOfUse = "https://www.thermaxglobal.com/themes/thermax/assets/pdf/Terms-of-Use.pdf";
 
 function localStorePath() {
   return process.env.LOCAL_CMS_FILE
@@ -38,12 +40,30 @@ async function writeLocalStore(store: LocalStore) {
 }
 
 function mergeCmsData(data?: Partial<CmsData>): CmsData {
+  const footer: ManagedFooter = data?.footer
+    ? { ...defaultCmsData.footer, ...data.footer }
+    : defaultCmsData.footer;
+
   return {
     assets: Array.isArray(data?.assets) ? data.assets : defaultCmsData.assets,
     productGroups: Array.isArray(data?.productGroups) ? data.productGroups : defaultCmsData.productGroups,
     news: Array.isArray(data?.news) ? data.news : defaultCmsData.news,
     projects: Array.isArray(data?.projects) ? data.projects : defaultCmsData.projects,
-    footer: data?.footer ? { ...defaultCmsData.footer, ...data.footer } : defaultCmsData.footer,
+    footer: {
+      ...footer,
+      legalLinks: (Array.isArray(footer.legalLinks) ? footer.legalLinks : defaultCmsData.footer.legalLinks).map((link) => {
+        if (link.href && link.href !== "#") return link;
+
+        const label = link.label.toLowerCase();
+        if (link.id === "default-footer-legal-1" || label.includes("privacy")) {
+          return { ...link, href: officialPrivacyPolicy };
+        }
+        if (link.id === "default-footer-legal-2" || label.includes("terms")) {
+          return { ...link, href: officialTermsOfUse };
+        }
+        return link;
+      }),
+    },
   };
 }
 

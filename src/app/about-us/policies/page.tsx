@@ -8,16 +8,22 @@ export const metadata = {
 };
 
 const policies = [
-  { title: "Code of Conduct", href: "#" },
-  { title: "Whistleblower Policy", href: "#" },
-  { title: "Supplier Code of Conduct", href: "#" },
-  { title: "Anti-Bribery and Anti-Corruption Policy", href: "#" },
-  { title: "Health, Safety, and Environment Policy", href: "#" },
-  { title: "Information Security Policy", href: "#" },
-  { title: "Privacy Policy", href: "#" },
-  { title: "Sustainability Policy", href: "#" },
-  { title: "Human Rights Policy", href: "#" },
-  { title: "Diversity, Equity, and Inclusion Policy", href: "#" },
+  { title: "Corporate Social Responsibility Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/CSR-Policy-Dec-14-18.pdf" },
+  { title: "Privacy Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Thermax-PDPF-Policy.pdf" },
+  { title: "Drugs & Alcohol Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Drugs-and-Alcohol-Policy.pdf" },
+  { title: "OHSE Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Thermax-OHSE-Policy-2020.pdf" },
+  { title: "Health Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/health-policy.pdf" },
+  { title: "Quality Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/quality-policy.pdf" },
+  { title: "Whistleblower Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Whistlerblower-Policy.pdf" },
+  { title: "Prevention of Sexual Harassment Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Prevention-of-Sexual-Harassment-at-the-Workplace.pdf" },
+  { title: "Sustainability Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Sustainability-Policy-June-2023.pdf" },
+  { title: "Sustainable Sourcing Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-01/Thermax-Group-Sustainable-Sourcing-Policy.pdf" },
+  { title: "Code of Conduct for Thermax Employees", href: "https://www.thermaxglobal.com/sites/default/files/2025-12/Code-of-Conduct-for-Thermax-Employees.pdf" },
+  { title: "Code of Conduct for Supply Chain Partners", href: "https://www.thermaxglobal.com/sites/default/files/2025-12/Thermax-Code-of-Conduct-Alt.pdf" },
+  { title: "Employment of Persons with Disabilities", href: "https://www.thermaxglobal.com/sites/default/files/2025-12/Equal-Opportunity-Policy-on-Employment-of-Persons-with-Disabilities_0.pdf" },
+  { title: "Anti-Bribery and Anti-Corruption Policy", href: "https://www.thermaxglobal.com/sites/default/files/2025-12/ABC-Policy-final.pdf" },
+  { title: "ISO 27001 Certificate", href: "https://www.thermaxglobal.com/sites/default/files/2026-03/Thermax-Limited.pdf" },
+  { title: "Thermax Brand Assets Usage and Protection Policy", href: "https://www.thermaxglobal.com/sites/default/files/2026-05/Thermax-Brand-Assets-Usage-and-Protection-Policy.pdf" },
 ];
 
 const certifications = [
@@ -48,7 +54,7 @@ export default function PoliciesPage() {
         <ul className="shareholder-info-list" style={{ color: "#082033" }}>
           {policies.map((p) => (
             <li key={p.title} style={{ borderColor: "#d9e2e8" }}>
-              <a href={p.href} style={{ color: "#082033" }}>
+              <a href={p.href} target="_blank" rel="noreferrer" style={{ color: "#082033" }}>
                 <span>{p.title}</span>
               </a>
             </li>

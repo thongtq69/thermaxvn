@@ -27,7 +27,7 @@ export function Footer({ showFooterCta = false }: { showFooterCta?: boolean }) {
           <img src={imageUrls.empower} alt="" />
           <div className="footer-cta-copy">
             <h2>{t("Empowering Young Minds, Transforming Futures")}</h2>
-            <a href="#">
+            <a href="/corporate-social-responsibility">
               <span />
               {t("Our social initiatives")}
             </a>

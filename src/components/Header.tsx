@@ -180,7 +180,7 @@ export function Header() {
                   openMega(item.label);
                 }}
                 onClick={() => {
-                  window.location.href = localizedHref(navHref[item.label] ?? "#");
+                  window.location.href = localizedHref(navHref[item.label] ?? "/");
                 }}
                 type="button"
               >
@@ -261,7 +261,7 @@ export function Header() {
           ) : (
             <div className="mega-links">
               {active.links.map((link) => (
-                <a href={megaHref[link] ?? "#"} key={link}>
+                <a href={megaHref[link] ?? "/"} key={link}>
                   {t(link)}
                   <span className="mega-row-arrow" aria-hidden="true">
                     <svg viewBox="0 0 24 24">
@@ -292,7 +292,7 @@ export function Header() {
               if (!hasChildren) {
                 return (
                   <div className="mobile-nav-section" key={item.label}>
-                    <a className="mobile-nav-link" href={localizedHref(navHref[item.label] ?? "#")} onClick={closeMobileMenu}>
+                    <a className="mobile-nav-link" href={localizedHref(navHref[item.label] ?? "/")} onClick={closeMobileMenu}>
                       {t(getNavDisplayLabel(item.label))}
                     </a>
                   </div>
@@ -319,7 +319,7 @@ export function Header() {
                       {!isNews ? (
                         <a
                           className="mobile-overview-link"
-                          href={localizedHref(navHref[item.label] ?? "#")}
+                          href={localizedHref(navHref[item.label] ?? "/")}
                           onClick={closeMobileMenu}
                         >
                           {t("Overview")}
@@ -342,7 +342,7 @@ export function Header() {
                             </details>
                           ))
                         : item.links.map((link) => (
-                            <a href={localizedHref(megaHref[link] ?? "#")} key={link} onClick={closeMobileMenu}>
+                            <a href={localizedHref(megaHref[link] ?? "/")} key={link} onClick={closeMobileMenu}>
                               {t(link)}
                             </a>
                           ))}

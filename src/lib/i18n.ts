@@ -452,6 +452,7 @@ export const viDictionary: Record<string, string> = {
   "Global Expertise. Local Commitment.": "Chuyên môn toàn cầu. Cam kết địa phương.",
   "From Pune to Pittsburgh, Jakarta to Johannesburg — engineering local outcomes from a global platform.": "Từ Pune đến Pittsburgh, Jakarta đến Johannesburg - kiến tạo kết quả địa phương từ một nền tảng toàn cầu.",
   "Our customers operate in some of the most demanding industrial environments on the planet. We meet them where they are — through a global network of offices, factories, and service teams that share a single commitment: to engineer outcomes that matter.": "Khách hàng của chúng tôi hoạt động trong những môi trường công nghiệp khắt khe nhất thế giới. Chúng tôi đồng hành tại nơi họ cần thông qua mạng lưới toàn cầu gồm văn phòng, nhà máy và đội ngũ dịch vụ cùng chung một cam kết: kiến tạo những kết quả có ý nghĩa.",
+  "Where we": "Nơi chúng tôi",
   "Where we work": "Nơi chúng tôi hoạt động",
   "Sales and service across North and South America.": "Bán hàng và dịch vụ trên khắp Bắc Mỹ và Nam Mỹ.",
   "Manufacturing and engineering across Denmark, Poland, Germany.": "Sản xuất và kỹ thuật tại Đan Mạch, Ba Lan, Đức.",
