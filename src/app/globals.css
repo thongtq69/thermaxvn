@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Gilroy";
+  src: url("https://zalo-site.zadn.vn/fonts/Gilroy%20Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   --ink: #082033;
   --muted: #66727c;
@@ -11,8 +19,8 @@
   --blue: #174a7c;
   --orange: #f08a22;
   --shadow: 0 22px 60px rgba(5, 35, 49, 0.12);
-  --font-sans: "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
-  --font-display: "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: "Gilroy", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-display: "Gilroy", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 * {
@@ -31,7 +39,7 @@ body {
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
-  font-synthesis: none;
+  font-synthesis: weight style;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11095,6 +11103,27 @@ dd {
 .contact-customer-support a {
   font-size: 18px;
   line-height: 1.45;
+}
+
+.contact-customer-support {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.contact-customer-support h3 {
+  margin-bottom: 0;
+}
+
+.contact-customer-support > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.contact-customer-support a {
+  margin-right: 0;
 }
 
 /* Keep the full-width Services and News dropdowns, with their rows centred. */
