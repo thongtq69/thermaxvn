@@ -578,7 +578,6 @@ function CallbackModal({ open, onClose }: { open: boolean; onClose: () => void }
         <button className="close-button" type="button" onClick={onClose} aria-label={t("Close")}>
           <CloseIcon />
         </button>
-        <p>{t("Request a call back")}</p>
         <h2>{t("Submit your enquiry")}</h2>
         <div className="form-grid">
           <input name="fullName" placeholder={t("Full name*")} required />

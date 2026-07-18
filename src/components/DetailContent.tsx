@@ -29,7 +29,6 @@ export function DetailContent({
       <section className="detail-overview-section" id="overview" data-section="overview">
         <div className="detail-overview-grid" data-reveal>
           <div className="detail-copy">
-            <p className="detail-eyebrow">{page.eyebrow}</p>
             <h2>{page.title}</h2>
             {page.overview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
@@ -68,7 +67,6 @@ export function DetailContent({
       {related.length > 0 ? (
         <section className="detail-related-section" data-section="related">
           <div className="detail-related-header" data-reveal>
-            <p>{page.category}</p>
             <h2>{labels.relatedTitle}</h2>
           </div>
           <div className="detail-related-grid" data-reveal>

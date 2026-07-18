@@ -52,7 +52,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
       <section className="official-intro-section" id="overview" data-section="overview">
         <div className="official-intro-grid" data-reveal>
           <div>
-            <p className="official-kicker">{page.title}</p>
             <h2>{page.intro}</h2>
           </div>
           <aside className="official-office-card" aria-label={labels.contact}>
@@ -92,7 +91,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
         <section className="official-challenge-section" id="challenges" data-section="challenges">
           <div className="official-section-inner">
             <div className="official-section-title" data-reveal>
-              <p>{page.title}</p>
               <h2>{labels.challenges}</h2>
             </div>
             <div className="official-challenge-grid" data-reveal>
@@ -111,7 +109,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
       <section className="official-product-section" id="products" data-section="products">
         <div className="official-section-inner">
           <div className="official-section-title" data-reveal>
-            <p>{page.title}</p>
             <h2>{page.productHeading}</h2>
           </div>
           <div className="official-product-grid" data-reveal>
@@ -126,7 +123,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
         <section className="official-service-section" id="services" data-section="services">
           <div className="official-section-inner">
             <div className="official-section-title" data-reveal>
-              <p>{page.title}</p>
               <h2>{page.serviceHeading}</h2>
               {page.serviceIntro ? <div>{page.serviceIntro}</div> : null}
             </div>
@@ -155,7 +151,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
         <section className="official-feature-section" id="featured-capabilities" data-section="featured-capabilities">
           <div className="official-section-inner">
             <div className="official-section-title" data-reveal>
-              <p>{page.title}</p>
               <h2>{page.featureHeading}</h2>
             </div>
             <div className="official-feature-grid" data-reveal>
@@ -171,7 +166,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
         <section className="official-industries-section" id="industries" data-section="industries">
           <div className="official-section-inner">
             <div className="official-section-title" data-reveal>
-              <p>{page.title}</p>
               <h2>{labels.industries}</h2>
             </div>
             <div className="official-industries-grid" data-reveal>
@@ -191,7 +185,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
             {page.caseStudies?.length ? (
               <div className="official-proof-block" data-reveal>
                 <div className="official-section-title">
-                  <p>{page.title}</p>
                   <h2>{labels.caseStudies}</h2>
                 </div>
                 <div className="official-proof-grid">
@@ -204,7 +197,6 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
             {page.resources?.length ? (
               <div className="official-resource-block" id="resources" data-section="resources" data-reveal>
                 <div className="official-section-title">
-                  <p>{page.title}</p>
                   <h2>{labels.resources}</h2>
                 </div>
                 <div className="official-resource-list">
