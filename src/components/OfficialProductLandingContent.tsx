@@ -14,6 +14,21 @@ type OfficialProductLandingContentProps = {
   };
 };
 
+function HighlightedIntro({ text, highlight }: { text: string; highlight?: string }) {
+  if (!highlight) return text;
+
+  const highlightIndex = text.indexOf(highlight);
+  if (highlightIndex === -1) return text;
+
+  return (
+    <>
+      {text.slice(0, highlightIndex)}
+      <span className="official-intro-highlight">{highlight}</span>
+      {text.slice(highlightIndex + highlight.length)}
+    </>
+  );
+}
+
 function LandingCardLink({ card }: { card: LandingCard }) {
   const content = (
     <>
@@ -52,7 +67,9 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
       <section className="official-intro-section" id="overview" data-section="overview">
         <div className="official-intro-grid" data-reveal>
           <div>
-            <h2>{page.intro}</h2>
+            <h2>
+              <HighlightedIntro text={page.intro} highlight={page.introHighlight} />
+            </h2>
           </div>
           <aside className="official-office-card" aria-label={labels.contact}>
             <span>{labels.contact}</span>

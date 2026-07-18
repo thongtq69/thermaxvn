@@ -9849,6 +9849,10 @@ dd {
   letter-spacing: -1px;
 }
 
+.official-intro-highlight {
+  color: var(--red);
+}
+
 .official-overview-panel {
   width: min(1540px, calc(100% - 180px));
   margin: 44px auto 0;

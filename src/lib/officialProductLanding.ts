@@ -33,6 +33,7 @@ export type OfficialProductLanding = {
   image: string;
   mobileImage: string;
   intro: string;
+  introHighlight?: string;
   overviewParagraphs?: string[];
   stats?: LandingStat[];
   challenges?: LandingChallenge[];
@@ -59,6 +60,7 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2025-12/LP%20Banner%20Image_1800X700_2.jpg`,
       mobileImage: `${s3}/2025-09/apc-banner-mobile.jpg`,
       intro: "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.",
+      introHighlight: "while pollutants may be inevitable, pollution is not.",
       productHeading: "Our products",
       products: [
         {
@@ -119,6 +121,7 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2026-04/Process%20Heat%20Solutions%20Banner.png`,
       mobileImage: `${s3}/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png`,
       intro: "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.",
+      introHighlight: "energy-efficient, fuel-flexible, and environmentally conscious heating solutions",
       productHeading: "Product categories",
       products: [
         {
@@ -192,6 +195,7 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2025-09/Untitled%20design%20%2884%29.png`,
       mobileImage: `${s3}/2025-09/steam_mobile_banner.jpg`,
       intro: "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.",
+      introHighlight: "cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems",
       productHeading: "Our products and solutions",
       products: [
         {
@@ -252,6 +256,7 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2026-04/Cooling%20and%20Heating%20Solutions%20Banner%20updated.png`,
       mobileImage: `${s3}/2026-04/Cooling%20and%20Heating%20Solutions.png`,
       intro: "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.",
+      introHighlight: "advanced energy recovery and transfer technologies",
       productHeading: "Our products",
       products: [
         {
@@ -331,6 +336,7 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       image: `${s3}/2025-08/water_waste_banner_0.jpg`,
       mobileImage: `${s3}/2025-08/water_waste_banner_mobile_0.jpg`,
       intro: "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.",
+      introHighlight: "recover, reuse, and rethink water",
       overviewParagraphs: [
         "With over 50 years of experience in providing innovative water and wastewater treatment solutions, we are committed to transforming the way industries manage water. From raw water treatment to sewage and effluent recycling, we deliver complete, digitally enabled solutions designed for performance, compliance, and sustainability.",
         "Thermax offers one-stop solutions for water and wastewater treatment, recycling, zero liquid discharge, and seawater desalination plants, along with standardised products, digitally enabled operations and maintenance, spares, audit support, and plant improvement services.",
@@ -486,6 +492,7 @@ const translations: Record<string, string> = {
   "Air Pollution Control Systems": "Xử lý khí thải",
   "Effective solutions for abatement of particulate and gaseous pollutants": "Giải pháp hiệu quả để kiểm soát bụi và khí ô nhiễm",
   "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.": "Mảng xử lý khí thải của Thermax hoạt động với một niềm tin đơn giản: chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
+  "while pollutants may be inevitable, pollution is not.": "chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
   "Our products": "Sản phẩm",
   "Our services": "Dịch vụ",
   "Featured capabilities": "Năng lực nổi bật",
@@ -495,15 +502,19 @@ const translations: Record<string, string> = {
   "Process Heat Solutions": "Hệ thống gia nhiệt",
   "Reliable, fuel-flexible, efficient, and sustainable heating solutions for every industry": "Giải pháp gia nhiệt tin cậy, linh hoạt nhiên liệu, hiệu quả và bền vững cho mọi ngành",
   "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.": "Danh mục giải pháp gia nhiệt của Thermax cung cấp nhiều giải pháp tiết kiệm năng lượng, linh hoạt nhiên liệu và thân thiện môi trường, phù hợp với nhu cầu đa dạng của từng ngành.",
+  "energy-efficient, fuel-flexible, and environmentally conscious heating solutions": "giải pháp tiết kiệm năng lượng, linh hoạt nhiên liệu và thân thiện môi trường",
   "Steam Engineering Solutions": "Hệ thống đường ống hơi",
   "Driving efficiency, compliance, and sustainability with advanced steam systems": "Nâng cao hiệu quả, tuân thủ và tính bền vững bằng hệ thống hơi tiên tiến",
   "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.": "Mảng kỹ thuật hơi của Thermax cung cấp các giải pháp tiên tiến để tối ưu hệ thống tạo hơi, phân phối, sử dụng hơi và thu hồi nước ngưng.",
+  "cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems": "các giải pháp tiên tiến để tối ưu hệ thống tạo hơi, phân phối, sử dụng hơi và thu hồi nước ngưng",
   "Cooling and Heating Solutions": "Hệ thống lạnh",
   "Innovative thermal solutions that maximise energy efficiency, utilise waste heat, save water and support a sustainable future": "Giải pháp nhiệt đổi mới giúp tối đa hiệu quả năng lượng, tận dụng nhiệt thải, tiết kiệm nước và hướng tới tương lai bền vững",
   "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.": "Giải pháp làm mát và gia nhiệt của Thermax sử dụng công nghệ thu hồi và truyền năng lượng tiên tiến để giảm tác động môi trường trong vận hành công nghiệp và thương mại.",
+  "advanced energy recovery and transfer technologies": "công nghệ thu hồi và truyền năng lượng tiên tiến",
   "Water and Waste Solutions": "Xử lý nước",
   "Delivering advanced water and wastewater management technologies, ensuring resource efficiency, regulatory compliance, and sustainable industrial operations": "Công nghệ quản lý nước và nước thải tiên tiến, bảo đảm hiệu quả tài nguyên, tuân thủ quy định và vận hành công nghiệp bền vững",
   "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.": "Chúng tôi cung cấp giải pháp nước và nước thải tích hợp, hỗ trợ số hóa để thu hồi, tái sử dụng và tái định hình cách quản lý nước, giúp các ngành công nghiệp và đô thị phát triển bền vững trong bối cảnh tài nguyên hạn chế, đồng thời đáp ứng mục tiêu về hiệu quả và tuân thủ.",
+  "recover, reuse, and rethink water": "thu hồi, tái sử dụng và tái định hình cách quản lý nước",
   "Electrostatic Precipitator (ESP)": "Bộ lọc tĩnh điện (ESP)",
   "Bag House / Bag Filters": "Bộ lọc túi",
   Scrubber: "Tháp rửa khí",
@@ -700,6 +711,7 @@ productPages.vi = productPages.en.map((page) => ({
   title: tr(page.title),
   heroDescription: tr(page.heroDescription),
   intro: tr(page.intro),
+  introHighlight: page.introHighlight ? tr(page.introHighlight) : undefined,
   overviewParagraphs: page.overviewParagraphs?.map(tr),
   stats: page.stats?.map(translateStat),
   challenges: page.challenges?.map(translateChallenge),
