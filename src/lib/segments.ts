@@ -14,6 +14,14 @@ export const industrialProductsSolutions: SolutionItem[] = [
     children: subcategoriesFor("Air Pollution Control Systems"),
   },
   {
+    title: "Cooling and Heating Solutions",
+    description: "Energy-efficient cooling and heating systems for industrial and commercial spaces",
+    image:
+      "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Cooling%20and%20Heating%20Solutions.png",
+    href: "/industrial-products/cooling-and-heating-solutions",
+    children: subcategoriesFor("Cooling and Heating Solutions"),
+  },
+  {
     title: "Process Heat Solutions",
     description: "Reliable, fuel-flexible, efficient, and sustainable heating solutions for every industry",
     image:
@@ -29,19 +37,19 @@ export const industrialProductsSolutions: SolutionItem[] = [
     children: subcategoriesFor("Steam Engineering Solutions"),
   },
   {
-    title: "Cooling and Heating Solutions",
-    description: "Energy-efficient cooling and heating systems for industrial and commercial spaces",
-    image:
-      "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-04/Cooling%20and%20Heating%20Solutions.png",
-    href: "/industrial-products/cooling-and-heating-solutions",
-    children: subcategoriesFor("Cooling and Heating Solutions"),
-  },
-  {
     title: "Water and Waste Solutions",
     description: "Comprehensive water treatment and wastewater management for sustainable operations",
     image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-03/fc-zeroliquid-wastewatercapabilities_0.jpg",
     href: "/industrial-products/water-and-waste-solutions",
     children: subcategoriesFor("Water and Waste Solutions"),
+  },
+  {
+    title: "Chemicals",
+    description:
+      "Speciality chemicals, ion exchange resins and treatment programmes for boiler water, cooling water, process water and construction applications.",
+    image: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2025-10/chemicals-desktop-banner.jpg",
+    href: "/business-portfolio/chemicals#solutions",
+    children: subcategoriesFor("Chemicals"),
   },
 ];
 
