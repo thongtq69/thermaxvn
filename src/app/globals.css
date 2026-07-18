@@ -10229,6 +10229,35 @@ dd {
   gap: 12px;
 }
 
+.official-industry-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.official-industry-card {
+  overflow: hidden;
+  color: #20242a;
+  background: #fff;
+  border: 1px solid #dce5eb;
+  border-radius: 8px;
+}
+
+.official-industry-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.official-industry-card span {
+  display: block;
+  padding: 14px 16px;
+  font-size: var(--fs-15);
+  font-weight: var(--font-weight-600);
+  line-height: 1.25;
+}
+
 .official-industry-chip {
   display: flex;
   align-items: center;
@@ -11001,6 +11030,7 @@ dd {
   .official-stat-grid,
   .official-challenge-grid,
   .official-industries-grid,
+  .official-industry-card-grid,
   .official-resource-list {
     grid-template-columns: 1fr;
     gap: 14px;

@@ -179,19 +179,30 @@ export function OfficialProductLandingContent({ page, labels }: OfficialProductL
         </section>
       ) : null}
 
-      {page.industries?.length ? (
+      {page.industryCards?.length || page.industries?.length ? (
         <section className="official-industries-section" id="industries" data-section="industries">
           <div className="official-section-inner">
             <div className="official-section-title" data-reveal>
               <h2>{labels.industries}</h2>
             </div>
-            <div className="official-industries-grid" data-reveal>
-              {page.industries.map((industry) => (
-                <span key={industry} className="official-industry-chip">
-                  {industry}
-                </span>
-              ))}
-            </div>
+            {page.industryCards?.length ? (
+              <div className="official-industry-card-grid" data-reveal>
+                {page.industryCards.map((industry) => (
+                  <article className="official-industry-card" key={industry.title}>
+                    {industry.image ? <img src={industry.image} alt="" loading="lazy" decoding="async" /> : null}
+                    <span>{industry.title}</span>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="official-industries-grid" data-reveal>
+                {page.industries?.map((industry) => (
+                  <span key={industry} className="official-industry-chip">
+                    {industry}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       ) : null}
