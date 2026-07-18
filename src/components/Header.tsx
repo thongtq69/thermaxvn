@@ -111,6 +111,33 @@ function getNavDisplayLabel(label: string) {
   return navDisplayLabel[label] ?? label;
 }
 
+function mergeOfficialProductGroups(groups: ProductSubcategoryGroup[]) {
+  const merged = productSubcategoryGroups.map((officialGroup) => {
+    const managedGroup = groups.find(
+      (group) => group.href === officialGroup.href || group.label === officialGroup.label,
+    );
+
+    if (!managedGroup) return officialGroup;
+
+    const children = [...managedGroup.children];
+    officialGroup.children.forEach((officialChild) => {
+      if (!children.some((child) => child.href === officialChild.href)) {
+        children.push(officialChild);
+      }
+    });
+
+    return { ...managedGroup, children };
+  });
+
+  groups.forEach((managedGroup) => {
+    if (!merged.some((group) => group.href === managedGroup.href || group.label === managedGroup.label)) {
+      merged.push(managedGroup);
+    }
+  });
+
+  return merged;
+}
+
 export function Header() {
   const { locale, t } = useLanguage();
   const [menu, setMenu] = useState("");
@@ -129,7 +156,7 @@ export function Header() {
       .then((response) => (response.ok ? response.json() : null))
       .then((groups) => {
         if (mounted && Array.isArray(groups) && groups.length > 0) {
-          setManagedProductGroups(groups);
+          setManagedProductGroups(mergeOfficialProductGroups(groups));
         }
       })
       .catch(() => undefined);
@@ -276,6 +303,11 @@ export function Header() {
                 {activeProductGroup.children.map((child) => (
                   <a href={child.href} key={child.href}>
                     {t(child.label)}
+                    <span className="mega-row-arrow" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="m9 5 7 7-7 7" />
+                      </svg>
+                    </span>
                   </a>
                 ))}
               </div>

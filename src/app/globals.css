@@ -11317,6 +11317,59 @@ textarea {
   padding-bottom: 12px;
 }
 
+/* Match the polished Services hover treatment without changing product-menu typography. */
+.mega-menu-products .mega-product-primary a,
+.mega-menu-products .mega-product-children a {
+  box-sizing: border-box;
+  width: calc(100% - 24px);
+  margin: 4px 12px;
+  background: #f8fafb;
+  border: 1px solid #edf1f3;
+  border-left: 3px solid transparent;
+  border-radius: 10px;
+  transform: translateX(0);
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.mega-menu-products .mega-product-children a {
+  justify-content: space-between;
+}
+
+.mega-menu-products .mega-product-children a .mega-row-arrow {
+  flex: 0 0 auto;
+  margin-left: 18px;
+  opacity: 0.45;
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+.mega-menu-products .mega-product-primary a:hover,
+.mega-menu-products .mega-product-primary a:focus-visible,
+.mega-menu-products .mega-product-primary a.is-active,
+.mega-menu-products .mega-product-children a:hover,
+.mega-menu-products .mega-product-children a:focus-visible {
+  padding-left: 26px;
+  color: var(--red);
+  background: #fff;
+  border-color: rgba(237, 52, 56, 0.22);
+  border-left-color: var(--red);
+  transform: translateX(4px);
+}
+
+.mega-menu-products .mega-product-children a:hover,
+.mega-menu-products .mega-product-children a:focus-visible {
+  padding-left: 28px;
+}
+
+.mega-menu-products .mega-product-primary a:hover .mega-row-arrow,
+.mega-menu-products .mega-product-primary a:focus-visible .mega-row-arrow,
+.mega-menu-products .mega-product-primary a.is-active .mega-row-arrow,
+.mega-menu-products .mega-product-children a:hover .mega-row-arrow,
+.mega-menu-products .mega-product-children a:focus-visible .mega-row-arrow {
+  color: var(--red);
+  opacity: 1;
+  transform: translateX(2px);
+}
+
 /* News items are listed vertically while retaining a compact image/content balance. */
 .news-listing-grid,
 .home-news-grid {

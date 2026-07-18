@@ -61,6 +61,15 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       mobileImage: `${s3}/2025-09/apc-banner-mobile.jpg`,
       intro: "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.",
       introHighlight: "while pollutants may be inevitable, pollution is not.",
+      overviewParagraphs: [
+        "The business delivers advanced solutions for particulate and gaseous emission control—from bag filters and electrostatic precipitators (ESPs) to scrubbers and flue gas desulphurisation (FGD) systems, along with biogas and hydrogen purification and upgradation technologies—ensuring cleaner air, greener energy, and regulatory compliance.",
+      ],
+      stats: [
+        { value: "50+", label: "Years of expertise" },
+        { value: "90+ million m³/hour", label: "Air cleaned annually" },
+        { value: "35,000+", label: "Installations worldwide" },
+        { value: "50+", label: "Types of pollutants handled" },
+      ],
       productHeading: "Our products",
       products: [
         {
@@ -122,6 +131,15 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       mobileImage: `${s3}/2026-04/Process%20Heat%20Solutions%20Banner%20mobile.png`,
       intro: "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.",
       introHighlight: "energy-efficient, fuel-flexible, and environmentally conscious heating solutions",
+      overviewParagraphs: [
+        "With steam, thermal oil, hot water, hot air, and their combinations as heating media, these solutions use biomass, electricity, and conventional solid, liquid, and gaseous fuels to deliver efficiency, reliability, flexibility, and sustainability across industrial applications.",
+      ],
+      stats: [
+        { value: "35,000+", label: "Installations" },
+        { value: "38+", label: "Countries served" },
+        { value: "4", label: "Types of heating media" },
+        { value: "150+", label: "Types of energy sources leveraged" },
+      ],
       productHeading: "Product categories",
       products: [
         {
@@ -196,6 +214,15 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       mobileImage: `${s3}/2025-09/steam_mobile_banner.jpg`,
       intro: "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.",
       introHighlight: "cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems",
+      overviewParagraphs: [
+        "From high-performance products to expert consultancy, Thermax helps industries improve operational excellence, energy efficiency, and regulatory compliance while reducing their environmental footprint.",
+      ],
+      stats: [
+        { value: "17+", label: "Years of technical expertise" },
+        { value: "20+", label: "Presence in countries" },
+        { value: "230,000+", label: "Installations" },
+        { value: "80+", label: "Dealer network" },
+      ],
       productHeading: "Our products and solutions",
       products: [
         {
@@ -257,6 +284,15 @@ const productPages: Record<Locale, OfficialProductLanding[]> = {
       mobileImage: `${s3}/2026-04/Cooling%20and%20Heating%20Solutions.png`,
       intro: "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.",
       introHighlight: "advanced energy recovery and transfer technologies",
+      overviewParagraphs: [
+        "With over three decades of experience, Thermax delivers end-to-end cooling and heating expertise using waste heat, electricity, and hybrid technologies to lower operating costs and support a more sustainable future.",
+      ],
+      stats: [
+        { value: "8,300+", label: "Installations" },
+        { value: "100+", label: "Countries served" },
+        { value: "6+", label: "Heat sources" },
+        { value: "-40°C to 140°C", label: "Temperature range" },
+      ],
       productHeading: "Our products",
       products: [
         {
@@ -493,6 +529,11 @@ const translations: Record<string, string> = {
   "Effective solutions for abatement of particulate and gaseous pollutants": "Giải pháp hiệu quả để kiểm soát bụi và khí ô nhiễm",
   "Thermax's Air Pollution Control business leads with the simple belief: while pollutants may be inevitable, pollution is not.": "Mảng xử lý khí thải của Thermax hoạt động với một niềm tin đơn giản: chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
   "while pollutants may be inevitable, pollution is not.": "chất ô nhiễm có thể khó tránh khỏi, nhưng ô nhiễm thì có thể được kiểm soát.",
+  "The business delivers advanced solutions for particulate and gaseous emission control—from bag filters and electrostatic precipitators (ESPs) to scrubbers and flue gas desulphurisation (FGD) systems, along with biogas and hydrogen purification and upgradation technologies—ensuring cleaner air, greener energy, and regulatory compliance.": "Mảng này cung cấp các giải pháp tiên tiến để kiểm soát bụi và khí thải, từ bộ lọc túi, bộ lọc tĩnh điện (ESP), tháp rửa khí đến hệ thống khử lưu huỳnh khí thải (FGD), cùng công nghệ tinh sạch và nâng cấp khí sinh học, hydro, góp phần bảo đảm không khí sạch hơn, năng lượng xanh hơn và tuân thủ quy định.",
+  "Years of expertise": "Năm kinh nghiệm",
+  "Air cleaned annually": "Lưu lượng không khí được làm sạch mỗi giờ",
+  "Installations worldwide": "Hệ thống đã lắp đặt toàn cầu",
+  "Types of pollutants handled": "Loại bụi và khí ô nhiễm được xử lý",
   "Our products": "Sản phẩm",
   "Our services": "Dịch vụ",
   "Featured capabilities": "Năng lực nổi bật",
@@ -503,14 +544,25 @@ const translations: Record<string, string> = {
   "Reliable, fuel-flexible, efficient, and sustainable heating solutions for every industry": "Giải pháp gia nhiệt tin cậy, linh hoạt nhiên liệu, hiệu quả và bền vững cho mọi ngành",
   "Thermax's Process Heat Solutions portfolio offers a wide range of energy-efficient, fuel-flexible, and environmentally conscious heating solutions tailored to diverse industry needs.": "Danh mục giải pháp gia nhiệt của Thermax cung cấp nhiều giải pháp tiết kiệm năng lượng, linh hoạt nhiên liệu và thân thiện môi trường, phù hợp với nhu cầu đa dạng của từng ngành.",
   "energy-efficient, fuel-flexible, and environmentally conscious heating solutions": "giải pháp tiết kiệm năng lượng, linh hoạt nhiên liệu và thân thiện môi trường",
+  "With steam, thermal oil, hot water, hot air, and their combinations as heating media, these solutions use biomass, electricity, and conventional solid, liquid, and gaseous fuels to deliver efficiency, reliability, flexibility, and sustainability across industrial applications.": "Với hơi nước, dầu tải nhiệt, nước nóng, không khí nóng và các tổ hợp làm môi chất gia nhiệt, những giải pháp này sử dụng sinh khối, điện cùng nhiên liệu rắn, lỏng và khí truyền thống để mang lại hiệu quả, độ tin cậy, tính linh hoạt và bền vững cho nhiều ứng dụng công nghiệp.",
+  "Countries served": "Quốc gia được phục vụ",
+  "Types of heating media": "Loại môi chất gia nhiệt",
+  "Types of energy sources leveraged": "Loại nguồn năng lượng được sử dụng",
   "Steam Engineering Solutions": "Hệ thống đường ống hơi",
   "Driving efficiency, compliance, and sustainability with advanced steam systems": "Nâng cao hiệu quả, tuân thủ và tính bền vững bằng hệ thống hơi tiên tiến",
   "Thermax's Steam Engineering business group delivers cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems.": "Mảng kỹ thuật hơi của Thermax cung cấp các giải pháp tiên tiến để tối ưu hệ thống tạo hơi, phân phối, sử dụng hơi và thu hồi nước ngưng.",
   "cutting-edge solutions that optimise steam generation, distribution, utilisation and condensate recovery systems": "các giải pháp tiên tiến để tối ưu hệ thống tạo hơi, phân phối, sử dụng hơi và thu hồi nước ngưng",
+  "From high-performance products to expert consultancy, Thermax helps industries improve operational excellence, energy efficiency, and regulatory compliance while reducing their environmental footprint.": "Từ sản phẩm hiệu suất cao đến tư vấn chuyên sâu, Thermax giúp doanh nghiệp nâng cao chất lượng vận hành, hiệu quả năng lượng và khả năng tuân thủ, đồng thời giảm tác động môi trường.",
+  "Years of technical expertise": "Năm kinh nghiệm kỹ thuật",
+  "Presence in countries": "Quốc gia hiện diện",
+  "Dealer network": "Đối tác trong mạng lưới phân phối",
   "Cooling and Heating Solutions": "Hệ thống lạnh",
   "Innovative thermal solutions that maximise energy efficiency, utilise waste heat, save water and support a sustainable future": "Giải pháp nhiệt đổi mới giúp tối đa hiệu quả năng lượng, tận dụng nhiệt thải, tiết kiệm nước và hướng tới tương lai bền vững",
   "Thermax's Cooling and Heating Solutions deliver energy-efficient systems that use advanced energy recovery and transfer technologies to minimise environmental impact across industrial and commercial operations.": "Giải pháp làm mát và gia nhiệt của Thermax sử dụng công nghệ thu hồi và truyền năng lượng tiên tiến để giảm tác động môi trường trong vận hành công nghiệp và thương mại.",
   "advanced energy recovery and transfer technologies": "công nghệ thu hồi và truyền năng lượng tiên tiến",
+  "With over three decades of experience, Thermax delivers end-to-end cooling and heating expertise using waste heat, electricity, and hybrid technologies to lower operating costs and support a more sustainable future.": "Với hơn ba thập kỷ kinh nghiệm, Thermax cung cấp giải pháp làm mát và gia nhiệt toàn diện sử dụng nhiệt thải, điện và công nghệ lai nhằm giảm chi phí vận hành và hướng tới tương lai bền vững hơn.",
+  "Heat sources": "Nguồn nhiệt",
+  "Temperature range": "Dải nhiệt độ đáp ứng",
   "Water and Waste Solutions": "Xử lý nước",
   "Delivering advanced water and wastewater management technologies, ensuring resource efficiency, regulatory compliance, and sustainable industrial operations": "Công nghệ quản lý nước và nước thải tiên tiến, bảo đảm hiệu quả tài nguyên, tuân thủ quy định và vận hành công nghiệp bền vững",
   "We offer integrated, digitally enabled water and wastewater solutions that recover, reuse, and rethink water, helping industries and urban areas thrive sustainably in a resource-constrained world and meet sustainability, efficiency, and compliance goals.": "Chúng tôi cung cấp giải pháp nước và nước thải tích hợp, hỗ trợ số hóa để thu hồi, tái sử dụng và tái định hình cách quản lý nước, giúp các ngành công nghiệp và đô thị phát triển bền vững trong bối cảnh tài nguyên hạn chế, đồng thời đáp ứng mục tiêu về hiệu quả và tuân thủ.",
