@@ -331,6 +331,32 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
     ],
   },
   {
+    label: "Cooling and Heating Solutions",
+    href: productSolutionHrefs["Cooling and Heating Solutions"],
+    children: [
+      {
+        label: "Absorption Chillers",
+        href: "/industrial-products/absorption-chillers",
+      },
+      {
+        label: "Absorption Heat Pumps",
+        href: "/industrial-products/absorption-heat-pumps",
+      },
+      {
+        label: "Electric Heat Pumps",
+        href: productSolutionHrefs["Electric Heat Pumps"],
+      },
+      {
+        label: "Closed Circuit Cooling Towers",
+        href: productSolutionHrefs["Closed Circuit Cooling Towers"],
+      },
+      {
+        label: "Air Cooled Heat Exchangers",
+        href: productSolutionHrefs["Air Cooled Heat Exchangers"],
+      },
+    ],
+  },
+  {
     label: "Process Heat Solutions",
     href: productSolutionHrefs["Process Heat Solutions"],
     children: [
@@ -371,32 +397,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
       {
         label: "Hot Water Heating Systems",
         href: productSolutionHrefs["Hot Water Heating Systems"],
-      },
-    ],
-  },
-  {
-    label: "Cooling and Heating Solutions",
-    href: productSolutionHrefs["Cooling and Heating Solutions"],
-    children: [
-      {
-        label: "Absorption Chillers",
-        href: "/industrial-products/absorption-chillers",
-      },
-      {
-        label: "Absorption Heat Pumps",
-        href: "/industrial-products/absorption-heat-pumps",
-      },
-      {
-        label: "Electric Heat Pumps",
-        href: productSolutionHrefs["Electric Heat Pumps"],
-      },
-      {
-        label: "Closed Circuit Cooling Towers",
-        href: productSolutionHrefs["Closed Circuit Cooling Towers"],
-      },
-      {
-        label: "Air Cooled Heat Exchangers",
-        href: productSolutionHrefs["Air Cooled Heat Exchangers"],
       },
     ],
   },
