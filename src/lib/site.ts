@@ -328,14 +328,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         label: "SOx Control",
         href: productSolutionHrefs["SOx Control"],
       },
-      {
-        label: "Scrubber",
-        href: "/industrial-products/scrubber",
-      },
-      {
-        label: "Thermax Ne0 - Gas Enrichment Solutions",
-        href: "/industrial-products/thermax-neo-gas-enrichment-solutions",
-      },
     ],
   },
   {
@@ -357,14 +349,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
       {
         label: "Hot Water Generators",
         href: "/industrial-products/hot-water-generators",
-      },
-      {
-        label: "Energy Plant",
-        href: "/industrial-products/energy-plant",
-      },
-      {
-        label: "Electric Process Heat Solutions",
-        href: "/industrial-products/electric-process-heat-solutions",
       },
     ],
   },
@@ -388,14 +372,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         label: "Hot Water Heating Systems",
         href: productSolutionHrefs["Hot Water Heating Systems"],
       },
-      {
-        label: "Process Automation",
-        href: "/industrial-products/process-automation",
-      },
-      {
-        label: "Customised Solutions",
-        href: "/industrial-products/customised-solutions",
-      },
     ],
   },
   {
@@ -411,18 +387,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
         href: "/industrial-products/absorption-heat-pumps",
       },
       {
-        label: "Absorption Chiller-Heaters",
-        href: "/industrial-products/absorption-chiller-heaters",
-      },
-      {
-        label: "Absorption Heat Transformer",
-        href: "/industrial-products/absorption-heat-transformer",
-      },
-      {
-        label: "Hybrid Chiller",
-        href: "/industrial-products/hybrid-chiller",
-      },
-      {
         label: "Electric Heat Pumps",
         href: productSolutionHrefs["Electric Heat Pumps"],
       },
@@ -433,22 +397,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
       {
         label: "Air Cooled Heat Exchangers",
         href: productSolutionHrefs["Air Cooled Heat Exchangers"],
-      },
-      {
-        label: "Heating Solutions",
-        href: "/industrial-products/heating-solutions",
-      },
-      {
-        label: "Wet Cooling Solutions",
-        href: "/industrial-products/wet-cooling-solutions",
-      },
-      {
-        label: "Dry Cooling Solutions",
-        href: "/industrial-products/dry-cooling-solutions",
-      },
-      {
-        label: "Refrigeration Solutions",
-        href: "/industrial-products/industrial-refrigeration-unit",
       },
     ],
   },
@@ -463,22 +411,6 @@ export const productSubcategoryGroups: ProductSubcategoryGroup[] = [
       {
         label: "Wastewater Recovery",
         href: productSolutionHrefs["Wastewater Recovery"],
-      },
-      {
-        label: "Sewage Treatment and Recycling Plants",
-        href: "/industrial-products/sewage-treatment-and-recycling-plants",
-      },
-      {
-        label: "Effluent Treatment & Recycling Plants",
-        href: "/industrial-products/effluent-treatment-recycling-plants",
-      },
-      {
-        label: "Minimum Liquid Discharge",
-        href: "/industrial-products/minimum-liquid-discharge",
-      },
-      {
-        label: "Zero Liquid Discharge System",
-        href: "/industrial-products/zero-liquid-discharge-system",
       },
     ],
   },
