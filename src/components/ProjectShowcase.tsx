@@ -13,17 +13,14 @@ export function ProjectShowcase({
   description = "A concise view of Thermax delivery capabilities across EPC, large boilers, fired heaters and industrial utility packages.",
   items,
   showHeader = true,
-  stacked = false,
 }: {
   eyebrow?: string;
   title?: string;
   description?: string;
   items: ProjectShowcaseItem[];
   showHeader?: boolean;
-  stacked?: boolean;
 }) {
   const { t } = useLanguage();
-  const [active, setActive] = useState(0);
   const [managedItems, setManagedItems] = useState<ProjectShowcaseItem[]>(items);
 
   useEffect(() => {
@@ -43,25 +40,7 @@ export function ProjectShowcase({
     };
   }, [items]);
 
-  useEffect(() => {
-    setActive(0);
-  }, [managedItems]);
-
-  useEffect(() => {
-    if (stacked || managedItems.length < 2) return;
-
-    const interval = window.setInterval(() => {
-      setActive((value) => (value + 1) % managedItems.length);
-    }, 5200);
-    return () => window.clearInterval(interval);
-  }, [managedItems.length, stacked]);
-
   if (managedItems.length === 0) return null;
-
-  const current = managedItems[active] ?? managedItems[0];
-  const goToProject = (direction: number) => {
-    setActive((value) => (value + direction + managedItems.length) % managedItems.length);
-  };
 
   return (
     <section className="project-showcase" id="solutions" data-section="solutions">
@@ -75,12 +54,12 @@ export function ProjectShowcase({
         </div>
       ) : null}
 
-      <div className={stacked ? "project-showcase-track is-stacked" : "project-showcase-track"} data-reveal>
-        {(stacked ? managedItems : [current]).map((project, index) => (
+      <div className="project-showcase-track is-stacked" data-reveal>
+        {managedItems.map((project, index) => (
           <article className="project-showcase-card" key={project.title}>
             <div className="project-showcase-media">
               <img src={project.image} alt={t(project.title)} />
-              <span>{String(stacked ? index + 1 : active + 1).padStart(2, "0")}</span>
+              <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div className="project-showcase-body">
               <p className="project-showcase-kicker">{t(project.category)}</p>
@@ -106,19 +85,6 @@ export function ProjectShowcase({
             </div>
           </article>
         ))}
-        {!stacked ? (
-          <div className="carousel-controls project-showcase-controls" aria-label={t("Projects")}>
-            <button type="button" onClick={() => goToProject(-1)} aria-label={t("Previous")}>
-              &lt;
-            </button>
-            <div className="carousel-counter">
-              {String(active + 1).padStart(2, "0")} / {String(managedItems.length).padStart(2, "0")}
-            </div>
-            <button type="button" onClick={() => goToProject(1)} aria-label={t("Next")}>
-              &gt;
-            </button>
-          </div>
-        ) : null}
       </div>
     </section>
   );

@@ -268,7 +268,6 @@ function HomeProjectsSection() {
       title="Projects"
       description=""
       items={industrialInfrastructureProjects}
-      stacked
     />
   );
 }

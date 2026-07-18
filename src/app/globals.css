@@ -11,8 +11,8 @@
   --blue: #174a7c;
   --orange: #f08a22;
   --shadow: 0 22px 60px rgba(5, 35, 49, 0.12);
-  --font-sans: "Poppins", "Noto Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
-  --font-display: "Poppins", "Noto Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-display: "Poppins", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 * {
@@ -11022,7 +11022,7 @@ dd {
 .desktop-nav,
 .desktop-nav .nav-link,
 .nav-actions .callback-button {
-  font-family: "Poppins", "Noto Sans", Arial, sans-serif;
+  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
 }
 
 .desktop-nav .nav-link {
@@ -11082,7 +11082,7 @@ dd {
 .contact-info-grid p,
 .contact-form-grid p,
 .contact-customer-support a {
-  font-family: "Poppins", "Noto Sans", Arial, sans-serif;
+  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
   font-weight: 400;
 }
 
@@ -11115,6 +11115,103 @@ dd {
   width: 100%;
 }
 
+/* One public-site typeface and a balanced navigation hierarchy. */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+}
+
+.contact-info-grid h3,
+.contact-form-grid h3 {
+  font-family: "Poppins", Arial, "Helvetica Neue", sans-serif;
+}
+
+.desktop-nav {
+  gap: clamp(20px, 1.55vw, 30px);
+}
+
+.desktop-nav .nav-link {
+  font-size: clamp(14px, 0.84vw, 16px);
+  font-weight: 400;
+}
+
+.nav-actions .callback-button {
+  font-size: clamp(14px, 0.82vw, 15px);
+  font-weight: 400;
+}
+
+.mega-product-primary a {
+  min-height: 52px;
+  padding: 10px 26px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.mega-product-children > p {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.mega-product-children a {
+  min-height: 46px;
+  padding: 9px 28px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.mega-menu:not(.mega-menu-products) .mega-links a {
+  min-height: 48px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* News items are listed vertically while retaining a compact image/content balance. */
+.news-listing-grid,
+.home-news-grid {
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.news-listing-card,
+.home-news-card {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+  min-height: 300px;
+}
+
+.news-listing-card:nth-child(even),
+.home-news-card:nth-child(even) {
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+}
+
+.news-listing-card:nth-child(even) > img,
+.home-news-card:nth-child(even) > img {
+  order: 2;
+}
+
+.news-listing-card img,
+.home-news-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.news-listing-card-body,
+.home-news-card > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 36px;
+}
+
 @media (max-width: 767px) {
   .mega-menu:not(.mega-menu-products) {
     display: none;
@@ -11122,5 +11219,55 @@ dd {
 
   .project-showcase-track.is-stacked {
     gap: 22px;
+  }
+
+  .mobile-panel .mobile-nav-trigger,
+  .mobile-panel .mobile-nav-link {
+    min-height: 54px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .mobile-panel .mobile-submenu a,
+  .mobile-panel .mobile-subgroup summary {
+    min-height: 40px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .mobile-panel .mobile-subgroup-links a {
+    min-height: 36px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .news-listing-grid,
+  .home-news-grid {
+    gap: 20px;
+  }
+
+  .news-listing-card,
+  .home-news-card,
+  .news-listing-card:nth-child(even),
+  .home-news-card:nth-child(even) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .news-listing-card:nth-child(even) > img,
+  .home-news-card:nth-child(even) > img {
+    order: 0;
+  }
+
+  .news-listing-card img,
+  .home-news-card img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1.55 / 1;
+  }
+
+  .news-listing-card-body,
+  .home-news-card > div {
+    padding: 24px;
   }
 }
