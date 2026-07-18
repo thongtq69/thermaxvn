@@ -22,6 +22,14 @@ function shouldUseLocalStore() {
   return Boolean(localStorePath());
 }
 
+function repairCmsText(value: string | undefined) {
+  if (!value) return value;
+
+  return value
+    .replaceAll("Chi tiáº¿t tin tá»©c", "Chi tiết tin tức")
+    .replace(/^Â©/, "©");
+}
+
 async function readLocalStore(): Promise<LocalStore> {
   const storePath = localStorePath();
   if (!storePath) return {};
@@ -43,14 +51,19 @@ function mergeCmsData(data?: Partial<CmsData>): CmsData {
   const footer: ManagedFooter = data?.footer
     ? { ...defaultCmsData.footer, ...data.footer }
     : defaultCmsData.footer;
+  const news = Array.isArray(data?.news) ? data.news : defaultCmsData.news;
 
   return {
     assets: Array.isArray(data?.assets) ? data.assets : defaultCmsData.assets,
     productGroups: Array.isArray(data?.productGroups) ? data.productGroups : defaultCmsData.productGroups,
-    news: Array.isArray(data?.news) ? data.news : defaultCmsData.news,
+    news: news.map((item) => ({
+      ...item,
+      sourceLabel: repairCmsText(item.sourceLabel),
+    })),
     projects: Array.isArray(data?.projects) ? data.projects : defaultCmsData.projects,
     footer: {
       ...footer,
+      copyright: repairCmsText(footer.copyright) ?? defaultCmsData.footer.copyright,
       legalLinks: (Array.isArray(footer.legalLinks) ? footer.legalLinks : defaultCmsData.footer.legalLinks).map((link) => {
         if (link.href && link.href !== "#") return link;
 
