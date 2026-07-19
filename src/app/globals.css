@@ -18,7 +18,8 @@
 .catalog-product-tabs,
 .catalog-product-overview,
 .catalog-product-technical,
-.catalog-product-features {
+.catalog-product-features,
+.catalog-product-resources {
   width: min(1640px, calc(100% - 96px));
   margin-inline: auto;
 }
@@ -163,7 +164,8 @@
 }
 
 .catalog-product-technical,
-.catalog-product-features {
+.catalog-product-features,
+.catalog-product-resources {
   padding: 84px 0;
   border-top: 1px solid #d9dee3;
 }
@@ -208,13 +210,63 @@
 .catalog-product-features article span { color: #f5333f; font-weight: 600; }
 .catalog-product-features article h3 { margin: 34px 0 0; font-size: 21px; line-height: 1.4; }
 
+.catalog-product-features .has-feature-details article {
+  min-height: 260px;
+  border: 1px solid #d9dee3;
+  background: #f5f7f8;
+}
+
+.catalog-product-features .has-feature-details article img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.catalog-product-features .has-feature-details article h3 {
+  margin-top: 26px;
+}
+
+.catalog-product-features .has-feature-details article p {
+  margin: 14px 0 0;
+  color: #44505c;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.catalog-product-resource-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.catalog-product-resource-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  min-height: 86px;
+  padding: 22px 26px;
+  border: 1px solid #d9dee3;
+  border-radius: 12px;
+  background: #f8f9fa;
+  font-weight: 500;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.catalog-product-resource-list a:hover {
+  border-color: #f5333f;
+  color: #f5333f;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 900px) {
   .catalog-product-breadcrumb,
   .catalog-product-hero,
   .catalog-product-tabs,
   .catalog-product-overview,
   .catalog-product-technical,
-  .catalog-product-features { width: min(100% - 32px, 760px); }
+  .catalog-product-features,
+  .catalog-product-resources { width: min(100% - 32px, 760px); }
 
   .catalog-product-hero,
   .catalog-product-overview { grid-template-columns: 1fr; }
@@ -225,7 +277,8 @@
   .catalog-product-overview-media img { min-height: 280px; }
   .catalog-product-tabs { gap: 24px; overflow-x: auto; }
   .catalog-product-technical dl,
-  .catalog-product-features > div:last-child { grid-template-columns: 1fr; }
+  .catalog-product-features > div:last-child,
+  .catalog-product-resource-list { grid-template-columns: 1fr; }
   .catalog-product-technical dl > div:nth-child(odd) { padding-right: 0; }
 }
 

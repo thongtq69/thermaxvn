@@ -1,3 +1,9 @@
+import {
+  officialSourceProductGroups,
+  type OfficialSourceFeature,
+  type OfficialSourceResource,
+} from "./officialProductDetails";
+
 export type OfficialCatalogProduct = {
   title: string;
   image: string;
@@ -11,6 +17,9 @@ export type OfficialCatalogProduct = {
   subtitle?: string;
   secondaryImage?: string;
   technicalData?: Array<{ label: string; value: string }>;
+  featureDetails?: OfficialSourceFeature[];
+  resources?: OfficialSourceResource[];
+  sourceUrl?: string;
 };
 
 const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
@@ -283,12 +292,48 @@ const catalogGroupDescriptions: Record<string, { vi: string; en: string }> = {
 };
 
 export function getOfficialProductCatalog(slug: string, locale: CatalogLocale): OfficialCatalogProduct[] | undefined {
-  const products = officialProductCatalog[slug];
-  if (!products) return undefined;
+  const localProducts = officialProductCatalog[slug] ?? [];
+  const sourceProducts = officialSourceProductGroups[slug];
+  if (!sourceProducts?.length && !localProducts.length) return undefined;
 
   const groupDescription = catalogGroupDescriptions[slug];
 
-  return products.map((product) => {
+  if (sourceProducts?.length) {
+    return sourceProducts.map((source, index) => {
+      const local = localProducts[index];
+      const sourceSlug = source.sourceUrl.split("/").filter(Boolean).at(-1) ?? source.title;
+      const productSlug = productCatalogSlug(sourceSlug);
+      const absorptionDetail = slug === "absorption-chillers"
+        ? absorptionProductDetails[source.title] ?? (local ? absorptionProductDetails[local.title] : undefined)
+        : undefined;
+      const title = locale === "vi" && absorptionDetail ? absorptionDetail.viTitle : source.title;
+      const description = source.subtitle || local?.description || groupDescription?.[locale] || title;
+      const overview = [source.overviewHeading, ...(source.overviewParas ?? [])].filter(Boolean) as string[];
+      const capacityDatum = source.technical?.find((item) => /operating range|capacity|output|cooling range|heating range/i.test(item.label));
+      const energyDatum = source.technical?.find((item) => /fuel|energy source|heat source|driving source/i.test(item.label));
+
+      return {
+        ...local,
+        title,
+        slug: productSlug,
+        href: `/industrial-products/${slug}/${productSlug}`,
+        image: source.heroImage || local?.image || "",
+        secondaryImage: source.overviewImage || source.heroImage || local?.secondaryImage || local?.image,
+        subtitle: source.subtitle || local?.subtitle || description,
+        description,
+        overview: overview.length ? overview : [description],
+        technicalData: source.technical ?? [],
+        featureDetails: source.features?.filter((feature) => feature.title || feature.description),
+        features: source.features?.map((feature) => feature.title).filter(Boolean) ?? local?.features ?? [],
+        resources: source.resources,
+        sourceUrl: source.sourceUrl,
+        capacity: capacityDatum?.value ?? "",
+        fuel: energyDatum?.value ?? "",
+      };
+    });
+  }
+
+  return localProducts.map((product) => {
     const absorptionDetail = slug === "absorption-chillers" ? absorptionProductDetails[product.title] : undefined;
     const title = locale === "vi" && absorptionDetail ? absorptionDetail.viTitle : product.title.replaceAll("â„¢", "™");
     const description = absorptionDetail
@@ -331,7 +376,11 @@ export function getOfficialCatalogProduct(parentSlug: string, productSlug: strin
 }
 
 export function getOfficialCatalogProductParams() {
-  return Object.entries(officialProductCatalog).flatMap(([slug, products]) =>
-    products.map((product) => ({ slug, product: product.slug ?? productCatalogSlug(product.title) })),
+  const groupSlugs = new Set([...Object.keys(officialProductCatalog), ...Object.keys(officialSourceProductGroups)]);
+  return [...groupSlugs].flatMap((slug) =>
+    (getOfficialProductCatalog(slug, "en") ?? []).map((product) => ({
+      slug,
+      product: product.slug ?? productCatalogSlug(product.title),
+    })),
   );
 }
