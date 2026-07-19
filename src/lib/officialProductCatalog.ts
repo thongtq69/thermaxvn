@@ -8,6 +8,9 @@ export type OfficialCatalogProduct = {
   slug?: string;
   overview?: string[];
   features?: string[];
+  subtitle?: string;
+  secondaryImage?: string;
+  technicalData?: Array<{ label: string; value: string }>;
 };
 
 const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
@@ -19,9 +22,9 @@ const p = (
 
 export function productCatalogSlug(title: string) {
   return title
+    .replace(/[™®]/g, "")
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/™/g, "")
     .replace(/&/g, " and ")
     .replace(/[^a-zA-Z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
@@ -30,13 +33,43 @@ export function productCatalogSlug(title: string) {
 
 export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = {
   "steam-boilers": [
-    p("UltraPac™", "2025-12/Ultrapac-min.jpg"), p("CombiPac™", "2025-12/Combipac.png"),
-    p("Bi-Drum (PowerMax)", "2025-12/Bi-Drum.png"), p("GreenPac™", "2025-10/steamboiler-prod-thumb-greenpac.jpg"),
-    p("ComBloc", "2025-12/ComBloc-min_0.jpg"), p("HuskPac™ Ultra", "2026-02/Huskpac%20Ultra%20Listing.png"),
-    p("TherMeon-A", "2025-12/Thermeon%202.0_TEON%202.jpg"), p("WoodPac", "2025-08/woodpac_product.jpg"),
-    p("CocoMax", "2026-02/Cocomax%20Listing.png"), p("ThermoSyphon", "2025-12/Thermosyphon.jpg"),
-    p("SteaMatic", "2026-02/Steamatic%20listing.png"), p("ShellMax Global Ultra", "2025-08/product-intro-rhs-pic.png"),
-    p("RevoMax Nxt", "2025-10/steamboiler-prod-revomax.png"),
+    p("UltraPac™", "2026-04/Untitled%20design%20%2817%29.png", {
+      subtitle: "Lò hơi sinh khối tiên tiến mang lại hiệu quả cao, tính linh hoạt về nhiên liệu và thời gian hoạt động liên tục vượt trội.",
+      description: "UltraPac™ là lò hơi đốt sinh khối có thời gian hoạt động vượt trội, hiệu suất hàng đầu và khả năng sử dụng nhiều loại nhiên liệu.",
+      overview: [
+        "UltraPac™ là lò hơi đốt sinh khối có thời gian hoạt động vượt trội, hiệu suất hàng đầu và khả năng sử dụng nhiều loại nhiên liệu. Thiết kế chắc chắn, nhỏ gọn và dạng mô-đun giúp giảm thiểu thời gian, không gian và chi phí lắp đặt.",
+        "Lò hơi được thiết kế để đốt cháy liền mạch nhiều loại nhiên liệu xanh và truyền thống, bao gồm viên nén sinh khối, dăm gỗ, than đá và viên sinh khối. Sản phẩm phù hợp cho các ngành cần nguồn hơi liên tục, đồng thời giảm phát thải carbon và tối ưu chi phí vận hành.",
+      ],
+      capacity: "4 TPH đến 12 TPH, có thể tùy chỉnh đến 32 TPH",
+      fuel: "Nhiên liệu rắn: viên nén sinh khối, dăm gỗ, than và biomass pellets",
+      secondaryImage: "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public/2026-02/Ultrapac.png",
+      technicalData: [
+        { label: "Phạm vi vận hành", value: "Sản lượng hơi 4 TPH đến 12 TPH, tùy chỉnh đến 32 TPH" },
+        { label: "Áp suất thiết kế", value: "Đến 17,5 kg/cm²(g), tùy chỉnh đến 32 kg/cm²(g)" },
+        { label: "Nguồn nhiên liệu", value: "Viên nén sinh khối, dăm gỗ, than và biomass pellets" },
+        { label: "Công nghệ đốt", value: "Ghi chuyển động tịnh tiến" },
+      ],
+      features: [
+        "Linh hoạt nhiên liệu vượt trội",
+        "Hiệu suất nhiệt cao",
+        "Thời gian hoạt động vượt trội",
+        "Thích ứng nhanh với tải",
+        "Tăng cường thu hồi nhiệt",
+        "Điều khiển và giám sát thông minh",
+      ],
+    }),
+    p("CombiPac™", "2025-12/Combipac.png", { description: "Lò hơi đa nhiên liệu hiệu suất cao cho nhu cầu hơi công nghiệp ổn định.", capacity: "4 TPH đến 25 TPH", fuel: "Nhiên liệu rắn và sinh khối" }),
+    p("Bi-Drum (PowerMax)", "2025-12/Bi-Drum.png", { description: "Lò hơi hai bao hơi công suất lớn, phù hợp cho nhà máy năng lượng và quy trình liên tục.", capacity: "Đến 35 TPH", fuel: "Nhiên liệu rắn và sinh khối" }),
+    p("GreenPac™", "2025-10/steamboiler-prod-thumb-greenpac.jpg", { description: "Lò hơi sinh khối dạng mô-đun giúp giảm phát thải và tối ưu chi phí vòng đời.", capacity: "5 TPH đến 16 TPH", fuel: "Sinh khối và nhiên liệu rắn" }),
+    p("ComBloc", "2025-12/ComBloc-min_0.jpg", { description: "Lò hơi đóng gói nhỏ gọn, phản ứng tải nhanh và dễ dàng lắp đặt.", capacity: "1,5 TPH đến 8 TPH", fuel: "Nhiên liệu rắn" }),
+    p("HuskPac™ Ultra", "2026-02/Huskpac%20Ultra%20Listing.png", { description: "Lò hơi được tối ưu cho trấu và nhiên liệu sinh khối, vận hành tin cậy với tải biến thiên.", capacity: "2 TPH đến 6 TPH", fuel: "Trấu, sinh khối; tùy chọn dầu/khí" }),
+    p("TherMeon-A", "2025-12/Thermeon%202.0_TEON%202.jpg", { description: "Lò hơi công suất nhỏ dùng nhiên liệu rắn dành cho các cơ sở sản xuất phân tán.", capacity: "0,3 TPH đến 2 TPH", fuel: "Nhiên liệu rắn và sinh khối" }),
+    p("WoodPac", "2025-08/woodpac_product.jpg", { description: "Giải pháp tạo hơi chuyên dụng cho gỗ và phế phẩm gỗ với hiệu suất đốt cao.", capacity: "2 TPH đến 4,5 TPH", fuel: "Gỗ và phế phẩm gỗ" }),
+    p("CocoMax", "2026-02/Cocomax%20Listing.png", { description: "Lò hơi sinh khối được thiết kế cho phụ phẩm dừa và nhiên liệu có độ ẩm biến thiên.", capacity: "2 TPH đến 5 TPH", fuel: "Phụ phẩm dừa và sinh khối" }),
+    p("ThermoSyphon", "2025-12/Thermosyphon.jpg", { description: "Thiết bị gia nhiệt tuần hoàn tự nhiên cho nhu cầu nhiệt quy trình ổn định.", capacity: "0,4 đến 2,5 triệu kcal/giờ", fuel: "Dầu và khí" }),
+    p("SteaMatic", "2026-02/Steamatic%20listing.png", { description: "Máy tạo hơi nhỏ gọn, khởi động nhanh cho nhu cầu hơi tại điểm sử dụng.", capacity: "50 hoặc 100 kg/giờ", fuel: "Dầu và khí" }),
+    p("ShellMax Global Ultra", "2025-08/product-intro-rhs-pic.png", { description: "Lò hơi ống lửa hiệu suất cao cho nhiều ngành và nhiều điều kiện vận hành.", capacity: "1 TPH đến 16 TPH, tùy chỉnh công suất lớn hơn", fuel: "Dầu và khí" }),
+    p("RevoMax Nxt", "2025-10/steamboiler-prod-revomax.png", { description: "Lò hơi đóng gói thế hệ mới với thiết kế nhỏ gọn và thời gian tạo hơi nhanh.", capacity: "0,2 TPH đến 1 TPH", fuel: "Dầu và khí" }),
   ],
   "thermal-oil-heaters": [
     p("GreenBloc™", "2025-12/GreenBloc.png"), p("ThermoPac™ Global", "2025-12/Thermopac%20Global.jpg"),
@@ -274,14 +307,14 @@ export function getOfficialProductCatalog(slug: string, locale: CatalogLocale): 
       title,
       slug: productSlug,
       description,
-      capacity: absorptionDetail ? (locale === "vi" ? "30 TR đến 3000 TR" : "30 TR to 3000 TR") : locale === "vi" ? "Theo cấu hình dự án" : "Project-specific",
-      fuel: absorptionDetail
+      capacity: product.capacity ?? (absorptionDetail ? (locale === "vi" ? "30 TR đến 3000 TR" : "30 TR to 3000 TR") : locale === "vi" ? "Theo cấu hình dự án" : "Project-specific"),
+      fuel: product.fuel ?? (absorptionDetail
         ? locale === "vi"
           ? absorptionDetail.fuelVi
           : absorptionDetail.fuelEn
         : locale === "vi"
           ? "Tùy theo sản phẩm"
-          : "Product-specific",
+          : "Product-specific"),
       href: `/industrial-products/${slug}/${productSlug}`,
       overview: product.overview ?? [description],
       features: product.features ?? [

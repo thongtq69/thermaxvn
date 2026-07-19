@@ -1,5 +1,4 @@
 import type { OfficialCatalogProduct } from "../lib/officialProductCatalog";
-import { vietnamOffice } from "../lib/site";
 
 type CatalogProductDetailProps = {
   product: OfficialCatalogProduct;
@@ -19,7 +18,6 @@ export function CatalogProductDetail({ product, parentTitle, parentHref, locale 
         features: "Đặc điểm nổi bật",
         capacity: "Phạm vi công suất",
         energy: "Nguồn năng lượng / nhiên liệu",
-        support: "Trao đổi với Thermax Vietnam",
       }
     : {
         home: "Home",
@@ -30,7 +28,6 @@ export function CatalogProductDetail({ product, parentTitle, parentHref, locale 
         features: "Product features",
         capacity: "Capacity range",
         energy: "Energy / fuel source",
-        support: "Talk to Thermax Vietnam",
       };
 
   return (
@@ -46,7 +43,7 @@ export function CatalogProductDetail({ product, parentTitle, parentHref, locale 
         <div className="catalog-product-hero-copy">
           <span>{parentTitle}</span>
           <h1>{product.title}</h1>
-          <p>{product.description}</p>
+          <p>{product.subtitle ?? product.description}</p>
           <a className="catalog-product-enquiry" href={`/contact-us?product=${encodeURIComponent(product.title)}`}>
             {copy.enquiry}
           </a>
@@ -63,18 +60,18 @@ export function CatalogProductDetail({ product, parentTitle, parentHref, locale 
       </nav>
 
       <section className="catalog-product-overview" id="overview">
-        <div>
-          <span>{copy.overview}</span>
-          <h2>{product.description}</h2>
-          {(product.overview ?? []).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        </div>
-        <aside>
-          <span>{copy.support}</span>
-          <h3>{vietnamOffice.label}</h3>
-          {vietnamOffice.address.map((line) => <p key={line}>{line}</p>)}
-          <a href={vietnamOffice.phoneHref}>{vietnamOffice.phone}</a>
-          <a href={vietnamOffice.emailHref}>{vietnamOffice.email}</a>
+        <aside className="catalog-product-side-nav">
+          <a className="is-active" href="#overview">{copy.overview}</a>
+          <a href="#technical-data">{copy.technical}</a>
+          <a href="#features">{copy.features}</a>
         </aside>
+        <div className="catalog-product-overview-copy">
+          <h2>{product.overview?.[0] ?? product.description}</h2>
+          {(product.overview ?? []).slice(1).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
+        <div className="catalog-product-overview-media">
+          <img src={product.secondaryImage ?? product.image} alt={product.title} loading="lazy" decoding="async" />
+        </div>
       </section>
 
       <section className="catalog-product-technical" id="technical-data">
@@ -83,8 +80,12 @@ export function CatalogProductDetail({ product, parentTitle, parentHref, locale 
           <h2>{product.title}</h2>
         </div>
         <dl>
-          <div><dt>{copy.capacity}</dt><dd>{product.capacity}</dd></div>
-          <div><dt>{copy.energy}</dt><dd>{product.fuel}</dd></div>
+          {(product.technicalData ?? [
+            { label: copy.capacity, value: product.capacity ?? "" },
+            { label: copy.energy, value: product.fuel ?? "" },
+          ]).map((item) => (
+            <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>
+          ))}
         </dl>
       </section>
 

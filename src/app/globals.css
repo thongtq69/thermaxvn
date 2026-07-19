@@ -112,40 +112,55 @@
 
 .catalog-product-overview {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 420px;
-  gap: clamp(48px, 8vw, 140px);
+  grid-template-columns: 300px minmax(360px, .82fr) minmax(420px, 1fr);
+  gap: clamp(36px, 4vw, 74px);
+  align-items: start;
   padding: 96px 0;
 }
 
-.catalog-product-overview h2 {
-  max-width: 920px;
-  margin: 24px 0;
-  font-size: clamp(34px, 3vw, 54px);
-  line-height: 1.18;
-  font-weight: 400;
-  letter-spacing: -.03em;
-}
-
-.catalog-product-overview > div > p {
-  max-width: 820px;
-  margin-top: 20px;
-  font-size: 19px;
-  line-height: 1.7;
-  color: #495563;
-}
-
-.catalog-product-overview aside {
+.catalog-product-side-nav {
+  position: sticky;
+  top: 150px;
+  display: grid;
   align-self: start;
-  padding: 38px;
-  border: 1px solid #d6dde3;
-  border-radius: 14px;
-  box-shadow: 0 18px 50px rgba(25, 39, 52, .08);
 }
 
-.catalog-product-overview aside > span { color: #f5333f; font-weight: 600; }
-.catalog-product-overview aside h3 { margin: 20px 0; font-size: 25px; }
-.catalog-product-overview aside p { margin: 2px 0; color: #4d5966; }
-.catalog-product-overview aside a { display: block; margin-top: 12px; }
+.catalog-product-side-nav a {
+  padding: 18px 0;
+  border-bottom: 1px solid #cfd5da;
+  font-weight: 500;
+}
+
+.catalog-product-side-nav a.is-active,
+.catalog-product-side-nav a:hover { color: #f5333f; }
+
+.catalog-product-overview-copy h2 {
+  margin: 0 0 24px;
+  font-size: clamp(27px, 2vw, 38px);
+  line-height: 1.34;
+  font-weight: 500;
+  letter-spacing: -.025em;
+}
+
+.catalog-product-overview-copy p {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: #29333e;
+}
+
+.catalog-product-overview-media {
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3f5f6;
+}
+
+.catalog-product-overview-media img {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  object-fit: cover;
+}
 
 .catalog-product-technical,
 .catalog-product-features {
@@ -206,6 +221,8 @@
   .catalog-product-hero { min-height: 0; gap: 36px; }
   .catalog-product-hero-media { min-height: 320px; }
   .catalog-product-overview { padding: 64px 0; }
+  .catalog-product-side-nav { position: static; grid-template-columns: repeat(3, minmax(max-content, 1fr)); overflow-x: auto; }
+  .catalog-product-overview-media img { min-height: 280px; }
   .catalog-product-tabs { gap: 24px; overflow-x: auto; }
   .catalog-product-technical dl,
   .catalog-product-features > div:last-child { grid-template-columns: 1fr; }
