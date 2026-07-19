@@ -5,10 +5,28 @@ export type OfficialCatalogProduct = {
   capacity?: string;
   fuel?: string;
   href?: string;
+  slug?: string;
+  overview?: string[];
+  features?: string[];
 };
 
 const s3 = "https://tmx-drupal-global-prod-s3.s3.ap-south-1.amazonaws.com/s3fs-public";
-const p = (title: string, path: string): OfficialCatalogProduct => ({ title, image: `${s3}/${path}` });
+const p = (
+  title: string,
+  path: string,
+  details: Omit<OfficialCatalogProduct, "title" | "image"> = {},
+): OfficialCatalogProduct => ({ title, image: `${s3}/${path}`, ...details });
+
+export function productCatalogSlug(title: string) {
+  return title
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/™/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+}
 
 export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = {
   "steam-boilers": [
@@ -33,6 +51,11 @@ export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = 
     p("Effitron™", "2025-12/Effitron-used.jpg"), p("ThermoTron™", "2025-08/thermotron_product_1.jpg"),
     p("AquaNexa E-Series", "2026-02/Aquanexa%20E-Series-listing.png"),
   ],
+  "energy-plant": [
+    p("Integrated Energy Plant", "2025-12/ComBloc-min_0.jpg"),
+    p("Steam and Power Package", "2025-12/Bi-Drum.png"),
+    p("Multi-Fuel Process Heat Plant", "2025-12/GreenBloc.png"),
+  ],
   "boiler-house-products": [
     p("A2Zflo-S Steam Flow Meter", "2025-12/A2Zflo-S%20%E2%80%93%20Steam%20Flow%20Meter-listing.png"),
     p("RealSteam™", "2025-12/RealSteam%E2%84%A2.png"), p("SABCO: Surface Auto Blowdown Control System", "2026-03/SABCO%20listing.png"),
@@ -51,6 +74,27 @@ export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = 
     p("Thermax Automatic Condensate Transfer System (TACTS)", "2025-12/TACTS-Pump_0.jpg"),
     p("Thermax Atmospheric Deaerator with Immersion Tube (TADIT)", "2025-12/TADIT_1300X800_0.jpg"),
     p("Thermax Atmospheric Flash System (TAFS)", "2025-12/Untitled%20design%20%2832%29.png"),
+  ],
+  "process-automation": [
+    p("PlyMax – Press Automation System", "2026-03/PlyMax%20listing.png", {
+      description: "Tự động hóa toàn diện máy sấy ván lạng và máy ép nhiệt trong sản xuất ván ép.",
+      overview: ["PlyMax kiểm soát thông minh nhiệt độ, áp suất và thời gian của các công đoạn dùng hơi, giúp sấy đồng đều, đóng rắn tối ưu, giảm năng lượng và hạn chế lỗi sản phẩm."],
+      features: ["Điều khiển chính xác nhiệt độ và áp suất", "Công thức vận hành linh hoạt trên PLC/HMI", "Theo dõi dữ liệu để kiểm soát chất lượng", "Giảm tiêu thụ năng lượng và phế phẩm"],
+    }),
+    p("RiceMax – Rice Dryer Automation System", "2026-03/Ricemax%20thumbnail.png", {
+      description: "Hệ thống tự động hóa máy sấy gạo giúp duy trì độ ẩm tối ưu và giảm tỷ lệ gãy hạt.",
+      overview: ["RiceMax tích hợp cảm biến nhiệt độ, độ ẩm, van điều khiển và bộ điều khiển thông minh để duy trì thông số sấy ổn định, tăng năng suất và chất lượng gạo."],
+      features: ["Kiểm soát độ ẩm theo thời gian thực", "Giảm sấy quá mức hoặc chưa đủ", "Tối ưu nhiên liệu và năng lượng", "Nâng cao chất lượng và giá trị hạt gạo"],
+    }),
+    p("Blow-Through System", "2026-03/Blow%20through%20thumbnail.png", {
+      description: "Duy trì dòng hơi để cuốn trôi nước ngưng tụ và không khí khỏi máy sấy quay nhằm đảm bảo truyền nhiệt đồng đều.",
+      overview: ["Hệ thống thổi khí hỗ trợ thoát nước ngưng và khí không ngưng trong thiết bị quay, giữ bề mặt gia nhiệt ổn định và cải thiện hiệu suất quá trình."],
+      features: ["Truyền nhiệt ổn định", "Loại bỏ nước ngưng hiệu quả", "Giảm thời gian dừng máy", "Tích hợp với hệ thống hơi hiện hữu"],
+    }),
+  ],
+  "customised-solutions": [
+    p("Packaged Hot Water System", "2026-02/Aquatherm-listing.png"),
+    p("Washdown and Hygiene System", "2026-03/Prefabricated%20Modules_thumbnail.png"),
   ],
   "absorption-chillers": [
     p("Steam-Driven Absorption Chiller", "2025-09/steam-driven-absorption-chiller-listing.jpg"),
@@ -73,6 +117,15 @@ export const officialProductCatalog: Record<string, OfficialCatalogProduct[]> = 
   ],
   "heating-solutions": [
     p("Hybrid Heat Pump", "2026-01/th-hybrid-heat-pump.jpg"), p("Electrical Heat Pump", "2026-01/th-electrical-heat-pump.jpg"),
+  ],
+  "absorption-heat-transformer": [
+    p("Absorption Heat Transformer", "2026-04/Steam-Driven%20Absorption%20Heat%20Pump_0.png"),
+  ],
+  "hybrid-chiller": [
+    p("Hybrid Chiller", "2026-01/th-hybrid-heat-pump.jpg"),
+  ],
+  "industrial-refrigeration-unit": [
+    p("Industrial Refrigeration Unit", "2026-01/th-dry-cooler.jpg"),
   ],
   "wet-cooling-solutions": [
     p("Adiabatic Cooling Tower", "2026-01/th-adct.jpg"), p("Evaporative Condenser", "2026-01/th-evaporative-condenser.jpg"),
@@ -170,6 +223,12 @@ const absorptionProductDetails: Record<
 };
 
 const catalogGroupDescriptions: Record<string, { vi: string; en: string }> = {
+  "energy-plant": { vi: "Nhà máy năng lượng tích hợp hơi, nhiệt và điện để tối ưu hiệu suất toàn hệ thống.", en: "Integrated steam, heat and power plants engineered for plant-wide efficiency." },
+  "process-automation": { vi: "Tự động hóa thông minh cho các quy trình sử dụng nhiều hơi, giúp kiểm soát chính xác và tiết kiệm năng lượng.", en: "Intelligent automation for steam-intensive processes, improving control, quality and energy efficiency." },
+  "customised-solutions": { vi: "Giải pháp đóng gói được thiết kế theo yêu cầu vận hành, nhiệt độ và vệ sinh của từng nhà máy.", en: "Packaged solutions engineered around each plant's process, temperature and hygiene requirements." },
+  "absorption-heat-transformer": { vi: "Nâng cấp nhiệt thải trung bình thành nguồn nhiệt hữu ích có nhiệt độ cao hơn cho quy trình công nghiệp.", en: "Upgrades medium-grade waste heat into higher-temperature useful process heat." },
+  "hybrid-chiller": { vi: "Kết hợp công nghệ hấp thụ và nén hơi để làm lạnh linh hoạt, hiệu quả và giảm phát thải.", en: "Combines absorption and compression technologies for flexible, efficient, lower-emission cooling." },
+  "industrial-refrigeration-unit": { vi: "Cung cấp khả năng làm lạnh công suất lớn và kiểm soát nhiệt độ chính xác cho các quy trình quan trọng.", en: "Reliable, high-capacity refrigeration with precise temperature control for critical processes." },
   "steam-boilers": { vi: "Giải pháp tạo hơi hiệu suất cao, vận hành tin cậy và phù hợp với nhiều loại nhiên liệu.", en: "High-efficiency steam generation engineered for reliable operation and flexible fuel use." },
   "thermal-oil-heaters": { vi: "Giải pháp gia nhiệt gián tiếp ở nhiệt độ cao cho nhiều quy trình công nghiệp.", en: "High-temperature indirect heating for a wide range of industrial processes." },
   "hot-air-generators": { vi: "Cung cấp khí nóng ổn định cho các ứng dụng sấy và gia nhiệt công nghiệp.", en: "Reliable hot-air generation for industrial drying and process heating." },
@@ -203,14 +262,17 @@ export function getOfficialProductCatalog(slug: string, locale: CatalogLocale): 
       ? locale === "vi"
         ? absorptionDetail.viDescription
         : absorptionDetail.enDescription
-      : groupDescription?.[locale] ??
+      : product.description ?? groupDescription?.[locale] ??
         (locale === "vi"
           ? `Giải pháp ${title} được thiết kế để vận hành hiệu quả, tin cậy và phù hợp với nhu cầu công nghiệp.`
           : `${title} is engineered for efficient, reliable operation across industrial applications.`);
 
+    const productSlug = product.slug ?? productCatalogSlug(product.title);
+
     return {
       ...product,
       title,
+      slug: productSlug,
       description,
       capacity: absorptionDetail ? (locale === "vi" ? "30 TR đến 3000 TR" : "30 TR to 3000 TR") : locale === "vi" ? "Theo cấu hình dự án" : "Project-specific",
       fuel: absorptionDetail
@@ -220,7 +282,23 @@ export function getOfficialProductCatalog(slug: string, locale: CatalogLocale): 
         : locale === "vi"
           ? "Tùy theo sản phẩm"
           : "Product-specific",
-      href: `/contact-us?product=${encodeURIComponent(product.title)}`,
+      href: `/industrial-products/${slug}/${productSlug}`,
+      overview: product.overview ?? [description],
+      features: product.features ?? [
+        locale === "vi" ? "Thiết kế tối ưu cho điều kiện vận hành thực tế" : "Engineered for real operating conditions",
+        locale === "vi" ? "Hiệu suất ổn định và vận hành tin cậy" : "Stable performance and reliable operation",
+        locale === "vi" ? "Có thể cấu hình theo yêu cầu dự án" : "Configurable for project requirements",
+      ],
     };
   });
+}
+
+export function getOfficialCatalogProduct(parentSlug: string, productSlug: string, locale: CatalogLocale) {
+  return getOfficialProductCatalog(parentSlug, locale)?.find((product) => product.slug === productSlug);
+}
+
+export function getOfficialCatalogProductParams() {
+  return Object.entries(officialProductCatalog).flatMap(([slug, products]) =>
+    products.map((product) => ({ slug, product: product.slug ?? productCatalogSlug(product.title) })),
+  );
 }

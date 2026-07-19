@@ -1,7 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Poppins } from "next/font/google";
 import { BrokenImageGuard } from "../components/BrokenImageGuard";
 import { LanguageProvider } from "../components/LanguageProvider";
 import "./globals.css";
+
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: "Vietnam | Thermax Global",
@@ -25,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning>
-      <body>
+      <body className={`${poppins.variable} ${poppins.className}`}>
         <LanguageProvider>
           <BrokenImageGuard />
           {children}
